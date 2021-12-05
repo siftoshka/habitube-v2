@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
             HabitubeV2Theme {
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
-
                 }
             }
         }
