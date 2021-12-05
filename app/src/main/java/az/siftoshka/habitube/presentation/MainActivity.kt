@@ -3,9 +3,7 @@ package az.siftoshka.habitube.presentation
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -23,10 +21,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import az.siftoshka.habitube.presentation.screen.ExploreScreen
-import az.siftoshka.habitube.presentation.screen.LibraryScreen
-import az.siftoshka.habitube.presentation.screen.SearchScreen
-import az.siftoshka.habitube.presentation.screen.SettingsScreen
+import az.siftoshka.habitube.presentation.screens.ExploreScreen
+import az.siftoshka.habitube.presentation.screens.LibraryScreen
+import az.siftoshka.habitube.presentation.screens.SearchScreen
+import az.siftoshka.habitube.presentation.screens.SettingsScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
@@ -92,7 +90,7 @@ fun RowScope.AddItem(
             Icon(
                 painter = painterResource(id = screen.icon),
                 contentDescription = stringResource(id = screen.title),
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(26.dp)
             )},
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.route

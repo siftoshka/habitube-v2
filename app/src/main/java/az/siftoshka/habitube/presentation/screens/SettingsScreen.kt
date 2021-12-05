@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screen
+package az.siftoshka.habitube.presentation.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,14 +9,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 /**
- * Composable function of the Search screen.
+ * Composable function of the Settings screen.
  */
 @Composable
-fun SearchScreen() {
+fun SettingsScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Search", style = MaterialTheme.typography.h1)
+        Text(text = "Settings", style = MaterialTheme.typography.h1)
     }
 }
