@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Season(
     @SerialName("air_date")
-    val airDate: Any,
+    val airDate: String,
     @SerialName("episode_count")
     val episodeCount: Int,
     @SerialName("id")
@@ -17,7 +17,7 @@ data class Season(
     @SerialName("overview")
     val overview: String,
     @SerialName("poster_path")
-    val posterPath: Any,
+    val posterPath: String,
     @SerialName("season_number")
     val seasonNumber: Int
 )
