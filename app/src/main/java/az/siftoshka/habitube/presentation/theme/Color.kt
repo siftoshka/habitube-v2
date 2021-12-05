@@ -2,8 +2,8 @@ package az.siftoshka.habitube.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val ColorPrimaryDark = Color(0xFFE2434B)
-val ColorPrimaryLight = Color(0xFF27C9A2)
+val ColorPrimaryDark = Color(0xFF1DB98D)
+val ColorPrimaryLight = Color(0xFF1DB98D)
 
 val SecondaryDark = Color(0xFFA9A9A9)
 val SecondaryLight = Color(0xFF606060)
