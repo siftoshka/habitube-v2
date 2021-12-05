@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.ui.theme
+package az.siftoshka.habitube.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -7,24 +7,23 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-        primary = Purple200,
-        primaryVariant = Purple700,
-        secondary = Teal200
+    primary = ColorPrimaryDark,
+    background = DarkGray,
+    onBackground = White,
+    onPrimary = White,
+    surface = MediumGray,
+    onSurface = White,
+    secondaryVariant = SecondaryDark
 )
 
 private val LightColorPalette = lightColors(
-        primary = Purple500,
-        primaryVariant = Purple700,
-        secondary = Teal200
-
-        /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    primary = ColorPrimaryLight,
+    background = PinkLight,
+    onBackground = MediumGray,
+    onPrimary = White,
+    surface = Pink,
+    onSurface = MediumGray,
+    secondaryVariant = SecondaryLight
 )
 
 @Composable
