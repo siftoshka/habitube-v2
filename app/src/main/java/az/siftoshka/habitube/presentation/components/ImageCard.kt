@@ -1,6 +1,6 @@
 package az.siftoshka.habitube.presentation.components
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
@@ -10,7 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
-import com.skydoves.landscapist.coil.CoilImage
+import coil.compose.rememberImagePainter
+import coil.request.CachePolicy
 
 @Composable
 fun ImageCard(
@@ -22,12 +23,19 @@ fun ImageCard(
         shape = MaterialTheme.shapes.large,
         elevation = 4.dp
     ) {
-        Box(modifier = Modifier.width(100.dp)) {
-            CoilImage(
-                imageModel = IMAGE_URL + imageUrl,
-                contentDescription = title,
-                contentScale = ContentScale.Crop
-            )
-        }
+        Image(
+            painter = rememberImagePainter(
+                data = IMAGE_URL + imageUrl,
+                builder = {
+                    crossfade(true)
+                    memoryCachePolicy(CachePolicy.ENABLED)
+                    diskCachePolicy(CachePolicy.DISABLED)
+                    networkCachePolicy(CachePolicy.ENABLED)
+                }
+            ),
+            contentDescription = title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.width(100.dp)
+        )
     }
 }
