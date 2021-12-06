@@ -6,4 +6,10 @@
     <string name="nav_search">Search</string>
     <string name="nav_library">Library</string>
     <string name="nav_settings">Settings</string>
+
+    <!-- Explore Screen -->
+    <string name="text_upcoming_movies">Upcoming movies</string>
+    <string name="text_trending_movies">Trending movies</string>
+    <string name="text_trending_shows">Trending TV Shows</string>
+    <string name="text_air_today">Air Today</string>
 </resources>

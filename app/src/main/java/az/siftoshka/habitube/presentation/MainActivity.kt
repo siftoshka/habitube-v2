@@ -3,7 +3,9 @@ package az.siftoshka.habitube.presentation
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -21,7 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import az.siftoshka.habitube.presentation.screens.ExploreScreen
+import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.SearchScreen
 import az.siftoshka.habitube.presentation.screens.SettingsScreen
@@ -45,8 +47,10 @@ class MainActivity : AppCompatActivity() {
 
                 Scaffold(
                     bottomBar = { BottomBar(navController = navController)}
-                ) {
-                    BottomNavGraph(navController = navController)
+                ) { innerPadding ->
+                    Box(modifier = Modifier.padding(innerPadding)) {
+                        BottomNavGraph(navController = navController)
+                    }
                 }
             }
         }
@@ -114,7 +118,7 @@ fun BottomNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Explore.route
     ) {
         composable(route = BottomBarScreen.Explore.route) {
-            ExploreScreen()
+            ExploreScreen(navController)
         }
         composable(route = BottomBarScreen.Search.route) {
             SearchScreen()
