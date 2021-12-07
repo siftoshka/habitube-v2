@@ -16,7 +16,6 @@ interface RemoteRepository {
 
     suspend fun getAirTodayTvShows(page: Int) : List<MovieLiteDto>
 
-
     suspend fun getMovie(movieId: Int) : MovieDto
 
 }

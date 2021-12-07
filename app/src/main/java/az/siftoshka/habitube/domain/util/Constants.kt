@@ -5,11 +5,12 @@ package az.siftoshka.habitube.domain.util
  */
 object Constants {
 
-    // Core
+    // API
     const val API_URL = "https://api.themoviedb.org/3/"
     const val IMAGE_URL = "https://image.tmdb.org/t/p/original"
     const val YOUTUBE_URL = "https://www.youtube.com/watch?v="
     const val VIMEO_URL = "https://vimeo.com/"
+    const val PAGE_SIZE = 20
 
     // About me
     const val DEV_TELEGRAM = "https://t.me/siftoshka"

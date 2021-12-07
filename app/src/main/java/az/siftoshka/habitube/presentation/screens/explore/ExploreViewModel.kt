@@ -4,8 +4,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.siftoshka.habitube.domain.model.MovieLite
 import az.siftoshka.habitube.domain.usecases.GetExploreUseCase
+import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.ExploreType
 import az.siftoshka.habitube.domain.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,17 +21,23 @@ class ExploreViewModel @Inject constructor(
     private val getExploreUseCase: GetExploreUseCase
 ) : ViewModel() {
 
-    private val _exploreUpcomingMoviesState = mutableStateOf(ExploreMoviesState())
-    val exploreUpcomingMoviesState: State<ExploreMoviesState> = _exploreUpcomingMoviesState
+    private val _exploreUpcomingMoviesState = mutableStateOf(ExploreState())
+    val exploreUpcomingMoviesState: State<ExploreState> = _exploreUpcomingMoviesState
 
-    private val _exploreTrendingMoviesState = mutableStateOf(ExploreMoviesState())
-    val exploreTrendingMoviesState: State<ExploreMoviesState> = _exploreTrendingMoviesState
+    private val _exploreTrendingMoviesState = mutableStateOf(ExploreState())
+    val exploreTrendingMoviesState: State<ExploreState> = _exploreTrendingMoviesState
+    val trendingMoviesPage = mutableStateOf(1)
+    private var trendingMoviesPosition = 0
 
-    private val _exploreTrendingTvShowsState = mutableStateOf(ExploreMoviesState())
-    val exploreTrendingTvShowsState: State<ExploreMoviesState> = _exploreTrendingTvShowsState
+    private val _exploreTrendingTvShowsState = mutableStateOf(ExploreState())
+    val exploreTrendingTvShowsState: State<ExploreState> = _exploreTrendingTvShowsState
+    val trendingTvShowsPage = mutableStateOf(1)
+    private var trendingTvShowsPosition = 0
 
-    private val _exploreAirTodayTvShowsState = mutableStateOf(ExploreMoviesState())
-    val exploreAirTodayTvShowsState: State<ExploreMoviesState> = _exploreAirTodayTvShowsState
+    private val _exploreAirTodayTvShowsState = mutableStateOf(ExploreState())
+    val exploreAirTodayTvShowsState: State<ExploreState> = _exploreAirTodayTvShowsState
+    val airTodayTvShowsPage = mutableStateOf(1)
+    private var airTodayTvShowsPosition = 0
 
     init {
         getUpcomingMovies()
@@ -44,13 +50,13 @@ class ExploreViewModel @Inject constructor(
         getExploreUseCase(page = 1, ExploreType.Upcoming).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _exploreUpcomingMoviesState.value = ExploreMoviesState(isLoading = true)
+                    _exploreUpcomingMoviesState.value = ExploreState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _exploreUpcomingMoviesState.value = ExploreMoviesState(movies = result.data ?: emptyList())
+                    _exploreUpcomingMoviesState.value = ExploreState(media = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _exploreUpcomingMoviesState.value = ExploreMoviesState(error = result.message ?: "Error")
+                    _exploreUpcomingMoviesState.value = ExploreState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
@@ -60,53 +66,107 @@ class ExploreViewModel @Inject constructor(
         getExploreUseCase(page = 1, ExploreType.TrendingMovies).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _exploreTrendingMoviesState.value = ExploreMoviesState(isLoading = true)
+                    _exploreTrendingMoviesState.value = ExploreState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _exploreTrendingMoviesState.value = ExploreMoviesState(movies = result.data ?: emptyList())
+                    _exploreTrendingMoviesState.value = ExploreState(media = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _exploreTrendingMoviesState.value = ExploreMoviesState(error = result.message ?: "Error")
+                    _exploreTrendingMoviesState.value = ExploreState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun getMoreTrendingMovies() {
+        if ((trendingMoviesPosition + 1) >= (trendingMoviesPage.value * PAGE_SIZE)) {
+            trendingMoviesPage.value = trendingMoviesPage.value + 1
+            if (trendingMoviesPage.value > 1) {
+                getExploreUseCase(page = trendingMoviesPage.value, ExploreType.TrendingMovies).onEach { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            _exploreTrendingMoviesState.value = ExploreState(
+                                media = _exploreTrendingMoviesState.value.media.plus(result.data.orEmpty()))
+                        }
+                    }
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun onChangeTrendingMoviesPosition(position: Int){
+        trendingMoviesPosition = position
     }
 
     private fun getTrendingTvShows() {
         getExploreUseCase(page = 1, ExploreType.TrendingTvShows).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _exploreTrendingTvShowsState.value = ExploreMoviesState(isLoading = true)
+                    _exploreTrendingTvShowsState.value = ExploreState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _exploreTrendingTvShowsState.value = ExploreMoviesState(movies = result.data ?: emptyList())
+                    _exploreTrendingTvShowsState.value = ExploreState(media = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _exploreTrendingTvShowsState.value = ExploreMoviesState(error = result.message ?: "Error")
+                    _exploreTrendingTvShowsState.value = ExploreState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun getMoreTrendingTvShows() {
+        if ((trendingTvShowsPosition + 1) >= (trendingTvShowsPage.value * PAGE_SIZE)) {
+            trendingTvShowsPage.value = trendingTvShowsPage.value + 1
+            if (trendingTvShowsPage.value > 1) {
+                getExploreUseCase(page = trendingTvShowsPage.value, ExploreType.TrendingTvShows).onEach { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            _exploreTrendingTvShowsState.value = ExploreState(
+                                media = _exploreTrendingTvShowsState.value.media.plus(result.data.orEmpty()))
+                        }
+                    }
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun onChangeTrendingTvShowsPosition(position: Int){
+        trendingTvShowsPosition = position
     }
 
     private fun getAirTodayTvShows() {
         getExploreUseCase(page = 1, ExploreType.AirToday).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _exploreAirTodayTvShowsState.value = ExploreMoviesState(isLoading = true)
+                    _exploreAirTodayTvShowsState.value = ExploreState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _exploreAirTodayTvShowsState.value = ExploreMoviesState(movies = result.data ?: emptyList())
+                    _exploreAirTodayTvShowsState.value = ExploreState(media = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _exploreAirTodayTvShowsState.value = ExploreMoviesState(error = result.message ?: "Error")
+                    _exploreAirTodayTvShowsState.value = ExploreState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
     }
-}
 
-data class ExploreMoviesState(
-    val isLoading: Boolean = false,
-    val movies: List<MovieLite> = emptyList(),
-    val error: String = ""
-)
+    fun getMoreAirTodayTvShows() {
+        if ((airTodayTvShowsPosition + 1) >= (airTodayTvShowsPage.value * PAGE_SIZE)) {
+            airTodayTvShowsPage.value = airTodayTvShowsPage.value + 1
+            if (airTodayTvShowsPage.value > 1) {
+                getExploreUseCase(page = airTodayTvShowsPage.value, ExploreType.AirToday).onEach { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            _exploreAirTodayTvShowsState.value = ExploreState(
+                                media = _exploreAirTodayTvShowsState.value.media.plus(result.data.orEmpty()))
+                        }
+                    }
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun onChangeAirTodayTvShowsPosition(position: Int){
+        airTodayTvShowsPosition = position
+    }
+}

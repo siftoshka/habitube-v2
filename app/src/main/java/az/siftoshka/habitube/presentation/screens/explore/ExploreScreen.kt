@@ -3,6 +3,7 @@ package az.siftoshka.habitube.presentation.screens.explore
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -17,9 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.presentation.components.ImageCard
 import az.siftoshka.habitube.presentation.components.LongImageCard
 import az.siftoshka.habitube.presentation.components.Pager
+import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -29,8 +32,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
  */
 @Composable
 fun ExploreScreen(
-    navController: NavController,
-    viewModel: ExploreViewModel = hiltViewModel()
+    navController: NavController
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
@@ -38,19 +40,26 @@ fun ExploreScreen(
 
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(
-                horizontalAlignment = Alignment.Start,
-                modifier = Modifier
-                    .verticalScroll(scrollState)
-            ) {
-                UpcomingMovies()
-                Spacer(modifier = Modifier.height(Padding.Large))
-                TrendingMovies()
-                Spacer(modifier = Modifier.height(Padding.Regular))
-                TrendingTvShows()
-                Spacer(modifier = Modifier.height(Padding.Regular))
-                AirTodayTvShows()
-                Spacer(modifier = Modifier.height(Padding.Regular))
+            Column(modifier = Modifier.fillMaxSize()) {
+                TopAppBar(
+                    title = R.string.app_name,
+                    icon = R.drawable.ic_launch_icon
+                )
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(scrollState)
+                ) {
+                    UpcomingMovies()
+                    Spacer(modifier = Modifier.height(Padding.Large))
+                    TrendingMovies()
+                    Spacer(modifier = Modifier.height(Padding.Regular))
+                    TrendingTvShows()
+                    Spacer(modifier = Modifier.height(Padding.Regular))
+                    AirTodayTvShows()
+                    Spacer(modifier = Modifier.height(Padding.Regular))
+                }
             }
         }
     }
@@ -62,10 +71,10 @@ fun UpcomingMovies(
 ) {
     val upcomingMoviesState = viewModel.exploreUpcomingMoviesState.value
 
-    if (upcomingMoviesState.movies.isNotEmpty()) {
+    if (upcomingMoviesState.media.isNotEmpty()) {
         TitleText(text = R.string.text_upcoming_movies)
         Pager(
-            items = upcomingMoviesState.movies,
+            items = upcomingMoviesState.media,
             itemFraction = 0.85f,
             overshootFraction = 0.5f,
             initialIndex = 1,
@@ -83,19 +92,21 @@ fun TrendingMovies(
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val trendingMoviesState = viewModel.exploreTrendingMoviesState.value
+    val page = viewModel.trendingMoviesPage.value
 
-    if (trendingMoviesState.movies.isNotEmpty()) {
+    if (trendingMoviesState.media.isNotEmpty()) {
         TitleText(text = R.string.text_trending_movies)
         LazyRow(
             modifier = Modifier.height(150.dp),
             contentPadding = PaddingValues(horizontal = Padding.Regular),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small),
         ) {
-            trendingMoviesState.movies.let { movies ->
-                items(movies.size) {
-                    val movie = movies[it]
-                    ImageCard(imageUrl = movie.posterPath, title = movie.title)
+            itemsIndexed(items = trendingMoviesState.media) { index, movie ->
+                viewModel.onChangeTrendingMoviesPosition(index)
+                if ((index + 1) >= (page * PAGE_SIZE)) {
+                    viewModel.getMoreTrendingMovies()
                 }
+                ImageCard(imageUrl = movie.posterPath, title = movie.title)
             }
         }
     }
@@ -106,19 +117,21 @@ fun TrendingTvShows(
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val trendingTvShowsState = viewModel.exploreTrendingTvShowsState.value
+    val page = viewModel.trendingTvShowsPage.value
 
-    if (trendingTvShowsState.movies.isNotEmpty()) {
+    if (trendingTvShowsState.media.isNotEmpty()) {
         TitleText(text = R.string.text_trending_shows)
         LazyRow(
             modifier = Modifier.height(150.dp),
             contentPadding = PaddingValues(horizontal = Padding.Regular),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small)
         ) {
-            trendingTvShowsState.movies.let { movies ->
-                items(movies.size) {
-                    val movie = movies[it]
-                    ImageCard(imageUrl = movie.posterPath, title = movie.title)
+            itemsIndexed(items = trendingTvShowsState.media) { index, show ->
+                viewModel.onChangeTrendingTvShowsPosition(index)
+                if ((index + 1) >= (page * PAGE_SIZE)) {
+                    viewModel.getMoreTrendingTvShows()
                 }
+                ImageCard(imageUrl = show.posterPath, title = show.title)
             }
         }
     }
@@ -129,19 +142,21 @@ fun AirTodayTvShows(
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val exploreAirTodayState = viewModel.exploreAirTodayTvShowsState.value
+    val page = viewModel.airTodayTvShowsPage.value
 
-    if (exploreAirTodayState.movies.isNotEmpty()) {
+    if (exploreAirTodayState.media.isNotEmpty()) {
         TitleText(text = R.string.text_air_today)
         LazyRow(
             modifier = Modifier.height(150.dp),
             contentPadding = PaddingValues(horizontal = Padding.Regular),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small)
         ) {
-            exploreAirTodayState.movies.let { movies ->
-                items(movies.size) {
-                    val movie = movies[it]
-                    ImageCard(imageUrl = movie.posterPath, title = movie.title)
+            itemsIndexed(items = exploreAirTodayState.media) { index, show ->
+                viewModel.onChangeAirTodayTvShowsPosition(index)
+                if ((index + 1) >= (page * PAGE_SIZE)) {
+                    viewModel.getMoreAirTodayTvShows()
                 }
+                ImageCard(imageUrl = show.posterPath, title = show.title)
             }
         }
     }
