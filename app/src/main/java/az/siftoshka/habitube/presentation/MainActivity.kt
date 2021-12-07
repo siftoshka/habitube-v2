@@ -25,11 +25,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.LibraryScreen
+import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.screens.SearchScreen
 import az.siftoshka.habitube.presentation.screens.SettingsScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
+import az.siftoshka.habitube.presentation.util.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -44,9 +46,15 @@ class MainActivity : AppCompatActivity() {
         setContent {
             HabitubeV2Theme {
                 val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route?.substringBeforeLast("/")
 
                 Scaffold(
-                    bottomBar = { BottomBar(navController = navController)}
+                    bottomBar = {
+                        if (currentRoute?.contains("nav") == true) {
+                            BottomBar(navController = navController)
+                        }
+                    }
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         BottomNavGraph(navController = navController)
@@ -128,6 +136,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable(route = BottomBarScreen.Settings.route) {
             SettingsScreen()
+        }
+        composable(route = Screen.MovieScreen.route + "/{movieId}") {
+            MovieScreen()
         }
     }
 }

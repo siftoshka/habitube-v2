@@ -1,18 +1,18 @@
 package az.siftoshka.habitube.data.remote.dto
 
-import az.siftoshka.habitube.domain.model.MovieLite
+import az.siftoshka.habitube.domain.model.MediaLite
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class MovieResponseDto(
+data class MediaResponseDto(
     @SerializedName("page") @Expose val page: Int,
-    @SerializedName("results") @Expose val results: List<MovieLiteDto>,
+    @SerializedName("results") @Expose val results: List<MediaLiteDto>,
     @SerializedName("total_pages") @Expose val totalPages: Int,
     @SerializedName("total_results") @Expose val totalResults: Int
 )
 
-data class MovieLiteDto(
+data class MediaLiteDto(
     @SerializedName("adult") @Expose val adult: Boolean,
     @SerializedName("backdrop_path") @Expose val backdropPath: String,
     @SerializedName("genre_ids") @Expose val genreIds: List<Int>,
@@ -29,9 +29,9 @@ data class MovieLiteDto(
     @SerializedName("vote_count") @Expose val voteCount: Int
 )
 
-fun toMovieLite(movieLiteDto: MovieLiteDto?): MovieLite {
-    return movieLiteDto?.let {
-        MovieLite(
+fun MediaLiteDto.toMediaLite(): MediaLite {
+    return this.let {
+        MediaLite(
             adult = it.adult,
             backdropPath = it.backdropPath,
             genreIds = it.genreIds,
@@ -47,5 +47,5 @@ fun toMovieLite(movieLiteDto: MovieLiteDto?): MovieLite {
             voteAverage = it.voteAverage,
             voteCount = it.voteCount
         )
-    } ?: MovieLite()
+    }
 }

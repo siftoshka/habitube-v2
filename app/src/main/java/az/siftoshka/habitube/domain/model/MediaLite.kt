@@ -1,6 +1,6 @@
 package az.siftoshka.habitube.domain.model
 
-data class MovieLite(
+data class MediaLite(
     val adult: Boolean? = false,
     val backdropPath: String? = null,
     val genreIds: List<Int>? = emptyList(),

@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,15 +20,18 @@ import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LongImageCard(
     imageUrl: String?,
-    title: String?
+    title: String?,
+    onItemClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.width(320.dp),
         shape = MaterialTheme.shapes.large,
-        elevation = 4.dp
+        elevation = 4.dp,
+        onClick = onItemClick
     ) {
         Box(modifier = Modifier.height(180.dp)) {
             Image(

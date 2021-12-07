@@ -25,6 +25,7 @@ import az.siftoshka.habitube.presentation.components.Pager
 import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
@@ -51,9 +52,9 @@ fun ExploreScreen(
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
-                    UpcomingMovies()
+                    UpcomingMovies(navController)
                     Spacer(modifier = Modifier.height(Padding.Large))
-                    TrendingMovies()
+                    TrendingMovies(navController)
                     Spacer(modifier = Modifier.height(Padding.Regular))
                     TrendingTvShows()
                     Spacer(modifier = Modifier.height(Padding.Regular))
@@ -67,6 +68,7 @@ fun ExploreScreen(
 
 @Composable
 fun UpcomingMovies(
+    navController: NavController,
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val upcomingMoviesState = viewModel.exploreUpcomingMoviesState.value
@@ -74,14 +76,19 @@ fun UpcomingMovies(
     if (upcomingMoviesState.media.isNotEmpty()) {
         TitleText(text = R.string.text_upcoming_movies)
         Pager(
-            items = upcomingMoviesState.media,
-            itemFraction = 0.85f,
-            overshootFraction = 0.5f,
-            initialIndex = 1,
-            itemSpacing = Padding.Medium,
-            modifier = Modifier.fillMaxWidth(),
-            contentFactory = {
-                LongImageCard(imageUrl = it.backdropPath, title = it.title)
+            width = 320.dp,
+            context = { lazyListState ->
+                LazyRow(
+                    state = lazyListState,
+                    contentPadding = PaddingValues(horizontal = Padding.Regular),
+                    horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                ) {
+                    itemsIndexed(upcomingMoviesState.media) { index, movie ->
+                        LongImageCard(imageUrl = movie.backdropPath, title = movie.title) {
+                            navController.navigate(Screen.MovieScreen.route + "/${movie.id}")
+                        }
+                    }
+                }
             }
         )
     }
@@ -89,6 +96,7 @@ fun UpcomingMovies(
 
 @Composable
 fun TrendingMovies(
+    navController: NavController,
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val trendingMoviesState = viewModel.exploreTrendingMoviesState.value
@@ -106,7 +114,9 @@ fun TrendingMovies(
                 if ((index + 1) >= (page * PAGE_SIZE)) {
                     viewModel.getMoreTrendingMovies()
                 }
-                ImageCard(imageUrl = movie.posterPath, title = movie.title)
+                ImageCard(imageUrl = movie.posterPath, title = movie.title) {
+                    navController.navigate(Screen.MovieScreen.route + "/${movie.id}")
+                }
             }
         }
     }
@@ -131,7 +141,9 @@ fun TrendingTvShows(
                 if ((index + 1) >= (page * PAGE_SIZE)) {
                     viewModel.getMoreTrendingTvShows()
                 }
-                ImageCard(imageUrl = show.posterPath, title = show.title)
+                ImageCard(imageUrl = show.posterPath, title = show.title) {
+
+                }
             }
         }
     }
@@ -156,7 +168,9 @@ fun AirTodayTvShows(
                 if ((index + 1) >= (page * PAGE_SIZE)) {
                     viewModel.getMoreAirTodayTvShows()
                 }
-                ImageCard(imageUrl = show.posterPath, title = show.title)
+                ImageCard(imageUrl = show.posterPath, title = show.title) {
+
+                }
             }
         }
     }

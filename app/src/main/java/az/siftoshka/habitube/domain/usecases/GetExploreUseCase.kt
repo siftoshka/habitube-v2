@@ -1,7 +1,7 @@
 package az.siftoshka.habitube.domain.usecases
 
-import az.siftoshka.habitube.data.remote.dto.toMovieLite
-import az.siftoshka.habitube.domain.model.MovieLite
+import az.siftoshka.habitube.data.remote.dto.toMediaLite
+import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import az.siftoshka.habitube.domain.util.ExploreType
 import az.siftoshka.habitube.domain.util.Resource
@@ -17,14 +17,14 @@ import javax.inject.Inject
 class GetExploreUseCase @Inject constructor(
     private val repository: RemoteRepository
 ) {
-    operator fun invoke(page: Int, type: ExploreType) : Flow<Resource<List<MovieLite>>> = flow {
+    operator fun invoke(page: Int, type: ExploreType) : Flow<Resource<List<MediaLite>>> = flow {
         try {
             emit(Resource.Loading())
             val movies = when (type) {
-                ExploreType.Upcoming -> repository.getUpcomingMovies(page).map { toMovieLite(it) }
-                ExploreType.TrendingMovies -> repository.getTrendingMovies(page).map { toMovieLite(it) }
-                ExploreType.TrendingTvShows -> repository.getTrendingTvShows(page).map { toMovieLite(it) }
-                ExploreType.AirToday -> repository.getAirTodayTvShows(page).map { toMovieLite(it) }
+                ExploreType.Upcoming -> repository.getUpcomingMovies(page).map { it.toMediaLite() }
+                ExploreType.TrendingMovies -> repository.getTrendingMovies(page).map { it.toMediaLite() }
+                ExploreType.TrendingTvShows -> repository.getTrendingTvShows(page).map { it.toMediaLite() }
+                ExploreType.AirToday -> repository.getAirTodayTvShows(page).map { it.toMediaLite() }
             }
             emit(Resource.Success(movies))
         } catch (e: HttpException) {
