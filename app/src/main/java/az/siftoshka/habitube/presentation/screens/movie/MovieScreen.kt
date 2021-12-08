@@ -4,7 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,11 +24,14 @@ import az.siftoshka.habitube.presentation.components.BackgroundImage
 import az.siftoshka.habitube.presentation.components.ImageCard
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
+import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.coroutines.launch
 
 /**
  * Composable function of the Movie Screen.
  */
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MovieScreen(
     navController: NavController,
@@ -35,7 +39,8 @@ fun MovieScreen(
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
-    var selectedTabIndex by remember { mutableStateOf(MovieTabs.INFO.value) }
+    val pagerState = rememberPagerState()
+    val scope = rememberCoroutineScope()
 
     val movieState = viewModel.movieState.value
 
@@ -53,10 +58,8 @@ fun MovieScreen(
                 }
                 MainBoard(navController)
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    TabView(
-                        tabs = listOf(R.string.tab_info, R.string.tab_cast, R.string.tab_crew, R.string.tab_similar)
-                    ) {
-                        selectedTabIndex = it
+                    TabView(pagerState) {
+                        scope.launch { pagerState.animateScrollToPage(it) }
                     }
                 }
             }
@@ -133,37 +136,74 @@ fun MainBoard(
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabView(
-    tabs: List<Int>,
-    onTabSelected: (selectedIndex: Int) -> Unit
-) {
-    var selectedTabIndex by remember {
-        mutableStateOf(MovieTabs.INFO.value)
-    }
+fun TabView(pagerState: PagerState, onTabSelected: (selectedIndex: Int) -> Unit) {
+    val tabs = listOf(R.string.tab_info, R.string.tab_cast, R.string.tab_crew, R.string.tab_similar)
     val inactiveColor = MaterialTheme.colors.onBackground
+
     TabRow(
+        indicator = { tabPositions -> TabRowDefaults.Indicator(Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)) },
         backgroundColor = Color.Transparent,
         contentColor = MaterialTheme.colors.primary,
-        selectedTabIndex = selectedTabIndex
+        selectedTabIndex = pagerState.currentPage
     ) {
         tabs.forEachIndexed { index, title ->
             Tab(
-                selected = selectedTabIndex == index,
+                selected = pagerState.currentPage == index,
                 selectedContentColor = MaterialTheme.colors.primary,
                 unselectedContentColor = inactiveColor,
-                onClick = {
-                    selectedTabIndex = index
-                    onTabSelected(index)
+                onClick = { onTabSelected(index) },
+                text = {
+                    Text(
+                        text = stringResource(id = title),
+                        style = MaterialTheme.typography.body1,
+                        color = if (pagerState.currentPage == index) MaterialTheme.colors.primary else inactiveColor
+                    )
                 }
-            ) {
-                Text(
-                    text = stringResource(id = title),
-                    style = MaterialTheme.typography.body1,
-                    color = if (selectedTabIndex == index) MaterialTheme.colors.primary else inactiveColor,
-                    modifier = Modifier.padding(vertical = Padding.Medium)
-                )
-            }
+            )
         }
     }
+    HorizontalPager(count = tabs.size, state = pagerState) { page ->
+        when (page) {
+            MovieTabs.INFO.value -> InfoTab()
+            MovieTabs.CAST.value -> CastTab()
+            MovieTabs.CREW.value -> CrewTab()
+            MovieTabs.SIMILAR.value -> SimilarTab()
+        }
+    }
+}
+
+@Composable
+fun InfoTab() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = stringResource(id = R.string.text_runtime),
+            style = MaterialTheme.typography.h2,
+            color = MaterialTheme.colors.onBackground,
+            textAlign = TextAlign.Start,
+        )
+    }
+}
+
+@Composable
+fun CastTab() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = stringResource(id = R.string.text_runtime),
+            style = MaterialTheme.typography.h2,
+            color = MaterialTheme.colors.onBackground,
+            textAlign = TextAlign.Start,
+        )
+    }
+}
+
+@Composable
+fun CrewTab() {
+
+}
+
+@Composable
+fun SimilarTab() {
+
 }
