@@ -53,10 +53,10 @@ fun BackgroundImage(
                         )
                     )
             )
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.fillMaxSize().padding(Padding.Default)) {
                 IconButton(
                     onClick = { onItemClick() },
-                    modifier = Modifier.size(50.dp).padding(Padding.Default)
+                    modifier = Modifier.size(30.dp)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),

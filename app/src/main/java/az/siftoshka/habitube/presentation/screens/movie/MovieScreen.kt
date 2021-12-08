@@ -176,7 +176,7 @@ fun TabView(pagerState: PagerState, onTabSelected: (selectedIndex: Int) -> Unit)
 
 @Composable
 fun InfoTab() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().padding(Padding.Default)) {
         Text(
             text = stringResource(id = R.string.text_runtime),
             style = MaterialTheme.typography.h2,
@@ -188,7 +188,7 @@ fun InfoTab() {
 
 @Composable
 fun CastTab() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().padding(Padding.Default)) {
         Text(
             text = stringResource(id = R.string.text_runtime),
             style = MaterialTheme.typography.h2,
