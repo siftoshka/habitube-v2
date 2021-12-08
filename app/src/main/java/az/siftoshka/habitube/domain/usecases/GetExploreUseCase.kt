@@ -12,7 +12,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get trending movies from repository call.
+ * Use-case to get explore content from repository call.
  */
 class GetExploreUseCase @Inject constructor(
     private val repository: RemoteRepository

@@ -23,11 +23,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.LibraryScreen
-import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.screens.SearchScreen
 import az.siftoshka.habitube.presentation.screens.SettingsScreen
+import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
+import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
@@ -103,7 +103,8 @@ fun RowScope.AddItem(
                 painter = painterResource(id = screen.icon),
                 contentDescription = stringResource(id = screen.title),
                 modifier = Modifier.size(26.dp)
-            )},
+            )
+        },
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.route
         } == true,
@@ -138,7 +139,7 @@ fun BottomNavGraph(navController: NavHostController) {
             SettingsScreen()
         }
         composable(route = Screen.MovieScreen.route + "/{movieId}") {
-            MovieScreen()
+            MovieScreen(navController)
         }
     }
 }

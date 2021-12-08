@@ -29,7 +29,7 @@ import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
- * Composable function of the Explore screen.
+ * Composable function of the Explore Screen.
  */
 @Composable
 fun ExploreScreen(

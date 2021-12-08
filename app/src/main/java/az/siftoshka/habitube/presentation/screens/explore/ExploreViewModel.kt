@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 /**
- * [ViewModel] of the ExploreScreen.
+ * [ViewModel] of the Explore Screen.
  */
 @HiltViewModel
 class ExploreViewModel @Inject constructor(

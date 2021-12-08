@@ -14,6 +14,10 @@ fun String.moneyFormat(): String {
     else DecimalFormat("#,###").format(toBigDecimal())
 }
 
+fun String.onlyYear(): String {
+    return this.take(4)
+}
+
 fun Context.getGithubIntent() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DEV_GITHUB)))
 
 fun Context.getTelegramIntent() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DEV_TELEGRAM)))

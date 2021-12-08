@@ -12,4 +12,15 @@
     <string name="text_trending_movies">Trending movies</string>
     <string name="text_trending_shows">Trending TV Shows</string>
     <string name="text_air_today">Air Today</string>
+
+    <!-- Movie Screen -->
+    <string name="text_rating">Rating</string>
+    <string name="text_runtime">Runtime</string>
+    <string name="text_minutes">minutes</string>
+
+    <!-- Tabs -->
+    <string name="tab_info">Info</string>
+    <string name="tab_cast">Cast</string>
+    <string name="tab_crew">Crew</string>
+    <string name="tab_similar">Similar</string>
 </resources>
