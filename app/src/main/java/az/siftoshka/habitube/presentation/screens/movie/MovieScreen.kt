@@ -1,6 +1,7 @@
 package az.siftoshka.habitube.presentation.screens.movie
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -9,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -19,11 +21,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.domain.util.onlyYear
-import az.siftoshka.habitube.presentation.components.BackgroundImage
-import az.siftoshka.habitube.presentation.components.ImageCard
+import az.siftoshka.habitube.domain.util.*
+import az.siftoshka.habitube.presentation.components.*
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
+import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
@@ -57,10 +59,8 @@ fun MovieScreen(
                     }
                 }
                 MainBoard(navController)
-                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    TabView(pagerState) {
-                        scope.launch { pagerState.animateScrollToPage(it) }
-                    }
+                TabView(pagerState) {
+                    scope.launch { pagerState.animateScrollToPage(it) }
                 }
             }
         }
@@ -73,65 +73,69 @@ fun MainBoard(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val movie = viewModel.movieState.value.movie
-
-    BackgroundImage(imageUrl = movie?.backdropPath) { navController.popBackStack() }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Padding.Default)
-            .padding(top = Padding.Small)
-    ) {
-        ImageCard(
-            imageUrl = movie?.posterPath,
-            title = movie?.title,
-            indication = null
-        ) {}
-        Column(modifier = Modifier.padding(horizontal = Padding.Small)) {
-            Text(
-                text = buildAnnotatedString {
-                    append("${movie?.title}")
-                    append(
-                        AnnotatedString(
-                            " (${movie?.releaseDate?.onlyYear()})",
-                            spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
+    Column {
+        BackgroundImage(
+            modifier = Modifier.fillMaxWidth(),
+            imageUrl = movie?.backdropPath
+        ) { navController.popBackStack() }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Padding.Default)
+                .padding(top = Padding.Small)
+        ) {
+            ImageCard(
+                imageUrl = movie?.posterPath,
+                title = movie?.title,
+                indication = null
+            ) {}
+            Column(modifier = Modifier.padding(horizontal = Padding.Small)) {
+                Text(
+                    text = buildAnnotatedString {
+                        append("${movie?.title}")
+                        append(
+                            AnnotatedString(
+                                " (${movie?.releaseDate?.onlyYear()})",
+                                spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
+                            )
                         )
-                    )
-                },
-                style = MaterialTheme.typography.h3,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Start,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(Padding.ExtraSmall))
-            Text(
-                text = buildAnnotatedString {
-                    append(stringResource(id = R.string.text_rating))
-                    append(
-                        AnnotatedString(
-                            ": ${movie?.voteAverage} (${movie?.voteCount})",
-                            spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
+                    },
+                    style = MaterialTheme.typography.h3,
+                    color = MaterialTheme.colors.onBackground,
+                    textAlign = TextAlign.Start,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(modifier = Modifier.height(Padding.ExtraSmall))
+                Text(
+                    text = buildAnnotatedString {
+                        append(stringResource(id = R.string.text_rating))
+                        append(
+                            AnnotatedString(
+                                ": ${movie?.voteAverage} (${movie?.voteCount})",
+                                spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
+                            )
                         )
-                    )
-                },
-                style = MaterialTheme.typography.h5,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Start,
-            )
-            Text(
-                text = buildAnnotatedString {
-                    append(stringResource(id = R.string.text_runtime))
-                    append(
-                        AnnotatedString(
-                            ": ${movie?.runtime} ${stringResource(id = R.string.text_minutes)}",
-                            spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
+                    },
+                    style = MaterialTheme.typography.h5,
+                    color = MaterialTheme.colors.onBackground,
+                    textAlign = TextAlign.Start,
+                )
+                Text(
+                    text = buildAnnotatedString {
+                        append(stringResource(id = R.string.text_runtime))
+                        append(
+                            AnnotatedString(
+                                ": ${movie?.runtime} ${stringResource(id = R.string.text_minutes)}",
+                                spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
+                            )
                         )
-                    )
-                },
-                style = MaterialTheme.typography.h5,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Start,
-            )
+                    },
+                    style = MaterialTheme.typography.h5,
+                    color = MaterialTheme.colors.onBackground,
+                    textAlign = TextAlign.Start,
+                )
+            }
         }
     }
 }
@@ -175,20 +179,86 @@ fun TabView(pagerState: PagerState, onTabSelected: (selectedIndex: Int) -> Unit)
 }
 
 @Composable
-fun InfoTab() {
-    Column(modifier = Modifier.fillMaxSize().padding(Padding.Default)) {
-        Text(
-            text = stringResource(id = R.string.text_runtime),
-            style = MaterialTheme.typography.h2,
-            color = MaterialTheme.colors.onBackground,
-            textAlign = TextAlign.Start,
-        )
+fun InfoTab(
+    viewModel: MovieViewModel = hiltViewModel()
+) {
+    val movieState = viewModel.movieState.value
+    val videosState = viewModel.videosState.value
+    val context = LocalContext.current
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(Padding.Medium)
+    ) {
+        if (videosState.videos.isNotEmpty()) {
+            TitleText(text = R.string.text_videos)
+            DetailsCard {
+                LazyRow(
+                    modifier = Modifier.padding(Padding.Medium),
+                    horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                ) {
+                    videosState.videos.let { videos ->
+                        items(videos.size) {
+                            val video = videos[it]
+                            val imageUrl = video.site?.takeVideoImageUrl(video.key)
+                            VideoCard(imageUrl = imageUrl, title = video.name) {
+                                context.openVideo(video.site, video.key)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        movieState.movie?.let { movie ->
+            Spacer(modifier = Modifier.height(Padding.Medium))
+            TitleText(text = R.string.text_description)
+            DetailsCard {
+                Text(
+                    text = movie.overview.orEmpty(),
+                    style = MaterialTheme.typography.body1,
+                    color = MaterialTheme.colors.onSurface,
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier.padding(Padding.Medium)
+                )
+            }
+            Spacer(modifier = Modifier.height(Padding.Medium))
+            TitleText(text = R.string.text_details)
+            DetailsCard {
+                Column(modifier = Modifier.padding(Padding.Medium)) {
+                    DetailText(name = R.string.text_budget, detail = ": $${movie.budget.toString().moneyFormat()}")
+                    DetailText(name = R.string.text_revenue, detail = ": $${movie.revenue.toString().moneyFormat()}")
+                    val languages = movie.spokenLanguages?.map { it.englishName }?.toFormattedString()
+                    DetailText(name = R.string.text_spoken_languages, detail = ": $languages")
+                }
+            }
+            Spacer(modifier = Modifier.height(Padding.Medium))
+            TitleText(text = R.string.text_genres)
+            DetailsCard {
+                FlowRow(
+                    mainAxisSpacing = Padding.Small,
+                    crossAxisSpacing = Padding.Small,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(Padding.Medium)
+                ) {
+                    movie.genres?.forEach { movieGenre ->
+                        Genre(genre = movieGenre.name.orEmpty())
+                    }
+                }
+            }
+        }
     }
 }
 
 @Composable
 fun CastTab() {
-    Column(modifier = Modifier.fillMaxSize().padding(Padding.Default)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(Padding.Default)
+    ) {
         Text(
             text = stringResource(id = R.string.text_runtime),
             style = MaterialTheme.typography.h2,

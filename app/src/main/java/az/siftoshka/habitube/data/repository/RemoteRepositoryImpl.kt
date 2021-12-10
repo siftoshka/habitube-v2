@@ -3,6 +3,7 @@ package az.siftoshka.habitube.data.repository
 import az.siftoshka.habitube.data.remote.MovieService
 import az.siftoshka.habitube.data.remote.dto.MovieDto
 import az.siftoshka.habitube.data.remote.dto.MediaLiteDto
+import az.siftoshka.habitube.data.remote.dto.VideoDto
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import javax.inject.Inject
 
@@ -31,5 +32,9 @@ class RemoteRepositoryImpl @Inject constructor(
 
     override suspend fun getMovie(movieId: Int): MovieDto {
         return service.getMovie(movieId)
+    }
+
+    override suspend fun getMovieVideos(movieId: Int): List<VideoDto> {
+        return service.getMovieVideos(movieId).results
     }
 }

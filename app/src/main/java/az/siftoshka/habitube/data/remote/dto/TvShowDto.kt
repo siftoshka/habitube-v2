@@ -1,6 +1,5 @@
 package az.siftoshka.habitube.data.remote.dto
 
-
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -8,13 +7,13 @@ data class TvShowDto(
     @SerializedName("backdrop_path") @Expose val backdropPath: String,
     @SerializedName("episode_run_time") @Expose val episodeRunTime: List<Int>,
     @SerializedName("first_air_date") @Expose val firstAirDate: String,
-    @SerializedName("genres") @Expose val genres: List<TvShowGenre>,
+    @SerializedName("genres") @Expose val genres: List<TvShowGenreDto>,
     @SerializedName("homepage") @Expose val homepage: String,
     @SerializedName("id") @Expose val id: Int,
     @SerializedName("in_production") @Expose val inProduction: Boolean,
     @SerializedName("last_air_date") @Expose val lastAirDate: String,
     @SerializedName("name") @Expose val name: String,
-    @SerializedName("networks") @Expose val networks: List<Network>,
+    @SerializedName("networks") @Expose val networks: List<NetworkDto>,
     @SerializedName("number_of_episodes") @Expose val numberOfEpisodes: Int,
     @SerializedName("number_of_seasons") @Expose val numberOfSeasons: Int,
     @SerializedName("origin_country") @Expose val originCountry: List<String>,
@@ -23,7 +22,7 @@ data class TvShowDto(
     @SerializedName("overview") @Expose val overview: String,
     @SerializedName("popularity") @Expose val popularity: Double,
     @SerializedName("poster_path") @Expose val posterPath: String,
-    @SerializedName("seasons") @Expose val seasons: List<Season>,
+    @SerializedName("seasons") @Expose val seasons: List<SeasonDto>,
     @SerializedName("status") @Expose val status: String,
     @SerializedName("tagline") @Expose val tagline: String,
     @SerializedName("type") @Expose val type: String,
@@ -31,19 +30,19 @@ data class TvShowDto(
     @SerializedName("vote_count") @Expose val voteCount: Int
 )
 
-data class TvShowGenre(
+data class TvShowGenreDto(
     @SerializedName("id") @Expose val id: Int,
     @SerializedName("name") @Expose val name: String
 )
 
-data class Network(
+data class NetworkDto(
     @SerializedName("id") @Expose val id: Int,
     @SerializedName("logo_path") @Expose val logoPath: String,
     @SerializedName("name") @Expose val name: String,
     @SerializedName("origin_country") @Expose val originCountry: String
 )
 
-data class Season(
+data class SeasonDto(
     @SerializedName("air_date") @Expose val airDate: String,
     @SerializedName("episode_count") @Expose val episodeCount: Int,
     @SerializedName("id") @Expose val id: Int,

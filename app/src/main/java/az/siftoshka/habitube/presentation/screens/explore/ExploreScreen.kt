@@ -1,6 +1,5 @@
 package az.siftoshka.habitube.presentation.screens.explore
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -8,21 +7,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
-import az.siftoshka.habitube.presentation.components.ImageCard
-import az.siftoshka.habitube.presentation.components.LongImageCard
-import az.siftoshka.habitube.presentation.components.Pager
-import az.siftoshka.habitube.presentation.components.TopAppBar
+import az.siftoshka.habitube.presentation.components.*
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
@@ -80,7 +73,7 @@ fun UpcomingMovies(
             context = { lazyListState ->
                 LazyRow(
                     state = lazyListState,
-                    contentPadding = PaddingValues(horizontal = Padding.Regular),
+                    contentPadding = PaddingValues(horizontal = Padding.Default),
                     horizontalArrangement = Arrangement.spacedBy(Padding.Small)
                 ) {
                     itemsIndexed(upcomingMoviesState.media) { index, movie ->
@@ -106,7 +99,7 @@ fun TrendingMovies(
         TitleText(text = R.string.text_trending_movies)
         LazyRow(
             modifier = Modifier.height(150.dp),
-            contentPadding = PaddingValues(horizontal = Padding.Regular),
+            contentPadding = PaddingValues(horizontal = Padding.Default),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small),
         ) {
             itemsIndexed(items = trendingMoviesState.media) { index, movie ->
@@ -133,7 +126,7 @@ fun TrendingTvShows(
         TitleText(text = R.string.text_trending_shows)
         LazyRow(
             modifier = Modifier.height(150.dp),
-            contentPadding = PaddingValues(horizontal = Padding.Regular),
+            contentPadding = PaddingValues(horizontal = Padding.Default),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small)
         ) {
             itemsIndexed(items = trendingTvShowsState.media) { index, show ->
@@ -160,7 +153,7 @@ fun AirTodayTvShows(
         TitleText(text = R.string.text_air_today)
         LazyRow(
             modifier = Modifier.height(150.dp),
-            contentPadding = PaddingValues(horizontal = Padding.Regular),
+            contentPadding = PaddingValues(horizontal = Padding.Default),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small)
         ) {
             itemsIndexed(items = exploreAirTodayState.media) { index, show ->
@@ -174,15 +167,4 @@ fun AirTodayTvShows(
             }
         }
     }
-}
-
-@Composable
-fun TitleText(@StringRes text: Int) {
-    Text(
-        text = stringResource(id = text),
-        style = MaterialTheme.typography.h2,
-        color = MaterialTheme.colors.onBackground,
-        textAlign = TextAlign.Start,
-        modifier = Modifier.padding(horizontal = Padding.Regular, vertical = Padding.ExtraSmall)
-    )
 }

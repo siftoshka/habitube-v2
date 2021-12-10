@@ -17,6 +17,13 @@
     <string name="text_rating">Rating</string>
     <string name="text_runtime">Runtime</string>
     <string name="text_minutes">minutes</string>
+    <string name="text_videos">Videos</string>
+    <string name="text_description">Description</string>
+    <string name="text_genres">Genres</string>
+    <string name="text_details">Details</string>
+    <string name="text_budget">Budget</string>
+    <string name="text_revenue">Revenue</string>
+    <string name="text_spoken_languages">Spoken languages:</string>
 
     <!-- Tabs -->
     <string name="tab_info">Info</string>

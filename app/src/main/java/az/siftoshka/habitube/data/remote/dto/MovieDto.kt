@@ -1,6 +1,5 @@
 package az.siftoshka.habitube.data.remote.dto
 
-
 import az.siftoshka.habitube.domain.model.*
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -8,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class MovieDto(
     @SerializedName("adult") @Expose val adult: Boolean,
     @SerializedName("backdrop_path") @Expose val backdropPath: String,
-    @SerializedName("budget") @Expose val budget: Int,
+    @SerializedName("budget") @Expose val budget: Long,
     @SerializedName("genres") @Expose val genres: List<MovieGenreDto>,
     @SerializedName("homepage") @Expose val homepage: String,
     @SerializedName("id") @Expose val id: Int,
@@ -21,7 +20,7 @@ data class MovieDto(
     @SerializedName("production_companies") @Expose val productionCompanies: List<ProductionCompanyDto>,
     @SerializedName("production_countries") @Expose val productionCountries: List<ProductionCountryDto>,
     @SerializedName("release_date") @Expose val releaseDate: String,
-    @SerializedName("revenue") @Expose val revenue: Int,
+    @SerializedName("revenue") @Expose val revenue: Long,
     @SerializedName("runtime") @Expose val runtime: Int,
     @SerializedName("spoken_languages") @Expose val spokenLanguages: List<SpokenLanguageDto>,
     @SerializedName("status") @Expose val status: String,

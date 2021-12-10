@@ -1,7 +1,9 @@
 package az.siftoshka.habitube.data.remote
 
-import az.siftoshka.habitube.data.remote.dto.MovieDto
 import az.siftoshka.habitube.data.remote.dto.MediaResponseDto
+import az.siftoshka.habitube.data.remote.dto.MovieDto
+import az.siftoshka.habitube.data.remote.dto.TvShowDto
+import az.siftoshka.habitube.data.remote.dto.VideoResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -35,4 +37,19 @@ interface MovieService {
     suspend fun getMovie(
         @Path("movie_id") movieId: Int,
     ): MovieDto
+
+    @GET("movie/{movie_id}/videos")
+    suspend fun getMovieVideos(
+        @Path("movie_id") movieId: Int,
+    ): VideoResponseDto
+
+    @GET("tv/{tv_id}")
+    suspend fun getTvShow(
+        @Path("tv_id") showId: Int,
+    ): TvShowDto
+
+    @GET("tv/{tv_id}/videos")
+    suspend fun getTvShowVideos(
+        @Path("tv_id") showId: Int,
+    ): VideoResponseDto
 }

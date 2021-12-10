@@ -3,7 +3,7 @@ package az.siftoshka.habitube.domain.model
 data class Movie(
     val adult: Boolean? = false,
     val backdropPath: String? = null,
-    val budget: Int? = 0,
+    val budget: Long? = 0,
     val genres: List<MovieGenre>? = emptyList(),
     val homepage: String? = null,
     val id: Int? = 0,
@@ -16,7 +16,7 @@ data class Movie(
     val productionCompanies: List<ProductionCompany>? = emptyList(),
     val productionCountries: List<ProductionCountry>? = emptyList(),
     val releaseDate: String? = null,
-    val revenue: Int? = 0,
+    val revenue: Long? = 0,
     val runtime: Int? = 0,
     val spokenLanguages: List<SpokenLanguage>? = emptyList(),
     val status: String? = null,

@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import az.siftoshka.habitube.domain.usecases.GetMovieUseCase
+import az.siftoshka.habitube.domain.usecases.GetVideosUseCase
 import az.siftoshka.habitube.domain.util.Resource
 import az.siftoshka.habitube.presentation.util.NavigationConstants.PARAM_MOVIE_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,15 +20,20 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val getMovieUseCase: GetMovieUseCase,
+    private val getVideosUseCase: GetVideosUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _movieState = mutableStateOf(MovieState())
     val movieState: State<MovieState> = _movieState
 
+    private val _videosState = mutableStateOf(MovieVideosState())
+    val videosState: State<MovieVideosState> = _videosState
+
     init {
         savedStateHandle.get<String>(PARAM_MOVIE_ID)?.let {
             getMovie(it.toInt())
+            getVideos(it.toInt())
         }
     }
 
@@ -42,6 +48,22 @@ class MovieViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _movieState.value = MovieState(error = result.message ?: "Error")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getVideos(movieId: Int) {
+        getVideosUseCase(movieId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _videosState.value = MovieVideosState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _videosState.value = MovieVideosState(videos = result.data ?: emptyList())
+                }
+                is Resource.Error -> {
+                    _videosState.value = MovieVideosState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
