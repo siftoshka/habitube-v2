@@ -6,6 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
@@ -72,10 +74,13 @@ fun MainBoard(
     navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
+    val offset = viewModel.imageOffset.observeAsState()
     val movie = viewModel.movieState.value.movie
     Column {
         BackgroundImage(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(offset.value?.dp ?: 200.dp),
             imageUrl = movie?.backdropPath
         ) { navController.popBackStack() }
         Row(
@@ -142,7 +147,11 @@ fun MainBoard(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabView(pagerState: PagerState, onTabSelected: (selectedIndex: Int) -> Unit) {
+fun TabView(
+    pagerState: PagerState,
+    viewModel: MovieViewModel = hiltViewModel(),
+    onTabSelected: (selectedIndex: Int) -> Unit
+) {
     val tabs = listOf(R.string.tab_info, R.string.tab_cast, R.string.tab_crew, R.string.tab_similar)
     val inactiveColor = MaterialTheme.colors.onBackground
 
@@ -175,6 +184,7 @@ fun TabView(pagerState: PagerState, onTabSelected: (selectedIndex: Int) -> Unit)
             MovieTabs.CREW.value -> CrewTab()
             MovieTabs.SIMILAR.value -> SimilarTab()
         }
+        viewModel.updateOffset(0)
     }
 }
 
@@ -182,6 +192,8 @@ fun TabView(pagerState: PagerState, onTabSelected: (selectedIndex: Int) -> Unit)
 fun InfoTab(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
+    val scrollState = rememberScrollState()
+    viewModel.updateOffset(scrollState.value)
     val movieState = viewModel.movieState.value
     val videosState = viewModel.videosState.value
     val context = LocalContext.current
@@ -189,7 +201,7 @@ fun InfoTab(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .padding(Padding.Medium)
     ) {
         if (videosState.videos.isNotEmpty()) {
@@ -231,6 +243,8 @@ fun InfoTab(
                     DetailText(name = R.string.text_revenue, detail = ": $${movie.revenue.toString().moneyFormat()}")
                     val languages = movie.spokenLanguages?.map { it.englishName }?.toFormattedString()
                     DetailText(name = R.string.text_spoken_languages, detail = ": $languages")
+                    val companies = movie.productionCompanies?.map { it.name }?.toFormattedString()
+                    DetailText(name = R.string.text_companies, detail = ": $companies")
                 }
             }
             Spacer(modifier = Modifier.height(Padding.Medium))
@@ -248,6 +262,7 @@ fun InfoTab(
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(128.dp))
         }
     }
 }

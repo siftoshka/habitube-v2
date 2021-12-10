@@ -2,9 +2,7 @@ package az.siftoshka.habitube.presentation.screens.movie
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import az.siftoshka.habitube.domain.usecases.GetMovieUseCase
 import az.siftoshka.habitube.domain.usecases.GetVideosUseCase
 import az.siftoshka.habitube.domain.util.Resource
@@ -23,6 +21,10 @@ class MovieViewModel @Inject constructor(
     private val getVideosUseCase: GetVideosUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    private val _imageOffset = MutableLiveData(240f)
+    val imageOffset: LiveData<Float>
+        get() = _imageOffset
 
     private val _movieState = mutableStateOf(MovieState())
     val movieState: State<MovieState> = _movieState
@@ -67,5 +69,10 @@ class MovieViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun updateOffset(state: Int) {
+        println(state)
+        _imageOffset.value = (200 - (state * 0.7)).toFloat()
     }
 }
