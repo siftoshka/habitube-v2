@@ -13,7 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -27,7 +27,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
-import az.siftoshka.habitube.presentation.components.*
+import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.image.Avatar
 import az.siftoshka.habitube.presentation.components.image.BackgroundImage
 import az.siftoshka.habitube.presentation.components.image.ImageCard
@@ -37,7 +37,6 @@ import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import java.lang.Float.min
 
@@ -86,9 +85,11 @@ fun MainBoard(
         BackgroundImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp - (scrollState.value * 0.5f).dp)
-                .absoluteOffset(y = -(scrollState.value * 0.1f).dp)
-                .alpha(min(1f, 1 - (scrollState.value / 200f))),
+                .height((200 - (scrollState.value * 0.15f)).dp)
+                .graphicsLayer {
+                    alpha = min(1f, 1 - (scrollState.value / 600f))
+                    translationY = -scrollState.value * 0.1f
+                },
             imageUrl = movie?.backdropPath
         ) { navController.popBackStack() }
         Row(
