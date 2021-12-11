@@ -1,9 +1,8 @@
 package az.siftoshka.habitube.domain.usecases
 
-import az.siftoshka.habitube.data.remote.dto.toCredits
-import az.siftoshka.habitube.domain.model.Credit
+import az.siftoshka.habitube.data.remote.dto.toTvShow
+import az.siftoshka.habitube.domain.model.TvShow
 import az.siftoshka.habitube.domain.repository.RemoteRepository
-import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,19 +11,16 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get credits from repository call.
+ * Use-case to get tv show from repository call.
  */
-class GetCreditsUseCase @Inject constructor(
+class GetTvShowUseCase @Inject constructor(
     private val repository: RemoteRepository
 ) {
-    operator fun invoke(mediaId: Int, mediaType: MediaType): Flow<Resource<Credit>> = flow {
+    operator fun invoke(showId: Int): Flow<Resource<TvShow>> = flow {
         try {
             emit(Resource.Loading())
-            val credits = when (mediaType) {
-                MediaType.Movie -> repository.getMovieCredits(mediaId).toCredits()
-                MediaType.TvShow -> repository.getTvShowCredits(mediaId).toCredits()
-            }
-            emit(Resource.Success(credits))
+            val movie = repository.getTvShow(showId).toTvShow()
+            emit(Resource.Success(movie))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))
         } catch (e: IOException) {

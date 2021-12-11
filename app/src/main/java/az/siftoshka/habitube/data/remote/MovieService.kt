@@ -10,6 +10,9 @@ import retrofit2.http.Query
  */
 interface MovieService {
 
+    /**
+     * Explore ----------
+     */
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
         @Query("page") page: Int,
@@ -30,6 +33,9 @@ interface MovieService {
         @Query("page") page: Int,
     ): MediaResponseDto
 
+    /**
+     * Movie ----------
+     */
     @GET("movie/{movie_id}")
     suspend fun getMovie(
         @Path("movie_id") movieId: Int,
@@ -51,6 +57,9 @@ interface MovieService {
         @Query("page") page: Int,
     ): MediaResponseDto
 
+    /**
+     * TV Show ----------
+     */
     @GET("tv/{tv_id}")
     suspend fun getTvShow(
         @Path("tv_id") showId: Int,
@@ -60,4 +69,23 @@ interface MovieService {
     suspend fun getTvShowVideos(
         @Path("tv_id") showId: Int,
     ): VideoResponseDto
+
+    @GET("tv/{tv_id}/credits")
+    suspend fun getTvShowCredits(
+        @Path("tv_id") showId: Int
+    ): CreditDto
+
+    @GET("tv/{tv_id}/similar")
+    suspend fun getSimilarTvShows(
+        @Path("tv_id") showId: Int,
+        @Query("page") page: Int,
+    ): MediaResponseDto
+
+    /**
+     * Movie Star ----------
+     */
+    @GET("person/{person_id}")
+    suspend fun getPerson(
+        @Path("person_id") personId: Int,
+    ): PersonDto
 }

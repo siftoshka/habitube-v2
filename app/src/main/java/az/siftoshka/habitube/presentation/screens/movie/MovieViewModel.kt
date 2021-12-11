@@ -10,6 +10,7 @@ import az.siftoshka.habitube.domain.usecases.GetMovieUseCase
 import az.siftoshka.habitube.domain.usecases.GetSimilarUseCase
 import az.siftoshka.habitube.domain.usecases.GetVideosUseCase
 import az.siftoshka.habitube.domain.util.Constants
+import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
 import az.siftoshka.habitube.presentation.util.NavigationConstants.PARAM_MOVIE_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -72,7 +73,7 @@ class MovieViewModel @Inject constructor(
     }
 
     private fun getVideos(movieId: Int) {
-        getVideosUseCase(movieId).onEach { result ->
+        getVideosUseCase(movieId, MediaType.Movie).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
                     _videosState.value = MovieVideosState(isLoading = true)
@@ -88,7 +89,7 @@ class MovieViewModel @Inject constructor(
     }
 
     private fun getCredits(movieId: Int) {
-        getCreditsUseCase(movieId).onEach { result ->
+        getCreditsUseCase(movieId, MediaType.Movie).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
                     _creditsState.value = MovieCreditsState(isLoading = true)
@@ -104,7 +105,7 @@ class MovieViewModel @Inject constructor(
     }
 
     private fun getSimilarMovies(movieId: Int) {
-        getSimilarUseCase(movieId, page = 1).onEach { result ->
+        getSimilarUseCase(movieId, page = 1, MediaType.Movie).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
                     _similarState.value = SimilarMoviesState(isLoading = true)
@@ -123,7 +124,7 @@ class MovieViewModel @Inject constructor(
         if ((similarMoviesPosition + 1) >= (similarMoviesPage.value * Constants.PAGE_SIZE)) {
             similarMoviesPage.value = similarMoviesPage.value + 1
             if (similarMoviesPage.value > 1) {
-                getSimilarUseCase(movieId, similarMoviesPage.value).onEach { result ->
+                getSimilarUseCase(movieId, similarMoviesPage.value, MediaType.Movie).onEach { result ->
                     when (result) {
                         is Resource.Success -> {
                             _similarState.value = SimilarMoviesState(

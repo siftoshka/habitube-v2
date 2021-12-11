@@ -1,5 +1,9 @@
 package az.siftoshka.habitube.data.remote.dto
 
+import az.siftoshka.habitube.domain.model.Network
+import az.siftoshka.habitube.domain.model.Season
+import az.siftoshka.habitube.domain.model.TvShow
+import az.siftoshka.habitube.domain.model.TvShowGenre
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -51,3 +55,71 @@ data class SeasonDto(
     @SerializedName("poster_path") @Expose val posterPath: String,
     @SerializedName("season_number") @Expose val seasonNumber: Int
 )
+
+fun TvShowDto.toTvShow() : TvShow {
+    return this.let {
+        TvShow(
+            backdropPath = it.backdropPath,
+            episodeRunTime = it.episodeRunTime,
+            firstAirDate = it.firstAirDate,
+            genres = map(it.genres),
+            homepage = it.homepage,
+            id = it.id,
+            inProduction = it.inProduction,
+            lastAirDate = it.lastAirDate,
+            name = it.name,
+            networks = map(it.networks),
+            numberOfEpisodes = it.numberOfEpisodes,
+            numberOfSeasons = it.numberOfSeasons,
+            originCountry = it.originCountry,
+            originalLanguage = it.originalLanguage,
+            originalName = it.originalName,
+            overview = it.overview,
+            popularity = it.popularity,
+            posterPath = it.posterPath,
+            seasons = map(it.seasons),
+            status = it.status,
+            tagline = it.tagline,
+            type = it.type,
+            voteAverage = it.voteAverage,
+            voteCount = it.voteCount
+        )
+    }
+}
+
+@JvmName("mapGenres")
+fun map(genres: List<TvShowGenreDto>) : List<TvShowGenre> {
+    return genres.map {
+        TvShowGenre(
+            id = it.id,
+            name = it.name
+        )
+    }
+}
+
+@JvmName("mapNetworks")
+fun map(networks: List<NetworkDto>) : List<Network> {
+    return networks.map {
+        Network(
+            id = it.id,
+            logoPath = it.logoPath,
+            name = it.name,
+            originCountry = it.originCountry
+        )
+    }
+}
+
+@JvmName("mapSeasons")
+fun map(seasons: List<SeasonDto>) : List<Season> {
+    return seasons.map {
+        Season(
+            airDate = it.airDate,
+            episodeCount = it.episodeCount,
+            id = it.id,
+            name = it.name,
+            overview = it.overview,
+            posterPath = it.posterPath,
+            seasonNumber = it.seasonNumber
+        )
+    }
+}

@@ -10,10 +10,12 @@ sealed class Screen(val route: String) {
     object SettingsScreen : Screen("nav_settings_screen")
     object MovieScreen : Screen("movie_screen")
     object TvShowScreen : Screen("tv_show_screen")
+    object PersonScreen : Screen("person_screen")
 }
 
 object NavigationConstants {
 
     const val PARAM_MOVIE_ID = "movieId"
     const val PARAM_TV_SHOW_ID = "showId"
+    const val PARAM_PERSON_ID = "personId"
 }

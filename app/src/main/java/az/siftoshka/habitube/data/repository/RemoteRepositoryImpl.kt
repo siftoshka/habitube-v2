@@ -1,10 +1,7 @@
 package az.siftoshka.habitube.data.repository
 
 import az.siftoshka.habitube.data.remote.MovieService
-import az.siftoshka.habitube.data.remote.dto.CreditDto
-import az.siftoshka.habitube.data.remote.dto.MovieDto
-import az.siftoshka.habitube.data.remote.dto.MediaLiteDto
-import az.siftoshka.habitube.data.remote.dto.VideoDto
+import az.siftoshka.habitube.data.remote.dto.*
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import javax.inject.Inject
 
@@ -45,5 +42,21 @@ class RemoteRepositoryImpl @Inject constructor(
 
     override suspend fun getSimilarMovies(movieId: Int, page: Int): List<MediaLiteDto> {
         return service.getSimilarMovies(movieId, page).results
+    }
+
+    override suspend fun getTvShow(showId: Int): TvShowDto {
+        return service.getTvShow(showId)
+    }
+
+    override suspend fun getTvShowVideos(showId: Int): List<VideoDto> {
+        return service.getTvShowVideos(showId).results
+    }
+
+    override suspend fun getTvShowCredits(showId: Int): CreditDto {
+        return service.getTvShowCredits(showId)
+    }
+
+    override suspend fun getSimilarTvShows(showId: Int, page: Int): List<MediaLiteDto> {
+        return service.getSimilarTvShows(showId, page).results
     }
 }
