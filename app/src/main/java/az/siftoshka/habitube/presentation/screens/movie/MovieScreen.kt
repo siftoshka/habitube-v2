@@ -1,16 +1,19 @@
 package az.siftoshka.habitube.presentation.screens.movie
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -27,10 +30,10 @@ import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.*
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
-import com.google.accompanist.flowlayout.FlowRow
-import com.google.accompanist.pager.*
+import az.siftoshka.habitube.presentation.util.Screen
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import kotlinx.coroutines.launch
+import java.lang.Float.min
 
 /**
  * Composable function of the Movie Screen.
@@ -43,8 +46,7 @@ fun MovieScreen(
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
-    val pagerState = rememberPagerState()
-    val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
 
     val movieState = viewModel.movieState.value
 
@@ -60,10 +62,8 @@ fun MovieScreen(
                         CircularProgressIndicator(color = MaterialTheme.colors.primary)
                     }
                 }
-                MainBoard(navController)
-                TabView(pagerState) {
-                    scope.launch { pagerState.animateScrollToPage(it) }
-                }
+                MainBoard(scrollState, navController)
+                InfoBoard(scrollState, navController)
             }
         }
     }
@@ -71,23 +71,25 @@ fun MovieScreen(
 
 @Composable
 fun MainBoard(
+    scrollState: ScrollState,
     navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
-    val offset = viewModel.imageOffset.observeAsState()
     val movie = viewModel.movieState.value.movie
+
     Column {
         BackgroundImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(offset.value?.dp ?: 200.dp),
+                .height(200.dp - (scrollState.value * 0.5f).dp)
+                .absoluteOffset(y = -(scrollState.value * 0.1f).dp)
+                .alpha(min(1f, 1 - (scrollState.value / 200f))),
             imageUrl = movie?.backdropPath
         ) { navController.popBackStack() }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = Padding.Default)
-                .padding(top = Padding.Small)
+                .padding(horizontal = Padding.Default, vertical = Padding.Small)
         ) {
             ImageCard(
                 imageUrl = movie?.posterPath,
@@ -145,55 +147,12 @@ fun MainBoard(
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TabView(
-    pagerState: PagerState,
-    viewModel: MovieViewModel = hiltViewModel(),
-    onTabSelected: (selectedIndex: Int) -> Unit
-) {
-    val tabs = listOf(R.string.tab_info, R.string.tab_cast, R.string.tab_crew, R.string.tab_similar)
-    val inactiveColor = MaterialTheme.colors.onBackground
-
-    TabRow(
-        indicator = { tabPositions -> TabRowDefaults.Indicator(Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)) },
-        backgroundColor = Color.Transparent,
-        contentColor = MaterialTheme.colors.primary,
-        selectedTabIndex = pagerState.currentPage
-    ) {
-        tabs.forEachIndexed { index, title ->
-            Tab(
-                selected = pagerState.currentPage == index,
-                selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = inactiveColor,
-                onClick = { onTabSelected(index) },
-                text = {
-                    Text(
-                        text = stringResource(id = title),
-                        style = MaterialTheme.typography.body1,
-                        color = if (pagerState.currentPage == index) MaterialTheme.colors.primary else inactiveColor
-                    )
-                }
-            )
-        }
-    }
-    HorizontalPager(count = tabs.size, state = pagerState) { page ->
-        when (page) {
-            MovieTabs.INFO.value -> InfoTab()
-            MovieTabs.CAST.value -> CastTab()
-            MovieTabs.CREW.value -> CrewTab()
-            MovieTabs.SIMILAR.value -> SimilarTab()
-        }
-        viewModel.updateOffset(0)
-    }
-}
-
-@Composable
-fun InfoTab(
+fun InfoBoard(
+    scrollState: ScrollState,
+    navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
-    val scrollState = rememberScrollState()
-    viewModel.updateOffset(scrollState.value)
     val movieState = viewModel.movieState.value
     val videosState = viewModel.videosState.value
     val context = LocalContext.current
@@ -202,10 +161,10 @@ fun InfoTab(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(Padding.Medium)
+            .padding(Padding.Default)
     ) {
         if (videosState.videos.isNotEmpty()) {
-            TitleText(text = R.string.text_videos)
+            DetailTitle(text = R.string.text_videos)
             DetailsCard {
                 LazyRow(
                     modifier = Modifier.padding(Padding.Medium),
@@ -225,7 +184,7 @@ fun InfoTab(
         }
         movieState.movie?.let { movie ->
             Spacer(modifier = Modifier.height(Padding.Medium))
-            TitleText(text = R.string.text_description)
+            DetailTitle(text = R.string.text_description)
             DetailsCard {
                 Text(
                     text = movie.overview.orEmpty(),
@@ -236,7 +195,7 @@ fun InfoTab(
                 )
             }
             Spacer(modifier = Modifier.height(Padding.Medium))
-            TitleText(text = R.string.text_details)
+            DetailTitle(text = R.string.text_details)
             DetailsCard {
                 Column(modifier = Modifier.padding(Padding.Medium)) {
                     DetailText(name = R.string.text_budget, detail = ": $${movie.budget.toString().moneyFormat()}")
@@ -245,50 +204,94 @@ fun InfoTab(
                     DetailText(name = R.string.text_spoken_languages, detail = ": $languages")
                     val companies = movie.productionCompanies?.map { it.name }?.toFormattedString()
                     DetailText(name = R.string.text_companies, detail = ": $companies")
+                    val genres = movie.genres?.map { it.name }?.toFormattedString()
+                    DetailText(name = R.string.text_genres, detail = ": $genres")
                 }
             }
             Spacer(modifier = Modifier.height(Padding.Medium))
-            TitleText(text = R.string.text_genres)
-            DetailsCard {
-                FlowRow(
-                    mainAxisSpacing = Padding.Small,
-                    crossAxisSpacing = Padding.Small,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(Padding.Medium)
-                ) {
-                    movie.genres?.forEach { movieGenre ->
-                        Genre(genre = movieGenre.name.orEmpty())
-                    }
-                }
-            }
-            Spacer(modifier = Modifier.height(128.dp))
+            Cast()
+            Spacer(modifier = Modifier.height(Padding.Medium))
+            Crew()
+            Spacer(modifier = Modifier.height(Padding.Medium))
+            SimilarMovies(navController)
+            Spacer(modifier = Modifier.height(Padding.Medium))
         }
     }
 }
 
 @Composable
-fun CastTab() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(Padding.Default)
-    ) {
-        Text(
-            text = stringResource(id = R.string.text_runtime),
-            style = MaterialTheme.typography.h2,
-            color = MaterialTheme.colors.onBackground,
-            textAlign = TextAlign.Start,
-        )
+fun Cast(
+    viewModel: MovieViewModel = hiltViewModel()
+) {
+    val creditState = viewModel.creditsState.value
+
+    if (creditState.credits?.cast?.isNotEmpty() == true) {
+        DetailTitle(text = R.string.text_cast)
+        DetailsCard {
+            LazyRow(
+                modifier = Modifier.padding(Padding.Medium),
+                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+            ) {
+                creditState.credits.cast.let { cast ->
+                    items(cast.size) {
+                        val actor = cast[it]
+                        Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.character) { }
+                    }
+                }
+            }
+        }
     }
 }
 
 @Composable
-fun CrewTab() {
+fun Crew(
+    viewModel: MovieViewModel = hiltViewModel()
+) {
+    val creditState = viewModel.creditsState.value
 
+    if (creditState.credits?.crew?.isNotEmpty() == true) {
+        DetailTitle(text = R.string.text_crew)
+        DetailsCard {
+            LazyRow(
+                modifier = Modifier.padding(Padding.Medium),
+                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+            ) {
+                creditState.credits.crew.let { crew ->
+                    items(crew.size) {
+                        val actor = crew[it]
+                        Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.knownForDepartment) {}
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable
-fun SimilarTab() {
+fun SimilarMovies(
+    navController: NavController,
+    viewModel: MovieViewModel = hiltViewModel()
+) {
+    val similarState = viewModel.similarState.value
+    val page = viewModel.similarMoviesPage.value
 
+    if (similarState.movies.isNotEmpty()) {
+        DetailTitle(text = R.string.text_similar)
+        DetailsCard {
+            LazyRow(
+                modifier = Modifier.padding(Padding.Medium),
+                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+            ) {
+                itemsIndexed(items = similarState.movies) { index, movie ->
+                    viewModel.onChangePosition(index)
+                    if ((index + 1) >= (page * Constants.PAGE_SIZE)) {
+                        viewModel.getMoreSimilarMovies()
+                    }
+                    ImageCard(imageUrl = movie.posterPath, title = movie.title) {
+                        navController.navigate(Screen.MovieScreen.route + "/${movie.id}")
+                    }
+                }
+            }
+        }
+    }
 }

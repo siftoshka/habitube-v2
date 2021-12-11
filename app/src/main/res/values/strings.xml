@@ -25,10 +25,7 @@
     <string name="text_revenue">Revenue</string>
     <string name="text_spoken_languages">Spoken languages</string>
     <string name="text_companies">Companies</string>
-
-    <!-- Tabs -->
-    <string name="tab_info">Info</string>
-    <string name="tab_cast">Cast</string>
-    <string name="tab_crew">Crew</string>
-    <string name="tab_similar">Similar</string>
+    <string name="text_cast">Cast</string>
+    <string name="text_crew">Crew</string>
+    <string name="text_similar">Similar</string>
 </resources>

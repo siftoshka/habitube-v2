@@ -1,5 +1,6 @@
 package az.siftoshka.habitube.domain.repository
 
+import az.siftoshka.habitube.data.remote.dto.CreditDto
 import az.siftoshka.habitube.data.remote.dto.MovieDto
 import az.siftoshka.habitube.data.remote.dto.MediaLiteDto
 import az.siftoshka.habitube.data.remote.dto.VideoDto
@@ -20,5 +21,9 @@ interface RemoteRepository {
     suspend fun getMovie(movieId: Int) : MovieDto
 
     suspend fun getMovieVideos(movieId: Int) : List<VideoDto>
+
+    suspend fun getMovieCredits(movieId: Int) : CreditDto
+
+    suspend fun getSimilarMovies(movieId: Int, page: Int) : List<MediaLiteDto>
 
 }

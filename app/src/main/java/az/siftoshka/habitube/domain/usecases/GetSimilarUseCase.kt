@@ -12,20 +12,15 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get explore content from repository call.
+ * Use-case to get similar movies/shows from repository call.
  */
-class GetExploreUseCase @Inject constructor(
+class GetSimilarUseCase @Inject constructor(
     private val repository: RemoteRepository
 ) {
-    operator fun invoke(page: Int, type: ExploreType) : Flow<Resource<List<MediaLite>>> = flow {
+    operator fun invoke(id: Int, page: Int,) : Flow<Resource<List<MediaLite>>> = flow {
         try {
             emit(Resource.Loading())
-            val resources = when (type) {
-                ExploreType.Upcoming -> repository.getUpcomingMovies(page).map { it.toMediaLite() }
-                ExploreType.TrendingMovies -> repository.getTrendingMovies(page).map { it.toMediaLite() }
-                ExploreType.TrendingTvShows -> repository.getTrendingTvShows(page).map { it.toMediaLite() }
-                ExploreType.AirToday -> repository.getAirTodayTvShows(page).map { it.toMediaLite() }
-            }
+            val resources = repository.getSimilarMovies(id, page).map { it.toMediaLite() }
             emit(Resource.Success(resources))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))

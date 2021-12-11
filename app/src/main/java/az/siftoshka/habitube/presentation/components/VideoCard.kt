@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
 import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
@@ -40,6 +41,7 @@ fun VideoCard(
                     data = imageUrl,
                     builder = {
                         crossfade(true)
+                        error(R.drawable.ic_placeholder)
                         memoryCachePolicy(CachePolicy.ENABLED)
                         diskCachePolicy(CachePolicy.DISABLED)
                         networkCachePolicy(CachePolicy.ENABLED)

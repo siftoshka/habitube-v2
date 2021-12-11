@@ -1,6 +1,7 @@
 package az.siftoshka.habitube.data.repository
 
 import az.siftoshka.habitube.data.remote.MovieService
+import az.siftoshka.habitube.data.remote.dto.CreditDto
 import az.siftoshka.habitube.data.remote.dto.MovieDto
 import az.siftoshka.habitube.data.remote.dto.MediaLiteDto
 import az.siftoshka.habitube.data.remote.dto.VideoDto
@@ -36,5 +37,13 @@ class RemoteRepositoryImpl @Inject constructor(
 
     override suspend fun getMovieVideos(movieId: Int): List<VideoDto> {
         return service.getMovieVideos(movieId).results
+    }
+
+    override suspend fun getMovieCredits(movieId: Int): CreditDto {
+        return service.getMovieCredits(movieId)
+    }
+
+    override suspend fun getSimilarMovies(movieId: Int, page: Int): List<MediaLiteDto> {
+        return service.getSimilarMovies(movieId, page).results
     }
 }

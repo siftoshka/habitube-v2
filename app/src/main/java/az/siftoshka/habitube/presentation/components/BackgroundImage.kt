@@ -35,6 +35,7 @@ fun BackgroundImage(
                     data = IMAGE_URL + imageUrl,
                     builder = {
                         crossfade(true)
+                        error(R.drawable.ic_placeholder)
                         memoryCachePolicy(CachePolicy.ENABLED)
                         diskCachePolicy(CachePolicy.DISABLED)
                         networkCachePolicy(CachePolicy.ENABLED)

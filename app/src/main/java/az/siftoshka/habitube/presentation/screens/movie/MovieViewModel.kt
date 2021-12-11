@@ -2,9 +2,14 @@ package az.siftoshka.habitube.presentation.screens.movie
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.*
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import az.siftoshka.habitube.domain.usecases.GetCreditsUseCase
 import az.siftoshka.habitube.domain.usecases.GetMovieUseCase
+import az.siftoshka.habitube.domain.usecases.GetSimilarUseCase
 import az.siftoshka.habitube.domain.usecases.GetVideosUseCase
+import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.Resource
 import az.siftoshka.habitube.presentation.util.NavigationConstants.PARAM_MOVIE_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,12 +24,10 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val getMovieUseCase: GetMovieUseCase,
     private val getVideosUseCase: GetVideosUseCase,
+    private val getCreditsUseCase: GetCreditsUseCase,
+    private val getSimilarUseCase: GetSimilarUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
-    private val _imageOffset = MutableLiveData(240f)
-    val imageOffset: LiveData<Float>
-        get() = _imageOffset
 
     private val _movieState = mutableStateOf(MovieState())
     val movieState: State<MovieState> = _movieState
@@ -32,10 +35,23 @@ class MovieViewModel @Inject constructor(
     private val _videosState = mutableStateOf(MovieVideosState())
     val videosState: State<MovieVideosState> = _videosState
 
+    private val _creditsState = mutableStateOf(MovieCreditsState())
+    val creditsState: State<MovieCreditsState> = _creditsState
+
+    private val _similarState = mutableStateOf(SimilarMoviesState())
+    val similarState: State<SimilarMoviesState> = _similarState
+    val similarMoviesPage = mutableStateOf(1)
+    private var similarMoviesPosition = 0
+
+    var movieId = 0
+
     init {
         savedStateHandle.get<String>(PARAM_MOVIE_ID)?.let {
+            movieId = it.toInt()
             getMovie(it.toInt())
             getVideos(it.toInt())
+            getCredits(it.toInt())
+            getSimilarMovies(it.toInt())
         }
     }
 
@@ -71,8 +87,56 @@ class MovieViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun updateOffset(state: Int) {
-        println(state)
-        _imageOffset.value = (200 - (state * 0.7)).toFloat()
+    private fun getCredits(movieId: Int) {
+        getCreditsUseCase(movieId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _creditsState.value = MovieCreditsState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _creditsState.value = MovieCreditsState(credits = result.data)
+                }
+                is Resource.Error -> {
+                    _creditsState.value = MovieCreditsState(error = result.message ?: "Error")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getSimilarMovies(movieId: Int) {
+        getSimilarUseCase(movieId, page = 1).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _similarState.value = SimilarMoviesState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _similarState.value = SimilarMoviesState(movies = result.data ?: emptyList())
+                }
+                is Resource.Error -> {
+                    _similarState.value = SimilarMoviesState(error = result.message ?: "Error")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun getMoreSimilarMovies() {
+        if ((similarMoviesPosition + 1) >= (similarMoviesPage.value * Constants.PAGE_SIZE)) {
+            similarMoviesPage.value = similarMoviesPage.value + 1
+            if (similarMoviesPage.value > 1) {
+                getSimilarUseCase(movieId, similarMoviesPage.value).onEach { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            _similarState.value = SimilarMoviesState(
+                                movies = _similarState.value.movies.plus(result.data.orEmpty())
+                            )
+                        }
+                    }
+                }.launchIn(viewModelScope)
+            }
+        }
+    }
+
+    fun onChangePosition(position: Int) {
+        similarMoviesPosition = position
     }
 }

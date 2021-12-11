@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
@@ -38,6 +39,7 @@ fun ImageCard(
                 data = IMAGE_URL + imageUrl,
                 builder = {
                     crossfade(true)
+                    error(R.drawable.ic_placeholder)
                     memoryCachePolicy(CachePolicy.ENABLED)
                     diskCachePolicy(CachePolicy.DISABLED)
                     networkCachePolicy(CachePolicy.ENABLED)
