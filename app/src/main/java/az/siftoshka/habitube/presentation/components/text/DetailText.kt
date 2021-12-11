@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components
+package az.siftoshka.habitube.presentation.components.text
 
 import androidx.annotation.StringRes
 import androidx.compose.material.MaterialTheme

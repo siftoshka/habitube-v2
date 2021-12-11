@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components
+package az.siftoshka.habitube.presentation.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Indication

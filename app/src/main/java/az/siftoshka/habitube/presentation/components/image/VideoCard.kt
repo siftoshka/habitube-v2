@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components
+package az.siftoshka.habitube.presentation.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,28 +16,28 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
 import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun LongImageCard(
+fun VideoCard(
     imageUrl: String?,
     title: String?,
     onItemClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier.width(320.dp),
+        modifier = Modifier.width(256.dp),
         shape = MaterialTheme.shapes.large,
         elevation = 4.dp,
         onClick = onItemClick
     ) {
-        Box(modifier = Modifier.height(180.dp)) {
+        Box(modifier = Modifier.height(144.dp)) {
             Image(
+                modifier = Modifier.fillMaxWidth(),
                 painter = rememberImagePainter(
-                    data = IMAGE_URL + imageUrl,
+                    data = imageUrl,
                     builder = {
                         crossfade(true)
                         error(R.drawable.ic_placeholder)

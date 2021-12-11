@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components
+package az.siftoshka.habitube.presentation.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Indication
@@ -64,7 +64,7 @@ fun Avatar(
         )
         Text(
             text = secondary.orEmpty(),
-            style = MaterialTheme.typography.h5,
+            style = MaterialTheme.typography.h6,
             color = MaterialTheme.colors.secondaryVariant,
             textAlign = TextAlign.Center,
             maxLines = 1,

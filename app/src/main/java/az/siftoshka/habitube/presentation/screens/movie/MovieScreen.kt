@@ -28,6 +28,12 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.*
+import az.siftoshka.habitube.presentation.components.image.Avatar
+import az.siftoshka.habitube.presentation.components.image.BackgroundImage
+import az.siftoshka.habitube.presentation.components.image.ImageCard
+import az.siftoshka.habitube.presentation.components.image.VideoCard
+import az.siftoshka.habitube.presentation.components.text.DetailText
+import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
@@ -38,7 +44,6 @@ import java.lang.Float.min
 /**
  * Composable function of the Movie Screen.
  */
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MovieScreen(
     navController: NavController,
@@ -198,12 +203,11 @@ fun InfoBoard(
             DetailTitle(text = R.string.text_details)
             DetailsCard {
                 Column(modifier = Modifier.padding(Padding.Medium)) {
+                    DetailText(name = R.string.text_original_title, detail = ": ${movie.originalTitle}")
                     DetailText(name = R.string.text_budget, detail = ": $${movie.budget.toString().moneyFormat()}")
                     DetailText(name = R.string.text_revenue, detail = ": $${movie.revenue.toString().moneyFormat()}")
                     val languages = movie.spokenLanguages?.map { it.englishName }?.toFormattedString()
                     DetailText(name = R.string.text_spoken_languages, detail = ": $languages")
-                    val companies = movie.productionCompanies?.map { it.name }?.toFormattedString()
-                    DetailText(name = R.string.text_companies, detail = ": $companies")
                     val genres = movie.genres?.map { it.name }?.toFormattedString()
                     DetailText(name = R.string.text_genres, detail = ": $genres")
                 }

@@ -16,6 +16,9 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.presentation.components.*
+import az.siftoshka.habitube.presentation.components.image.ImageCard
+import az.siftoshka.habitube.presentation.components.image.LongImageCard
+import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
