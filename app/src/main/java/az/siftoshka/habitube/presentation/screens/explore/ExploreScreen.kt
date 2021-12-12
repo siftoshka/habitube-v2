@@ -52,9 +52,9 @@ fun ExploreScreen(
                     Spacer(modifier = Modifier.height(Padding.Large))
                     TrendingMovies(navController)
                     Spacer(modifier = Modifier.height(Padding.Regular))
-                    TrendingTvShows()
+                    TrendingTvShows(navController)
                     Spacer(modifier = Modifier.height(Padding.Regular))
-                    AirTodayTvShows()
+                    AirTodayTvShows(navController)
                     Spacer(modifier = Modifier.height(Padding.Regular))
                 }
             }
@@ -120,6 +120,7 @@ fun TrendingMovies(
 
 @Composable
 fun TrendingTvShows(
+    navController: NavController,
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val trendingTvShowsState = viewModel.exploreTrendingTvShowsState.value
@@ -138,7 +139,7 @@ fun TrendingTvShows(
                     viewModel.getMoreTrendingTvShows()
                 }
                 ImageCard(imageUrl = show.posterPath, title = show.title) {
-
+                    navController.navigate(Screen.TvShowScreen.route + "/${show.id}")
                 }
             }
         }
@@ -147,6 +148,7 @@ fun TrendingTvShows(
 
 @Composable
 fun AirTodayTvShows(
+    navController: NavController,
     viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val exploreAirTodayState = viewModel.exploreAirTodayTvShowsState.value
@@ -165,7 +167,7 @@ fun AirTodayTvShows(
                     viewModel.getMoreAirTodayTvShows()
                 }
                 ImageCard(imageUrl = show.posterPath, title = show.title) {
-
+                    navController.navigate(Screen.TvShowScreen.route + "/${show.id}")
                 }
             }
         }

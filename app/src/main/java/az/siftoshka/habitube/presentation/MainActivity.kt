@@ -28,6 +28,7 @@ import az.siftoshka.habitube.presentation.screens.SearchScreen
 import az.siftoshka.habitube.presentation.screens.SettingsScreen
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
+import az.siftoshka.habitube.presentation.screens.show.ShowScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
@@ -140,6 +141,9 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable(route = Screen.MovieScreen.route + "/{movieId}") {
             MovieScreen(navController)
+        }
+        composable(route = Screen.TvShowScreen.route + "/{showId}") {
+            ShowScreen(navController)
         }
     }
 }

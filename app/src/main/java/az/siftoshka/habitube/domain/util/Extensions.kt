@@ -9,16 +9,16 @@ import java.text.DecimalFormat
  *  General extension file.
  */
 fun String.moneyFormat(): String {
-    if (this == "0") return this
-    return if (contains(".")) DecimalFormat("#,##0").format(toBigDecimal())
-    else DecimalFormat("#,###").format(toBigDecimal())
+    if (this == "0") return "-"
+    return if (contains(".")) DecimalFormat("$#,##0").format(toBigDecimal())
+    else DecimalFormat("$#,###").format(toBigDecimal())
 }
 
 fun String.onlyYear(): String {
     return this.take(4)
 }
 
-fun List<String?>.toFormattedString(): String {
+fun List<Any?>.toFormattedString(): String {
     return this.toString().replace("[", "").replace("]", "")
 }
 

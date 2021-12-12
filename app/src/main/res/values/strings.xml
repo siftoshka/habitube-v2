@@ -13,19 +13,26 @@
     <string name="text_trending_shows">Trending TV Shows</string>
     <string name="text_air_today">Air Today</string>
 
-    <!-- Movie Screen -->
+    <!-- Movie/TV Show Screens -->
     <string name="text_rating">Rating</string>
     <string name="text_runtime">Runtime</string>
+    <string name="text_episodes">Episodes</string>
     <string name="text_minutes">minutes</string>
     <string name="text_videos">Videos</string>
     <string name="text_description">Description</string>
     <string name="text_genres">Genres</string>
+    <string name="text_seasons">Seasons</string>
     <string name="text_details">Details</string>
     <string name="text_budget">Budget</string>
+    <string name="text_status">Status</string>
     <string name="text_revenue">Revenue</string>
     <string name="text_spoken_languages">Spoken languages</string>
     <string name="text_original_title">Original title</string>
     <string name="text_cast">Cast</string>
     <string name="text_crew">Crew</string>
     <string name="text_similar">Similar</string>
+
+    <!-- Common -->
+    <string name="text_show_less">Show less</string>
+    <string name="text_show_more">Show more</string>
 </resources>
