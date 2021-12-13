@@ -3,6 +3,7 @@ package az.siftoshka.habitube.domain.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import az.siftoshka.habitube.R
 import java.text.DecimalFormat
 
 /**
@@ -12,6 +13,29 @@ fun String.moneyFormat(): String {
     if (this == "0") return "-"
     return if (contains(".")) DecimalFormat("$#,##0").format(toBigDecimal())
     else DecimalFormat("$#,###").format(toBigDecimal())
+}
+
+fun String?.normalDate(context: Context): String {
+    val year = this?.substring(0, 4)
+    var month = this?.substring(5, 7)
+    val day = this?.substring(8, 10)
+
+    when (month) {
+        "01" -> month = context.getString(R.string.month_1)
+        "02" -> month = context.getString(R.string.month_2)
+        "03" -> month = context.getString(R.string.month_3)
+        "04" -> month = context.getString(R.string.month_4)
+        "05" -> month = context.getString(R.string.month_5)
+        "06" -> month = context.getString(R.string.month_6)
+        "07" -> month = context.getString(R.string.month_7)
+        "08" -> month = context.getString(R.string.month_8)
+        "09" -> month = context.getString(R.string.month_9)
+        "10" -> month = context.getString(R.string.month_10)
+        "11" -> month = context.getString(R.string.month_11)
+        "12" -> month = context.getString(R.string.month_12)
+    }
+
+    return "$day $month $year"
 }
 
 fun String.onlyYear(): String {

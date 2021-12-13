@@ -31,8 +31,31 @@
     <string name="text_cast">Cast</string>
     <string name="text_crew">Crew</string>
     <string name="text_similar">Similar</string>
+    
+    <!-- Person Screen -->
+    <string name="text_birth_place">Place of birth</string>
+    <string name="text_known_for">Known for</string>
+    <string name="text_biography">Biography</string>
+    <string name="text_acting_movies">Acting in movies</string>
+    <string name="text_acting_shows">Acting in tv shows</string>
+    <string name="text_crew_movies">Crew in movies</string>
+    <string name="text_crew_shows">Crew in tv shows</string>
 
     <!-- Common -->
     <string name="text_show_less">Show less</string>
     <string name="text_show_more">Show more</string>
+
+    <!-- Months -->
+    <string name="month_1">Jan</string>
+    <string name="month_2">Feb</string>
+    <string name="month_3">Mar</string>
+    <string name="month_4">Apr</string>
+    <string name="month_5">May</string>
+    <string name="month_6">Jun</string>
+    <string name="month_7">Jul</string>
+    <string name="month_8">Aug</string>
+    <string name="month_9">Sep</string>
+    <string name="month_10">Oct</string>
+    <string name="month_11">Nov</string>
+    <string name="month_12">Dec</string>
 </resources>

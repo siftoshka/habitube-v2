@@ -1,5 +1,6 @@
 package az.siftoshka.habitube.data.remote.dto
 
+import az.siftoshka.habitube.domain.model.Person
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -19,3 +20,24 @@ data class PersonDto(
     @SerializedName("popularity") @Expose val popularity: Double,
     @SerializedName("profile_path") @Expose val profilePath: String
 )
+
+fun PersonDto.toPerson() : Person {
+    return this.let {
+        Person(
+            adult = it.adult,
+            alsoKnownAs = it.alsoKnownAs,
+            biography = it.biography,
+            birthday = it.birthday,
+            deathday = it.deathday,
+            gender = it.gender,
+            homepage = it.homepage,
+            id = it.id,
+            imdbId = it.imdbId,
+            knownForDepartment = it.knownForDepartment,
+            name = it.name,
+            placeOfBirth = it.placeOfBirth,
+            popularity = it.popularity,
+            profilePath = it.profilePath
+        )
+    }
+}

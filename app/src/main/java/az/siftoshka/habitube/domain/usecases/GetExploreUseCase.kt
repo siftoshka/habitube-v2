@@ -20,12 +20,13 @@ class GetExploreUseCase @Inject constructor(
     operator fun invoke(page: Int, type: ExploreType) : Flow<Resource<List<MediaLite>>> = flow {
         try {
             emit(Resource.Loading())
-            val resources = when (type) {
+            var resources = when (type) {
                 ExploreType.Upcoming -> repository.getUpcomingMovies(page).map { it.toMediaLite() }
                 ExploreType.TrendingMovies -> repository.getTrendingMovies(page).map { it.toMediaLite() }
                 ExploreType.TrendingTvShows -> repository.getTrendingTvShows(page).map { it.toMediaLite() }
                 ExploreType.AirToday -> repository.getAirTodayTvShows(page).map { it.toMediaLite() }
             }
+            resources = resources.filterNot { it.posterPath.isNullOrBlank() }
             emit(Resource.Success(resources))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))

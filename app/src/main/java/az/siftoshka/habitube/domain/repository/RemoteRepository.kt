@@ -31,4 +31,10 @@ interface RemoteRepository {
 
     suspend fun getSimilarTvShows(showId: Int, page: Int) : List<MediaLiteDto>
 
+    suspend fun getPerson(personId: Int) : PersonDto
+
+    suspend fun getPersonMovieCredits(personId: Int) : PersonCreditDto
+
+    suspend fun getPersonTvShowCredits(personId: Int) : PersonCreditDto
+
 }

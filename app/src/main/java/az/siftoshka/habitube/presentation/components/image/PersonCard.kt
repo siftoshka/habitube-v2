@@ -3,6 +3,7 @@ package az.siftoshka.habitube.presentation.components.image
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -20,14 +21,15 @@ import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
 @Composable
-fun BackgroundImage(
+fun PersonCard(
     modifier: Modifier,
     imageUrl: String?,
     onItemClick: () -> Unit
 ) {
     Card(
         modifier = modifier,
-        elevation = 4.dp
+        elevation = 4.dp,
+        shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
@@ -50,9 +52,9 @@ fun BackgroundImage(
                     .fillMaxSize()
                     .background(
                         Brush.verticalGradient(
-                            colors = listOf(Color.Black, Color.Transparent, Color.Black),
+                            colors = listOf(Color.Black, Color.Transparent, Color.Transparent, Color.Black),
                             startY = -100f,
-                            endY = 800f
+                            endY = 1200f
                         )
                     )
             )

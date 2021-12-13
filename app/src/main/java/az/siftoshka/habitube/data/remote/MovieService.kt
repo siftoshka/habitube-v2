@@ -88,4 +88,14 @@ interface MovieService {
     suspend fun getPerson(
         @Path("person_id") personId: Int,
     ): PersonDto
+
+    @GET("person/{person_id}/movie_credits")
+    suspend fun getPersonMovieCredits(
+        @Path("person_id") personId: Int,
+    ): PersonCreditDto
+
+    @GET("person/{person_id}/tv_credits")
+    suspend fun getPersonTvShowCredits(
+        @Path("person_id") personId: Int,
+    ): PersonCreditDto
 }

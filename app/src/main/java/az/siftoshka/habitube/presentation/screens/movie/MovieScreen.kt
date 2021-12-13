@@ -190,10 +190,10 @@ fun InfoBoard(
             }
         }
         movieState.movie?.let { movie ->
-            Spacer(modifier = Modifier.height(Padding.Medium))
-            DetailTitle(text = R.string.text_description)
-            DetailsCard {
-                ExpandableText(text = movie.overview.orEmpty())
+            if (!movie.overview.isNullOrEmpty()) {
+                Spacer(modifier = Modifier.height(Padding.Medium))
+                DetailTitle(text = R.string.text_description)
+                DetailsCard { ExpandableText(text = movie.overview.orEmpty()) }
             }
             Spacer(modifier = Modifier.height(Padding.Medium))
             DetailTitle(text = R.string.text_details)
@@ -209,9 +209,9 @@ fun InfoBoard(
                 }
             }
             Spacer(modifier = Modifier.height(Padding.Medium))
-            Cast()
+            Cast(navController)
             Spacer(modifier = Modifier.height(Padding.Medium))
-            Crew()
+            Crew(navController)
             Spacer(modifier = Modifier.height(Padding.Medium))
             SimilarMovies(navController)
             Spacer(modifier = Modifier.height(Padding.Medium))
@@ -221,6 +221,7 @@ fun InfoBoard(
 
 @Composable
 fun Cast(
+    navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val creditState = viewModel.creditsState.value
@@ -232,7 +233,9 @@ fun Cast(
                 creditState.credits.cast.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
-                        Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.character) { }
+                        Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.character) {
+                            navController.navigate(Screen.PersonScreen.route + "/${actor.id}")
+                        }
                     }
                 }
             }
@@ -242,6 +245,7 @@ fun Cast(
 
 @Composable
 fun Crew(
+    navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val creditState = viewModel.creditsState.value
@@ -253,7 +257,9 @@ fun Crew(
                 creditState.credits.crew.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
-                        Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.knownForDepartment) {}
+                        Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.knownForDepartment) {
+                            navController.navigate(Screen.PersonScreen.route + "/${actor.id}")
+                        }
                     }
                 }
             }
