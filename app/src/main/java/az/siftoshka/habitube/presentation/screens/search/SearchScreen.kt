@@ -126,18 +126,10 @@ fun SearchView(
                     .padding(horizontal = Padding.Default),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                SearchTab(SearchType.Multi) {
-                    viewModel.changeSearchType(SearchType.Multi)
-                }
-                SearchTab(SearchType.Movie) {
-                    viewModel.changeSearchType(SearchType.Movie)
-                }
-                SearchTab(SearchType.TvShow) {
-                    viewModel.changeSearchType(SearchType.TvShow)
-                }
-                SearchTab(SearchType.Person) {
-                    viewModel.changeSearchType(SearchType.Person)
-                }
+                SearchTab(SearchType.Multi) { viewModel.changeSearchType(SearchType.Multi) }
+                SearchTab(SearchType.Movie) { viewModel.changeSearchType(SearchType.Movie) }
+                SearchTab(SearchType.TvShow) { viewModel.changeSearchType(SearchType.TvShow) }
+                SearchTab(SearchType.Person) { viewModel.changeSearchType(SearchType.Person) }
             }
         }
     }
@@ -153,13 +145,15 @@ fun SearchTab(
     val mediaType = viewModel.mediaType.value
     val keyboardController = LocalSoftwareKeyboardController.current
     val backgroundColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+    val title = when (searchType) {
+        SearchType.Multi -> stringResource(id = R.string.text_tab_multi)
+        SearchType.Movie -> stringResource(id = R.string.text_tab_movie)
+        SearchType.TvShow -> stringResource(id = R.string.text_tab_show)
+        SearchType.Person -> stringResource(id = R.string.text_tab_person)
+    }
     Card(
         modifier = Modifier
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colors.primary,
-                shape = RoundedCornerShape(100.dp),
-            ),
+            .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(100.dp)),
         shape = RoundedCornerShape(100.dp),
         backgroundColor = backgroundColor,
         onClick = {
@@ -168,7 +162,7 @@ fun SearchTab(
         }
     ) {
         Text(
-            text = searchType.name,
+            text = title,
             color = MaterialTheme.colors.onPrimary,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,

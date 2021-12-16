@@ -114,7 +114,7 @@ fun MainBoard(
                     append(stringResource(id = R.string.text_known_for))
                     append(
                         AnnotatedString(
-                            ": ${person?.knownForDepartment}",
+                            ": ${person?.knownForDepartment ?: "-"}",
                             spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
                         )
                     )
@@ -128,7 +128,7 @@ fun MainBoard(
                     append(stringResource(id = R.string.text_birth_place))
                     append(
                         AnnotatedString(
-                            ": ${person?.placeOfBirth}",
+                            ": ${person?.placeOfBirth ?: "-"}",
                             spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
                         )
                     )
@@ -165,7 +165,7 @@ fun MovieCast(
     val creditState = viewModel.personMoviesState.value
 
     if (creditState.credits?.cast?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_acting_movies)
+        DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_person_movies)
         DetailsCard {
             LazyRow(
                 modifier = Modifier.padding(Padding.Medium),
@@ -192,7 +192,7 @@ fun MovieCrew(
     val creditState = viewModel.personMoviesState.value
 
     if (creditState.credits?.crew?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_crew_movies)
+        DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_person_movies)
         DetailsCard {
             LazyRow(
                 modifier = Modifier.padding(Padding.Medium),
@@ -219,7 +219,7 @@ fun ShowCast(
     val creditState = viewModel.personShowsState.value
 
     if (creditState.credits?.cast?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_acting_shows)
+        DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_person_shows)
         DetailsCard {
             LazyRow(
                 modifier = Modifier.padding(Padding.Medium),
@@ -246,7 +246,7 @@ fun ShowCrew(
     val creditState = viewModel.personShowsState.value
 
     if (creditState.credits?.crew?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_crew_shows)
+        DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_person_shows)
         DetailsCard {
             LazyRow(
                 modifier = Modifier.padding(Padding.Medium),

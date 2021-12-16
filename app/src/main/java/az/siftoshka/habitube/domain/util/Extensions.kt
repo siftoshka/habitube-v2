@@ -16,9 +16,9 @@ fun String.moneyFormat(): String {
 }
 
 fun String?.normalDate(context: Context): String {
-    val year = this?.substring(0, 4)
-    var month = this?.substring(5, 7)
-    val day = this?.substring(8, 10)
+    val year = this?.substring(0, 4).orEmpty()
+    var month = this?.substring(5, 7).orEmpty()
+    val day = this?.substring(8, 10).orEmpty()
 
     when (month) {
         "01" -> month = context.getString(R.string.month_1)

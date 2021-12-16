@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <item>
         <inset
-            android:inset="20dp"
+            android:inset="30dp"
             android:drawable="@drawable/ic_camera">
         </inset>
     </item>
