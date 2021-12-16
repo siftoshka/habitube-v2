@@ -37,4 +37,12 @@ interface RemoteRepository {
 
     suspend fun getPersonTvShowCredits(personId: Int) : PersonCreditDto
 
+    suspend fun getSearchResults(searchQuery: String, page: Int) : List<MediaLiteDto>
+
+    suspend fun getMovieSearchResults(searchQuery: String, page: Int) : List<MediaLiteDto>
+
+    suspend fun getTvShowSearchResults(searchQuery: String, page: Int) : List<MediaLiteDto>
+
+    suspend fun getPersonSearchResults(searchQuery: String, page: Int) : List<MediaLiteDto>
+
 }

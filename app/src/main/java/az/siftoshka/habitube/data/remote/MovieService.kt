@@ -98,4 +98,31 @@ interface MovieService {
     suspend fun getPersonTvShowCredits(
         @Path("person_id") personId: Int,
     ): PersonCreditDto
+
+    /**
+     * Search ----------
+     */
+    @GET("search/multi")
+    suspend fun getSearchResults(
+        @Query("query") searchQuery: String,
+        @Query("page") page: Int,
+    ): MediaResponseDto
+
+    @GET("search/movie")
+    suspend fun getMovieSearchResults(
+        @Query("query") searchQuery: String,
+        @Query("page") page: Int,
+    ): MediaResponseDto
+
+    @GET("search/tv")
+    suspend fun getTvShowSearchResults(
+        @Query("query") searchQuery: String,
+        @Query("page") page: Int,
+    ): MediaResponseDto
+
+    @GET("search/person")
+    suspend fun getPersonSearchResults(
+        @Query("query") searchQuery: String,
+        @Query("page") page: Int,
+    ): MediaResponseDto
 }

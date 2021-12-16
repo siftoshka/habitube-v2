@@ -71,4 +71,20 @@ class RemoteRepositoryImpl @Inject constructor(
     override suspend fun getPersonTvShowCredits(personId: Int): PersonCreditDto {
         return service.getPersonTvShowCredits(personId)
     }
+
+    override suspend fun getSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
+        return service.getSearchResults(searchQuery, page).results
+    }
+
+    override suspend fun getMovieSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
+        return service.getMovieSearchResults(searchQuery, page).results
+    }
+
+    override suspend fun getTvShowSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
+        return service.getTvShowSearchResults(searchQuery, page).results
+    }
+
+    override suspend fun getPersonSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
+        return service.getPersonSearchResults(searchQuery, page).results
+    }
 }

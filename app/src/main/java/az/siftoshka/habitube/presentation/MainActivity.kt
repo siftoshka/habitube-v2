@@ -24,7 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import az.siftoshka.habitube.presentation.screens.LibraryScreen
-import az.siftoshka.habitube.presentation.screens.SearchScreen
+import az.siftoshka.habitube.presentation.screens.search.SearchScreen
 import az.siftoshka.habitube.presentation.screens.SettingsScreen
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
@@ -132,7 +132,7 @@ fun BottomNavGraph(navController: NavHostController) {
             ExploreScreen(navController)
         }
         composable(route = BottomBarScreen.Search.route) {
-            SearchScreen()
+            SearchScreen(navController)
         }
         composable(route = BottomBarScreen.Library.route) {
             LibraryScreen()

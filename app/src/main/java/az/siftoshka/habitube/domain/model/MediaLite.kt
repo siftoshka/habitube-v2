@@ -10,9 +10,11 @@ data class MediaLite(
     val overview: String? = null,
     val popularity: Double? = 0.0,
     val posterPath: String? = null,
+    val profilePath: String? = null,
     val releaseDate: String? = null,
     val title: String? = null,
     val video: Boolean? = false,
+    val mediaType: String? = null,
     val voteAverage: Double? = 0.0,
     val voteCount: Int? = 0
 )
