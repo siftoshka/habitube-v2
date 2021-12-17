@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.domain.usecases
+package az.siftoshka.habitube.domain.usecases.remote
 
 import az.siftoshka.habitube.data.remote.dto.toMediaLite
 import az.siftoshka.habitube.domain.model.MediaLite

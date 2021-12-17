@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.siftoshka.habitube.domain.usecases.GetCreditsUseCase
-import az.siftoshka.habitube.domain.usecases.GetMovieUseCase
-import az.siftoshka.habitube.domain.usecases.GetSimilarUseCase
-import az.siftoshka.habitube.domain.usecases.GetVideosUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetCreditsUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetMovieUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetSimilarUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetVideosUseCase
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource

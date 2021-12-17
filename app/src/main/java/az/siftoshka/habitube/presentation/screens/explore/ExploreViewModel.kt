@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.siftoshka.habitube.domain.usecases.GetExploreUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetExploreUseCase
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.ExploreType
 import az.siftoshka.habitube.domain.util.Resource

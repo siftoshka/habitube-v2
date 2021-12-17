@@ -1,7 +1,7 @@
-package az.siftoshka.habitube.domain.usecases
+package az.siftoshka.habitube.domain.usecases.remote
 
-import az.siftoshka.habitube.data.remote.dto.toPerson
-import az.siftoshka.habitube.domain.model.Person
+import az.siftoshka.habitube.data.remote.dto.toMovie
+import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import az.siftoshka.habitube.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -11,16 +11,16 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get person (actor/director) from repository call.
+ * Use-case to get movie from repository call.
  */
-class GetPersonUseCase @Inject constructor(
+class GetMovieUseCase @Inject constructor(
     private val repository: RemoteRepository
 ) {
-    operator fun invoke(personId: Int): Flow<Resource<Person>> = flow {
+    operator fun invoke(movieId: Int): Flow<Resource<Movie>> = flow {
         try {
             emit(Resource.Loading())
-            val person = repository.getPerson(personId).toPerson()
-            emit(Resource.Success(person))
+            val movie = repository.getMovie(movieId).toMovie()
+            emit(Resource.Success(movie))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))
         } catch (e: IOException) {

@@ -47,9 +47,16 @@
     <string name="text_tab_show">TV Show</string>
     <string name="text_tab_person">Person</string>
 
+    <!-- Library Screen -->
+    <string name="text_watched">Watched</string>
+    <string name="text_planning">Planning</string>
+
     <!-- Common -->
     <string name="text_show_less">Show less</string>
     <string name="text_show_more">Show more</string>
+    <string name="text_add_rating">Add rating</string>
+    <string name="text_rated">%1$s/10</string>
+    <string name="text_watch_later">Watch later</string>
 
     <!-- Months -->
     <string name="month_1">Jan</string>

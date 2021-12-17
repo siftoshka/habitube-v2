@@ -1,7 +1,7 @@
-package az.siftoshka.habitube.domain.usecases
+package az.siftoshka.habitube.domain.usecases.remote
 
-import az.siftoshka.habitube.data.remote.dto.toVideo
-import az.siftoshka.habitube.domain.model.Video
+import az.siftoshka.habitube.data.remote.dto.toCredits
+import az.siftoshka.habitube.domain.model.Credit
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
@@ -12,19 +12,19 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get videos from repository call.
+ * Use-case to get credits from repository call.
  */
-class GetVideosUseCase @Inject constructor(
+class GetCreditsUseCase @Inject constructor(
     private val repository: RemoteRepository
 ) {
-    operator fun invoke(mediaId: Int, mediaType: MediaType): Flow<Resource<List<Video>>> = flow {
+    operator fun invoke(mediaId: Int, mediaType: MediaType): Flow<Resource<Credit>> = flow {
         try {
             emit(Resource.Loading())
-            val videos = when (mediaType) {
-                MediaType.Movie -> repository.getMovieVideos(mediaId).map { it.toVideo() }
-                MediaType.TvShow -> repository.getTvShowVideos(mediaId).map { it.toVideo() }
+            val credits = when (mediaType) {
+                MediaType.Movie -> repository.getMovieCredits(mediaId).toCredits()
+                MediaType.TvShow -> repository.getTvShowCredits(mediaId).toCredits()
             }
-            emit(Resource.Success(videos))
+            emit(Resource.Success(credits))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))
         } catch (e: IOException) {

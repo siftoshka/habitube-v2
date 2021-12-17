@@ -28,6 +28,7 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.DetailsCard
+import az.siftoshka.habitube.presentation.components.StoreButton
 import az.siftoshka.habitube.presentation.components.image.Avatar
 import az.siftoshka.habitube.presentation.components.image.BackgroundImage
 import az.siftoshka.habitube.presentation.components.image.ImageCard
@@ -103,7 +104,11 @@ fun MainBoard(
                 title = movie?.title,
                 indication = null
             ) {}
-            Column(modifier = Modifier.padding(horizontal = Padding.Small)) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = Padding.Small)
+                    .height(150.dp)
+            ) {
                 Text(
                     text = buildAnnotatedString {
                         append("${movie?.title}")
@@ -148,7 +153,26 @@ fun MainBoard(
                     style = MaterialTheme.typography.h5,
                     color = MaterialTheme.colors.onBackground,
                     textAlign = TextAlign.Start,
+                    modifier = Modifier.weight(1f)
                 )
+                Row {
+                    StoreButton(
+                        inActiveText = stringResource(id = R.string.text_add_rating),
+                        activeText = stringResource(id = R.string.text_rated, "3"),
+                        icon = R.drawable.ic_star,
+                        isMovieExist = true
+                    ) {
+
+                    }
+                    StoreButton(
+                        inActiveText = stringResource(id = R.string.text_watch_later),
+                        activeText = stringResource(id = R.string.text_watch_later),
+                        icon = R.drawable.ic_watch,
+                        isMovieExist = false
+                    ) {
+
+                    }
+                }
             }
         }
     }

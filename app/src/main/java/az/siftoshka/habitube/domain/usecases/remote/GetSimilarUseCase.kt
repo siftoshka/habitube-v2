@@ -1,7 +1,7 @@
-package az.siftoshka.habitube.domain.usecases
+package az.siftoshka.habitube.domain.usecases.remote
 
-import az.siftoshka.habitube.data.remote.dto.toCredits
-import az.siftoshka.habitube.domain.model.Credit
+import az.siftoshka.habitube.data.remote.dto.toMediaLite
+import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
@@ -12,19 +12,19 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get credits from repository call.
+ * Use-case to get similar movies/shows from repository call.
  */
-class GetCreditsUseCase @Inject constructor(
+class GetSimilarUseCase @Inject constructor(
     private val repository: RemoteRepository
 ) {
-    operator fun invoke(mediaId: Int, mediaType: MediaType): Flow<Resource<Credit>> = flow {
+    operator fun invoke(mediaId: Int, page: Int, mediaType: MediaType) : Flow<Resource<List<MediaLite>>> = flow {
         try {
             emit(Resource.Loading())
-            val credits = when (mediaType) {
-                MediaType.Movie -> repository.getMovieCredits(mediaId).toCredits()
-                MediaType.TvShow -> repository.getTvShowCredits(mediaId).toCredits()
+            val resources = when (mediaType) {
+                MediaType.Movie -> repository.getSimilarMovies(mediaId, page).map { it.toMediaLite() }
+                MediaType.TvShow -> repository.getSimilarTvShows(mediaId, page).map { it.toMediaLite() }
             }
-            emit(Resource.Success(credits))
+            emit(Resource.Success(resources))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))
         } catch (e: IOException) {

@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.siftoshka.habitube.domain.usecases.GetPersonCreditsUseCase
-import az.siftoshka.habitube.domain.usecases.GetPersonUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetPersonCreditsUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetPersonUseCase
 import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
 import az.siftoshka.habitube.presentation.util.NavigationConstants.PARAM_PERSON_ID

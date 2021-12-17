@@ -1,30 +1,40 @@
 package az.siftoshka.habitube.domain.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+import az.siftoshka.habitube.domain.util.Constants
+import java.util.*
+
+@Entity(tableName = Constants.MOVIE_TABLE)
 data class Movie(
-    val adult: Boolean? = false,
-    val backdropPath: String? = null,
-    val budget: Long? = 0,
-    val genres: List<MovieGenre>? = emptyList(),
-    val homepage: String? = null,
-    val id: Int? = 0,
-    val imdbId: String? = null,
-    val originalLanguage: String? = null,
-    val originalTitle: String? = null,
-    val overview: String? = null,
-    val popularity: Double? = 0.0,
-    val posterPath: String? = null,
-    val productionCompanies: List<ProductionCompany>? = emptyList(),
-    val productionCountries: List<ProductionCountry>? = emptyList(),
-    val releaseDate: String? = null,
-    val revenue: Long? = 0,
-    val runtime: Int? = 0,
-    val spokenLanguages: List<SpokenLanguage>? = emptyList(),
-    val status: String? = null,
-    val tagline: String? = null,
-    val title: String? = null,
-    val video: Boolean? = false,
-    val voteAverage: Double? = 0.0,
-    val voteCount: Int? = 0
+    @ColumnInfo(name = "adult") var adult: Boolean? = false,
+    @Ignore @ColumnInfo(name = "backdrop_path") var backdropPath: String? = null,
+    @ColumnInfo(name = "budget") var budget: Long? = 0,
+    @Ignore var genres: List<MovieGenre>? = emptyList(),
+    @Ignore var homepage: String? = null,
+    @PrimaryKey @ColumnInfo(name = "id") var id: Int? = 0,
+    @ColumnInfo(name = "imdb_id") var imdbId: String? = null,
+    @Ignore var originalLanguage: String? = null,
+    @ColumnInfo(name = "original_title") var originalTitle: String? = null,
+    @ColumnInfo(name = "overview") var overview: String? = null,
+    @ColumnInfo(name = "popularity") var popularity: Double? = 0.0,
+    @ColumnInfo(name = "poster_path") var posterPath: String? = null,
+    @Ignore var productionCompanies: List<ProductionCompany>? = emptyList(),
+    @Ignore var productionCountries: List<ProductionCountry>? = emptyList(),
+    @ColumnInfo(name = "release_date") var releaseDate: String? = null,
+    @ColumnInfo(name = "revenue") var revenue: Long? = 0,
+    @ColumnInfo(name = "runtime") var runtime: Int? = 0,
+    @Ignore var spokenLanguages: List<SpokenLanguage>? = emptyList(),
+    @ColumnInfo(name = "status") var status: String? = null,
+    @Ignore var tagline: String? = null,
+    @ColumnInfo(name = "title") var title: String? = null,
+    @Ignore var video: Boolean? = false,
+    @ColumnInfo(name = "vote_average")var voteAverage: Double? = 0.0,
+    @ColumnInfo(name = "vote_count") var voteCount: Int? = 0,
+    @ColumnInfo(name = "added_date") var addedDate: Date? = null,
+    @ColumnInfo(name = "my_rating") var myRating: Float? = 0f
 )
 
 data class MovieGenre(

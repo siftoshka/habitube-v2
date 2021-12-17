@@ -240,7 +240,7 @@ fun Seasons(
             contentPadding = PaddingValues(horizontal = Padding.Default),
             horizontalArrangement = Arrangement.spacedBy(Padding.Small)
         ) {
-            show.seasons.let { seasons ->
+            show.seasons?.let { seasons ->
                 items(seasons.size) {
                     val season = seasons[it]
                     SeasonCard(season)

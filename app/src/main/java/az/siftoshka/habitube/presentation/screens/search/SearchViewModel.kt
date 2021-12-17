@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.siftoshka.habitube.domain.usecases.GetSearchUseCase
+import az.siftoshka.habitube.domain.usecases.remote.GetSearchUseCase
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.Resource
 import az.siftoshka.habitube.domain.util.SearchType

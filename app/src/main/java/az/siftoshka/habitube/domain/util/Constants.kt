@@ -5,6 +5,12 @@ package az.siftoshka.habitube.domain.util
  */
 object Constants {
 
+    // Database
+    const val WATCHED = "watched"
+    const val PLANNED = "planned"
+    const val MOVIE_TABLE = "movies"
+    const val SHOW_TABLE = "shows"
+
     // API
     const val API_URL = "https://api.themoviedb.org/3/"
     const val IMAGE_URL = "https://image.tmdb.org/t/p/original"

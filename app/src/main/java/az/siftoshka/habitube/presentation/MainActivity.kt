@@ -23,12 +23,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import az.siftoshka.habitube.presentation.screens.LibraryScreen
-import az.siftoshka.habitube.presentation.screens.search.SearchScreen
 import az.siftoshka.habitube.presentation.screens.SettingsScreen
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
+import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.screens.person.PersonScreen
+import az.siftoshka.habitube.presentation.screens.search.SearchScreen
 import az.siftoshka.habitube.presentation.screens.show.ShowScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        BottomNavGraph(navController = navController)
+                        NavGraph(navController = navController)
                     }
                 }
             }
@@ -113,9 +113,11 @@ fun RowScope.AddItem(
         selectedContentColor = MaterialTheme.colors.primary,
         unselectedContentColor = MaterialTheme.colors.secondaryVariant,
         onClick = {
-            navController.navigate(screen.route) {
-                popUpTo(navController.graph.findStartDestination().id)
-                launchSingleTop = true
+            if (currentDestination?.route != screen.route) {
+                navController.navigate(screen.route) {
+                    popUpTo(navController.graph.findStartDestination().id)
+                    launchSingleTop = true
+                }
             }
         }
     )
@@ -123,7 +125,7 @@ fun RowScope.AddItem(
 
 
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Explore.route
@@ -135,7 +137,7 @@ fun BottomNavGraph(navController: NavHostController) {
             SearchScreen(navController)
         }
         composable(route = BottomBarScreen.Library.route) {
-            LibraryScreen()
+            LibraryScreen(navController)
         }
         composable(route = BottomBarScreen.Settings.route) {
             SettingsScreen()
