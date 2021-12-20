@@ -18,6 +18,7 @@ import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.presentation.components.*
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
+import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
@@ -70,7 +71,7 @@ fun UpcomingMovies(
     val upcomingMoviesState = viewModel.exploreUpcomingMoviesState.value
 
     if (upcomingMoviesState.media.isNotEmpty()) {
-        TitleText(text = R.string.text_upcoming_movies)
+        TitleText(text = R.string.text_upcoming, secondary = R.string.text_movies)
         Pager(
             width = 320.dp,
             context = { lazyListState ->
@@ -99,7 +100,7 @@ fun TrendingMovies(
     val page = viewModel.trendingMoviesPage.value
 
     if (trendingMoviesState.media.isNotEmpty()) {
-        TitleText(text = R.string.text_trending_movies)
+        TitleText(text = R.string.text_trending, secondary = R.string.text_movies)
         LazyRow(
             modifier = Modifier.height(150.dp),
             contentPadding = PaddingValues(horizontal = Padding.Default),
@@ -127,7 +128,7 @@ fun TrendingTvShows(
     val page = viewModel.trendingTvShowsPage.value
 
     if (trendingTvShowsState.media.isNotEmpty()) {
-        TitleText(text = R.string.text_trending_shows)
+        TitleText(text = R.string.text_trending, secondary = R.string.text_shows)
         LazyRow(
             modifier = Modifier.height(150.dp),
             contentPadding = PaddingValues(horizontal = Padding.Default),
@@ -155,7 +156,7 @@ fun AirTodayTvShows(
     val page = viewModel.airTodayTvShowsPage.value
 
     if (exploreAirTodayState.media.isNotEmpty()) {
-        TitleText(text = R.string.text_air_today)
+        TitleText(text = R.string.text_air_today, secondary = R.string.text_shows)
         LazyRow(
             modifier = Modifier.height(150.dp),
             contentPadding = PaddingValues(horizontal = Padding.Default),

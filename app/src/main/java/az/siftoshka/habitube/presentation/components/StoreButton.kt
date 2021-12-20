@@ -1,15 +1,12 @@
 package az.siftoshka.habitube.presentation.components
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -23,17 +20,16 @@ fun StoreButton(
     inActiveText: String,
     activeText: String,
     @DrawableRes icon: Int,
-    isMovieExist: Boolean,
+    isMediaExist: MutableState<Boolean>,
     onPerformClick: (value: Boolean) -> Unit
 ) {
-    val isExist = remember { mutableStateOf(isMovieExist) }
-    val backgroundColor = if (isExist.value) MaterialTheme.colors.primary else MaterialTheme.colors.surface
-    val text = if (isExist.value) activeText else inActiveText
+    val backgroundColor = if (isMediaExist.value) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+    val text = if (isMediaExist.value) activeText else inActiveText
 
     Button(
         onClick = {
-            isExist.value = !isExist.value
-            onPerformClick(isExist.value)
+            isMediaExist.value = !isMediaExist.value
+            onPerformClick(isMediaExist.value)
         },
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),

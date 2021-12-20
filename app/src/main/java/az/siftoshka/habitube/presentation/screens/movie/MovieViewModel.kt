@@ -5,6 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import az.siftoshka.habitube.domain.model.Movie
+import az.siftoshka.habitube.domain.usecases.local.PlannedMoviesUseCase
+import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetCreditsUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetMovieUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetSimilarUseCase
@@ -16,6 +19,7 @@ import az.siftoshka.habitube.presentation.util.NavigationConstants.PARAM_MOVIE_I
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -27,6 +31,8 @@ class MovieViewModel @Inject constructor(
     private val getVideosUseCase: GetVideosUseCase,
     private val getCreditsUseCase: GetCreditsUseCase,
     private val getSimilarUseCase: GetSimilarUseCase,
+    private val plannedMoviesUseCase: PlannedMoviesUseCase,
+    private val watchedMoviesUseCase: WatchedMoviesUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -44,7 +50,12 @@ class MovieViewModel @Inject constructor(
     val similarMoviesPage = mutableStateOf(1)
     private var similarMoviesPosition = 0
 
+    var rating = mutableStateOf(0f)
+    var isWatched = mutableStateOf(false)
+    var isPlanned = mutableStateOf(false)
+
     var movieId = 0
+    var movie: Movie? = null
 
     init {
         savedStateHandle.get<String>(PARAM_MOVIE_ID)?.let {
@@ -53,6 +64,7 @@ class MovieViewModel @Inject constructor(
             getVideos(it.toInt())
             getCredits(it.toInt())
             getSimilarMovies(it.toInt())
+            isLocalExists(it.toInt())
         }
     }
 
@@ -64,12 +76,51 @@ class MovieViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     _movieState.value = MovieState(movie = result.data)
+                    movie = result.data
                 }
                 is Resource.Error -> {
                     _movieState.value = MovieState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun isLocalExists(movieId: Int) {
+        viewModelScope.launch {
+            watchedMoviesUseCase.getMovie(movieId).also {
+                isWatched.value = it.id == movieId
+                rating.value = it.myRating ?: 0f
+            }
+            plannedMoviesUseCase.getMovie(movieId).also {
+                isPlanned.value = it.id == movieId
+            }
+        }
+    }
+
+    fun addWatched(rating: Float?) {
+        viewModelScope.launch {
+            movie?.let { watchedMoviesUseCase.addMovie(it, rating) }
+        }
+    }
+
+    fun deleteWatched() {
+        viewModelScope.launch {
+            movie?.let { watchedMoviesUseCase.deleteMovie(it) }
+            isWatched.value = false
+            rating.value = 0f
+        }
+    }
+
+    fun addPlanned() {
+        viewModelScope.launch {
+            movie?.let { plannedMoviesUseCase.addMovie(it) }
+        }
+    }
+
+    fun deletePlanned() {
+        viewModelScope.launch {
+            movie?.let { plannedMoviesUseCase.deleteMovie(it) }
+        }
     }
 
     private fun getVideos(movieId: Int) {

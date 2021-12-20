@@ -7,13 +7,30 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import az.siftoshka.habitube.presentation.util.Padding
 
 @Composable
-fun TitleText(@StringRes text: Int) {
+fun TitleText(
+    @StringRes text: Int,
+    @StringRes secondary: Int? = null
+) {
     Text(
-        text = stringResource(id = text),
+        text = buildAnnotatedString {
+            append(stringResource(id = text))
+            if (secondary != null) {
+                append(
+                    AnnotatedString(
+                        " ${stringResource(id = secondary)}",
+                        spanStyle = SpanStyle(fontSize = 16.sp, color = MaterialTheme.colors.secondaryVariant)
+                    )
+                )
+            }
+        },
         style = MaterialTheme.typography.h2,
         color = MaterialTheme.colors.onBackground,
         textAlign = TextAlign.Start,

@@ -8,9 +8,8 @@
     <string name="nav_settings">Settings</string>
 
     <!-- Explore Screen -->
-    <string name="text_upcoming_movies">Upcoming movies</string>
-    <string name="text_trending_movies">Trending movies</string>
-    <string name="text_trending_shows">Trending TV Shows</string>
+    <string name="text_upcoming">Upcoming</string>
+    <string name="text_trending">Trending</string>
     <string name="text_air_today">Air Today</string>
 
     <!-- Movie/TV Show Screens -->
@@ -38,8 +37,7 @@
     <string name="text_biography">Biography</string>
     <string name="text_person_acting">Acting</string>
     <string name="text_person_crew">Crew</string>
-    <string name="text_person_movies">Movies</string>
-    <string name="text_person_shows">TV Shows</string>
+
 
     <!-- Search Screen -->
     <string name="text_tab_multi">Multi</string>
@@ -57,6 +55,8 @@
     <string name="text_add_rating">Add rating</string>
     <string name="text_rated">%1$s/10</string>
     <string name="text_watch_later">Watch later</string>
+    <string name="text_movies">Movies</string>
+    <string name="text_shows">TV Shows</string>
 
     <!-- Months -->
     <string name="month_1">Jan</string>

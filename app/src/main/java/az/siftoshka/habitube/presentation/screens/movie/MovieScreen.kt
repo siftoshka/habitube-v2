@@ -10,7 +10,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -40,6 +40,9 @@ import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.gowtham.ratingbar.RatingBar
+import com.gowtham.ratingbar.RatingBarStyle
+import com.gowtham.ratingbar.StepSize
 import java.lang.Float.min
 
 /**
@@ -158,19 +161,21 @@ fun MainBoard(
                 Row {
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_add_rating),
-                        activeText = stringResource(id = R.string.text_rated, "3"),
+                        activeText = stringResource(id = R.string.text_rated, viewModel.rating.value),
                         icon = R.drawable.ic_star,
-                        isMovieExist = true
-                    ) {
-
+                        isMediaExist = viewModel.isWatched
+                    ) { isNotWatched ->
+                        if (isNotWatched) viewModel.addWatched(viewModel.rating.value)
+                        else viewModel.deleteWatched()
                     }
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_watch_later),
                         activeText = stringResource(id = R.string.text_watch_later),
                         icon = R.drawable.ic_watch,
-                        isMovieExist = false
-                    ) {
-
+                        isMediaExist = viewModel.isPlanned
+                    ) { isNotPlanned ->
+                        if (isNotPlanned) viewModel.addPlanned()
+                        else viewModel.deletePlanned()
                     }
                 }
             }
@@ -186,6 +191,7 @@ fun InfoBoard(
 ) {
     val movieState = viewModel.movieState.value
     val videosState = viewModel.videosState.value
+    val ratingState = viewModel.rating
     val context = LocalContext.current
 
     Column(
@@ -194,6 +200,15 @@ fun InfoBoard(
             .verticalScroll(scrollState)
             .padding(Padding.Default)
     ) {
+        if (viewModel.isWatched.value) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
+                    ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
+                    viewModel.rating.value = it
+                    viewModel.addWatched(it)
+                }
+            }
+        }
         if (videosState.videos.isNotEmpty()) {
             DetailTitle(text = R.string.text_videos)
             DetailsCard {

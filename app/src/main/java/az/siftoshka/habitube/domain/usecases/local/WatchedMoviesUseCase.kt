@@ -5,6 +5,7 @@ import az.siftoshka.habitube.domain.repository.PlannedRepository
 import az.siftoshka.habitube.domain.repository.WatchedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -14,8 +15,8 @@ class WatchedMoviesUseCase @Inject constructor(
     private val repository: WatchedRepository
 ) {
 
-    suspend fun addMovie(movie: Movie) {
-        repository.addMovie(movie)
+    suspend fun addMovie(movie: Movie, rating: Float?) {
+        repository.addMovie(movie.copy(addedDate = Date(), myRating = rating))
     }
 
     suspend fun updateMovie(movie: Movie) {

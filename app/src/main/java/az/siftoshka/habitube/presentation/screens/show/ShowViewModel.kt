@@ -5,6 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import az.siftoshka.habitube.domain.model.TvShow
+import az.siftoshka.habitube.domain.usecases.local.PlannedTvShowUseCase
+import az.siftoshka.habitube.domain.usecases.local.WatchedTvShowUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetCreditsUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetSimilarUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetTvShowUseCase
@@ -16,6 +19,7 @@ import az.siftoshka.habitube.presentation.util.NavigationConstants.PARAM_TV_SHOW
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -27,6 +31,8 @@ class ShowViewModel @Inject constructor(
     private val getVideosUseCase: GetVideosUseCase,
     private val getCreditsUseCase: GetCreditsUseCase,
     private val getSimilarUseCase: GetSimilarUseCase,
+    private val plannedTvShowUseCase: PlannedTvShowUseCase,
+    private val watchedTvShowUseCase: WatchedTvShowUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -44,7 +50,12 @@ class ShowViewModel @Inject constructor(
     val similarShowsPage = mutableStateOf(1)
     private var similarShowsPosition = 0
 
+    var rating = mutableStateOf(0f)
+    var isWatched = mutableStateOf(false)
+    var isPlanned = mutableStateOf(false)
+
     var showId = 0
+    var show: TvShow? = null
 
     init {
         savedStateHandle.get<String>(PARAM_TV_SHOW_ID)?.let {
@@ -53,6 +64,7 @@ class ShowViewModel @Inject constructor(
             getVideos(it.toInt())
             getCredits(it.toInt())
             getSimilarShows(it.toInt())
+            isLocalExists(it.toInt())
         }
     }
 
@@ -64,12 +76,51 @@ class ShowViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     _showState.value = ShowState(show = result.data)
+                    show = result.data
                 }
                 is Resource.Error -> {
                     _showState.value = ShowState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun isLocalExists(showId: Int) {
+        viewModelScope.launch {
+            watchedTvShowUseCase.getShow(showId).also {
+                isWatched.value = it.id == showId
+                rating.value = it.myRating ?: 0f
+            }
+            plannedTvShowUseCase.getShow(showId).also {
+                isPlanned.value = it.id == showId
+            }
+        }
+    }
+
+    fun addWatched(rating: Float?) {
+        viewModelScope.launch {
+            show?.let { watchedTvShowUseCase.addShow(it, rating) }
+        }
+    }
+
+    fun deleteWatched() {
+        viewModelScope.launch {
+            show?.let { watchedTvShowUseCase.deleteShow(it) }
+            isWatched.value = false
+            rating.value = 0f
+        }
+    }
+
+    fun addPlanned() {
+        viewModelScope.launch {
+            show?.let { plannedTvShowUseCase.addShow(it) }
+        }
+    }
+
+    fun deletePlanned() {
+        viewModelScope.launch {
+            show?.let { plannedTvShowUseCase.deleteShow(it) }
+        }
     }
 
     private fun getVideos(showId: Int) {

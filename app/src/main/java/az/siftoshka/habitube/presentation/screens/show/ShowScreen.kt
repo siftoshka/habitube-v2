@@ -11,7 +11,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -30,6 +30,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.SeasonCard
+import az.siftoshka.habitube.presentation.components.StoreButton
 import az.siftoshka.habitube.presentation.components.image.Avatar
 import az.siftoshka.habitube.presentation.components.image.BackgroundImage
 import az.siftoshka.habitube.presentation.components.image.ImageCard
@@ -41,6 +42,9 @@ import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.gowtham.ratingbar.RatingBar
+import com.gowtham.ratingbar.RatingBarStyle
+import com.gowtham.ratingbar.StepSize
 import java.lang.Float.min
 
 /**
@@ -105,7 +109,10 @@ fun MainBoard(
                 title = show?.name,
                 indication = null
             ) {}
-            Column(modifier = Modifier.padding(horizontal = Padding.Small)) {
+            Column(modifier = Modifier
+                .padding(horizontal = Padding.Small)
+                .height(150.dp))
+            {
                 Text(
                     text = buildAnnotatedString {
                         append("${show?.name}")
@@ -150,7 +157,28 @@ fun MainBoard(
                     style = MaterialTheme.typography.h5,
                     color = MaterialTheme.colors.onBackground,
                     textAlign = TextAlign.Start,
+                    modifier = Modifier.weight(1f)
                 )
+                Row {
+                    StoreButton(
+                        inActiveText = stringResource(id = R.string.text_add_rating),
+                        activeText = stringResource(id = R.string.text_rated, viewModel.rating.value),
+                        icon = R.drawable.ic_star,
+                        isMediaExist = viewModel.isWatched
+                    ) { isNotWatched ->
+                        if (isNotWatched) viewModel.addWatched(viewModel.rating.value)
+                        else viewModel.deleteWatched()
+                    }
+                    StoreButton(
+                        inActiveText = stringResource(id = R.string.text_watch_later),
+                        activeText = stringResource(id = R.string.text_watch_later),
+                        icon = R.drawable.ic_watch,
+                        isMediaExist = viewModel.isPlanned
+                    ) { isNotPlanned ->
+                        if (isNotPlanned) viewModel.addPlanned()
+                        else viewModel.deletePlanned()
+                    }
+                }
             }
         }
     }
@@ -164,6 +192,7 @@ fun InfoBoard(
 ) {
     val showState = viewModel.showState.value
     val videosState = viewModel.videosState.value
+    val ratingState = viewModel.rating
     val context = LocalContext.current
 
     Column(
@@ -171,6 +200,15 @@ fun InfoBoard(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
+        if (viewModel.isWatched.value) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
+                    ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
+                    viewModel.rating.value = it
+                    viewModel.addWatched(it)
+                }
+            }
+        }
         if (videosState.videos.isNotEmpty()) {
             Column(Modifier.padding(horizontal = Padding.Default)) {
                 DetailTitle(text = R.string.text_videos)
