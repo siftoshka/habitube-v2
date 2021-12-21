@@ -48,6 +48,10 @@
     <!-- Library Screen -->
     <string name="text_watched">Watched</string>
     <string name="text_planning">Planning</string>
+    <string name="text_full_info">Open full information</string>
+    <string name="text_remove_watched">Remove from watched</string>
+    <string name="text_remove_planning">Remove from planning</string>
+    <string name="text_already_watched">Already watched</string>
 
     <!-- Common -->
     <string name="text_show_less">Show less</string>

@@ -18,10 +18,6 @@ class WatchedTvShowUseCase @Inject constructor(
         repository.addShow(show.copy(addedDate = Date(), myRating = rating))
     }
 
-    suspend fun updateShow(show: TvShow) {
-        repository.updateShow(show)
-    }
-
     suspend fun deleteShow(show: TvShow) {
         repository.deleteShow(show)
     }

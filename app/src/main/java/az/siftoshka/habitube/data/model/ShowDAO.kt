@@ -1,7 +1,6 @@
 package az.siftoshka.habitube.data.model
 
 import androidx.room.*
-import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.model.TvShow
 import kotlinx.coroutines.flow.Flow
 
@@ -13,9 +12,6 @@ interface ShowDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addShow(show: TvShow)
-
-    @Update
-    suspend fun updateShow(show: TvShow)
 
     @Transaction @Query("SELECT * FROM shows")
     fun getShows() : Flow<List<TvShow>>

@@ -19,10 +19,6 @@ class WatchedMoviesUseCase @Inject constructor(
         repository.addMovie(movie.copy(addedDate = Date(), myRating = rating))
     }
 
-    suspend fun updateMovie(movie: Movie) {
-        repository.updateMovie(movie)
-    }
-
     suspend fun deleteMovie(movie: Movie) {
         repository.deleteMovie(movie)
     }

@@ -10,7 +10,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -85,6 +85,7 @@ fun MainBoard(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val movie = viewModel.movieState.value.movie
+    val context = LocalContext.current
 
     Column {
         BackgroundImage(
@@ -165,8 +166,13 @@ fun MainBoard(
                         icon = R.drawable.ic_star,
                         isMediaExist = viewModel.isWatched
                     ) { isNotWatched ->
-                        if (isNotWatched) viewModel.addWatched(viewModel.rating.value)
-                        else viewModel.deleteWatched()
+                        if (isNotWatched) {
+                            viewModel.addWatched(viewModel.rating.value)
+                            context.saveToStorage(movie?.posterPath, true)
+                        } else {
+                            viewModel.deleteWatched()
+                            context.deleteFromStorage(movie?.posterPath, true)
+                        }
                     }
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_watch_later),
@@ -174,8 +180,13 @@ fun MainBoard(
                         icon = R.drawable.ic_watch,
                         isMediaExist = viewModel.isPlanned
                     ) { isNotPlanned ->
-                        if (isNotPlanned) viewModel.addPlanned()
-                        else viewModel.deletePlanned()
+                        if (isNotPlanned) {
+                            viewModel.addPlanned()
+                            context.saveToStorage(movie?.posterPath, false)
+                        } else {
+                            viewModel.deletePlanned()
+                            context.deleteFromStorage(movie?.posterPath, false)
+                        }
                     }
                 }
             }

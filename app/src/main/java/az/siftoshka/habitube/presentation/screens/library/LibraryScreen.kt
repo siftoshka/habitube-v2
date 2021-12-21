@@ -1,5 +1,6 @@
 package az.siftoshka.habitube.presentation.screens.library
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
@@ -13,11 +14,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.presentation.components.image.LibraryCard
+import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
+import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import com.google.accompanist.pager.*
@@ -27,7 +32,7 @@ import kotlinx.coroutines.launch
 /**
  * Composable function of the Library screen.
  */
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun LibraryScreen(
     navController: NavController,
@@ -35,41 +40,61 @@ fun LibraryScreen(
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
+    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
 
     HabitubeV2Theme {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                Row(
-                    horizontalArrangement = Arrangement.Start,
-                    modifier = Modifier
-                        .padding(horizontal = Padding.Default)
-                        .padding(top = Padding.Default)
-                ) {
-                    LibraryTitle(title = stringResource(id = R.string.text_movies), isSelected = viewModel.isMoviesSelected.value) { isSelected ->
-                        viewModel.isMoviesSelected.value = isSelected
-                        viewModel.isShowsSelected.value = !isSelected
-                        viewModel.updateConfiguration()
-                    }
-                    LibraryTitle(title = stringResource(id = R.string.text_shows), isSelected = viewModel.isShowsSelected.value) { isSelected ->
-                        viewModel.isShowsSelected.value = isSelected
-                        viewModel.isMoviesSelected.value = !isSelected
-                        viewModel.updateConfiguration()
-                    }
+        ModalBottomSheetLayout(
+            sheetState = sheetState,
+            sheetBackgroundColor = MaterialTheme.colors.surface,
+            sheetShape = MaterialTheme.shapes.large,
+            scrimColor = Color.Transparent,
+            sheetContent = {
+                if (viewModel.isMoviesSelected.value) {
+                    MovieBoard(isWatched = viewModel.isWatched.value, navController, sheetState)
+                } else {
+                    ShowBoard(isWatched = viewModel.isWatched.value, navController, sheetState)
                 }
-                TabView(pagerState) {
-                    scope.launch { pagerState.animateScrollToPage(it) }
+            }
+        ) {
+            BackHandler(
+                enabled = (sheetState.currentValue == ModalBottomSheetValue.Expanded),
+                onBack = { scope.launch { sheetState.hide() } }
+            )
+            Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier
+                            .padding(horizontal = Padding.Default)
+                            .padding(top = Padding.Default)
+                    ) {
+                        LibraryTitle(title = stringResource(id = R.string.text_movies), isSelected = viewModel.isMoviesSelected.value) { isSelected ->
+                            viewModel.isMoviesSelected.value = isSelected
+                            viewModel.isShowsSelected.value = !isSelected
+                            viewModel.updateConfiguration()
+                        }
+                        LibraryTitle(title = stringResource(id = R.string.text_shows), isSelected = viewModel.isShowsSelected.value) { isSelected ->
+                            viewModel.isShowsSelected.value = isSelected
+                            viewModel.isMoviesSelected.value = !isSelected
+                            viewModel.updateConfiguration()
+                        }
+                    }
+                    TabView(pagerState, sheetState) {
+                        scope.launch { pagerState.animateScrollToPage(it) }
+                    }
                 }
             }
         }
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun TabView(
     pagerState: PagerState,
+    sheetState: ModalBottomSheetState,
     onTabSelected: (selectedIndex: Int) -> Unit
 ) {
     val tabs = listOf(R.string.text_watched, R.string.text_planning)
@@ -99,17 +124,21 @@ fun TabView(
     }
     HorizontalPager(count = tabs.size, state = pagerState) { page ->
         when (page) {
-            0 -> WatchedTab()
-            1 -> PlanningTab()
+            0 -> WatchedTab(sheetState)
+            1 -> PlanningTab(sheetState)
         }
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun WatchedTab(
+    sheetState: ModalBottomSheetState,
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     Column(Modifier.fillMaxSize()) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
@@ -117,22 +146,34 @@ fun WatchedTab(
         ) {
             if (viewModel.isMoviesSelected.value) {
                 itemsIndexed(viewModel.watchedMovies.value) { index, item ->
-                    println("WATCHED MOVIES" + item.id)
+                    LibraryCard(context, title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating, true) {
+                        viewModel.isWatched.value = true
+                        viewModel.mediaId.value = item.id ?: 0
+                        scope.launch { sheetState.show() }
+                    }
                 }
             } else if (viewModel.isShowsSelected.value) {
                 itemsIndexed(viewModel.watchedShows.value) { index, item ->
-                    println("WATCHED SHOWS" + item.id)
+                    LibraryCard(context, title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating, true) {
+                        viewModel.isWatched.value = true
+                        viewModel.mediaId.value = item.id ?: 0
+                        scope.launch { sheetState.show() }
+                    }
                 }
             }
         }
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun PlanningTab(
+    sheetState: ModalBottomSheetState,
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     Column(Modifier.fillMaxSize()) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
@@ -140,11 +181,19 @@ fun PlanningTab(
         ) {
             if (viewModel.isMoviesSelected.value) {
                 itemsIndexed(viewModel.plannedMovies.value) { index, item ->
-                    println("PLANNED MOVIES" + item.id)
+                    LibraryCard(context, title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), isWatched = false) {
+                        viewModel.isWatched.value = false
+                        viewModel.mediaId.value = item.id ?: 0
+                        scope.launch { sheetState.show() }
+                    }
                 }
             } else if (viewModel.isShowsSelected.value) {
                 itemsIndexed(viewModel.plannedShows.value) { index, item ->
-                    println("PLANNED SHOWS" + item.id)
+                    LibraryCard(context, title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), isWatched = false) {
+                        viewModel.isWatched.value = false
+                        viewModel.mediaId.value = item.id ?: 0
+                        scope.launch { sheetState.show() }
+                    }
                 }
             }
         }

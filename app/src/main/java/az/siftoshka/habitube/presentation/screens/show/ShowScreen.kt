@@ -11,7 +11,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
@@ -87,6 +87,7 @@ fun MainBoard(
     viewModel: ShowViewModel = hiltViewModel()
 ) {
     val show = viewModel.showState.value.show
+    val context = LocalContext.current
 
     Column {
         BackgroundImage(
@@ -109,9 +110,11 @@ fun MainBoard(
                 title = show?.name,
                 indication = null
             ) {}
-            Column(modifier = Modifier
-                .padding(horizontal = Padding.Small)
-                .height(150.dp))
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = Padding.Small)
+                    .height(150.dp)
+            )
             {
                 Text(
                     text = buildAnnotatedString {
@@ -166,8 +169,13 @@ fun MainBoard(
                         icon = R.drawable.ic_star,
                         isMediaExist = viewModel.isWatched
                     ) { isNotWatched ->
-                        if (isNotWatched) viewModel.addWatched(viewModel.rating.value)
-                        else viewModel.deleteWatched()
+                        if (isNotWatched) {
+                            viewModel.addWatched(viewModel.rating.value)
+                            context.saveToStorage(show?.posterPath, true)
+                        } else {
+                            viewModel.deleteWatched()
+                            context.deleteFromStorage(show?.posterPath, true)
+                        }
                     }
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_watch_later),
@@ -175,8 +183,13 @@ fun MainBoard(
                         icon = R.drawable.ic_watch,
                         isMediaExist = viewModel.isPlanned
                     ) { isNotPlanned ->
-                        if (isNotPlanned) viewModel.addPlanned()
-                        else viewModel.deletePlanned()
+                        if (isNotPlanned) {
+                            viewModel.addPlanned()
+                            context.saveToStorage(show?.posterPath, false)
+                        } else {
+                            viewModel.deletePlanned()
+                            context.deleteFromStorage(show?.posterPath, false)
+                        }
                     }
                 }
             }

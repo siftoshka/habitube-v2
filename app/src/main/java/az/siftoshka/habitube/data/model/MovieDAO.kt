@@ -13,9 +13,6 @@ interface MovieDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addMovie(movie: Movie)
 
-    @Update
-    suspend fun updateMovie(movie: Movie)
-
     @Transaction @Query("SELECT * FROM movies")
     fun getMovies() : Flow<List<Movie>>
 

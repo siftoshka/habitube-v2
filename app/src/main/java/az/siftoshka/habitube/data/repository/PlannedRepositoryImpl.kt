@@ -20,10 +20,6 @@ class PlannedRepositoryImpl(
         movieDAO.addMovie(movie)
     }
 
-    override suspend fun updateMovie(movie: Movie) = withContext(Dispatchers.IO) {
-        movieDAO.updateMovie(movie)
-    }
-
     override fun getMovies() = movieDAO.getMovies()
 
     override suspend fun getMovie(movieId: Int) = movieDAO.getMovie(movieId)
@@ -38,10 +34,6 @@ class PlannedRepositoryImpl(
 
     override suspend fun addShow(show: TvShow) = withContext(Dispatchers.IO) {
         showDAO.addShow(show)
-    }
-
-    override suspend fun updateShow(show: TvShow) = withContext(Dispatchers.IO) {
-        showDAO.updateShow(show)
     }
 
     override fun getShows() = showDAO.getShows()

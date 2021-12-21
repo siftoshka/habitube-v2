@@ -21,10 +21,6 @@ class WatchedRepositoryImpl(
         movieDAO.addMovie(movie)
     }
 
-    override suspend fun updateMovie(movie: Movie) = withContext(Dispatchers.IO) {
-        movieDAO.updateMovie(movie)
-    }
-
     override fun getMovies(): Flow<List<Movie>> {
         return movieDAO.getMovies()
     }
@@ -43,10 +39,6 @@ class WatchedRepositoryImpl(
 
     override suspend fun addShow(show: TvShow) = withContext(Dispatchers.IO) {
         showDAO.addShow(show)
-    }
-
-    override suspend fun updateShow(show: TvShow) = withContext(Dispatchers.IO) {
-        showDAO.updateShow(show)
     }
 
     override fun getShows(): Flow<List<TvShow>> {

@@ -17,10 +17,6 @@ class PlannedMoviesUseCase @Inject constructor(
         repository.addMovie(movie)
     }
 
-    suspend fun updateMovie(movie: Movie) {
-        repository.updateMovie(movie)
-    }
-
     suspend fun deleteMovie(movie: Movie) {
         repository.deleteMovie(movie)
     }

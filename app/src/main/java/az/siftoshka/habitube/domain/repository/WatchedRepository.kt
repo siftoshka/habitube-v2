@@ -11,8 +11,6 @@ interface WatchedRepository {
 
     suspend fun addMovie(movie: Movie)
 
-    suspend fun updateMovie(movie: Movie)
-
     fun getMovies() : Flow<List<Movie>>
 
     suspend fun getMovie(movieId: Int) : Movie?
@@ -22,8 +20,6 @@ interface WatchedRepository {
     suspend fun deleteAllMovies()
 
     suspend fun addShow(show: TvShow)
-
-    suspend fun updateShow(show: TvShow)
 
     fun getShows() : Flow<List<TvShow>>
 

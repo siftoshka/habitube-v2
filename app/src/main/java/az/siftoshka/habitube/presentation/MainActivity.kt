@@ -23,7 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import az.siftoshka.habitube.presentation.screens.SettingsScreen
+import az.siftoshka.habitube.presentation.screens.settings.SettingsScreen
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
