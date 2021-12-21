@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -23,12 +24,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import az.siftoshka.habitube.presentation.screens.settings.SettingsScreen
+import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.screens.person.PersonScreen
 import az.siftoshka.habitube.presentation.screens.search.SearchScreen
+import az.siftoshka.habitube.presentation.screens.settings.SettingsScreen
+import az.siftoshka.habitube.presentation.screens.settings.language.LanguageScreen
 import az.siftoshka.habitube.presentation.screens.show.ShowScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
@@ -123,12 +126,15 @@ fun RowScope.AddItem(
     )
 }
 
-
 @Composable
 fun NavGraph(navController: NavHostController) {
+
+    val context = LocalContext.current
+    val startDestination = if (context.isInternetAvailable()) BottomBarScreen.Explore.route else BottomBarScreen.Library.route
+
     NavHost(
         navController = navController,
-        startDestination = BottomBarScreen.Explore.route
+        startDestination = startDestination
     ) {
         composable(route = BottomBarScreen.Explore.route) {
             ExploreScreen(navController)
@@ -140,7 +146,7 @@ fun NavGraph(navController: NavHostController) {
             LibraryScreen(navController)
         }
         composable(route = BottomBarScreen.Settings.route) {
-            SettingsScreen()
+            SettingsScreen(navController)
         }
         composable(route = Screen.MovieScreen.route + "/{movieId}") {
             MovieScreen(navController)
@@ -150,6 +156,9 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(route = Screen.PersonScreen.route + "/{personId}") {
             PersonScreen(navController)
+        }
+        composable(route = Screen.LanguageScreen.route) {
+            LanguageScreen(navController)
         }
     }
 }

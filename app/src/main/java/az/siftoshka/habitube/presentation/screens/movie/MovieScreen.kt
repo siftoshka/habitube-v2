@@ -33,6 +33,7 @@ import az.siftoshka.habitube.presentation.components.image.Avatar
 import az.siftoshka.habitube.presentation.components.image.BackgroundImage
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.VideoCard
+import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailText
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
@@ -62,15 +63,7 @@ fun MovieScreen(
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (movieState.isLoading) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator(color = MaterialTheme.colors.primary)
-                    }
-                }
+                if (movieState.isLoading) { LoadingScreen() }
                 MainBoard(scrollState, navController)
                 InfoBoard(scrollState, navController)
             }

@@ -53,6 +53,14 @@
     <string name="text_remove_planning">Remove from planning</string>
     <string name="text_already_watched">Already watched</string>
 
+    <!-- Settings Screen -->
+    <string name="text_general">General</string>
+    <string name="text_language">Language</string>
+    <string name="text_about">About</string>
+    <string name="text_app_version">App version</string>
+    <string name="text_contact_me">Contact me</string>
+    <string name="text_credits">Credits</string>
+
     <!-- Common -->
     <string name="text_show_less">Show less</string>
     <string name="text_show_more">Show more</string>
@@ -61,6 +69,15 @@
     <string name="text_watch_later">Watch later</string>
     <string name="text_movies">Movies</string>
     <string name="text_shows">TV Shows</string>
+    <string name="text_selected">Selected</string>
+
+    <!-- Languages -->
+    <string name="text_lang_automatic">Automatic</string>
+    <string name="text_lang_english">English</string>
+    <string name="text_lang_azerbaijani">Azerbaijani</string>
+    <string name="text_lang_spanish">Spanish</string>
+    <string name="text_lang_french">French</string>
+    <string name="text_lang_russian">Russian</string>
 
     <!-- Months -->
     <string name="month_1">Jan</string>

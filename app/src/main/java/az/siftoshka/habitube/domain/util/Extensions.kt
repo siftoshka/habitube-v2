@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import az.siftoshka.habitube.R
 import coil.ImageLoader
@@ -11,7 +13,6 @@ import coil.request.ImageRequest
 import java.io.File
 import java.io.FileOutputStream
 import java.text.DecimalFormat
-
 
 /**
  *  General extension file.
@@ -115,6 +116,19 @@ fun Context.renameFileToWatched(imageDir: String?) {
     val imagePath = imageDir?.replace("/", "-")
     File(this.filesDir.path + "/planned" + imagePath)
         .renameTo(File(this.filesDir.path + "/watched" + imagePath))
+}
+
+fun Context.isInternetAvailable(): Boolean {
+    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+    if (capabilities != null) {
+        when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> return true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> return true
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> return true
+        }
+    }
+    return false
 }
 
 fun Context.getGithubIntent() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DEV_GITHUB)))

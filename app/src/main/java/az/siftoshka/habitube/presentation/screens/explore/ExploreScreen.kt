@@ -42,7 +42,7 @@ fun ExploreScreen(
                 TopAppBar(
                     title = R.string.app_name,
                     icon = R.drawable.ic_launch_icon
-                )
+                ) {}
                 Column(
                     horizontalAlignment = Alignment.Start,
                     modifier = Modifier

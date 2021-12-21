@@ -29,6 +29,7 @@ import az.siftoshka.habitube.domain.util.normalDate
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.PersonCard
+import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
@@ -54,15 +55,7 @@ fun PersonScreen(
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (personState.isLoading) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator(color = MaterialTheme.colors.primary)
-                    }
-                }
+                if (personState.isLoading) { LoadingScreen() }
                 MainBoard(scrollState, navController)
             }
         }
