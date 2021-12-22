@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.sp
 import az.siftoshka.habitube.R
 
 val fontFamily = FontFamily(
-        Font(R.font.sans_light, FontWeight.Light),
-        Font(R.font.sans_regular, FontWeight.Normal),
-        Font(R.font.sans_medium, FontWeight.Medium),
-        Font(R.font.sans_semibold, FontWeight.SemiBold),
-        Font(R.font.sans_bold, FontWeight.Bold),
+        Font(R.font.rubik_light, FontWeight.Light),
+        Font(R.font.rubik_regular, FontWeight.Normal),
+        Font(R.font.rubik_medium, FontWeight.Medium),
+        Font(R.font.rubik_semibold, FontWeight.SemiBold),
+        Font(R.font.rubik_bold, FontWeight.Bold),
 )
 
 val Typography = Typography(
