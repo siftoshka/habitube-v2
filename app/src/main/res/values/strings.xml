@@ -52,6 +52,7 @@
     <string name="text_remove_watched">Remove from watched</string>
     <string name="text_remove_planning">Remove from planning</string>
     <string name="text_already_watched">Already watched</string>
+    <string name="text_empty_list">Empty list</string>
 
     <!-- Settings Screen -->
     <string name="text_general">General</string>

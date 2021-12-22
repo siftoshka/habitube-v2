@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.image.LibraryCard
+import az.siftoshka.habitube.presentation.components.screen.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
 import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
@@ -140,6 +141,8 @@ fun WatchedTab(
     val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize()) {
+        if (viewModel.watchedMovies.value.isEmpty() && viewModel.isMoviesSelected.value) LibraryEmptyScreen()
+        if (viewModel.watchedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
             contentPadding = PaddingValues(Padding.Medium),
@@ -175,6 +178,8 @@ fun PlanningTab(
     val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize()) {
+        if (viewModel.plannedMovies.value.isEmpty() && viewModel.isMoviesSelected.value) LibraryEmptyScreen()
+        if (viewModel.plannedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
             contentPadding = PaddingValues(Padding.Medium),

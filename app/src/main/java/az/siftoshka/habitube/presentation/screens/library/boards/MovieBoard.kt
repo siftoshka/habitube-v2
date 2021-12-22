@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.deleteFromStorage
+import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.domain.util.renameFileToWatched
 import az.siftoshka.habitube.presentation.screens.library.LibraryViewModel
 import az.siftoshka.habitube.presentation.screens.library.sections.InfoMovieSection
@@ -44,27 +45,29 @@ fun MovieBoard(
                 .padding(horizontal = Padding.Default)
                 .padding(bottom = Padding.ExtraLarge)
         ) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
-                shape = MaterialTheme.shapes.large,
-                backgroundColor = MaterialTheme.colors.surface,
-                indication = rememberRipple(color = MaterialTheme.colors.primary),
-                onClick = {
-                    scope.launch {
-                        sheetState.hide()
-                        navController.navigate(Screen.MovieScreen.route + "/${viewModel.movieState.value.id}")
+            if (context.isInternetAvailable()) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                    shape = MaterialTheme.shapes.large,
+                    backgroundColor = MaterialTheme.colors.surface,
+                    indication = rememberRipple(color = MaterialTheme.colors.primary),
+                    onClick = {
+                        scope.launch {
+                            sheetState.hide()
+                            navController.navigate(Screen.MovieScreen.route + "/${viewModel.movieState.value.id}")
+                        }
                     }
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.text_full_info),
+                        color = MaterialTheme.colors.onSurface,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h4,
+                        modifier = Modifier.padding(Padding.Medium)
+                    )
                 }
-            ) {
-                Text(
-                    text = stringResource(id = R.string.text_full_info),
-                    color = MaterialTheme.colors.onSurface,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(Padding.Medium)
-                )
             }
             Card(
                 modifier = Modifier
@@ -98,27 +101,29 @@ fun MovieBoard(
                 .padding(horizontal = Padding.Default)
                 .padding(bottom = Padding.ExtraLarge)
         ) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
-                shape = MaterialTheme.shapes.large,
-                backgroundColor = MaterialTheme.colors.surface,
-                indication = rememberRipple(color = MaterialTheme.colors.primary),
-                onClick = {
-                    scope.launch {
-                        sheetState.hide()
-                        navController.navigate(Screen.MovieScreen.route + "/${viewModel.movieState.value.id}")
+            if (context.isInternetAvailable()) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                    shape = MaterialTheme.shapes.large,
+                    backgroundColor = MaterialTheme.colors.surface,
+                    indication = rememberRipple(color = MaterialTheme.colors.primary),
+                    onClick = {
+                        scope.launch {
+                            sheetState.hide()
+                            navController.navigate(Screen.MovieScreen.route + "/${viewModel.movieState.value.id}")
+                        }
                     }
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.text_full_info),
+                        color = MaterialTheme.colors.onSurface,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h4,
+                        modifier = Modifier.padding(Padding.Medium)
+                    )
                 }
-            ) {
-                Text(
-                    text = stringResource(id = R.string.text_full_info),
-                    color = MaterialTheme.colors.onSurface,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(Padding.Medium)
-                )
             }
             Card(
                 modifier = Modifier

@@ -1,0 +1,44 @@
+package az.siftoshka.habitube.presentation.components.screen
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import az.siftoshka.habitube.R
+import az.siftoshka.habitube.presentation.util.Padding
+import com.airbnb.lottie.compose.*
+
+@Composable
+fun LibraryEmptyScreen() {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.space_empty))
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        LottieAnimation(
+            modifier = Modifier
+                .width(346.dp)
+                .height(142.dp),
+            composition = composition,
+            iterations = LottieConstants.IterateForever,
+            contentScale = ContentScale.FillBounds,
+
+        )
+        Text(
+            text = stringResource(id = R.string.text_empty_list),
+            style = MaterialTheme.typography.h1,
+            color = MaterialTheme.colors.onBackground,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(vertical = Padding.Default)
+        )
+    }
+}
