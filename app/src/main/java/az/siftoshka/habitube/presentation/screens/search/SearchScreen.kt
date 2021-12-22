@@ -29,6 +29,7 @@ import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.SearchType
 import az.siftoshka.habitube.presentation.components.image.SearchCard
+import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
@@ -55,6 +56,7 @@ fun SearchScreen(
                 SearchView()
                 Column(modifier = Modifier.fillMaxSize()) {
                     if (searchState.isLoading) { LoadingScreen() }
+                    if (searchState.media.isEmpty()) { EmptyScreen() }
                     LazyVerticalGrid(
                         cells = GridCells.Fixed(4),
                         contentPadding = PaddingValues(Padding.Medium),

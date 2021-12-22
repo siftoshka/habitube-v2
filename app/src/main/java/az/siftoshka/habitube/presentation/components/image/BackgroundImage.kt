@@ -63,6 +63,7 @@ fun BackgroundImage(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
+                        tint = Color.White,
                         contentDescription = imageUrl,
                     )
                 }

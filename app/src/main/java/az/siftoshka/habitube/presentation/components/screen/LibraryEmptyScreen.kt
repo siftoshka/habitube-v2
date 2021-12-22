@@ -30,8 +30,7 @@ fun LibraryEmptyScreen() {
                 .height(142.dp),
             composition = composition,
             iterations = LottieConstants.IterateForever,
-            contentScale = ContentScale.FillBounds,
-
+            contentScale = ContentScale.Fit
         )
         Text(
             text = stringResource(id = R.string.text_empty_list),
