@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import az.siftoshka.habitube.R
 
 /**
- * Item for sorting items.
+ * Item for [SortScreen].
  */
 class SortItem(
     val type: SortType,

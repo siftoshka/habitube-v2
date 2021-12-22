@@ -14,12 +14,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.screens.settings.fileds.SettingsTitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 
 /**
- * Composable function of Storage screen.
+ * Composable function of Storage Screen.
  */
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable

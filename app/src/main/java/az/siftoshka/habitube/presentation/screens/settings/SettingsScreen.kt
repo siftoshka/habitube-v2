@@ -22,7 +22,7 @@ import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 
 /**
- * Composable function of the Settings screen.
+ * Composable function of the Settings Screen.
  */
 @Composable
 fun SettingsScreen(

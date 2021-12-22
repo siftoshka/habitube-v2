@@ -20,7 +20,7 @@ import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 
 /**
- * Composable function of Sort screen.
+ * Composable function of Sort Screen.
  */
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable

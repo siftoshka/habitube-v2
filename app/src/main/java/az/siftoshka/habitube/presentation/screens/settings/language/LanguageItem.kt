@@ -5,7 +5,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Language
 
 /**
- * Item for language.
+ * Item for [LanguageScreen].
  */
 class LanguageItem(
     val category: LanguageCategory,

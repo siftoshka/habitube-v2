@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import az.siftoshka.habitube.R
 
 /**
- * Item for storage.
+ * Item for [StorageScreen].
  */
 class StorageItem(
     val type: StorageType,

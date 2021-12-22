@@ -30,7 +30,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.launch
 
 /**
- * Composable function of the Library screen.
+ * Composable function of the Library Screen.
  */
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterialApi::class)
 @Composable

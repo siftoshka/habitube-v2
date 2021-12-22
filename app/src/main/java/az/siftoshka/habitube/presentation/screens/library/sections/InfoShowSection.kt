@@ -20,7 +20,6 @@ import az.siftoshka.habitube.domain.util.onlyYear
 import az.siftoshka.habitube.presentation.components.image.LibraryMinimalCard
 import az.siftoshka.habitube.presentation.util.Padding
 
-
 @Composable
 fun InfoShowSection(show: TvShow?, isWatched: Boolean) {
 
