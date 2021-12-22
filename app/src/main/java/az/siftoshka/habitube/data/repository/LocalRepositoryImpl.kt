@@ -3,6 +3,7 @@ package az.siftoshka.habitube.data.repository
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import az.siftoshka.habitube.domain.repository.LocalRepository
+import az.siftoshka.habitube.presentation.screens.settings.content.ContentLanguageCategory
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
 import javax.inject.Inject
 
@@ -14,9 +15,18 @@ class LocalRepositoryImpl @Inject constructor(
 ) : LocalRepository {
 
     companion object {
+        const val KEY_SETTINGS_LANGUAGE = "key_settings_language"
         const val KEY_SETTINGS_SORT = "key_settings_sort"
         const val KEY_SETTINGS_ADULT = "key_settings_adult"
     }
+
+    override fun setContentLanguage(value: String) {
+        preferences.edit(commit = true) {
+            putString(KEY_SETTINGS_LANGUAGE, value)
+        }
+    }
+
+    override fun getContentLanguage(): String = preferences.getString(KEY_SETTINGS_LANGUAGE, "en-US").orEmpty()
 
     override fun setSortType(value: String) {
         preferences.edit(commit = true) {

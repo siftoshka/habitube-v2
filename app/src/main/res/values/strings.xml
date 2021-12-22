@@ -55,15 +55,16 @@
 
     <!-- Settings Screen -->
     <string name="text_general">General</string>
+    <string name="text_content_language">Content Language</string>
     <string name="text_language">Language</string>
-    <string name="text_sort">Sort by</string>
+    <string name="text_sort">Sort By</string>
     <string name="text_library">Library</string>
     <string name="text_storage">Storage</string>
-    <string name="text_adult_title">Adult content</string>
+    <string name="text_adult_title">Adult Content</string>
     <string name="text_adult_description">Possibility to see adultery content in search results</string>
     <string name="text_about">About</string>
-    <string name="text_app_version">App version</string>
-    <string name="text_contact_me">Contact me</string>
+    <string name="text_app_version">App Version</string>
+    <string name="text_contact_me">Contact Me</string>
     <string name="text_credits">Credits</string>
     <string name="text_privacy">Privacy Policy</string>
     <string name="text_terms">Terms of Service</string>

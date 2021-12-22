@@ -31,6 +31,7 @@ import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.screens.person.PersonScreen
 import az.siftoshka.habitube.presentation.screens.search.SearchScreen
 import az.siftoshka.habitube.presentation.screens.settings.SettingsScreen
+import az.siftoshka.habitube.presentation.screens.settings.content.ContentLanguageScreen
 import az.siftoshka.habitube.presentation.screens.settings.language.LanguageScreen
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortScreen
 import az.siftoshka.habitube.presentation.screens.settings.storage.StorageScreen
@@ -162,6 +163,9 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(route = Screen.LanguageScreen.route) {
             LanguageScreen(navController)
+        }
+        composable(route = Screen.ContentLanguageScreen.route) {
+            ContentLanguageScreen(navController)
         }
         composable(route = Screen.StorageScreen.route) {
             StorageScreen(navController)

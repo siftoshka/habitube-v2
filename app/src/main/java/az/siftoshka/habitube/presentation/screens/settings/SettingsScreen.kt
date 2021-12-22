@@ -44,6 +44,10 @@ fun SettingsScreen(
                 Column(Modifier.padding(horizontal = Padding.Default)) {
                     SettingsTitleText(text = R.string.text_general)
                     SettingsButtonField(
+                        text = R.string.text_content_language,
+                        secondary = stringResource(id = viewModel.getContentLanguage())
+                    ) { navController.navigate(Screen.ContentLanguageScreen.route) }
+                    SettingsButtonField(
                         text = R.string.text_language,
                         getCurrentLanguage()
                     ) { navController.navigate(Screen.LanguageScreen.route) }

@@ -1,12 +1,17 @@
 package az.siftoshka.habitube.domain.repository
 
 import android.content.SharedPreferences
+import az.siftoshka.habitube.presentation.screens.settings.content.ContentLanguageCategory
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
 
 /**
  * The repository class for [SharedPreferences].
  */
 interface LocalRepository {
+
+    fun setContentLanguage(value: String)
+
+    fun getContentLanguage() : String
 
     fun setSortType(value: String)
 

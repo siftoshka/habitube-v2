@@ -16,21 +16,25 @@ interface MovieService {
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(
         @Query("page") page: Int,
+        @Query("language") language: String
     ): MediaResponseDto
 
     @GET("trending/movie/day")
     suspend fun getTrendingMovies(
         @Query("page") page: Int,
+        @Query("language") language: String
     ): MediaResponseDto
 
     @GET("trending/tv/day")
     suspend fun getTrendingTvShows(
         @Query("page") page: Int,
+        @Query("language") language: String
     ): MediaResponseDto
 
     @GET("tv/airing_today")
     suspend fun getAirTodayTvShows(
         @Query("page") page: Int,
+        @Query("language") language: String
     ): MediaResponseDto
 
     /**
@@ -39,11 +43,13 @@ interface MovieService {
     @GET("movie/{movie_id}")
     suspend fun getMovie(
         @Path("movie_id") movieId: Int,
+        @Query("language") language: String
     ): MovieDto
 
     @GET("movie/{movie_id}/videos")
     suspend fun getMovieVideos(
         @Path("movie_id") movieId: Int,
+        @Query("language") language: String
     ): VideoResponseDto
 
     @GET("movie/{movie_id}/credits")
@@ -55,6 +61,7 @@ interface MovieService {
     suspend fun getSimilarMovies(
         @Path("movie_id") movieId: Int,
         @Query("page") page: Int,
+        @Query("language") language: String
     ): MediaResponseDto
 
     /**
@@ -63,11 +70,13 @@ interface MovieService {
     @GET("tv/{tv_id}")
     suspend fun getTvShow(
         @Path("tv_id") showId: Int,
+        @Query("language") language: String
     ): TvShowDto
 
     @GET("tv/{tv_id}/videos")
     suspend fun getTvShowVideos(
         @Path("tv_id") showId: Int,
+        @Query("language") language: String
     ): VideoResponseDto
 
     @GET("tv/{tv_id}/credits")
@@ -79,6 +88,7 @@ interface MovieService {
     suspend fun getSimilarTvShows(
         @Path("tv_id") showId: Int,
         @Query("page") page: Int,
+        @Query("language") language: String
     ): MediaResponseDto
 
     /**
@@ -87,16 +97,19 @@ interface MovieService {
     @GET("person/{person_id}")
     suspend fun getPerson(
         @Path("person_id") personId: Int,
+        @Query("language") language: String
     ): PersonDto
 
     @GET("person/{person_id}/movie_credits")
     suspend fun getPersonMovieCredits(
         @Path("person_id") personId: Int,
+        @Query("language") language: String
     ): PersonCreditDto
 
     @GET("person/{person_id}/tv_credits")
     suspend fun getPersonTvShowCredits(
         @Path("person_id") personId: Int,
+        @Query("language") language: String
     ): PersonCreditDto
 
     /**
@@ -106,27 +119,31 @@ interface MovieService {
     suspend fun getSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
-        @Query("include_adult") isAdult: Boolean
+        @Query("include_adult") isAdult: Boolean,
+        @Query("language") language: String
     ): MediaResponseDto
 
     @GET("search/movie")
     suspend fun getMovieSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
-        @Query("include_adult") isAdult: Boolean
+        @Query("include_adult") isAdult: Boolean,
+        @Query("language") language: String
     ): MediaResponseDto
 
     @GET("search/tv")
     suspend fun getTvShowSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
-        @Query("include_adult") isAdult: Boolean
+        @Query("include_adult") isAdult: Boolean,
+        @Query("language") language: String
     ): MediaResponseDto
 
     @GET("search/person")
     suspend fun getPersonSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
-        @Query("include_adult") isAdult: Boolean
+        @Query("include_adult") isAdult: Boolean,
+        @Query("language") language: String
     ): MediaResponseDto
 }

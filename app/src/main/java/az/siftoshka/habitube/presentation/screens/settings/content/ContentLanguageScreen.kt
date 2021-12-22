@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.settings.sort
+package az.siftoshka.habitube.presentation.screens.settings.content
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,19 +19,19 @@ import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 
 /**
- * Composable function of Sort Screen.
+ * Composable function of Content Language Screen.
  */
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
-fun SortScreen(
+fun ContentLanguageScreen(
     navController: NavController,
-    viewModel: SortViewModel = hiltViewModel()
+    viewModel: ContentLanguageViewModel = hiltViewModel()
 ) {
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 TopAppBar(
-                    title = R.string.text_sort,
+                    title = R.string.text_content_language,
                     icon = R.drawable.ic_back,
                 ) { navController.popBackStack() }
                 Spacer(modifier = Modifier.height(16.dp))
@@ -41,10 +40,10 @@ fun SortScreen(
                         .padding(horizontal = Padding.Default)
                         .fillMaxWidth()
                 ) {
-                    items(list.size) {
-                        val item = list[it]
-                        SortRowItem(item) { type ->
-                            viewModel.setSortType(type.name)
+                    items(languages.size) {
+                        val language = languages[it]
+                        ContentLanguageRowItem(language) { code ->
+                            viewModel.setContentLanguage(code)
                             navController.popBackStack()
                         }
                     }
@@ -56,30 +55,30 @@ fun SortScreen(
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
-fun SortRowItem(
-    item: SortItem,
-    viewModel: SortViewModel = hiltViewModel(),
-    onPerformClick: (SortType) -> Unit
+fun ContentLanguageRowItem(
+    language: ContentLanguageItem,
+    viewModel: ContentLanguageViewModel = hiltViewModel(),
+    onPerformClick: (code: String) -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
-        onClick = { onPerformClick(item.type) },
+        onClick = { onPerformClick(language.code) },
         elevation = 4.dp,
         modifier = Modifier.padding(vertical = Padding.ExtraSmall)
     ) {
         ListItem(
             text = {
                 Text(
-                    text = stringResource(id = item.text),
+                    text = stringResource(id = language.text),
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
                 )
             },
             trailing = {
-                if (viewModel.getSortType() == item.type) {
+                if (viewModel.getContentLanguage() == language.code) {
                     OutlinedButton(
-                        onClick = { onPerformClick(item.type) },
+                        onClick = { onPerformClick(language.code) },
                         shape = RoundedCornerShape(20.dp),
                         border = BorderStroke(1.dp, MaterialTheme.colors.primary),
                         colors = ButtonDefaults.outlinedButtonColors(

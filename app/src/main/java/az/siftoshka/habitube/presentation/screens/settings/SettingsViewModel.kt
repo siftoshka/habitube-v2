@@ -15,6 +15,15 @@ class SettingsViewModel @Inject constructor(
     private val localRepository: LocalRepository,
 ) : ViewModel() {
 
+    fun getContentLanguage(): Int {
+        return when (localRepository.getContentLanguage()) {
+            "en-US" -> R.string.text_lang_english
+            "fr-FR" -> R.string.text_lang_french
+            "ru-RU" -> R.string.text_lang_russian
+            else -> R.string.text_lang_english
+        }
+    }
+
     fun getSortType(): Int {
         return when (localRepository.getSortType()) {
             SortType.RECENTLY -> R.string.text_recently_added
