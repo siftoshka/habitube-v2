@@ -39,10 +39,10 @@ val list = mutableListOf(
     ),
     SortItem(
         SortType.RELEASE_DESC,
-        R.string.text_release_year_desc
+        R.string.text_release_desc
     ),
     SortItem(
         SortType.RELEASE_ASC,
-        R.string.text_release_year_asc
+        R.string.text_release_asc
     )
 )

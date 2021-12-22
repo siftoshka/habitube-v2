@@ -24,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
 import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
@@ -35,6 +36,7 @@ import az.siftoshka.habitube.presentation.screens.settings.language.LanguageScre
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortScreen
 import az.siftoshka.habitube.presentation.screens.settings.storage.StorageScreen
 import az.siftoshka.habitube.presentation.screens.show.ShowScreen
+import az.siftoshka.habitube.presentation.screens.web.WebScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
@@ -167,6 +169,11 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(route = Screen.SortScreen.route) {
             SortScreen(navController)
+        }
+        composable(route = Screen.WebScreen.route + "/{url}") { navBackStackEntry ->
+            navBackStackEntry.arguments?.getString("url")?.let {
+                WebScreen(value = it, navController = navController)
+            }
         }
     }
 }

@@ -39,7 +39,6 @@ fun StorageScreen(
                 ) { navController.popBackStack() }
                 Spacer(modifier = Modifier.height(16.dp))
                 Column(Modifier.padding(horizontal = Padding.Default)) {
-                    SettingsTitleText(text = R.string.text_local)
                     LazyColumn(modifier = Modifier.fillMaxWidth()) {
                         items(list.size) {
                             val item = list[it]

@@ -58,7 +58,7 @@ fun SettingsScreen(
                         adultState.value = it
                         viewModel.changeAdultVisibility()
                     }
-                    Spacer(modifier = Modifier.height(36.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     SettingsTitleText(text = R.string.text_library)
                     SettingsButtonField(text = R.string.text_storage, secondary = "") {
                         navController.navigate(Screen.StorageScreen.route)
@@ -66,7 +66,7 @@ fun SettingsScreen(
                     SettingsSimpleButtonField(R.string.text_clear_cache) {
                         context.clearCache()
                     }
-                    Spacer(modifier = Modifier.height(36.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     SettingsTitleText(text = R.string.text_about)
                     SettingsTextField(text = R.string.text_app_version, secondaryText = R.string.version_name)
                     ContactMeField(text = R.string.text_contact_me) {
@@ -76,6 +76,13 @@ fun SettingsScreen(
                             SocialNetworks.INSTAGRAM -> context.getInstagramIntent()
                         }
                     }
+                    SettingsButtonField(text = R.string.text_privacy, secondary = "") {
+                        navController.navigate(Screen.WebScreen.route + "/privacy")
+                    }
+                    SettingsButtonField(text = R.string.text_terms, secondary = "") {
+                        navController.navigate(Screen.WebScreen.route + "/terms")
+                    }
+                    Spacer(modifier = Modifier.height(36.dp))
                 }
             }
         }

@@ -14,6 +14,7 @@ sealed class Screen(val route: String) {
     object LanguageScreen : Screen("language_screen")
     object StorageScreen : Screen("storage_screen")
     object SortScreen : Screen("sort_screen")
+    object WebScreen : Screen("web_screen")
 }
 
 object NavigationConstants {

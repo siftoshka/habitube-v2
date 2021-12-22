@@ -21,8 +21,8 @@ class SettingsViewModel @Inject constructor(
             SortType.FIRST -> R.string.text_added_first
             SortType.TITLE -> R.string.text_sort_title
             SortType.RATING -> R.string.text_sort_rating
-            SortType.RELEASE_DESC -> R.string.text_release_year_desc
-            SortType.RELEASE_ASC -> R.string.text_release_year_asc
+            SortType.RELEASE_DESC -> R.string.text_release_desc
+            SortType.RELEASE_ASC -> R.string.text_release_asc
         }
     }
 
