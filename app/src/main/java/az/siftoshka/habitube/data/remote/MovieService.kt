@@ -106,23 +106,27 @@ interface MovieService {
     suspend fun getSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean
     ): MediaResponseDto
 
     @GET("search/movie")
     suspend fun getMovieSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean
     ): MediaResponseDto
 
     @GET("search/tv")
     suspend fun getTvShowSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean
     ): MediaResponseDto
 
     @GET("search/person")
     suspend fun getPersonSearchResults(
         @Query("query") searchQuery: String,
         @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean
     ): MediaResponseDto
 }

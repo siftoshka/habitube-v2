@@ -61,7 +61,7 @@ fun MovieBoard(
             ) {
                 Text(
                     text = stringResource(id = R.string.text_full_info),
-                    color = MaterialTheme.colors.onPrimary,
+                    color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(Padding.Medium)
@@ -83,7 +83,7 @@ fun MovieBoard(
             ) {
                 Text(
                     text = stringResource(id = R.string.text_remove_watched),
-                    color = MaterialTheme.colors.onPrimary,
+                    color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(Padding.Medium)
@@ -115,7 +115,7 @@ fun MovieBoard(
             ) {
                 Text(
                     text = stringResource(id = R.string.text_full_info),
-                    color = MaterialTheme.colors.onPrimary,
+                    color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(Padding.Medium)
@@ -137,7 +137,7 @@ fun MovieBoard(
             ) {
                 Text(
                     text = stringResource(id = R.string.text_already_watched),
-                    color = MaterialTheme.colors.onPrimary,
+                    color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(Padding.Medium)
@@ -159,7 +159,7 @@ fun MovieBoard(
             ) {
                 Text(
                     text = stringResource(id = R.string.text_remove_planning),
-                    color = MaterialTheme.colors.onPrimary,
+                    color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(Padding.Medium)

@@ -1,14 +1,18 @@
 package az.siftoshka.habitube.di
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import az.siftoshka.habitube.data.model.PlannedDatabase
 import az.siftoshka.habitube.data.model.WatchedDatabase
 import az.siftoshka.habitube.data.remote.HttpInterceptor
 import az.siftoshka.habitube.data.remote.MovieService
+import az.siftoshka.habitube.data.repository.LocalRepositoryImpl
 import az.siftoshka.habitube.data.repository.PlannedRepositoryImpl
 import az.siftoshka.habitube.data.repository.RemoteRepositoryImpl
 import az.siftoshka.habitube.data.repository.WatchedRepositoryImpl
+import az.siftoshka.habitube.domain.repository.LocalRepository
 import az.siftoshka.habitube.domain.repository.PlannedRepository
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import az.siftoshka.habitube.domain.repository.WatchedRepository
@@ -58,12 +62,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideMovieService(retrofit: Retrofit) = retrofit.create(MovieService::class.java)
+    fun provideMovieService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
 
     @Provides
     @Singleton
-    fun provideRemoteRepository(service: MovieService): RemoteRepository {
-        return RemoteRepositoryImpl(service)
+    fun provideRemoteRepository(service: MovieService, localRepository: LocalRepository): RemoteRepository {
+        return RemoteRepositoryImpl(service, localRepository)
     }
 
     @Provides
@@ -88,6 +92,17 @@ object AppModule {
     @Singleton
     fun provideWatchedRepository(db: WatchedDatabase): WatchedRepository {
         return WatchedRepositoryImpl(db.getMovieDAO(), db.getShowDAO())
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(app: Application): SharedPreferences =
+        app.applicationContext.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
+
+    @Provides
+    @Singleton
+    fun provideLocalRepository(preferences: SharedPreferences): LocalRepository {
+        return LocalRepositoryImpl(preferences)
     }
 
 }

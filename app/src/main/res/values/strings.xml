@@ -56,6 +56,11 @@
     <!-- Settings Screen -->
     <string name="text_general">General</string>
     <string name="text_language">Language</string>
+    <string name="text_sort">Sort by</string>
+    <string name="text_library">Library</string>
+    <string name="text_storage">Storage</string>
+    <string name="text_adult_title">Adult content</string>
+    <string name="text_adult_description">Possibility to see adultery content in search results</string>
     <string name="text_about">About</string>
     <string name="text_app_version">App version</string>
     <string name="text_contact_me">Contact me</string>
@@ -70,6 +75,27 @@
     <string name="text_movies">Movies</string>
     <string name="text_shows">TV Shows</string>
     <string name="text_selected">Selected</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_delete">Delete</string>
+
+    <!-- Storage -->
+    <string name="text_local">Local</string>
+    <string name="text_delete_watched_movies">Delete Watched Movies</string>
+    <string name="text_delete_watched_shows">Delete Watched TV Shows</string>
+    <string name="text_delete_planned_movies">Delete Planning Movies</string>
+    <string name="text_delete_planned_shows">Delete Planning TV Shows</string>
+    <string name="text_delete_all">Delete all Movies &amp; TV Shows</string>
+    <string name="text_clear_cache">Clear Cache</string>
+    <string name="text_storage_dialog_title">Deleting…</string>
+    <string name="text_storage_dialog_description">Are you sure you want to delete?</string>
+
+    <!-- Sort by -->
+    <string name="text_recently_added">Recently added</string>
+    <string name="text_added_first">Added first</string>
+    <string name="text_sort_title">Title</string>
+    <string name="text_sort_rating">Rating</string>
+    <string name="text_release_year_desc">Release year (Descending)</string>
+    <string name="text_release_year_asc">Release year (Ascending)</string>
 
     <!-- Languages -->
     <string name="text_lang_automatic">Automatic</string>

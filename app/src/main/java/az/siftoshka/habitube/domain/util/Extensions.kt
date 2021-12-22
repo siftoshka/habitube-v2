@@ -118,6 +118,10 @@ fun Context.renameFileToWatched(imageDir: String?) {
         .renameTo(File(this.filesDir.path + "/watched" + imagePath))
 }
 
+fun Context.clearCache() {
+    this.cacheDir.deleteRecursively()
+}
+
 fun Context.isInternetAvailable(): Boolean {
     val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)

@@ -2,6 +2,7 @@ package az.siftoshka.habitube.data.repository
 
 import az.siftoshka.habitube.data.remote.MovieService
 import az.siftoshka.habitube.data.remote.dto.*
+import az.siftoshka.habitube.domain.repository.LocalRepository
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import javax.inject.Inject
 
@@ -9,7 +10,8 @@ import javax.inject.Inject
  * Implementation of the [RemoteRepository] of application.
  */
 class RemoteRepositoryImpl @Inject constructor(
-    private val service: MovieService
+    private val service: MovieService,
+    private val localRepository: LocalRepository
 ) : RemoteRepository {
 
     override suspend fun getUpcomingMovies(page: Int): List<MediaLiteDto> {
@@ -73,18 +75,18 @@ class RemoteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
-        return service.getSearchResults(searchQuery, page).results
+        return service.getSearchResults(searchQuery, page, localRepository.isAdultVisible()).results
     }
 
     override suspend fun getMovieSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
-        return service.getMovieSearchResults(searchQuery, page).results
+        return service.getMovieSearchResults(searchQuery, page, localRepository.isAdultVisible()).results
     }
 
     override suspend fun getTvShowSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
-        return service.getTvShowSearchResults(searchQuery, page).results
+        return service.getTvShowSearchResults(searchQuery, page, localRepository.isAdultVisible()).results
     }
 
     override suspend fun getPersonSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
-        return service.getPersonSearchResults(searchQuery, page).results
+        return service.getPersonSearchResults(searchQuery, page, localRepository.isAdultVisible()).results
     }
 }

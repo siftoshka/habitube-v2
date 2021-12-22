@@ -11,6 +11,9 @@ object Constants {
     const val MOVIE_TABLE = "movies"
     const val SHOW_TABLE = "shows"
 
+    // Shared Preferences
+    const val PREFS_NAME = "app_prefs"
+
     // API
     const val API_URL = "https://api.themoviedb.org/3/"
     const val IMAGE_URL = "https://image.tmdb.org/t/p/original"
