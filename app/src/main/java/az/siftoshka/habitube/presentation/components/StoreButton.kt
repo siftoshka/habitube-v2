@@ -38,7 +38,7 @@ fun StoreButton(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painter = painterResource(id = icon),
-                contentDescription = stringResource(id = R.string.text_watch_later),
+                contentDescription = stringResource(id = R.string.text_planning_watch),
                 modifier = Modifier
                     .padding(end = Padding.ExtraSmall)
                     .size(20.dp)

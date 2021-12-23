@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.presentation.RealtimeViewModel
 import az.siftoshka.habitube.presentation.components.image.LibraryCard
 import az.siftoshka.habitube.presentation.components.screen.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
@@ -37,13 +38,16 @@ import kotlinx.coroutines.launch
 @Composable
 fun LibraryScreen(
     navController: NavController,
-    viewModel: LibraryViewModel = hiltViewModel()
+    viewModel: LibraryViewModel = hiltViewModel(),
+    realtimeViewModel: RealtimeViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
+
+    realtimeViewModel.syncData()
 
     HabitubeV2Theme {
         ModalBottomSheetLayout(

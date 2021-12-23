@@ -91,7 +91,7 @@ fun Context.saveToStorage(imageDir: String?, isWatched: Boolean) {
         try {
             val myPath = File(this.filesDir.path + File.separator.toString() + configText + imagePath)
             fos = FileOutputStream(myPath)
-            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 60, fos)
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 50, fos)
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {

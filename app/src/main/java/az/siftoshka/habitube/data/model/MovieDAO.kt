@@ -19,6 +19,9 @@ interface MovieDAO {
     @Transaction @Query("SELECT * FROM movies WHERE id = :movieId")
     suspend fun getMovie(movieId: Int) : Movie?
 
+    @Transaction @Query("SELECT count(*) FROM movies WHERE id = :movieId")
+    suspend fun getMovieCount(movieId: Int): Int
+
     @Delete
     suspend fun deleteMovie(movie: Movie)
 

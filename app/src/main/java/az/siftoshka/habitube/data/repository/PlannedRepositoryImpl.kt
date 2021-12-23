@@ -24,6 +24,10 @@ class PlannedRepositoryImpl(
 
     override suspend fun getMovie(movieId: Int) = movieDAO.getMovie(movieId)
 
+    override suspend fun isMovieExist(movieId: Int): Boolean {
+        return movieDAO.getMovieCount(movieId) > 0
+    }
+
     override suspend fun deleteMovie(movie: Movie) = withContext(Dispatchers.IO) {
         movieDAO.deleteMovie(movie)
     }
@@ -37,6 +41,10 @@ class PlannedRepositoryImpl(
     }
 
     override fun getShows() = showDAO.getShows()
+
+    override suspend fun isShowExist(showId: Int): Boolean {
+        return showDAO.getShowCount(showId) > 0
+    }
 
     override suspend fun getShow(showId: Int) = showDAO.getShow(showId)
 

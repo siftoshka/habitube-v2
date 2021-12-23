@@ -15,6 +15,8 @@ interface PlannedRepository {
 
     suspend fun getMovie(movieId: Int) : Movie?
 
+    suspend fun isMovieExist(movieId: Int) : Boolean
+
     suspend fun deleteMovie(movie: Movie)
 
     suspend fun deleteAllMovies()
@@ -24,6 +26,8 @@ interface PlannedRepository {
     fun getShows() : Flow<List<TvShow>>
 
     suspend fun getShow(showId: Int) : TvShow?
+
+    suspend fun isShowExist(showId: Int) : Boolean
 
     suspend fun deleteShow(show: TvShow)
 

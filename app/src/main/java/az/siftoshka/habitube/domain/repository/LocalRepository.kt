@@ -1,11 +1,10 @@
 package az.siftoshka.habitube.domain.repository
 
 import android.content.SharedPreferences
-import az.siftoshka.habitube.presentation.screens.settings.content.ContentLanguageCategory
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
 
 /**
- * The repository class for [SharedPreferences].
+ * The repository interface for [SharedPreferences].
  */
 interface LocalRepository {
 

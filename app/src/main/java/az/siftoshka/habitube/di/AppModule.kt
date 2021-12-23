@@ -8,14 +8,8 @@ import az.siftoshka.habitube.data.model.PlannedDatabase
 import az.siftoshka.habitube.data.model.WatchedDatabase
 import az.siftoshka.habitube.data.remote.HttpInterceptor
 import az.siftoshka.habitube.data.remote.MovieService
-import az.siftoshka.habitube.data.repository.LocalRepositoryImpl
-import az.siftoshka.habitube.data.repository.PlannedRepositoryImpl
-import az.siftoshka.habitube.data.repository.RemoteRepositoryImpl
-import az.siftoshka.habitube.data.repository.WatchedRepositoryImpl
-import az.siftoshka.habitube.domain.repository.LocalRepository
-import az.siftoshka.habitube.domain.repository.PlannedRepository
-import az.siftoshka.habitube.domain.repository.RemoteRepository
-import az.siftoshka.habitube.domain.repository.WatchedRepository
+import az.siftoshka.habitube.data.repository.*
+import az.siftoshka.habitube.domain.repository.*
 import az.siftoshka.habitube.domain.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -33,6 +27,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context = application.applicationContext
 
     @Singleton
     @Provides
@@ -103,6 +101,12 @@ object AppModule {
     @Singleton
     fun provideLocalRepository(preferences: SharedPreferences): LocalRepository {
         return LocalRepositoryImpl(preferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRealtimeRepository(): RealtimeRepository {
+        return RealtimeRepositoryImpl()
     }
 
 }

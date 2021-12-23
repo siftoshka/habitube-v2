@@ -55,6 +55,8 @@
     <string name="text_empty_list">Empty list</string>
 
     <!-- Settings Screen -->
+    <string name="text_account">Backup &amp; Sync</string>
+    <string name="text_sign_in">Sign in with Google</string>
     <string name="text_general">General</string>
     <string name="text_content_language">Content Language</string>
     <string name="text_language">Language</string>
@@ -69,13 +71,14 @@
     <string name="text_credits">Credits</string>
     <string name="text_privacy">Privacy Policy</string>
     <string name="text_terms">Terms of Service</string>
+    <string name="text_log_out">Log out</string>
 
     <!-- Common -->
     <string name="text_show_less">Show less</string>
     <string name="text_show_more">Show more</string>
     <string name="text_add_rating">Add rating</string>
     <string name="text_rated">%1$s/10</string>
-    <string name="text_watch_later">Watch later</string>
+    <string name="text_planning_watch">Planning</string>
     <string name="text_movies">Movies</string>
     <string name="text_shows">TV Shows</string>
     <string name="text_selected">Selected</string>
