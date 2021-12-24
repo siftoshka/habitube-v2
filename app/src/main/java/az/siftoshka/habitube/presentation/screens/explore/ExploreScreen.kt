@@ -8,6 +8,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -17,11 +19,12 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.isInternetAvailable
-import az.siftoshka.habitube.presentation.components.*
+import az.siftoshka.habitube.presentation.components.Pager
+import az.siftoshka.habitube.presentation.components.TopAppBar
+import az.siftoshka.habitube.presentation.components.UpdateDialog
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
-import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
@@ -33,12 +36,16 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
  */
 @Composable
 fun ExploreScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: ExploreViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
     val context = LocalContext.current
+
+    val updateState = viewModel.updateState
+    val dialogState = remember { mutableStateOf(false) }
 
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
@@ -46,7 +53,9 @@ fun ExploreScreen(
                 TopAppBar(
                     title = R.string.app_name,
                     icon = R.drawable.ic_launch_icon
-                ) {}
+                ) {
+                    dialogState.value = true
+                }
                 if (!context.isInternetAvailable()) NoConnectionScreen()
                 Column(
                     horizontalAlignment = Alignment.Start,
@@ -54,6 +63,17 @@ fun ExploreScreen(
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 ) {
+                    viewModel.isUpdateShown()
+                    if (updateState.value) { dialogState.value = true }
+                    UpdateDialog(
+                        title = R.string.text_update_title,
+                        text = R.string.text_update_description,
+                        textButton = R.string.text_update_button,
+                        state = dialogState
+                    ) {
+                        dialogState.value = false
+                        viewModel.setUpdateShown()
+                    }
                     UpcomingMovies(navController)
                     Spacer(modifier = Modifier.height(Padding.Large))
                     TrendingMovies(navController)

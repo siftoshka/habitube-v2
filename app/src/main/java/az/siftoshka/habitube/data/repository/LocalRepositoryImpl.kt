@@ -1,9 +1,10 @@
 package az.siftoshka.habitube.data.repository
 
+import android.app.Application
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.repository.LocalRepository
-import az.siftoshka.habitube.presentation.screens.settings.content.ContentLanguageCategory
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
 import javax.inject.Inject
 
@@ -11,6 +12,7 @@ import javax.inject.Inject
  * The implementation of repository class for [SharedPreferences].
  */
 class LocalRepositoryImpl @Inject constructor(
+    private val app: Application,
     private val preferences: SharedPreferences
 ) : LocalRepository {
 
@@ -18,6 +20,7 @@ class LocalRepositoryImpl @Inject constructor(
         const val KEY_SETTINGS_LANGUAGE = "key_settings_language"
         const val KEY_SETTINGS_SORT = "key_settings_sort"
         const val KEY_SETTINGS_ADULT = "key_settings_adult"
+        const val KEY_VERSION_NAME = "key_version_name"
     }
 
     override fun setContentLanguage(value: String) {
@@ -53,4 +56,14 @@ class LocalRepositoryImpl @Inject constructor(
     }
 
     override fun isAdultVisible(): Boolean = preferences.getBoolean(KEY_SETTINGS_ADULT, false)
+
+    override fun setVersionName() {
+        preferences.edit(commit = true) {
+            putString(KEY_VERSION_NAME, app.getString(R.string.version_name))
+        }
+    }
+
+    override fun isUpdateShown(): Boolean {
+        return app.getString(R.string.version_name) == preferences.getString(KEY_VERSION_NAME, "")
+    }
 }

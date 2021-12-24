@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.SocialNetworks
 import az.siftoshka.habitube.presentation.util.Padding
-import az.siftoshka.habitube.presentation.util.SocialColors
+import az.siftoshka.habitube.presentation.util.SpecialColors
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -35,7 +35,7 @@ fun ContactMeField(
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Card(
                     shape = MaterialTheme.shapes.large,
-                    backgroundColor = SocialColors.Telegram,
+                    backgroundColor = SpecialColors.Telegram,
                     contentColor = MaterialTheme.colors.onPrimary,
                     onClick = { onPerformClick(SocialNetworks.TELEGRAM) },
                     modifier = Modifier.width(100.dp),
@@ -49,7 +49,7 @@ fun ContactMeField(
                 }
                 Card(
                     shape = MaterialTheme.shapes.large,
-                    backgroundColor = SocialColors.Github,
+                    backgroundColor = SpecialColors.Github,
                     contentColor = MaterialTheme.colors.onPrimary,
                     onClick = { onPerformClick(SocialNetworks.GITHUB) },
                     modifier = Modifier.width(100.dp),
@@ -63,7 +63,7 @@ fun ContactMeField(
                 }
                 Card(
                     shape = MaterialTheme.shapes.large,
-                    backgroundColor = SocialColors.Instagram,
+                    backgroundColor = SpecialColors.Instagram,
                     contentColor = MaterialTheme.colors.onPrimary,
                     onClick = { onPerformClick(SocialNetworks.INSTAGRAM) },
                     modifier = Modifier.width(100.dp),

@@ -109,6 +109,11 @@
     <string name="text_release_desc">Release day (Descending)</string>
     <string name="text_release_asc">Release day (Ascending)</string>
 
+    <!-- What's new -->
+    <string name="text_update_title">Habitube 2.0 is here!</string>
+    <string name="text_update_description">[Design]\n• Created the whole user interface from scratch\n• More space, more happy :)\n\n\n[Maintainability]\n• Since this update, there will be more new features. Stay tuned!</string>
+    <string name="text_update_button">Explore!</string>
+
     <!-- Languages -->
     <string name="text_lang_automatic">Automatic</string>
     <string name="text_lang_english">English</string>

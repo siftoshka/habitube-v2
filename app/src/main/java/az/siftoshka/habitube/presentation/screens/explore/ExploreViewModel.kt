@@ -1,16 +1,20 @@
 package az.siftoshka.habitube.presentation.screens.explore
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import az.siftoshka.habitube.domain.repository.LocalRepository
 import az.siftoshka.habitube.domain.usecases.remote.GetExploreUseCase
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.ExploreType
 import az.siftoshka.habitube.domain.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -18,8 +22,12 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
-    private val getExploreUseCase: GetExploreUseCase
+    private val getExploreUseCase: GetExploreUseCase,
+    private val localRepository: LocalRepository
 ) : ViewModel() {
+
+    private val _updateState = mutableStateOf(false)
+    val updateState: MutableState<Boolean> = _updateState
 
     private val _exploreUpcomingMoviesState = mutableStateOf(ExploreState())
     val exploreUpcomingMoviesState: State<ExploreState> = _exploreUpcomingMoviesState
@@ -44,6 +52,19 @@ class ExploreViewModel @Inject constructor(
         getTrendingMovies()
         getTrendingTvShows()
         getAirTodayTvShows()
+    }
+
+    fun isUpdateShown() {
+        viewModelScope.launch {
+            delay(2000L)
+            _updateState.value = !localRepository.isUpdateShown()
+        }
+    }
+
+    fun setUpdateShown() {
+        localRepository.setVersionName().also {
+            _updateState.value = !localRepository.isUpdateShown()
+        }
     }
 
     private fun getUpcomingMovies() {

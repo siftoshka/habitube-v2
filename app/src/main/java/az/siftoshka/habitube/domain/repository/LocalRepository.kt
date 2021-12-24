@@ -19,4 +19,8 @@ interface LocalRepository {
     fun setAdultVisibility(value: Boolean)
 
     fun isAdultVisible(): Boolean
+
+    fun setVersionName()
+
+    fun isUpdateShown(): Boolean
 }

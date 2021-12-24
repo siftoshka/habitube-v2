@@ -4,6 +4,7 @@ import az.siftoshka.habitube.data.remote.dto.toPerson
 import az.siftoshka.habitube.domain.model.Person
 import az.siftoshka.habitube.domain.repository.RemoteRepository
 import az.siftoshka.habitube.domain.util.Resource
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -20,6 +21,7 @@ class GetPersonUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             val person = repository.getPerson(personId).toPerson()
+            delay(150L)
             emit(Resource.Success(person))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))
