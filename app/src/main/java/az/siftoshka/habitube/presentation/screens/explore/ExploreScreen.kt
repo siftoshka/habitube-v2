@@ -10,14 +10,17 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
+import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.components.*
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
+import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
@@ -35,6 +38,7 @@ fun ExploreScreen(
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
@@ -43,6 +47,7 @@ fun ExploreScreen(
                     title = R.string.app_name,
                     icon = R.drawable.ic_launch_icon
                 ) {}
+                if (!context.isInternetAvailable()) NoConnectionScreen()
                 Column(
                     horizontalAlignment = Alignment.Start,
                     modifier = Modifier

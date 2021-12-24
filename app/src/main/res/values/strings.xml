@@ -69,9 +69,13 @@
     <string name="text_app_version">App Version</string>
     <string name="text_contact_me">Contact Me</string>
     <string name="text_credits">Credits</string>
+    <string name="text_credits_description">App Icon made by www.instagram.com/@ok__die\n\nIcons made by www.flaticon.com/authors/gariebaldy\n\nAstronaut - Light Theme by musa adanur at lottiefiles.com\nTumbleweed Rolling by Muhammad Hazwan Bin Mohd Hanizul at lottiefiles.com\nLoading Abstract by jignesh gajjar at lottiefiles.com\nGreen connection by Davi Dupin at lottiefiles.com</string>
+    <string name="text_info">Info</string>
     <string name="text_privacy">Privacy Policy</string>
     <string name="text_terms">Terms of Service</string>
+    <string name="text_licenses">Open Source Licenses</string>
     <string name="text_log_out">Log out</string>
+    <string name="text_content_warning">Warning!\nYou will get fewer search results using a language other than English.</string>
 
     <!-- Common -->
     <string name="text_show_less">Show less</string>
@@ -84,6 +88,8 @@
     <string name="text_selected">Selected</string>
     <string name="text_cancel">Cancel</string>
     <string name="text_delete">Delete</string>
+    <string name="text_offline">You are offline</string>
+    <string name="text_offline_description">Check the network access\nReconnect to Wi-Fi</string>
 
     <!-- Storage -->
     <string name="text_delete_watched_movies">Delete Watched Movies</string>

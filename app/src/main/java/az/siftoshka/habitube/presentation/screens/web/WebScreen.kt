@@ -27,12 +27,14 @@ fun WebScreen(value: String, navController: NavController) {
     val title = when (value) {
         "privacy" -> R.string.text_privacy
         "terms" -> R.string.text_terms
+        "licenses" -> R.string.text_licenses
         else -> R.string.text_privacy
     }
 
     val url = when (value) {
         "privacy" -> "file:///android_asset/privacy_policy.html"
         "terms" -> "file:///android_asset/terms_of_service.html"
+        "licenses" -> "file:///android_asset/licenses_output.html"
         else -> "file:///android_asset/privacy_policy.html"
     }
 

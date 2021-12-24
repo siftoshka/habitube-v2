@@ -67,6 +67,7 @@ fun SettingsScreen(
                     }
                     Spacer(modifier = Modifier.height(24.dp))
                     SettingsTitleText(text = R.string.text_library)
+                    LibraryField(moviesCount = viewModel.moviesCount.value, showsCount = viewModel.showsCount.value)
                     SettingsButtonField(text = R.string.text_storage, secondary = "") {
                         navController.navigate(Screen.StorageScreen.route)
                     }
@@ -83,11 +84,17 @@ fun SettingsScreen(
                             SocialNetworks.INSTAGRAM -> context.getInstagramIntent()
                         }
                     }
+                    FoldableTextField(shortText = R.string.text_credits, longText = R.string.text_credits_description )
+                    Spacer(modifier = Modifier.height(24.dp))
+                    SettingsTitleText(text = R.string.text_info)
                     SettingsButtonField(text = R.string.text_privacy, secondary = "") {
                         navController.navigate(Screen.WebScreen.route + "/privacy")
                     }
                     SettingsButtonField(text = R.string.text_terms, secondary = "") {
                         navController.navigate(Screen.WebScreen.route + "/terms")
+                    }
+                    SettingsButtonField(text = R.string.text_licenses, secondary = "") {
+                        navController.navigate(Screen.WebScreen.route + "/licenses")
                     }
                     Spacer(modifier = Modifier.height(36.dp))
                 }
