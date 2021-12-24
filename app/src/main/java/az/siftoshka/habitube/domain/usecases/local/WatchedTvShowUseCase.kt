@@ -12,7 +12,7 @@ import java.util.*
 import javax.inject.Inject
 
 /**
- * Use-case tp get watched tv shows calls from repository.
+ * Use-case to get watched tv shows calls from repository.
  */
 class WatchedTvShowUseCase @Inject constructor(
     private val repository: WatchedRepository,

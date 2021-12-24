@@ -4,16 +4,15 @@ import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
@@ -67,29 +66,16 @@ fun LibraryCard(
                     Row(
                         horizontalArrangement = Arrangement.End, modifier = Modifier
                             .fillMaxWidth()
-                            .padding(2.dp)
+                            .padding(4.dp)
                     ) {
-                        Box(contentAlignment = Alignment.Center,
+                        Text(
+                            text = " $rating ",
+                            style = MaterialTheme.typography.h6,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .background(MaterialTheme.colors.background.copy(alpha = 0.5f), shape = CircleShape)
-                                .layout { measurable, constraints ->
-                                    val placeable = measurable.measure(constraints)
-                                    val currentHeight = placeable.height
-                                    var heightCircle = currentHeight
-                                    if (placeable.width > heightCircle) heightCircle = placeable.width
-                                    layout(heightCircle, heightCircle) {
-                                        placeable.placeRelative(0, (heightCircle - currentHeight) / 2)
-                                    }
-                                }) {
-
-                            Text(
-                                text = rating.toString(),
-                                style = MaterialTheme.typography.h6,
-                                color = MaterialTheme.colors.onBackground,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.defaultMinSize(20.dp)
-                            )
-                        }
+                                .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(100.dp))
+                        )
                     }
                 }
             }

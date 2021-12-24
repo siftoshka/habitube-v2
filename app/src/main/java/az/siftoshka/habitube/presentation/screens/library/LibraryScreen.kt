@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,12 +24,14 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.RealtimeViewModel
 import az.siftoshka.habitube.presentation.components.image.LibraryCard
 import az.siftoshka.habitube.presentation.components.screen.LibraryEmptyScreen
+import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
 import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -47,7 +50,12 @@ fun LibraryScreen(
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
 
-    realtimeViewModel.syncData()
+    LaunchedEffect(true) {
+        scope.launch(Dispatchers.Default) {
+            realtimeViewModel.syncData()
+            viewModel.updateConfiguration()
+        }
+    }
 
     HabitubeV2Theme {
         ModalBottomSheetLayout(
@@ -145,6 +153,7 @@ fun WatchedTab(
     val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize()) {
+        if (viewModel.isLoading.value) LoadingScreen()
         if (viewModel.watchedMovies.value.isEmpty() && viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         if (viewModel.watchedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         LazyVerticalGrid(

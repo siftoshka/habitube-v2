@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
- * Use-case tp get planned tv shows calls from repository.
+ * Use-case to get planned tv shows calls from repository.
  */
 class PlannedTvShowUseCase @Inject constructor(
     private val repository: PlannedRepository,

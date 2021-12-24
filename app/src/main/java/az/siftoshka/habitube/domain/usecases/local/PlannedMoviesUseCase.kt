@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
- * Use-case tp get planned movies calls from repository.
+ * Use-case to get planned movies calls from repository.
  */
 class PlannedMoviesUseCase @Inject constructor(
     private val repository: PlannedRepository,

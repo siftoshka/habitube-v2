@@ -10,6 +10,10 @@ import az.siftoshka.habitube.domain.usecases.local.PlannedTvShowUseCase
 import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
 import az.siftoshka.habitube.domain.usecases.local.WatchedTvShowUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -32,6 +36,7 @@ class LibraryViewModel @Inject constructor(
     val watchedShows = mutableStateOf<List<TvShow>>(emptyList())
     val plannedShows = mutableStateOf<List<TvShow>>(emptyList())
 
+    val isLoading = mutableStateOf(true)
     val isMoviesSelected = mutableStateOf(true)
     val isShowsSelected = mutableStateOf(false)
     val isWatched = mutableStateOf(false)
@@ -40,11 +45,10 @@ class LibraryViewModel @Inject constructor(
     var movieState = mutableStateOf(Movie())
     var showState = mutableStateOf(TvShow())
 
-    init { updateConfiguration() }
-
     fun updateConfiguration() {
         if (isMoviesSelected.value) {
             clean()
+            isLoading.value = true
             getWatchedMovies()
             getPlannedMovies()
         } else if (isShowsSelected.value) {
@@ -79,27 +83,38 @@ class LibraryViewModel @Inject constructor(
     }
 
     private fun getWatchedMovies() {
-        watchedMoviesUseCase.getMovies().onEach { result ->
-            watchedMovies.value = result
-        }.launchIn(viewModelScope)
+        watchedMoviesUseCase.getMovies()
+            .debounce {
+                if (it.isEmpty()) 0L
+                else 400L
+            }
+            .flowOn(Dispatchers.IO)
+            .onEach { result ->
+                watchedMovies.value = result
+                isLoading.value = false
+            }
+            .launchIn(viewModelScope)
     }
 
     private fun getPlannedMovies() {
-        plannedMoviesUseCase.getMovies().onEach { result ->
-            plannedMovies.value = result
-        }.launchIn(viewModelScope)
+        plannedMoviesUseCase.getMovies()
+            .flowOn(Dispatchers.IO)
+            .onEach { result -> plannedMovies.value = result }
+            .launchIn(viewModelScope)
     }
 
     private fun getWatchedTvShows() {
-        watchedTvShowUseCase.getShows().onEach { result ->
-            watchedShows.value = result
-        }.launchIn(viewModelScope)
+        watchedTvShowUseCase.getShows()
+            .flowOn(Dispatchers.IO)
+            .onEach { result -> watchedShows.value = result }
+            .launchIn(viewModelScope)
     }
 
     private fun getPlannedTvShows() {
-        plannedTvShowUseCase.getShows().onEach { result ->
-            plannedShows.value = result
-        }.launchIn(viewModelScope)
+        plannedTvShowUseCase.getShows()
+            .flowOn(Dispatchers.IO)
+            .onEach { result -> plannedShows.value = result }
+            .launchIn(viewModelScope)
     }
 
     private fun clean() {
