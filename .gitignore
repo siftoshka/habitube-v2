@@ -141,3 +141,4 @@ fabric.properties
 # KeyStore properties file where path and password is defined
 keystore.properties
 app/google-services.json
+app/src/main/assets/
