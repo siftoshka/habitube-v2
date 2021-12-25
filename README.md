@@ -1,5 +1,7 @@
 # Habitube V2
-
+### The 2nd iteration of the Habitube
+#### New stack of technologies with Kotlin and Jetpack Compose. Still Ad-Free :)
+#
 ### License
 ```
 MIT License
