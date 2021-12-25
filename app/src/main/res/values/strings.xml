@@ -2,12 +2,12 @@
     <string name="app_name">Habitube</string>
 
     <!-- Navigation -->
-    <string name="nav_explore">Explore</string>
+    <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
     <string name="nav_library">Library</string>
     <string name="nav_settings">Settings</string>
 
-    <!-- Explore Screen -->
+    <!-- Home Screen -->
     <string name="text_upcoming">Upcoming</string>
     <string name="text_trending">Trending</string>
     <string name="text_air_today">Air Today</string>
@@ -41,9 +41,9 @@
 
     <!-- Search Screen -->
     <string name="text_tab_multi">Multi</string>
-    <string name="text_tab_movie">Movie</string>
-    <string name="text_tab_show">TV Show</string>
-    <string name="text_tab_person">Person</string>
+    <string name="text_tab_movie">Movies</string>
+    <string name="text_tab_show">TV Shows</string>
+    <string name="text_tab_person">Persons</string>
 
     <!-- Library Screen -->
     <string name="text_watched">Watched</string>
@@ -62,9 +62,11 @@
     <string name="text_language">Language</string>
     <string name="text_sort">Sort By</string>
     <string name="text_library">Library</string>
+    <string name="text_watched_movies">Watched Movies</string>
+    <string name="text_watched_shows">Watched Shows</string>
     <string name="text_storage">Storage</string>
     <string name="text_adult_title">Adult Content</string>
-    <string name="text_adult_description">Possibility to see adultery content in search results</string>
+    <string name="text_adult_description">Possibility to see adult content in search results</string>
     <string name="text_about">About</string>
     <string name="text_app_version">App Version</string>
     <string name="text_contact_me">Contact Me</string>
@@ -73,7 +75,7 @@
     <string name="text_info">Info</string>
     <string name="text_privacy">Privacy Policy</string>
     <string name="text_terms">Terms of Service</string>
-    <string name="text_licenses">Open Source Licenses</string>
+    <string name="text_licenses">Open-Source Licenses</string>
     <string name="text_log_out">Log out</string>
     <string name="text_content_warning">Warning!\nYou will get fewer search results using a language other than English.</string>
 
@@ -111,7 +113,7 @@
 
     <!-- What's new -->
     <string name="text_update_title">Habitube 2.0 is here!</string>
-    <string name="text_update_description">[Design]\n• Created the whole user interface from scratch\n• More space, more happy :)\n\n\n[Maintainability]\n• Since this update, there will be more new features. Stay tuned!</string>
+    <string name="text_update_description">[Design]\n• Created the whole user interface from scratch\n• More space, more happiness :)\n\n\n[Maintainability]\n• Since this update, there will be more new features. Stay tuned!</string>
     <string name="text_update_button">Explore!</string>
 
     <!-- Languages -->

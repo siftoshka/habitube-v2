@@ -4,7 +4,7 @@ package az.siftoshka.habitube.presentation.util
  * The sealed class for the navigation between [Screen]-s.
  */
 sealed class Screen(val route: String) {
-    object ExploreScreen : Screen("nav_explore_screen")
+    object HomeScreen : Screen("nav_home_screen")
     object SearchScreen : Screen("nav_search_screen")
     object LibraryScreen : Screen("nav_library_screen")
     object SettingsScreen : Screen("nav_settings_screen")

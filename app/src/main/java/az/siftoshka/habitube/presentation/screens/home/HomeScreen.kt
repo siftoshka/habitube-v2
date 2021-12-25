@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.explore
+package az.siftoshka.habitube.presentation.screens.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,6 +24,7 @@ import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.components.UpdateDialog
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
+import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
@@ -32,12 +33,12 @@ import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
- * Composable function of the Explore Screen.
+ * Composable function of the Home Screen.
  */
 @Composable
-fun ExploreScreen(
+fun HomeScreen(
     navController: NavController,
-    viewModel: ExploreViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
@@ -46,6 +47,10 @@ fun ExploreScreen(
 
     val updateState = viewModel.updateState
     val dialogState = remember { mutableStateOf(false) }
+    val isLoading = viewModel.exploreUpcomingMoviesState.value.isLoading &&
+            viewModel.exploreTrendingMoviesState.value.isLoading &&
+            viewModel.exploreTrendingTvShowsState.value.isLoading &&
+            viewModel.exploreAirTodayTvShowsState.value.isLoading
 
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
@@ -56,6 +61,7 @@ fun ExploreScreen(
                 ) {
                     dialogState.value = true
                 }
+                if (isLoading) LoadingScreen()
                 if (!context.isInternetAvailable()) NoConnectionScreen()
                 Column(
                     horizontalAlignment = Alignment.Start,
@@ -91,7 +97,7 @@ fun ExploreScreen(
 @Composable
 fun UpcomingMovies(
     navController: NavController,
-    viewModel: ExploreViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val upcomingMoviesState = viewModel.exploreUpcomingMoviesState.value
 
@@ -119,7 +125,7 @@ fun UpcomingMovies(
 @Composable
 fun TrendingMovies(
     navController: NavController,
-    viewModel: ExploreViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val trendingMoviesState = viewModel.exploreTrendingMoviesState.value
     val page = viewModel.trendingMoviesPage.value
@@ -147,7 +153,7 @@ fun TrendingMovies(
 @Composable
 fun TrendingTvShows(
     navController: NavController,
-    viewModel: ExploreViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val trendingTvShowsState = viewModel.exploreTrendingTvShowsState.value
     val page = viewModel.trendingTvShowsPage.value
@@ -175,7 +181,7 @@ fun TrendingTvShows(
 @Composable
 fun AirTodayTvShows(
     navController: NavController,
-    viewModel: ExploreViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val exploreAirTodayState = viewModel.exploreAirTodayTvShowsState.value
     val page = viewModel.airTodayTvShowsPage.value

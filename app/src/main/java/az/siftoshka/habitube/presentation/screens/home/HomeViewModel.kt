@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.explore
+package az.siftoshka.habitube.presentation.screens.home
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -18,10 +18,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * [ViewModel] of the Explore Screen.
+ * [ViewModel] of the Home Screen.
  */
 @HiltViewModel
-class ExploreViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val getExploreUseCase: GetExploreUseCase,
     private val localRepository: LocalRepository
 ) : ViewModel() {
@@ -107,7 +107,8 @@ class ExploreViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             _exploreTrendingMoviesState.value = ExploreState(
-                                media = _exploreTrendingMoviesState.value.media.plus(result.data.orEmpty()))
+                                media = _exploreTrendingMoviesState.value.media.plus(result.data.orEmpty())
+                            )
                         }
                     }
                 }.launchIn(viewModelScope)
@@ -115,7 +116,7 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    fun onChangeTrendingMoviesPosition(position: Int){
+    fun onChangeTrendingMoviesPosition(position: Int) {
         trendingMoviesPosition = position
     }
 
@@ -143,7 +144,8 @@ class ExploreViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             _exploreTrendingTvShowsState.value = ExploreState(
-                                media = _exploreTrendingTvShowsState.value.media.plus(result.data.orEmpty()))
+                                media = _exploreTrendingTvShowsState.value.media.plus(result.data.orEmpty())
+                            )
                         }
                     }
                 }.launchIn(viewModelScope)
@@ -151,7 +153,7 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    fun onChangeTrendingTvShowsPosition(position: Int){
+    fun onChangeTrendingTvShowsPosition(position: Int) {
         trendingTvShowsPosition = position
     }
 
@@ -179,7 +181,8 @@ class ExploreViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             _exploreAirTodayTvShowsState.value = ExploreState(
-                                media = _exploreAirTodayTvShowsState.value.media.plus(result.data.orEmpty()))
+                                media = _exploreAirTodayTvShowsState.value.media.plus(result.data.orEmpty())
+                            )
                         }
                     }
                 }.launchIn(viewModelScope)
@@ -187,7 +190,7 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
-    fun onChangeAirTodayTvShowsPosition(position: Int){
+    fun onChangeAirTodayTvShowsPosition(position: Int) {
         airTodayTvShowsPosition = position
     }
 }

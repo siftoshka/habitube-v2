@@ -1,0 +1,140 @@
+<resources>
+    <string name="app_name">Habitube</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Дом</string>
+    <string name="nav_search">Поиск</string>
+    <string name="nav_library">Библиотека</string>
+    <string name="nav_settings">Настройки</string>
+
+    <!-- Home Screen -->
+    <string name="text_upcoming">Предстоящие</string>
+    <string name="text_trending">Тренды</string>
+    <string name="text_air_today">Новое</string>
+
+    <!-- Movie/TV Show Screens -->
+    <string name="text_rating">Оценка</string>
+    <string name="text_runtime">Время</string>
+    <string name="text_episodes">Эпизоды</string>
+    <string name="text_minutes">минут</string>
+    <string name="text_videos">Видео</string>
+    <string name="text_description">Описание</string>
+    <string name="text_genres">Жанры</string>
+    <string name="text_seasons">Сезоны</string>
+    <string name="text_details">Детали</string>
+    <string name="text_budget">Бюджет</string>
+    <string name="text_status">Статус</string>
+    <string name="text_revenue">Сборы</string>
+    <string name="text_spoken_languages">Языки</string>
+    <string name="text_original_title">Оригинальное название</string>
+    <string name="text_cast">Актёры</string>
+    <string name="text_crew">Команда</string>
+    <string name="text_similar">Похожие</string>
+
+    <!-- Person Screen -->
+    <string name="text_birth_place">Место рождения</string>
+    <string name="text_known_for">Известен</string>
+    <string name="text_biography">Биография</string>
+    <string name="text_person_acting">Играет роль</string>
+    <string name="text_person_crew">Член команды</string>
+
+
+    <!-- Search Screen -->
+    <string name="text_tab_multi">Общее</string>
+    <string name="text_tab_movie">Фильмы</string>
+    <string name="text_tab_show">Сериалы</string>
+    <string name="text_tab_person">Люди</string>
+
+    <!-- Library Screen -->
+    <string name="text_watched">Просмотрено</string>
+    <string name="text_planning">Запланировано</string>
+    <string name="text_full_info">Открыть полностью</string>
+    <string name="text_remove_watched">Удалить из просмотренных</string>
+    <string name="text_remove_planning">Удалить из запланированных</string>
+    <string name="text_already_watched">Уже посмотрел</string>
+    <string name="text_empty_list">Пустой список</string>
+
+    <!-- Settings Screen -->
+    <string name="text_account">Синхронизация</string>
+    <string name="text_sign_in">Войти в Google аккаунт</string>
+    <string name="text_general">Общее</string>
+    <string name="text_content_language">Язык контента</string>
+    <string name="text_language">Язык</string>
+    <string name="text_sort">Сортировать по</string>
+    <string name="text_library">Хранилище</string>
+    <string name="text_watched_movies">Просмотренные фильмы</string>
+    <string name="text_watched_shows">Просмотренные сериалы</string>
+    <string name="text_storage">Память</string>
+    <string name="text_adult_title">Контент для взрослых</string>
+    <string name="text_adult_description">Возможность увидеть контент для взрослых в результате поиска</string>
+    <string name="text_about">Детали</string>
+    <string name="text_app_version">Версия приложения</string>
+    <string name="text_contact_me">Мои контакты</string>
+    <string name="text_credits">Благодарности</string>
+    <string name="text_credits_description">Инонка приложения сделана www.instagram.com/@ok__die\n\nИконки сделаны www.flaticon.com/authors/gariebaldy\n\nAstronaut - Light Theme от musa adanur в lottiefiles.com\nTumbleweed Rolling от Muhammad Hazwan Bin Mohd Hanizul в lottiefiles.com\nLoading Abstract от jignesh gajjar в lottiefiles.com\nGreen connection от Davi Dupin в lottiefiles.com</string>
+    <string name="text_info">Инфо</string>
+    <string name="text_privacy">Политика конфиденциальности</string>
+    <string name="text_terms">Условия использования</string>
+    <string name="text_licenses">Лицензии на открытый исходный код</string>
+    <string name="text_log_out">Выйти</string>
+    <string name="text_content_warning">Предупреждение!\nВы получите меньше результатов поиска, используя язык, отличный от английского.</string>
+
+    <!-- Common -->
+    <string name="text_show_less">Показать меньше</string>
+    <string name="text_show_more">Показать больше</string>
+    <string name="text_add_rating">Оценить</string>
+    <string name="text_rated">%1$s/10</string>
+    <string name="text_planning_watch">На потом</string>
+    <string name="text_movies">Фильмы</string>
+    <string name="text_shows">Сериалы</string>
+    <string name="text_selected">Выбран</string>
+    <string name="text_cancel">Отмена</string>
+    <string name="text_delete">Удалить</string>
+    <string name="text_offline">Вы вне сети</string>
+    <string name="text_offline_description">Проверьте интернет соединение\nПереподключитесь к Wi-Fi</string>
+
+    <!-- Storage -->
+    <string name="text_delete_watched_movies">Удалить просмотренные фильмы</string>
+    <string name="text_delete_watched_shows">Удалить просмотренные сериалы</string>
+    <string name="text_delete_planned_movies">Удалить запланированные фильмы</string>
+    <string name="text_delete_planned_shows">Удалить запланированные сериалы</string>
+    <string name="text_delete_all">Удалить всех Фильмов и Сериалов</string>
+    <string name="text_clear_cache">Очистить кэш</string>
+    <string name="text_storage_dialog_title">Удалние…</string>
+    <string name="text_storage_dialog_description">Вы уверены что хотите удалить?</string>
+
+    <!-- Sort by -->
+    <string name="text_recently_added">Недавним</string>
+    <string name="text_added_first">Первым добавленным</string>
+    <string name="text_sort_title">Названию</string>
+    <string name="text_sort_rating">Оценке</string>
+    <string name="text_release_desc">Дате выхода (По убыванию)</string>
+    <string name="text_release_asc">Дате выхода (По возрастанию)</string>
+
+    <!-- What's new -->
+    <string name="text_update_title">Habitube 2.0 уже здесь!</string>
+    <string name="text_update_description">[Дизайн]\n• Дизайн сделанный с нуля\n• Больше места, больше счастья :)\n\n\n[Поддержка]\n• Начиная с этой версии, будут больше новых функций!</string>
+    <string name="text_update_button">Посмотреть!</string>
+
+    <!-- Languages -->
+    <string name="text_lang_automatic">Автоматически</string>
+    <string name="text_lang_english">Английский</string>
+    <string name="text_lang_azerbaijani">Азербайджанский</string>
+    <string name="text_lang_spanish">Испанский</string>
+    <string name="text_lang_french">Французский</string>
+    <string name="text_lang_russian">Русский</string>
+
+    <!-- Months -->
+    <string name="month_1">Янв</string>
+    <string name="month_2">Фев</string>
+    <string name="month_3">Мар</string>
+    <string name="month_4">Апр</string>
+    <string name="month_5">Май</string>
+    <string name="month_6">Июнь</string>
+    <string name="month_7">Июль</string>
+    <string name="month_8">Авг</string>
+    <string name="month_9">Сен</string>
+    <string name="month_10">Окт</string>
+    <string name="month_11">Ноя</string>
+    <string name="month_12">Дек</string>
+</resources>

@@ -25,7 +25,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import az.siftoshka.habitube.domain.util.isInternetAvailable
-import az.siftoshka.habitube.presentation.screens.explore.ExploreScreen
+import az.siftoshka.habitube.presentation.screens.home.HomeScreen
 import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
 import az.siftoshka.habitube.presentation.screens.person.PersonScreen
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun BottomBar(navController: NavHostController) {
     val screens = listOf(
-        BottomBarScreen.Explore,
+        BottomBarScreen.Home,
         BottomBarScreen.Search,
         BottomBarScreen.Library,
         BottomBarScreen.Settings
@@ -139,14 +139,14 @@ fun RowScope.AddItem(
 fun NavGraph(navController: NavHostController) {
 
     val context = LocalContext.current
-    val startDestination = if (context.isInternetAvailable()) BottomBarScreen.Explore.route else BottomBarScreen.Library.route
+    val startDestination = if (context.isInternetAvailable()) BottomBarScreen.Home.route else BottomBarScreen.Library.route
 
     AnimatedNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
         composable(
-            route = BottomBarScreen.Explore.route,
+            route = BottomBarScreen.Home.route,
             exitTransition = { _, _ ->
                 slideOutHorizontally(
                     targetOffsetX = { -300 },
@@ -160,7 +160,7 @@ fun NavGraph(navController: NavHostController) {
                 ) + fadeIn(animationSpec = tween(400))
             }
         ) {
-            ExploreScreen(navController)
+            HomeScreen(navController)
         }
         composable(route = BottomBarScreen.Search.route) {
             SearchScreen(navController)

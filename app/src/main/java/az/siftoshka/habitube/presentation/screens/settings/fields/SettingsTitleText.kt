@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.settings.fileds
+package az.siftoshka.habitube.presentation.screens.settings.fields
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding

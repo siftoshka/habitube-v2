@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.settings.fileds
+package az.siftoshka.habitube.presentation.screens.settings.fields
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts

@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.settings.fileds
+package az.siftoshka.habitube.presentation.screens.settings.fields
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.util.Padding
@@ -29,9 +30,10 @@ fun LibraryField(
                     .weight(1f), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "${stringResource(id = R.string.text_watched)} ${stringResource(id = R.string.text_movies)}",
+                    text = stringResource(id = R.string.text_watched_movies),
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
+                    textAlign = TextAlign.Center,
                     modifier = Modifier.padding(bottom = Padding.Small)
                 )
                 Text(
@@ -51,9 +53,10 @@ fun LibraryField(
                     .weight(1f), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "${stringResource(id = R.string.text_watched)} ${stringResource(id = R.string.text_shows)}",
+                    text = stringResource(id = R.string.text_watched_shows),
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
+                    textAlign = TextAlign.Center,
                     modifier = Modifier.padding(bottom = Padding.Small)
                 )
                 Text(

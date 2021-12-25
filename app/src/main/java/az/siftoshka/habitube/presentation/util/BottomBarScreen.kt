@@ -12,10 +12,10 @@ sealed class BottomBarScreen(
     @StringRes val title: Int,
     @DrawableRes val icon: Int
 ) {
-    object Explore: BottomBarScreen(
-        route = Screen.ExploreScreen.route,
-        title = R.string.nav_explore,
-        icon = R.drawable.ic_explore
+    object Home: BottomBarScreen(
+        route = Screen.HomeScreen.route,
+        title = R.string.nav_home,
+        icon = R.drawable.ic_home
     )
     object Search: BottomBarScreen(
         route = Screen.SearchScreen.route,

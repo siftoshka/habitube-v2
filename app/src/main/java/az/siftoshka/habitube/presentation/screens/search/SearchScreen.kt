@@ -160,7 +160,7 @@ fun SearchTab(
             color = MaterialTheme.colors.onSurface,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(horizontal = Padding.Default, vertical = Padding.Small)
+            modifier = Modifier.padding(horizontal = Padding.Medium, vertical = Padding.Small)
         )
     }
 }
