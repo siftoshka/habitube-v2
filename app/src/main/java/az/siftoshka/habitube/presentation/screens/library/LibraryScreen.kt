@@ -162,7 +162,7 @@ fun WatchedTab(
         ) {
             if (viewModel.isMoviesSelected.value) {
                 itemsIndexed(viewModel.watchedMovies.value) { index, item ->
-                    LibraryCard(context, title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating, true) {
+                    LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
                         viewModel.isWatched.value = true
                         viewModel.mediaId.value = item.id ?: 0
                         scope.launch { sheetState.show() }
@@ -170,7 +170,7 @@ fun WatchedTab(
                 }
             } else if (viewModel.isShowsSelected.value) {
                 itemsIndexed(viewModel.watchedShows.value) { index, item ->
-                    LibraryCard(context, title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating, true) {
+                    LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
                         viewModel.isWatched.value = true
                         viewModel.mediaId.value = item.id ?: 0
                         scope.launch { sheetState.show() }
@@ -199,7 +199,7 @@ fun PlanningTab(
         ) {
             if (viewModel.isMoviesSelected.value) {
                 itemsIndexed(viewModel.plannedMovies.value) { index, item ->
-                    LibraryCard(context, title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), isWatched = false) {
+                    LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
                         viewModel.isWatched.value = false
                         viewModel.mediaId.value = item.id ?: 0
                         scope.launch { sheetState.show() }
@@ -207,7 +207,7 @@ fun PlanningTab(
                 }
             } else if (viewModel.isShowsSelected.value) {
                 itemsIndexed(viewModel.plannedShows.value) { index, item ->
-                    LibraryCard(context, title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), isWatched = false) {
+                    LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
                         viewModel.isWatched.value = false
                         viewModel.mediaId.value = item.id ?: 0
                         scope.launch { sheetState.show() }

@@ -1,6 +1,5 @@
 package az.siftoshka.habitube.presentation.components.image
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,20 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
-import java.io.File
+import coil.size.Precision
 
 @Composable
-fun LibraryMinimalCard(
-    context: Context,
-    imageUrl: String,
-    isWatched: Boolean,
-) {
-    val imagePath = imageUrl.replace("/", "-")
-    val configText = if (isWatched) "/watched" else "/planned"
-
+fun LibraryMinimalCard(imageUrl: String) {
     Card(
         modifier = Modifier
             .width(90.dp)
@@ -36,12 +29,13 @@ fun LibraryMinimalCard(
     ) {
         Image(
             painter = rememberImagePainter(
-                data = File(context.filesDir.path + configText + imagePath),
+                data = Constants.IMAGE_URL + imageUrl,
                 builder = {
                     crossfade(true)
+                    precision(Precision.INEXACT)
                     error(R.drawable.ic_placeholder)
-                    memoryCachePolicy(CachePolicy.ENABLED)
-                    diskCachePolicy(CachePolicy.DISABLED)
+                    memoryCacheKey(Constants.IMAGE_URL + imageUrl)
+                    memoryCachePolicy(CachePolicy.READ_ONLY)
                     networkCachePolicy(CachePolicy.ENABLED)
                 }
             ),

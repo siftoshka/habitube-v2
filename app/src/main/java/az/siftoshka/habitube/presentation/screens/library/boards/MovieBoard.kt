@@ -16,9 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.domain.util.deleteFromStorage
 import az.siftoshka.habitube.domain.util.isInternetAvailable
-import az.siftoshka.habitube.domain.util.renameFileToWatched
 import az.siftoshka.habitube.presentation.screens.library.LibraryViewModel
 import az.siftoshka.habitube.presentation.screens.library.sections.InfoMovieSection
 import az.siftoshka.habitube.presentation.util.Padding
@@ -38,7 +36,7 @@ fun MovieBoard(
 
     if (isWatched) {
         viewModel.getWatchedMovie()
-        InfoMovieSection(movie = viewModel.movieState.value, isWatched)
+        InfoMovieSection(movie = viewModel.movieState.value)
         Column(
             Modifier
                 .fillMaxWidth()
@@ -80,7 +78,6 @@ fun MovieBoard(
                 onClick = {
                     scope.launch { sheetState.hide() }
                     viewModel.deleteMovie(viewModel.movieState.value, isWatched)
-                    context.deleteFromStorage(viewModel.movieState.value.posterPath, true)
                 }
             ) {
                 Text(
@@ -94,7 +91,7 @@ fun MovieBoard(
         }
     } else {
         viewModel.getPlannedMovie()
-        InfoMovieSection(movie = viewModel.movieState.value, isWatched)
+        InfoMovieSection(movie = viewModel.movieState.value)
         Column(
             Modifier
                 .fillMaxWidth()
@@ -136,7 +133,6 @@ fun MovieBoard(
                 onClick = {
                     scope.launch { sheetState.hide() }
                     viewModel.switchToWatchedMovie(viewModel.movieState.value)
-                    context.renameFileToWatched(viewModel.movieState.value.posterPath)
                 }
             ) {
                 Text(
@@ -158,7 +154,6 @@ fun MovieBoard(
                 onClick = {
                     scope.launch { sheetState.hide() }
                     viewModel.deleteMovie(viewModel.movieState.value, isWatched)
-                    context.deleteFromStorage(viewModel.movieState.value.posterPath, false)
                 }
             ) {
                 Text(

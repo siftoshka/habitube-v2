@@ -16,9 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.domain.util.deleteFromStorage
 import az.siftoshka.habitube.domain.util.isInternetAvailable
-import az.siftoshka.habitube.domain.util.renameFileToWatched
 import az.siftoshka.habitube.presentation.screens.library.LibraryViewModel
 import az.siftoshka.habitube.presentation.screens.library.sections.InfoShowSection
 import az.siftoshka.habitube.presentation.util.Padding
@@ -38,7 +36,7 @@ fun ShowBoard(
 
     if (isWatched) {
         viewModel.getWatchedTvShow()
-        InfoShowSection(show = viewModel.showState.value, isWatched)
+        InfoShowSection(show = viewModel.showState.value)
         Column(
             Modifier
                 .fillMaxWidth()
@@ -80,7 +78,6 @@ fun ShowBoard(
                 onClick = {
                     scope.launch { sheetState.hide() }
                     viewModel.deleteShow(viewModel.showState.value, isWatched)
-                    context.deleteFromStorage(viewModel.showState.value.posterPath, true)
                 }
             ) {
                 Text(
@@ -94,7 +91,7 @@ fun ShowBoard(
         }
     } else {
         viewModel.getPlannedTVShow()
-        InfoShowSection(show = viewModel.showState.value, isWatched)
+        InfoShowSection(show = viewModel.showState.value)
         Column(
             Modifier
                 .fillMaxWidth()
@@ -136,7 +133,6 @@ fun ShowBoard(
                 onClick = {
                     scope.launch { sheetState.hide() }
                     viewModel.switchToWatchedShow(viewModel.showState.value)
-                    context.renameFileToWatched(viewModel.showState.value.posterPath)
                 }
             ) {
                 Text(
@@ -158,7 +154,6 @@ fun ShowBoard(
                 onClick = {
                     scope.launch { sheetState.hide() }
                     viewModel.deleteShow(viewModel.showState.value, isWatched)
-                    context.deleteFromStorage(viewModel.showState.value.posterPath, false)
                 }
             ) {
                 Text(

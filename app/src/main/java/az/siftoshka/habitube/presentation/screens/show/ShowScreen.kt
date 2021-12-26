@@ -64,7 +64,7 @@ fun ShowScreen(
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (showState.isLoading) { LoadingScreen() }
+                if (showState.isLoading) LoadingScreen()
                 MainBoard(scrollState, navController)
                 InfoBoard(scrollState, navController)
             }
@@ -79,7 +79,6 @@ fun MainBoard(
     viewModel: ShowViewModel = hiltViewModel()
 ) {
     val show = viewModel.showState.value.show
-    val context = LocalContext.current
 
     Column {
         BackgroundImage(
@@ -163,10 +162,8 @@ fun MainBoard(
                     ) { isNotWatched ->
                         if (isNotWatched) {
                             viewModel.addWatched(viewModel.rating.value)
-                            context.saveToStorage(show?.posterPath, true)
                         } else {
                             viewModel.deleteWatched()
-                            context.deleteFromStorage(show?.posterPath, true)
                         }
                     }
                     StoreButton(
@@ -177,10 +174,8 @@ fun MainBoard(
                     ) { isNotPlanned ->
                         if (isNotPlanned) {
                             viewModel.addPlanned()
-                            context.saveToStorage(show?.posterPath, false)
                         } else {
                             viewModel.deletePlanned()
-                            context.deleteFromStorage(show?.posterPath, false)
                         }
                     }
                 }

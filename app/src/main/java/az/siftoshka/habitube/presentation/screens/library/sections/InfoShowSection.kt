@@ -5,7 +5,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -21,16 +20,14 @@ import az.siftoshka.habitube.presentation.components.image.LibraryMinimalCard
 import az.siftoshka.habitube.presentation.util.Padding
 
 @Composable
-fun InfoShowSection(show: TvShow?, isWatched: Boolean) {
-
-    val context = LocalContext.current
+fun InfoShowSection(show: TvShow?) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Padding.Default, vertical = Padding.Small)
     ) {
-        LibraryMinimalCard(context = context, imageUrl = show?.posterPath.orEmpty(), isWatched)
+        LibraryMinimalCard(imageUrl = show?.posterPath.orEmpty())
         Column(
             modifier = Modifier
                 .padding(horizontal = Padding.Small)

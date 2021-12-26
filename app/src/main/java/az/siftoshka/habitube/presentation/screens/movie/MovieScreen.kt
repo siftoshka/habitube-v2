@@ -62,7 +62,7 @@ fun MovieScreen(
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (movieState.isLoading) { LoadingScreen() }
+                if (movieState.isLoading) LoadingScreen()
                 MainBoard(scrollState, navController)
                 InfoBoard(scrollState, navController)
             }
@@ -77,7 +77,6 @@ fun MainBoard(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val movie = viewModel.movieState.value.movie
-    val context = LocalContext.current
 
     Column {
         BackgroundImage(
@@ -160,10 +159,8 @@ fun MainBoard(
                     ) { isNotWatched ->
                         if (isNotWatched) {
                             viewModel.addWatched(viewModel.rating.value)
-                            context.saveToStorage(movie?.posterPath, true)
                         } else {
                             viewModel.deleteWatched()
-                            context.deleteFromStorage(movie?.posterPath, true)
                         }
                     }
                     StoreButton(
@@ -174,10 +171,8 @@ fun MainBoard(
                     ) { isNotPlanned ->
                         if (isNotPlanned) {
                             viewModel.addPlanned()
-                            context.saveToStorage(movie?.posterPath, false)
                         } else {
                             viewModel.deletePlanned()
-                            context.deleteFromStorage(movie?.posterPath, false)
                         }
                     }
                 }

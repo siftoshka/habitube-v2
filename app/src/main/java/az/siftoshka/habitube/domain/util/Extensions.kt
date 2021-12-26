@@ -2,16 +2,10 @@ package az.siftoshka.habitube.domain.util
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import az.siftoshka.habitube.R
-import coil.ImageLoader
-import coil.request.ImageRequest
-import java.io.File
-import java.io.FileOutputStream
 import java.text.DecimalFormat
 
 /**
@@ -79,43 +73,6 @@ fun Context.openVideo(site: String?, key: String?) {
         else -> return
     }
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-}
-
-fun Context.saveToStorage(imageDir: String?, isWatched: Boolean) {
-    val imagePath = imageDir?.replace("/", "-")
-    val configText = if (isWatched) "/watched" else "/planned"
-    var fos: FileOutputStream? = null
-    val loader = ImageLoader(this)
-    val request = ImageRequest.Builder(this).data(Constants.IMAGE_URL + imageDir).target {
-        val bitmapImage = (it as BitmapDrawable).bitmap
-        try {
-            val myPath = File(this.filesDir.path + File.separator.toString() + configText + imagePath)
-            fos = FileOutputStream(myPath)
-            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 40, fos)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            try {
-                fos?.close()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }.build()
-
-    loader.enqueue(request)
-}
-
-fun Context.deleteFromStorage(imageDir: String?, isWatched: Boolean) {
-    val imagePath = imageDir?.replace("/", "-")
-    val configText = if (isWatched) "/watched" else "/planned"
-    File(this.filesDir.path + configText + imagePath).delete()
-}
-
-fun Context.renameFileToWatched(imageDir: String?) {
-    val imagePath = imageDir?.replace("/", "-")
-    File(this.filesDir.path + "/planned" + imagePath)
-        .renameTo(File(this.filesDir.path + "/watched" + imagePath))
 }
 
 fun Context.clearCache() {

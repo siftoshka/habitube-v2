@@ -1,6 +1,5 @@
 package az.siftoshka.habitube.presentation.components.image
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -16,23 +15,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
 import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
-import java.io.File
+import coil.size.Precision
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LibraryCard(
-    context: Context,
     title: String,
     imageUrl: String,
     rating: Float? = 0f,
-    isWatched: Boolean,
     onItemClick: () -> Unit
 ) {
-    val imagePath = imageUrl.replace("/", "-")
-    val configText = if (isWatched) "/watched" else "/planned"
 
     Card(
         modifier = Modifier
@@ -46,12 +42,13 @@ fun LibraryCard(
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = rememberImagePainter(
-                    data = File(context.filesDir.path + configText + imagePath),
+                    data = IMAGE_URL + imageUrl,
                     builder = {
                         crossfade(true)
+                        precision(Precision.INEXACT)
                         error(R.drawable.ic_placeholder)
+                        memoryCacheKey(IMAGE_URL + imageUrl)
                         memoryCachePolicy(CachePolicy.ENABLED)
-                        diskCachePolicy(CachePolicy.DISABLED)
                         networkCachePolicy(CachePolicy.ENABLED)
                     }
                 ),
