@@ -42,9 +42,11 @@ fun SettingsScreen(
                     .verticalScroll(scrollState)
             ) {
                 Column(Modifier.padding(horizontal = Padding.Default)) {
-                    SettingsTitleText(text = R.string.text_account)
-                    GoogleSignInButton()
-                    Spacer(modifier = Modifier.height(24.dp))
+                    if (context.isPlayServicesAvailable()) {
+                        SettingsTitleText(text = R.string.text_account)
+                        GoogleSignInButton()
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
                     SettingsTitleText(text = R.string.text_general)
                     SettingsButtonField(
                         text = R.string.text_content_language,

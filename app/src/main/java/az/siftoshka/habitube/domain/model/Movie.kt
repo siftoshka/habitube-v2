@@ -9,32 +9,32 @@ import java.util.*
 
 @Entity(tableName = Constants.MOVIE_TABLE)
 data class Movie(
-    @ColumnInfo(name = "adult") var adult: Boolean? = false,
+    @ColumnInfo(name = "adult") var adult: Boolean? = null,
     @Ignore @ColumnInfo(name = "backdrop_path") var backdropPath: String? = null,
-    @ColumnInfo(name = "budget") var budget: Long? = 0,
     @Ignore var genres: List<MovieGenre>? = emptyList(),
-    @Ignore var homepage: String? = null,
-    @PrimaryKey @ColumnInfo(name = "id") var id: Int? = 0,
+    @PrimaryKey @ColumnInfo(name = "id") var id: Int? = null,
     @ColumnInfo(name = "imdb_id") var imdbId: String? = null,
-    @Ignore var originalLanguage: String? = null,
     @ColumnInfo(name = "original_title") var originalTitle: String? = null,
     @ColumnInfo(name = "overview") var overview: String? = null,
-    @ColumnInfo(name = "popularity") var popularity: Double? = 0.0,
+    @ColumnInfo(name = "popularity") var popularity: Double? = null,
     @ColumnInfo(name = "poster_path") var posterPath: String? = null,
+    @ColumnInfo(name = "release_date") var releaseDate: String? = null,
+    @ColumnInfo(name = "runtime") var runtime: Int? = null,
+    @ColumnInfo(name = "status") var status: String? = null,
+    @ColumnInfo(name = "title") var title: String? = null,
+    @ColumnInfo(name = "vote_average") var voteAverage: Double? = null,
+    @ColumnInfo(name = "vote_count") var voteCount: Int? = null,
+    @ColumnInfo(name = "budget") var budget: Long? = null,
+    @ColumnInfo(name = "revenue") var revenue: Long? = null,
+    @ColumnInfo(name = "added_date") var addedDate: Date? = null,
+    @ColumnInfo(name = "my_rating") var myRating: Float? = null,
+    @Ignore var homepage: String? = null,
+    @Ignore var originalLanguage: String? = null,
     @Ignore var productionCompanies: List<ProductionCompany>? = emptyList(),
     @Ignore var productionCountries: List<ProductionCountry>? = emptyList(),
-    @ColumnInfo(name = "release_date") var releaseDate: String? = null,
-    @ColumnInfo(name = "revenue") var revenue: Long? = 0,
-    @ColumnInfo(name = "runtime") var runtime: Int? = 0,
     @Ignore var spokenLanguages: List<SpokenLanguage>? = emptyList(),
-    @ColumnInfo(name = "status") var status: String? = null,
     @Ignore var tagline: String? = null,
-    @ColumnInfo(name = "title") var title: String? = null,
-    @Ignore var video: Boolean? = false,
-    @ColumnInfo(name = "vote_average")var voteAverage: Double? = 0.0,
-    @ColumnInfo(name = "vote_count") var voteCount: Int? = 0,
-    @ColumnInfo(name = "added_date") var addedDate: Date? = null,
-    @ColumnInfo(name = "my_rating") var myRating: Float? = 0f
+    @Ignore var video: Boolean? = false
 )
 
 data class MovieGenre(

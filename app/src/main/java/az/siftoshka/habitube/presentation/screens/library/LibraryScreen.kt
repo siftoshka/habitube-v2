@@ -149,7 +149,6 @@ fun WatchedTab(
     sheetState: ModalBottomSheetState,
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize()) {
@@ -187,7 +186,6 @@ fun PlanningTab(
     sheetState: ModalBottomSheetState,
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize()) {

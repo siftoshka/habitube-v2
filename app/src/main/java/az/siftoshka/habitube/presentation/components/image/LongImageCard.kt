@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
+import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL_ORIGINAL
 import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
@@ -37,7 +37,7 @@ fun LongImageCard(
         Box(modifier = Modifier.height(180.dp)) {
             Image(
                 painter = rememberImagePainter(
-                    data = IMAGE_URL + imageUrl,
+                    data = IMAGE_URL_ORIGINAL + imageUrl,
                     builder = {
                         crossfade(true)
                         error(R.drawable.ic_placeholder)

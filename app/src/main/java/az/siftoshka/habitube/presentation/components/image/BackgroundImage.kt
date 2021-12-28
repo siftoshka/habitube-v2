@@ -2,7 +2,10 @@ package az.siftoshka.habitube.presentation.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -14,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
+import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL_ORIGINAL
 import az.siftoshka.habitube.presentation.util.Padding
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
@@ -32,7 +35,7 @@ fun BackgroundImage(
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = rememberImagePainter(
-                    data = IMAGE_URL + imageUrl,
+                    data = IMAGE_URL_ORIGINAL + imageUrl,
                     builder = {
                         crossfade(true)
                         error(R.drawable.ic_placeholder)
@@ -56,7 +59,9 @@ fun BackgroundImage(
                         )
                     )
             )
-            Box(modifier = Modifier.fillMaxSize().padding(Padding.Default)) {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .padding(Padding.Default)) {
                 IconButton(
                     onClick = { onItemClick() },
                     modifier = Modifier.size(30.dp)

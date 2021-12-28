@@ -5,7 +5,10 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
+import androidx.core.content.ContentProviderCompat
 import az.siftoshka.habitube.R
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import java.text.DecimalFormat
 
 /**
@@ -77,6 +80,16 @@ fun Context.openVideo(site: String?, key: String?) {
 
 fun Context.clearCache() {
     this.cacheDir.deleteRecursively()
+}
+
+fun Context.firstSetupV2() {
+
+}
+
+fun Context.isPlayServicesAvailable(): Boolean {
+    val gApi = GoogleApiAvailability.getInstance()
+    val resultCode = gApi.isGooglePlayServicesAvailable(this)
+    return resultCode == ConnectionResult.SUCCESS
 }
 
 fun Context.isInternetAvailable(): Boolean {

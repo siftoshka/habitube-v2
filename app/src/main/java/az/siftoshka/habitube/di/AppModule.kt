@@ -4,7 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import az.siftoshka.habitube.data.model.PLANNED_MIGRATION_1_2
 import az.siftoshka.habitube.data.model.PlannedDatabase
+import az.siftoshka.habitube.data.model.WATCHED_MIGRATION_1_2
 import az.siftoshka.habitube.data.model.WatchedDatabase
 import az.siftoshka.habitube.data.remote.HttpInterceptor
 import az.siftoshka.habitube.data.remote.MovieService
@@ -71,7 +73,9 @@ object AppModule {
     @Provides
     @Singleton
     fun providePlannedDatabase(app: Application): PlannedDatabase {
-        return Room.databaseBuilder(app, PlannedDatabase::class.java, Constants.PLANNED).build()
+        return Room.databaseBuilder(app, PlannedDatabase::class.java, Constants.PLANNED)
+            .addMigrations(PLANNED_MIGRATION_1_2)
+            .build()
     }
 
     @Provides
@@ -83,7 +87,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideWatchedDatabase(app: Application): WatchedDatabase {
-        return Room.databaseBuilder(app, WatchedDatabase::class.java, Constants.WATCHED).build()
+        return Room.databaseBuilder(app, WatchedDatabase::class.java, Constants.WATCHED)
+            .addMigrations(WATCHED_MIGRATION_1_2)
+            .build()
     }
 
     @Provides

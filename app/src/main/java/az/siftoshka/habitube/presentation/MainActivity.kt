@@ -14,7 +14,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -24,7 +23,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import az.siftoshka.habitube.domain.util.isInternetAvailable
+import az.siftoshka.habitube.domain.util.firstSetupV2
 import az.siftoshka.habitube.presentation.screens.home.HomeScreen
 import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
@@ -56,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        applicationContext.firstSetupV2()
         setContent {
             HabitubeV2Theme {
                 val navController = rememberAnimatedNavController()
@@ -138,12 +138,9 @@ fun RowScope.AddItem(
 @Composable
 fun NavGraph(navController: NavHostController) {
 
-    val context = LocalContext.current
-    val startDestination = if (context.isInternetAvailable()) BottomBarScreen.Home.route else BottomBarScreen.Library.route
-
     AnimatedNavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = BottomBarScreen.Home.route
     ) {
         composable(
             route = BottomBarScreen.Home.route,

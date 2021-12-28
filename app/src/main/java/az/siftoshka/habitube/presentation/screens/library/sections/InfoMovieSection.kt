@@ -20,7 +20,7 @@ import az.siftoshka.habitube.presentation.components.image.LibraryMinimalCard
 import az.siftoshka.habitube.presentation.util.Padding
 
 @Composable
-fun InfoMovieSection(movie: Movie?) {
+fun InfoMovieSection(movie: Movie?, isWatched: Boolean) {
 
     Row(
         modifier = Modifier
@@ -50,6 +50,22 @@ fun InfoMovieSection(movie: Movie?) {
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(Padding.ExtraSmall))
+            if (isWatched) {
+                Text(
+                    text = buildAnnotatedString {
+                        append(stringResource(id = R.string.text_my_rating))
+                        append(
+                            AnnotatedString(
+                                ": ${movie?.myRating}",
+                                spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
+                            )
+                        )
+                    },
+                    style = MaterialTheme.typography.h4,
+                    color = MaterialTheme.colors.onBackground,
+                    textAlign = TextAlign.Start,
+                )
+            }
             Text(
                 text = buildAnnotatedString {
                     append(stringResource(id = R.string.text_rating))

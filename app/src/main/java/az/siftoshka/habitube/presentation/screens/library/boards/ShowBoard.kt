@@ -36,7 +36,7 @@ fun ShowBoard(
 
     if (isWatched) {
         viewModel.getWatchedTvShow()
-        InfoShowSection(show = viewModel.showState.value)
+        InfoShowSection(show = viewModel.showState.value, isWatched)
         Column(
             Modifier
                 .fillMaxWidth()
@@ -91,7 +91,7 @@ fun ShowBoard(
         }
     } else {
         viewModel.getPlannedTVShow()
-        InfoShowSection(show = viewModel.showState.value)
+        InfoShowSection(show = viewModel.showState.value, isWatched)
         Column(
             Modifier
                 .fillMaxWidth()

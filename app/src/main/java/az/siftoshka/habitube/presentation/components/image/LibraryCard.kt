@@ -45,6 +45,7 @@ fun LibraryCard(
                     data = IMAGE_URL + imageUrl,
                     builder = {
                         crossfade(true)
+                        crossfade(300)
                         precision(Precision.INEXACT)
                         error(R.drawable.ic_placeholder)
                         memoryCacheKey(IMAGE_URL + imageUrl)

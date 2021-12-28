@@ -36,7 +36,7 @@ fun MovieBoard(
 
     if (isWatched) {
         viewModel.getWatchedMovie()
-        InfoMovieSection(movie = viewModel.movieState.value)
+        InfoMovieSection(movie = viewModel.movieState.value, isWatched)
         Column(
             Modifier
                 .fillMaxWidth()
@@ -91,7 +91,7 @@ fun MovieBoard(
         }
     } else {
         viewModel.getPlannedMovie()
-        InfoMovieSection(movie = viewModel.movieState.value)
+        InfoMovieSection(movie = viewModel.movieState.value, isWatched)
         Column(
             Modifier
                 .fillMaxWidth()
