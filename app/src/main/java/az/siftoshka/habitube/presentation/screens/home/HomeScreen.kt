@@ -5,14 +5,16 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -30,6 +32,7 @@ import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
+import az.siftoshka.habitube.presentation.util.SpecialColors
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
@@ -54,40 +57,47 @@ fun HomeScreen(
 
     HabitubeV2Theme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.app_name,
-                    icon = R.drawable.ic_launch_icon
-                ) {
-                    dialogState.value = true
-                }
-                if (isLoading) LoadingScreen()
-                if (!context.isInternetAvailable()) NoConnectionScreen()
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(scrollState)
-                ) {
-                    viewModel.isUpdateShown()
-                    if (updateState.value) { dialogState.value = true }
-                    UpdateDialog(
-                        title = R.string.text_update_title,
-                        text = R.string.text_update_description,
-                        textButton = R.string.text_update_button,
-                        state = dialogState
+            Scaffold(
+                floatingActionButton = { FloatingSearchButton(navController) },
+                floatingActionButtonPosition = FabPosition.End
+            ) {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    TopAppBar(
+                        title = R.string.app_name,
+                        icon = R.drawable.ic_launch_icon
                     ) {
-                        dialogState.value = false
-                        viewModel.setUpdateShown()
+                        dialogState.value = true
                     }
-                    UpcomingMovies(navController)
-                    Spacer(modifier = Modifier.height(Padding.Large))
-                    TrendingMovies(navController)
-                    Spacer(modifier = Modifier.height(Padding.Regular))
-                    TrendingTvShows(navController)
-                    Spacer(modifier = Modifier.height(Padding.Regular))
-                    AirTodayTvShows(navController)
-                    Spacer(modifier = Modifier.height(Padding.Regular))
+                    if (isLoading) LoadingScreen()
+                    if (!context.isInternetAvailable()) NoConnectionScreen()
+                    Column(
+                        horizontalAlignment = Alignment.Start,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(scrollState)
+                    ) {
+                        viewModel.isUpdateShown()
+                        if (updateState.value) {
+                            dialogState.value = true
+                        }
+                        UpdateDialog(
+                            title = R.string.text_update_title,
+                            text = R.string.text_update_description,
+                            textButton = R.string.text_update_button,
+                            state = dialogState
+                        ) {
+                            dialogState.value = false
+                            viewModel.setUpdateShown()
+                        }
+                        UpcomingMovies(navController)
+                        Spacer(modifier = Modifier.height(Padding.Large))
+                        TrendingMovies(navController)
+                        Spacer(modifier = Modifier.height(Padding.Regular))
+                        TrendingTvShows(navController)
+                        Spacer(modifier = Modifier.height(Padding.Regular))
+                        AirTodayTvShows(navController)
+                        Spacer(modifier = Modifier.height(Padding.Regular))
+                    }
                 }
             }
         }
@@ -203,5 +213,22 @@ fun AirTodayTvShows(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun FloatingSearchButton(navController: NavController) {
+    FloatingActionButton(
+        onClick = { navController.navigate(Screen.SearchScreen.route) },
+        shape = MaterialTheme.shapes.large,
+        backgroundColor = SpecialColors.Search,
+        modifier = Modifier.size(width = 100.dp, height = 50.dp)
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_search),
+            contentDescription = stringResource(id = R.string.nav_search),
+            tint = Color.White,
+            modifier = Modifier.size(25.dp)
+        )
     }
 }

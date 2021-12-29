@@ -6,6 +6,7 @@ package az.siftoshka.habitube.presentation.util
 sealed class Screen(val route: String) {
     object HomeScreen : Screen("nav_home_screen")
     object SearchScreen : Screen("nav_search_screen")
+    object DiscoverScreen : Screen("nav_discover_screen")
     object LibraryScreen : Screen("nav_library_screen")
     object SettingsScreen : Screen("nav_settings_screen")
     object MovieScreen : Screen("movie_screen")

@@ -138,4 +138,5 @@
     <string name="month_11">Ноя</string>
     <string name="month_12">Дек</string>
     <string name="text_my_rating">Моя оценка</string>
+    <string name="nav_discover">Discover</string>
 </resources>
