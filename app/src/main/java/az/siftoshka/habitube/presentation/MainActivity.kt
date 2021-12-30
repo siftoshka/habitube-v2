@@ -25,6 +25,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import az.siftoshka.habitube.domain.util.firstSetupV2
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverScreen
+import az.siftoshka.habitube.presentation.screens.discover.list.DiscoverListScreen
 import az.siftoshka.habitube.presentation.screens.home.HomeScreen
 import az.siftoshka.habitube.presentation.screens.library.LibraryScreen
 import az.siftoshka.habitube.presentation.screens.movie.MovieScreen
@@ -162,6 +163,9 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(route = BottomBarScreen.Discover.route) {
             DiscoverScreen(navController)
+        }
+        composable(route = Screen.DiscoverListScreen.route) {
+            DiscoverListScreen(navController)
         }
         composable(route = Screen.SearchScreen.route) {
             SearchScreen(navController)

@@ -3,6 +3,7 @@
 
     <!-- Navigation -->
     <string name="nav_home">Дом</string>
+    <string name="nav_discover">Discover</string>
     <string name="nav_search">Поиск</string>
     <string name="nav_library">Библиотека</string>
     <string name="nav_settings">Настройки</string>
@@ -53,6 +54,7 @@
     <string name="text_remove_planning">Удалить из запланированных</string>
     <string name="text_already_watched">Уже посмотрел</string>
     <string name="text_empty_list">Пустой список</string>
+    <string name="text_my_rating">Моя оценка</string>
 
     <!-- Settings Screen -->
     <string name="text_account">Синхронизация</string>
@@ -137,6 +139,4 @@
     <string name="month_10">Окт</string>
     <string name="month_11">Ноя</string>
     <string name="month_12">Дек</string>
-    <string name="text_my_rating">Моя оценка</string>
-    <string name="nav_discover">Discover</string>
 </resources>

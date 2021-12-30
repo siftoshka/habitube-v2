@@ -80,6 +80,18 @@
     <string name="text_log_out">Log out</string>
     <string name="text_content_warning">Warning!\nYou will get fewer search results using a language other than English.</string>
 
+    <!-- Discover Screen -->
+    <string name="text_sort_popularity_desc">Popularity (Desc.)</string>
+    <string name="text_sort_popularity_asc">Popularity (Asc.)</string>
+    <string name="text_sort_date_desc">Date (Desc.)</string>
+    <string name="text_sort_date_asc">Date (Asc.)</string>
+    <string name="text_sort_revenue_desc">Revenue (Desc.)</string>
+    <string name="text_sort_revenue_asc">Revenue (Asc.)</string>
+    <string name="text_sort_name_desc">Name (Desc.)</string>
+    <string name="text_sort_name_asc">Name (Asc.)</string>
+    <string name="text_sort_vote_desc">Rating (Desc.)</string>
+    <string name="text_sort_vote_asc">Rating (Asc.)</string>
+
     <!-- Common -->
     <string name="text_show_less">Show less</string>
     <string name="text_show_more">Show more</string>

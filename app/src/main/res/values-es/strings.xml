@@ -3,6 +3,7 @@
 
     <!-- Navigation -->
     <string name="nav_home">Casa</string>
+    <string name="nav_discover">Discover</string>
     <string name="nav_search">Búsqueda</string>
     <string name="nav_library">Biblioteca</string>
     <string name="nav_settings">Parámetros</string>
@@ -138,5 +139,4 @@
     <string name="month_10">Oct</string>
     <string name="month_11">Nov</string>
     <string name="month_12">Dic</string>
-    <string name="nav_discover">Discover</string>
 </resources>

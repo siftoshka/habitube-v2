@@ -3,6 +3,7 @@
 
     <!-- Navigation -->
     <string name="nav_home">Ana səhifə</string>
+    <string name="nav_discover">Discover</string>
     <string name="nav_search">Axtarış</string>
     <string name="nav_library">Kitabxana</string>
     <string name="nav_settings">Parametrlər</string>
@@ -53,6 +54,7 @@
     <string name="text_remove_planning">Planlaşdırmadan silmək</string>
     <string name="text_already_watched">Artıq baxılıb</string>
     <string name="text_empty_list">Boş siyahı</string>
+    <string name="text_my_rating">Mənim reytinqim</string>
 
     <!-- Settings Screen -->
     <string name="text_account">Sinxronizasiya</string>
@@ -137,6 +139,4 @@
     <string name="month_10">Okt</string>
     <string name="month_11">Noy</string>
     <string name="month_12">Dek</string>
-    <string name="text_my_rating">Mənim reytinqim</string>
-    <string name="nav_discover">Discover</string>
 </resources>
