@@ -14,24 +14,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverViewModel
-import az.siftoshka.habitube.presentation.screens.discover.items.DiscoverSortItem
+import az.siftoshka.habitube.presentation.screens.discover.items.DiscoverGenresItem
 import az.siftoshka.habitube.presentation.util.Padding
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SortTag(
-    item: DiscoverSortItem,
+fun GenreTag(
+    item: DiscoverGenresItem,
     viewModel: DiscoverViewModel = hiltViewModel()
 ) {
 
-    val backgroundColor = if (viewModel.sortCategory.value == item.category) MaterialTheme.colors.primary else MaterialTheme.colors.background
-    val strokeColor = if (viewModel.sortCategory.value == item.category) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
+    val isExist = viewModel.genres.value.contains(item.category)
+
+    val backgroundColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.background
+    val strokeColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
 
     Card(
         border = BorderStroke(1.dp, color = strokeColor),
         shape = RoundedCornerShape(100.dp),
         backgroundColor = backgroundColor,
-        onClick = { viewModel.sortCategory.value = item.category }
+        onClick = {
+            if (isExist) viewModel.genres.value = viewModel.genres.value.minus(item.category)
+            else viewModel.genres.value = viewModel.genres.value.plus(item.category)
+        }
     ) {
         Text(
             text = stringResource(id = item.text),

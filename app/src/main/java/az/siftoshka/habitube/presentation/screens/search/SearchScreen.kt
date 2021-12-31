@@ -1,7 +1,7 @@
 package az.siftoshka.habitube.presentation.screens.search
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -55,8 +55,12 @@ fun SearchScreen(
             Column(modifier = Modifier.fillMaxSize()) {
                 SearchView()
                 Column(modifier = Modifier.fillMaxSize()) {
-                    if (searchState.isLoading) { LoadingScreen() }
-                    if (searchState.media.isEmpty()) { EmptyScreen() }
+                    if (searchState.isLoading) {
+                        LoadingScreen()
+                    }
+                    if (searchState.media.isEmpty()) {
+                        EmptyScreen()
+                    }
                     LazyVerticalGrid(
                         cells = GridCells.Fixed(4),
                         contentPadding = PaddingValues(Padding.Medium),
@@ -146,8 +150,7 @@ fun SearchTab(
         SearchType.Person -> stringResource(id = R.string.text_tab_person)
     }
     Card(
-        modifier = Modifier
-            .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(100.dp)),
+        border = BorderStroke(1.dp, MaterialTheme.colors.primary),
         shape = RoundedCornerShape(100.dp),
         backgroundColor = backgroundColor,
         onClick = {

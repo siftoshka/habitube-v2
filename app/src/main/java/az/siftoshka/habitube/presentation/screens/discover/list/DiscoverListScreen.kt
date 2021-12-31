@@ -9,9 +9,11 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.TopAppBar
+import az.siftoshka.habitube.presentation.screens.discover.DiscoverViewModel
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -21,6 +23,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun DiscoverListScreen(
     navController: NavController,
+    viewModel: DiscoverViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)

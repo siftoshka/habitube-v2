@@ -13,9 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverViewModel
-import az.siftoshka.habitube.presentation.screens.discover.sort.DiscoverSortCategory
 import az.siftoshka.habitube.presentation.util.Padding
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -35,7 +33,7 @@ fun MediaOptions(viewModel: DiscoverViewModel = hiltViewModel()) {
                 modifier = Modifier
                     .clickable(indication = null, interactionSource = MutableInteractionSource()) {
                         viewModel.isMovieSelected.value = true
-                        viewModel.sortCategory.value = DiscoverSortCategory.POPULARITY_DESC
+                        viewModel.clear()
                     }
                     .weight(1f), horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -55,7 +53,7 @@ fun MediaOptions(viewModel: DiscoverViewModel = hiltViewModel()) {
                 modifier = Modifier
                     .clickable(indication = null, interactionSource = MutableInteractionSource()) {
                         viewModel.isMovieSelected.value = false
-                        viewModel.sortCategory.value = DiscoverSortCategory.POPULARITY_DESC
+                        viewModel.clear()
                     }
                     .weight(1f), horizontalAlignment = Alignment.CenterHorizontally
             ) {
