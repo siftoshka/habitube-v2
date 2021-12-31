@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.discover
+package az.siftoshka.habitube.presentation.screens.discover.list
 
 import az.siftoshka.habitube.domain.model.MediaLite
 

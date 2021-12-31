@@ -25,4 +25,5 @@ object NavigationConstants {
     const val PARAM_MOVIE_ID = "movieId"
     const val PARAM_TV_SHOW_ID = "showId"
     const val PARAM_PERSON_ID = "personId"
+    const val PARAM_DISCOVER = "discoverConfig"
 }

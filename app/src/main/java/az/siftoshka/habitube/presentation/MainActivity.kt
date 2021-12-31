@@ -23,6 +23,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import az.siftoshka.habitube.domain.model.DiscoverConfiguration
 import az.siftoshka.habitube.domain.util.firstSetupV2
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverScreen
 import az.siftoshka.habitube.presentation.screens.discover.list.DiscoverListScreen
@@ -41,6 +42,7 @@ import az.siftoshka.habitube.presentation.screens.web.WebScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
+import az.siftoshka.habitube.presentation.util.NavigationConstants
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -165,7 +167,9 @@ fun NavGraph(navController: NavHostController) {
             DiscoverScreen(navController)
         }
         composable(route = Screen.DiscoverListScreen.route) {
-            DiscoverListScreen(navController)
+            val discoverConfiguration =
+                navController.previousBackStackEntry?.arguments?.getParcelable<DiscoverConfiguration>(NavigationConstants.PARAM_DISCOVER)
+            DiscoverListScreen(navController, discoverConfiguration)
         }
         composable(route = Screen.SearchScreen.route) {
             SearchScreen(navController)

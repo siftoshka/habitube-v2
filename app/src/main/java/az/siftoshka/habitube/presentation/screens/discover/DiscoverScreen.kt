@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.screens.discover.components.*
 import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.util.NavigationConstants
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -52,7 +53,11 @@ fun DiscoverScreen(
                     shape = MaterialTheme.shapes.large,
                     backgroundColor = MaterialTheme.colors.primary,
                     onClick = {
-                        navController.navigate(Screen.DiscoverListScreen.route)
+                        viewModel.updateData().also {
+                            println(it)
+                            navController.currentBackStackEntry?.arguments?.putParcelable(NavigationConstants.PARAM_DISCOVER, it)
+                            navController.navigate(Screen.DiscoverListScreen.route)
+                        }
                     },
                 ) {
                     Text(
