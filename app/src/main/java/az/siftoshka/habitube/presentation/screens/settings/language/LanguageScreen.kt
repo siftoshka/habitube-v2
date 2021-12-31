@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 
 /**
@@ -29,7 +29,7 @@ fun LanguageScreen(
 ) {
     val context = LocalContext.current
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 TopAppBar(

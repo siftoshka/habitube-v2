@@ -39,7 +39,7 @@ import az.siftoshka.habitube.presentation.screens.settings.sort.SortScreen
 import az.siftoshka.habitube.presentation.screens.settings.storage.StorageScreen
 import az.siftoshka.habitube.presentation.screens.show.ShowScreen
 import az.siftoshka.habitube.presentation.screens.web.WebScreen
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.fontFamily
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
 import az.siftoshka.habitube.presentation.util.NavigationConstants
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         applicationContext.firstSetupV2()
         setContent {
-            HabitubeV2Theme {
+            HabitubeTheme {
                 val navController = rememberAnimatedNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route?.substringBeforeLast("/")

@@ -26,6 +26,7 @@ fun SortTag(
 
     val backgroundColor = if (viewModel.sortCategory.value == item.category) MaterialTheme.colors.primary else MaterialTheme.colors.background
     val strokeColor = if (viewModel.sortCategory.value == item.category) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
+    val textColor = if (viewModel.sortCategory.value == item.category) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onBackground
 
     Card(
         border = BorderStroke(1.dp, color = strokeColor),
@@ -35,7 +36,7 @@ fun SortTag(
     ) {
         Text(
             text = stringResource(id = item.text),
-            color = MaterialTheme.colors.onBackground,
+            color = textColor,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(Padding.Small)

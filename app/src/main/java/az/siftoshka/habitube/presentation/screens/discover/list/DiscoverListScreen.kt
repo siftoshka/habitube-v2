@@ -1,10 +1,7 @@
 package az.siftoshka.habitube.presentation.screens.discover.list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -22,8 +19,7 @@ import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NothingScreen
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
-import az.siftoshka.habitube.presentation.util.NavigationConstants
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -49,7 +45,7 @@ fun DiscoverListScreen(
     val page = viewModel.discoverListPage.value
     val isLoading = viewModel.discoverState.value.isLoading
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 TopAppBar(
@@ -62,7 +58,7 @@ fun DiscoverListScreen(
                 if (discoverState.media.isEmpty()) NothingScreen()
                 LazyVerticalGrid(
                     cells = GridCells.Fixed(2),
-                    contentPadding = PaddingValues(horizontal = Padding.Default),
+                    contentPadding = PaddingValues(horizontal = Padding.Default, vertical = Padding.Small),
                     horizontalArrangement = Arrangement.spacedBy(Padding.Small),
                     verticalArrangement = Arrangement.spacedBy(Padding.Small)
                 ) {

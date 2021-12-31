@@ -14,7 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 
 /**
@@ -29,7 +29,7 @@ fun StorageScreen(
     val dialogState = remember { mutableStateOf(false) }
     val storageType = remember { mutableStateOf(StorageType.WATCHED_MOVIES) }
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 TopAppBar(

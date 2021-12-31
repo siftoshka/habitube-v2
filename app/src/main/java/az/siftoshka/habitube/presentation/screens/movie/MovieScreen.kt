@@ -36,7 +36,7 @@ import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailText
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -59,7 +59,7 @@ fun MovieScreen(
 
     val movieState = viewModel.movieState.value
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 if (movieState.isLoading) LoadingScreen()

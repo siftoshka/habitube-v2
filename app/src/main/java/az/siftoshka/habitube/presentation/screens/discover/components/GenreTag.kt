@@ -28,6 +28,7 @@ fun GenreTag(
 
     val backgroundColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.background
     val strokeColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
+    val textColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onBackground
 
     Card(
         border = BorderStroke(1.dp, color = strokeColor),
@@ -40,7 +41,7 @@ fun GenreTag(
     ) {
         Text(
             text = stringResource(id = item.text),
-            color = MaterialTheme.colors.onBackground,
+            color = textColor,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(Padding.Small)

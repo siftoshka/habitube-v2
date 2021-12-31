@@ -29,7 +29,7 @@ import az.siftoshka.habitube.presentation.components.image.LongImageCard
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.components.text.TitleText
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import az.siftoshka.habitube.presentation.util.SpecialColors
@@ -55,7 +55,7 @@ fun HomeScreen(
             viewModel.exploreTrendingTvShowsState.value.isLoading &&
             viewModel.exploreAirTodayTvShowsState.value.isLoading
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Scaffold(
                 floatingActionButton = { FloatingSearchButton(navController) },

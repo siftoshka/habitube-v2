@@ -7,27 +7,27 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = ColorPrimaryDark,
-    background = DarkGray,
-    onBackground = White,
-    onPrimary = White,
-    surface = MediumGray,
-    onSurface = White,
+    primary = PrimaryDark,
+    onPrimary = OnPrimaryDark,
+    background = BackgroundDark,
+    onBackground = OnBackgroundDark,
+    surface = SurfaceDark,
+    onSurface = OnSurfaceDark,
     secondaryVariant = SecondaryDark
 )
 
 private val LightColorPalette = lightColors(
-    primary = ColorPrimaryLight,
-    background = PinkLight,
-    onBackground = MediumGray,
-    onPrimary = White,
-    surface = Pink,
-    onSurface = MediumGray,
+    primary = PrimaryLight,
+    onPrimary = OnPrimaryLight,
+    background = BackgroundLight,
+    onBackground = OnBackgroundLight,
+    surface = SurfaceLight,
+    onSurface = OnSurfaceLight,
     secondaryVariant = SecondaryLight
 )
 
 @Composable
-fun HabitubeV2Theme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun HabitubeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

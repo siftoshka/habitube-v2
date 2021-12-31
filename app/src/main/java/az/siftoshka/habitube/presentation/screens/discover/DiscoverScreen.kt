@@ -13,7 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.screens.discover.components.*
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.NavigationConstants
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
@@ -31,7 +31,7 @@ fun DiscoverScreen(
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
@@ -54,7 +54,6 @@ fun DiscoverScreen(
                     backgroundColor = MaterialTheme.colors.primary,
                     onClick = {
                         viewModel.updateData().also {
-                            println(it)
                             navController.currentBackStackEntry?.arguments?.putParcelable(NavigationConstants.PARAM_DISCOVER, it)
                             navController.navigate(Screen.DiscoverListScreen.route)
                         }
