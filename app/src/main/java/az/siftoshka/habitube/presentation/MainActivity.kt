@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -114,12 +112,12 @@ fun RowScope.AddItem(
     navController: NavHostController
 ) {
     BottomNavigationItem(
-        label = { Text(text = stringResource(id = screen.title), fontFamily = fontFamily) },
+        label = { Text(text = stringResource(id = screen.title), fontFamily = fontFamily, fontSize = 11.sp) },
         icon = {
             Icon(
                 painter = painterResource(id = screen.icon),
                 contentDescription = stringResource(id = screen.title),
-                modifier = Modifier.size(26.dp)
+                modifier = Modifier.size(28.dp).fillMaxSize()
             )
         },
         selected = currentDestination?.hierarchy?.any {

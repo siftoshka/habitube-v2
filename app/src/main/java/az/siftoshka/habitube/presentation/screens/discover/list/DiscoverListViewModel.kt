@@ -34,8 +34,8 @@ class DiscoverListViewModel @Inject constructor(
             isMovieSelected = configuration?.isMovieSelected ?: true,
             ratingGte = configuration?.ratingStart.orEmpty(),
             ratingLte = configuration?.ratingEnd.orEmpty(),
-            yearGte = configuration?.yearStart.orEmpty(),
-            yearLte = configuration?.yearEnd.orEmpty()
+            yearGte = configuration?.yearStart.orEmpty() + "-01-01",
+            yearLte = configuration?.yearEnd.orEmpty() + "-01-01"
         ).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -62,8 +62,8 @@ class DiscoverListViewModel @Inject constructor(
                     isMovieSelected = configuration?.isMovieSelected ?: true,
                     ratingGte = configuration?.ratingStart.orEmpty(),
                     ratingLte = configuration?.ratingEnd.orEmpty(),
-                    yearGte = configuration?.yearStart.orEmpty(),
-                    yearLte = configuration?.yearEnd.orEmpty()
+                    yearGte = configuration?.yearStart.orEmpty() + "-01-01",
+                    yearLte = configuration?.yearEnd.orEmpty() + "-01-01"
                 ).onEach { result ->
                     when (result) {
                         is Resource.Success -> {

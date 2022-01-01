@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,7 +28,7 @@ fun GenreTag(
     val isExist = viewModel.genres.value.contains(item.category)
 
     val backgroundColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.background
-    val strokeColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
+    val strokeColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.secondaryVariant.copy(alpha = 0.2f)
     val textColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onBackground
 
     Card(
@@ -43,7 +44,8 @@ fun GenreTag(
             text = stringResource(id = item.text),
             color = textColor,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h5,
+            style = MaterialTheme.typography.body2,
+            fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(Padding.Small)
         )
     }

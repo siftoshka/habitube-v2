@@ -60,7 +60,7 @@ fun DiscoverScreen(
                     },
                 ) {
                     Text(
-                        text = stringResource(id = R.string.nav_discover),
+                        text = stringResource(id = R.string.text_discover),
                         color = MaterialTheme.colors.onPrimary,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h3,

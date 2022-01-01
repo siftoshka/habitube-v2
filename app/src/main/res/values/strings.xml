@@ -3,7 +3,6 @@
 
     <!-- Navigation -->
     <string name="nav_home">Home</string>
-    <string name="nav_search">Search</string>
     <string name="nav_discover">Discover</string>
     <string name="nav_library">Library</string>
     <string name="nav_settings">Settings</string>
@@ -12,6 +11,7 @@
     <string name="text_upcoming">Upcoming</string>
     <string name="text_trending">Trending</string>
     <string name="text_air_today">Air Today</string>
+    <string name="text_search">Search</string>
 
     <!-- Movie/TV Show Screens -->
     <string name="text_rating">Rating</string>
@@ -39,7 +39,6 @@
     <string name="text_person_acting">Acting</string>
     <string name="text_person_crew">Crew</string>
 
-
     <!-- Search Screen -->
     <string name="text_tab_multi">Multi</string>
     <string name="text_tab_movie">Movies</string>
@@ -54,6 +53,7 @@
     <string name="text_remove_planning">Remove from planning</string>
     <string name="text_already_watched">Already watched</string>
     <string name="text_empty_list">Empty list</string>
+    <string name="text_my_rating">My rating</string>
 
     <!-- Settings Screen -->
     <string name="text_account">Backup &amp; Sync</string>
@@ -81,14 +81,15 @@
     <string name="text_content_warning">Warning!\nYou will get fewer search results using a language other than English.</string>
 
     <!-- Discover Screen -->
+    <string name="text_discover">Discover</string>
     <string name="text_sort_popularity_desc">Popularity (Desc.)</string>
     <string name="text_sort_popularity_asc">Popularity (Asc.)</string>
     <string name="text_sort_date_desc">Date (Desc.)</string>
     <string name="text_sort_date_asc">Date (Asc.)</string>
     <string name="text_sort_revenue_desc">Revenue (Desc.)</string>
     <string name="text_sort_revenue_asc">Revenue (Asc.)</string>
-    <string name="text_sort_name_desc">Name (Desc.)</string>
-    <string name="text_sort_name_asc">Name (Asc.)</string>
+    <string name="text_sort_name_desc">Title (Desc.)</string>
+    <string name="text_sort_name_asc">Title (Asc.)</string>
     <string name="text_sort_vote_desc">Rating (Desc.)</string>
     <string name="text_sort_vote_asc">Rating (Asc.)</string>
     <string name="text_years_range">Year range</string>
@@ -99,7 +100,6 @@
     <string name="text_show_less">Show less</string>
     <string name="text_show_more">Show more</string>
     <string name="text_add_rating">Add rating</string>
-    <string name="text_my_rating">My rating</string>
     <string name="text_rated">%1$s/10</string>
     <string name="text_planning_watch">Planning</string>
     <string name="text_movies">Movies</string>

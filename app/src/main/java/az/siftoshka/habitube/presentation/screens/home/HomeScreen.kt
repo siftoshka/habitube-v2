@@ -226,7 +226,7 @@ fun FloatingSearchButton(navController: NavController) {
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = stringResource(id = R.string.nav_search),
+            contentDescription = stringResource(id = R.string.text_search),
             tint = Color.White,
             modifier = Modifier.size(25.dp)
         )

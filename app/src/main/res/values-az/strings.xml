@@ -3,8 +3,7 @@
 
     <!-- Navigation -->
     <string name="nav_home">Ana səhifə</string>
-    <string name="nav_discover">Discover</string>
-    <string name="nav_search">Axtarış</string>
+    <string name="nav_discover">Kəşf et</string>
     <string name="nav_library">Kitabxana</string>
     <string name="nav_settings">Parametrlər</string>
 
@@ -12,6 +11,7 @@
     <string name="text_upcoming">Qarşıdan gələn</string>
     <string name="text_trending">Trend</string>
     <string name="text_air_today">Yeni çıxan</string>
+    <string name="text_search">Axtarış</string>
 
     <!-- Movie/TV Show Screens -->
     <string name="text_rating">Reytinq</string>
@@ -38,7 +38,6 @@
     <string name="text_biography">Bioqrafiya</string>
     <string name="text_person_acting">Aktyorluq</string>
     <string name="text_person_crew">Komanda</string>
-
 
     <!-- Search Screen -->
     <string name="text_tab_multi">Ümumi</string>
@@ -80,6 +79,22 @@
     <string name="text_licenses">Açıq mənbə lisenziyaları</string>
     <string name="text_log_out">Çıxış</string>
     <string name="text_content_warning">Xəbərdarlıq!\nİngilis dilindən başqa bir dildən istifadə edərək daha az axtarış nəticəsi əldə edəcəksiniz.</string>
+
+    <!-- Discover Screen -->
+    <string name="text_discover">Axtar</string>
+    <string name="text_sort_popularity_desc">Populyarlıq (Azalan)</string>
+    <string name="text_sort_popularity_asc">Populyarlıq (Artan)</string>
+    <string name="text_sort_date_desc">Tarix (Azalan)</string>
+    <string name="text_sort_date_asc">Tarix (Artan)</string>
+    <string name="text_sort_revenue_desc">Gəlir (Azalan)</string>
+    <string name="text_sort_revenue_asc">Gəlir (Artan)</string>
+    <string name="text_sort_name_desc">Ad (Azalan)</string>
+    <string name="text_sort_name_asc">Ad (Artan)</string>
+    <string name="text_sort_vote_desc">Reytinq (Azalan)</string>
+    <string name="text_sort_vote_asc">Reytinq (Artan)</string>
+    <string name="text_years_range">İllər</string>
+    <string name="text_rating_range">Reytinqlər</string>
+    <string name="text_nothing_found">Heç nə tapılmadı</string>
 
     <!-- Common -->
     <string name="text_show_less">Daha az göstər</string>
@@ -125,6 +140,35 @@
     <string name="text_lang_spanish">İspan dili</string>
     <string name="text_lang_french">Fransız dili</string>
     <string name="text_lang_russian">Rus dili</string>
+
+    <!-- Genres -->
+    <string name="text_genres_action">Döyüş</string>
+    <string name="text_genres_adventure">Macəra</string>
+    <string name="text_genres_action_adventure">Döyüş &amp; Macəra</string>
+    <string name="text_genres_animation">Animasiya</string>
+    <string name="text_genres_comedy">Komediya</string>
+    <string name="text_genres_crime">Kriminal</string>
+    <string name="text_genres_documentary">Sənədli</string>
+    <string name="text_genres_drama">Dram</string>
+    <string name="text_genres_family">Ailə</string>
+    <string name="text_genres_fantasy">Fantastika</string>
+    <string name="text_genres_history">Tarix</string>
+    <string name="text_genres_horror">Dəhşət</string>
+    <string name="text_genres_music">Müzikl</string>
+    <string name="text_genres_mystery">Sirr</string>
+    <string name="text_genres_romance">Romantika</string>
+    <string name="text_genres_scifi">Elmi fantastika</string>
+    <string name="text_genres_scifi_fantasy">Fantastika</string>
+    <string name="text_genres_tv_movie">Televiziya filmi</string>
+    <string name="text_genres_thriller">Triller</string>
+    <string name="text_genres_war">Müharibə</string>
+    <string name="text_genres_war_politics">Müharibə</string>
+    <string name="text_genres_western">Qərb</string>
+    <string name="text_genres_kids">Uşaqlar</string>
+    <string name="text_genres_news">Xəbərlər</string>
+    <string name="text_genres_reality">Reallıq</string>
+    <string name="text_genres_soap">Sabun opera</string>
+    <string name="text_genres_talk">Danışıq</string>
 
     <!-- Months -->
     <string name="month_1">Yan</string>

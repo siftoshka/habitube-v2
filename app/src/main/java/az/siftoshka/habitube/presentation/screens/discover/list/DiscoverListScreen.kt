@@ -51,9 +51,7 @@ fun DiscoverListScreen(
                 TopAppBar(
                     title = R.string.nav_discover,
                     icon = R.drawable.ic_back,
-                ) {
-                    navController.popBackStack()
-                }
+                ) { navController.popBackStack() }
                 if (isLoading) LoadingScreen()
                 if (discoverState.media.isEmpty()) NothingScreen()
                 LazyVerticalGrid(

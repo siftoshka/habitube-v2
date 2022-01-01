@@ -107,7 +107,7 @@ fun SearchView(
             OutlinedTextField(
                 value = query,
                 singleLine = true,
-                placeholder = { Text(text = stringResource(id = R.string.nav_search), style = MaterialTheme.typography.body1) },
+                placeholder = { Text(text = stringResource(id = R.string.text_search), style = MaterialTheme.typography.body1) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(Padding.Small)
@@ -143,7 +143,7 @@ fun SearchTab(
     val mediaType = viewModel.mediaType.value
     val keyboardController = LocalSoftwareKeyboardController.current
     val backgroundColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.surface
-    val strokeColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface
+    val strokeColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.secondaryVariant
     val textColor = if (mediaType == searchType) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSurface
     val title = when (searchType) {
         SearchType.Multi -> stringResource(id = R.string.text_tab_multi)
