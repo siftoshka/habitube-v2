@@ -1,7 +1,7 @@
 package az.siftoshka.habitube.presentation.screens.search
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -31,7 +31,7 @@ import az.siftoshka.habitube.domain.util.SearchType
 import az.siftoshka.habitube.presentation.components.image.SearchCard
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -50,13 +50,17 @@ fun SearchScreen(
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 SearchView()
                 Column(modifier = Modifier.fillMaxSize()) {
-                    if (searchState.isLoading) { LoadingScreen() }
-                    if (searchState.media.isEmpty()) { EmptyScreen() }
+                    if (searchState.isLoading) {
+                        LoadingScreen()
+                    }
+                    if (searchState.media.isEmpty()) {
+                        EmptyScreen()
+                    }
                     LazyVerticalGrid(
                         cells = GridCells.Fixed(4),
                         contentPadding = PaddingValues(Padding.Medium),
@@ -103,7 +107,7 @@ fun SearchView(
             OutlinedTextField(
                 value = query,
                 singleLine = true,
-                placeholder = { Text(text = stringResource(id = R.string.nav_search), style = MaterialTheme.typography.body1) },
+                placeholder = { Text(text = stringResource(id = R.string.text_search), style = MaterialTheme.typography.body1) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(Padding.Small)
@@ -139,6 +143,8 @@ fun SearchTab(
     val mediaType = viewModel.mediaType.value
     val keyboardController = LocalSoftwareKeyboardController.current
     val backgroundColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+    val strokeColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.secondaryVariant
+    val textColor = if (mediaType == searchType) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSurface
     val title = when (searchType) {
         SearchType.Multi -> stringResource(id = R.string.text_tab_multi)
         SearchType.Movie -> stringResource(id = R.string.text_tab_movie)
@@ -146,8 +152,7 @@ fun SearchTab(
         SearchType.Person -> stringResource(id = R.string.text_tab_person)
     }
     Card(
-        modifier = Modifier
-            .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(100.dp)),
+        border = BorderStroke(1.dp, strokeColor),
         shape = RoundedCornerShape(100.dp),
         backgroundColor = backgroundColor,
         onClick = {
@@ -157,7 +162,7 @@ fun SearchTab(
     ) {
         Text(
             text = title,
-            color = MaterialTheme.colors.onSurface,
+            color = textColor,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(horizontal = Padding.Medium, vertical = Padding.Small)

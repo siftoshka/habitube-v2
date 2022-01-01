@@ -2,7 +2,7 @@ package az.siftoshka.habitube.domain.usecases.remote
 
 import az.siftoshka.habitube.data.remote.dto.toCredits
 import az.siftoshka.habitube.domain.model.Credit
-import az.siftoshka.habitube.domain.repository.RemoteRepository
+import az.siftoshka.habitube.domain.repository.MovieDBApiRepository
 import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ import javax.inject.Inject
  * Use-case to get credits from repository call.
  */
 class GetCreditsUseCase @Inject constructor(
-    private val repository: RemoteRepository
+    private val repository: MovieDBApiRepository
 ) {
     operator fun invoke(mediaId: Int, mediaType: MediaType): Flow<Resource<Credit>> = flow {
         try {

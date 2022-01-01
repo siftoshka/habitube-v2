@@ -8,7 +8,7 @@ import retrofit2.http.Query
 /**
  * Description of the API Queries.
  */
-interface MovieService {
+interface MovieApiService {
 
     /**
      * Explore ----------
@@ -142,6 +142,35 @@ interface MovieService {
     @GET("search/person")
     suspend fun getPersonSearchResults(
         @Query("query") searchQuery: String,
+        @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean,
+        @Query("language") language: String
+    ): MediaResponseDto
+
+    /**
+     * Discover ----------
+     */
+    @GET("discover/movie")
+    suspend fun getDiscoverMovies(
+        @Query("sort_by") sort: String,
+        @Query("with_genres") genres: String,
+        @Query("release_date.gte") yearGte: String,
+        @Query("release_date.lte") yearLte: String,
+        @Query("vote_average.gte") ratingGte: String,
+        @Query("vote_average.lte") ratingLte: String,
+        @Query("page") page: Int,
+        @Query("include_adult") isAdult: Boolean,
+        @Query("language") language: String
+    ): MediaResponseDto
+
+    @GET("discover/tv")
+    suspend fun getDiscoverTvShows(
+        @Query("sort_by") sort: String,
+        @Query("with_genres") genres: String,
+        @Query("first_air_date.gte") yearGte: String,
+        @Query("first_air_date.lte") yearLte: String,
+        @Query("vote_average.gte") ratingGte: String,
+        @Query("vote_average.lte") ratingLte: String,
         @Query("page") page: Int,
         @Query("include_adult") isAdult: Boolean,
         @Query("language") language: String

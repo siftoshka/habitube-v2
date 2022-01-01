@@ -3,7 +3,7 @@
 
     <!-- Navigation -->
     <string name="nav_home">Дом</string>
-    <string name="nav_search">Поиск</string>
+    <string name="nav_discover">Интересное</string>
     <string name="nav_library">Библиотека</string>
     <string name="nav_settings">Настройки</string>
 
@@ -11,6 +11,7 @@
     <string name="text_upcoming">Предстоящие</string>
     <string name="text_trending">Тренды</string>
     <string name="text_air_today">Новое</string>
+    <string name="text_search">Поиск</string>
 
     <!-- Movie/TV Show Screens -->
     <string name="text_rating">Оценка</string>
@@ -38,7 +39,6 @@
     <string name="text_person_acting">Играет роль</string>
     <string name="text_person_crew">Член команды</string>
 
-
     <!-- Search Screen -->
     <string name="text_tab_multi">Общее</string>
     <string name="text_tab_movie">Фильмы</string>
@@ -53,6 +53,7 @@
     <string name="text_remove_planning">Удалить из запланированных</string>
     <string name="text_already_watched">Уже посмотрел</string>
     <string name="text_empty_list">Пустой список</string>
+    <string name="text_my_rating">Моя оценка</string>
 
     <!-- Settings Screen -->
     <string name="text_account">Синхронизация</string>
@@ -78,6 +79,22 @@
     <string name="text_licenses">Лицензии на открытый исходный код</string>
     <string name="text_log_out">Выйти</string>
     <string name="text_content_warning">Предупреждение!\nВы получите меньше результатов поиска, используя язык, отличный от английского.</string>
+
+    <!-- Discover Screen -->
+    <string name="text_discover">Поиск</string>
+    <string name="text_sort_popularity_desc">Популярности (Убыв.)</string>
+    <string name="text_sort_popularity_asc">Популярности (Возр.)</string>
+    <string name="text_sort_date_desc">Дате (Убыв.)</string>
+    <string name="text_sort_date_asc">Дате (Возр.)</string>
+    <string name="text_sort_revenue_desc">Сборам (Убыв.)</string>
+    <string name="text_sort_revenue_asc">Сборам (Возр.)</string>
+    <string name="text_sort_name_desc">Имени (Убыв.)</string>
+    <string name="text_sort_name_asc">Имени (Возр.)</string>
+    <string name="text_sort_vote_desc">Оценке (Убыв.)</string>
+    <string name="text_sort_vote_asc">Оценке (Возр.)</string>
+    <string name="text_years_range">Годы</string>
+    <string name="text_rating_range">Оценки</string>
+    <string name="text_nothing_found">Ничего не найдено</string>
 
     <!-- Common -->
     <string name="text_show_less">Показать меньше</string>
@@ -124,6 +141,35 @@
     <string name="text_lang_french">Французский</string>
     <string name="text_lang_russian">Русский</string>
 
+    <!-- Genres -->
+    <string name="text_genres_action">Боевик</string>
+    <string name="text_genres_adventure">Приключения</string>
+    <string name="text_genres_action_adventure">Боевик &amp; Приключения</string>
+    <string name="text_genres_animation">Анимация</string>
+    <string name="text_genres_comedy">Комедия</string>
+    <string name="text_genres_crime">Криминал</string>
+    <string name="text_genres_documentary">Документальное</string>
+    <string name="text_genres_drama">Драма</string>
+    <string name="text_genres_family">Семейное</string>
+    <string name="text_genres_fantasy">Фэнтези</string>
+    <string name="text_genres_history">История</string>
+    <string name="text_genres_horror">Ужастик</string>
+    <string name="text_genres_music">Музыка</string>
+    <string name="text_genres_mystery">Мистика</string>
+    <string name="text_genres_romance">Романтика</string>
+    <string name="text_genres_scifi">Научная Фантастика</string>
+    <string name="text_genres_scifi_fantasy">Фантастика</string>
+    <string name="text_genres_tv_movie">ТВ Фильмы</string>
+    <string name="text_genres_thriller">Триллер</string>
+    <string name="text_genres_war">Война</string>
+    <string name="text_genres_war_politics">Война</string>
+    <string name="text_genres_western">Вестерн</string>
+    <string name="text_genres_kids">Детское</string>
+    <string name="text_genres_news">Новости</string>
+    <string name="text_genres_reality">Реалити Шоу</string>
+    <string name="text_genres_soap">Мыльное</string>
+    <string name="text_genres_talk">Разговорное</string>
+
     <!-- Months -->
     <string name="month_1">Янв</string>
     <string name="month_2">Фев</string>
@@ -137,5 +183,4 @@
     <string name="month_10">Окт</string>
     <string name="month_11">Ноя</string>
     <string name="month_12">Дек</string>
-    <string name="text_my_rating">Моя оценка</string>
 </resources>

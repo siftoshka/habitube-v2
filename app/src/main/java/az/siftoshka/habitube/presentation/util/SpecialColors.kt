@@ -12,4 +12,5 @@ object SpecialColors {
     val Telegram = Color(0xB326A5E4)
 
     val Update = Color(0xFF303A52)
+    val Search = Color(0xFF085f63)
 }

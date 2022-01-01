@@ -36,14 +36,14 @@ fun UpdateDialog(
                 Text(
                     text = stringResource(id = text),
                     style = MaterialTheme.typography.body1,
-                    color = MaterialTheme.colors.onSurface,
+                    color = MaterialTheme.colors.onPrimary,
                 )
             },
             title = {
                 Text(
                     text = stringResource(id = title),
                     style = MaterialTheme.typography.h2,
-                    color = MaterialTheme.colors.onSurface,
+                    color = MaterialTheme.colors.onPrimary,
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
                 )

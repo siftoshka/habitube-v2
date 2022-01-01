@@ -9,7 +9,7 @@ import az.siftoshka.habitube.data.model.PlannedDatabase
 import az.siftoshka.habitube.data.model.WATCHED_MIGRATION_1_2
 import az.siftoshka.habitube.data.model.WatchedDatabase
 import az.siftoshka.habitube.data.remote.HttpInterceptor
-import az.siftoshka.habitube.data.remote.MovieService
+import az.siftoshka.habitube.data.remote.MovieApiService
 import az.siftoshka.habitube.data.repository.*
 import az.siftoshka.habitube.domain.repository.*
 import az.siftoshka.habitube.domain.util.Constants
@@ -62,12 +62,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideMovieService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
+    fun provideMovieApiService(retrofit: Retrofit): MovieApiService = retrofit.create(MovieApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideRemoteRepository(service: MovieService, localRepository: LocalRepository): RemoteRepository {
-        return RemoteRepositoryImpl(service, localRepository)
+    fun provideMovieDBApiRepository(service: MovieApiService, localRepository: LocalRepository): MovieDBApiRepository {
+        return MovieDBApiRepositoryImpl(service, localRepository)
     }
 
     @Provides

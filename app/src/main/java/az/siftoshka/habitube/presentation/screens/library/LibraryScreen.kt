@@ -15,7 +15,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,7 +26,7 @@ import az.siftoshka.habitube.presentation.components.screen.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
 import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -57,7 +56,7 @@ fun LibraryScreen(
         }
     }
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         ModalBottomSheetLayout(
             sheetState = sheetState,
             sheetBackgroundColor = MaterialTheme.colors.surface,

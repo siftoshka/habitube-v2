@@ -2,7 +2,7 @@ package az.siftoshka.habitube.domain.usecases.remote
 
 import az.siftoshka.habitube.data.remote.dto.toMediaLite
 import az.siftoshka.habitube.domain.model.MediaLite
-import az.siftoshka.habitube.domain.repository.RemoteRepository
+import az.siftoshka.habitube.domain.repository.MovieDBApiRepository
 import az.siftoshka.habitube.domain.util.ExploreType
 import az.siftoshka.habitube.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ import javax.inject.Inject
  * Use-case to get explore content from repository call.
  */
 class GetExploreUseCase @Inject constructor(
-    private val repository: RemoteRepository
+    private val repository: MovieDBApiRepository
 ) {
     operator fun invoke(page: Int, type: ExploreType) : Flow<Resource<List<MediaLite>>> = flow {
         try {

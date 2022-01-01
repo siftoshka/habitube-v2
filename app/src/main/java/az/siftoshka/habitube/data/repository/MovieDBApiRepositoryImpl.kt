@@ -1,18 +1,18 @@
 package az.siftoshka.habitube.data.repository
 
-import az.siftoshka.habitube.data.remote.MovieService
+import az.siftoshka.habitube.data.remote.MovieApiService
 import az.siftoshka.habitube.data.remote.dto.*
 import az.siftoshka.habitube.domain.repository.LocalRepository
-import az.siftoshka.habitube.domain.repository.RemoteRepository
+import az.siftoshka.habitube.domain.repository.MovieDBApiRepository
 import javax.inject.Inject
 
 /**
- * Implementation of the [RemoteRepository] of application.
+ * Implementation of the [MovieDBApiRepository].
  */
-class RemoteRepositoryImpl @Inject constructor(
-    private val service: MovieService,
+class MovieDBApiRepositoryImpl @Inject constructor(
+    private val service: MovieApiService,
     private val localRepository: LocalRepository
-) : RemoteRepository {
+) : MovieDBApiRepository {
 
     override suspend fun getUpcomingMovies(page: Int): List<MediaLiteDto> {
         return service.getUpcomingMovies(page, localRepository.getContentLanguage()).results
@@ -88,5 +88,49 @@ class RemoteRepositoryImpl @Inject constructor(
 
     override suspend fun getPersonSearchResults(searchQuery: String, page: Int): List<MediaLiteDto> {
         return service.getPersonSearchResults(searchQuery, page, localRepository.isAdultVisible(), localRepository.getContentLanguage()).results
+    }
+
+    override suspend fun getDiscoverMovies(
+        sort: String,
+        genres: String,
+        yearGte: String,
+        yearLte: String,
+        ratingGte: String,
+        ratingLte: String,
+        page: Int
+    ): List<MediaLiteDto> {
+        return service.getDiscoverMovies(
+            sort = sort,
+            genres = genres,
+            yearGte = yearGte,
+            yearLte = yearLte,
+            ratingGte = ratingGte,
+            ratingLte = ratingLte,
+            page = page,
+            isAdult = localRepository.isAdultVisible(),
+            language = localRepository.getContentLanguage()
+        ).results
+    }
+
+    override suspend fun getDiscoverTvShows(
+        sort: String,
+        genres: String,
+        yearGte: String,
+        yearLte: String,
+        ratingGte: String,
+        ratingLte: String,
+        page: Int
+    ): List<MediaLiteDto> {
+        return service.getDiscoverTvShows(
+            sort = sort,
+            genres = genres,
+            yearGte = yearGte,
+            yearLte = yearLte,
+            ratingGte = ratingGte,
+            ratingLte = ratingLte,
+            page = page,
+            isAdult = localRepository.isAdultVisible(),
+            language = localRepository.getContentLanguage()
+        ).results
     }
 }

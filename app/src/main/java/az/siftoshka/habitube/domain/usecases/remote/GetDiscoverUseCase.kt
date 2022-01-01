@@ -4,7 +4,6 @@ import az.siftoshka.habitube.data.remote.dto.toMediaLite
 import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.repository.MovieDBApiRepository
 import az.siftoshka.habitube.domain.util.Resource
-import az.siftoshka.habitube.domain.util.SearchType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -12,21 +11,29 @@ import java.io.IOException
 import javax.inject.Inject
 
 /**
- * Use-case to get search content from repository call.
+ * Use-case to get discover content from repository call.
  */
-class GetSearchUseCase @Inject constructor(
+class GetDiscoverUseCase @Inject constructor(
     private val repository: MovieDBApiRepository
 ) {
-    operator fun invoke(searchQuery: String, page: Int, type: SearchType): Flow<Resource<List<MediaLite>>> = flow {
+    operator fun invoke(
+        sort: String,
+        genres: String,
+        yearGte: String,
+        yearLte: String,
+        ratingGte: String,
+        ratingLte: String,
+        page: Int,
+        isMovieSelected: Boolean
+    ): Flow<Resource<List<MediaLite>>> = flow {
         try {
             emit(Resource.Loading())
-            kotlinx.coroutines.delay(500L)
-            val resources = when (type) {
-                SearchType.Multi -> repository.getSearchResults(searchQuery, page).map { it.toMediaLite() }
-                SearchType.Movie -> repository.getMovieSearchResults(searchQuery, page).map { it.toMediaLite() }
-                SearchType.TvShow -> repository.getTvShowSearchResults(searchQuery, page).map { it.toMediaLite() }
-                SearchType.Person -> repository.getPersonSearchResults(searchQuery, page).map { it.toMediaLite() }
+            var resources = if (isMovieSelected) {
+                repository.getDiscoverMovies(sort, genres, yearGte, yearLte, ratingGte, ratingLte, page).map { it.toMediaLite() }
+            } else {
+                repository.getDiscoverTvShows(sort, genres, yearGte, yearLte, ratingGte, ratingLte, page).map { it.toMediaLite() }
             }
+            resources = resources.filterNot { it.posterPath.isNullOrBlank() }
             emit(Resource.Success(resources))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))

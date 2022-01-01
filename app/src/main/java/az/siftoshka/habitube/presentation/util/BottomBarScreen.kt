@@ -17,10 +17,10 @@ sealed class BottomBarScreen(
         title = R.string.nav_home,
         icon = R.drawable.ic_home
     )
-    object Search: BottomBarScreen(
-        route = Screen.SearchScreen.route,
-        title = R.string.nav_search,
-        icon = R.drawable.ic_search
+    object Discover: BottomBarScreen(
+        route = Screen.DiscoverScreen.route,
+        title = R.string.nav_discover,
+        icon = R.drawable.ic_discover
     )
     object Library: BottomBarScreen(
         route = Screen.LibraryScreen.route,

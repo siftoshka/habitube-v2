@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.screens.settings.fields.*
-import az.siftoshka.habitube.presentation.theme.HabitubeV2Theme
+import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 
@@ -34,7 +34,7 @@ fun SettingsScreen(
 
     val adultState = remember { mutableStateOf(viewModel.isAdultVisible()) }
 
-    HabitubeV2Theme {
+    HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
