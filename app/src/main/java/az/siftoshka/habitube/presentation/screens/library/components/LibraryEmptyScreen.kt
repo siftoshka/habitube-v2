@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components.screen
+package az.siftoshka.habitube.presentation.screens.library.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme

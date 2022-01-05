@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components.text
+package az.siftoshka.habitube.presentation.screens.library.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

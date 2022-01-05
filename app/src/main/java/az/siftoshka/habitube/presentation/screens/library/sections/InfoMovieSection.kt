@@ -13,12 +13,11 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.domain.util.onlyYear
-import az.siftoshka.habitube.presentation.components.image.LibraryMinimalCard
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryMinimalCard
 import az.siftoshka.habitube.presentation.util.Padding
 
 @Composable

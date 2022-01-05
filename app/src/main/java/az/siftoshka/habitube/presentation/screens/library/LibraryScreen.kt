@@ -24,10 +24,10 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.RealtimeViewModel
-import az.siftoshka.habitube.presentation.components.image.LibraryCard
-import az.siftoshka.habitube.presentation.components.screen.LibraryEmptyScreen
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryCard
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
-import az.siftoshka.habitube.presentation.components.text.LibraryTextCard
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryTextCard
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
 import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
