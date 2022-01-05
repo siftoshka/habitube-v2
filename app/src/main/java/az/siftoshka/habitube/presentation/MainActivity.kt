@@ -22,7 +22,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import az.siftoshka.habitube.domain.model.DiscoverConfiguration
-import az.siftoshka.habitube.domain.util.firstSetupV2
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverScreen
 import az.siftoshka.habitube.presentation.screens.discover.list.DiscoverListScreen
 import az.siftoshka.habitube.presentation.screens.home.HomeScreen
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        applicationContext.firstSetupV2()
         setContent {
             HabitubeTheme {
                 val navController = rememberAnimatedNavController()

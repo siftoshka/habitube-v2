@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.model.Movie
+import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.domain.util.onlyYear
 import az.siftoshka.habitube.presentation.components.image.LibraryMinimalCard
 import az.siftoshka.habitube.presentation.util.Padding
@@ -22,17 +24,15 @@ import az.siftoshka.habitube.presentation.util.Padding
 @Composable
 fun InfoMovieSection(movie: Movie?, isWatched: Boolean) {
 
+    val context = LocalContext.current
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Padding.Default, vertical = Padding.Small)
     ) {
-        LibraryMinimalCard(imageUrl = movie?.posterPath.orEmpty())
-        Column(
-            modifier = Modifier
-                .padding(horizontal = Padding.Small)
-                .height(150.dp)
-        ) {
+        if (context.isInternetAvailable()) LibraryMinimalCard(imageUrl = movie?.posterPath.orEmpty())
+        Column(modifier = Modifier.padding(horizontal = Padding.Small)) {
             Text(
                 text = buildAnnotatedString {
                     append("${movie?.title}")

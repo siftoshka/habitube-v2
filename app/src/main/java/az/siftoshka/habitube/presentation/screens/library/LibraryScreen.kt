@@ -7,6 +7,7 @@ import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
@@ -15,15 +16,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.RealtimeViewModel
 import az.siftoshka.habitube.presentation.components.image.LibraryCard
 import az.siftoshka.habitube.presentation.components.screen.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
+import az.siftoshka.habitube.presentation.components.text.LibraryTextCard
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
 import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
@@ -149,29 +153,52 @@ fun WatchedTab(
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Column(Modifier.fillMaxSize()) {
         if (viewModel.isLoading.value) LoadingScreen()
         if (viewModel.watchedMovies.value.isEmpty() && viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         if (viewModel.watchedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(4),
-            contentPadding = PaddingValues(Padding.Medium),
-        ) {
-            if (viewModel.isMoviesSelected.value) {
-                itemsIndexed(viewModel.watchedMovies.value) { index, item ->
-                    LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
-                        viewModel.isWatched.value = true
-                        viewModel.mediaId.value = item.id ?: 0
-                        scope.launch { sheetState.show() }
+        if (context.isInternetAvailable()) {
+            LazyVerticalGrid(
+                cells = GridCells.Fixed(4),
+                contentPadding = PaddingValues(Padding.Medium),
+            ) {
+                if (viewModel.isMoviesSelected.value) {
+                    itemsIndexed(viewModel.watchedMovies.value) { index, item ->
+                        LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
+                            viewModel.isWatched.value = true
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
+                    }
+                } else if (viewModel.isShowsSelected.value) {
+                    itemsIndexed(viewModel.watchedShows.value) { index, item ->
+                        LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
+                            viewModel.isWatched.value = true
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
                     }
                 }
-            } else if (viewModel.isShowsSelected.value) {
-                itemsIndexed(viewModel.watchedShows.value) { index, item ->
-                    LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
-                        viewModel.isWatched.value = true
-                        viewModel.mediaId.value = item.id ?: 0
-                        scope.launch { sheetState.show() }
+            }
+        } else {
+            LazyColumn(contentPadding = PaddingValues(Padding.Medium)) {
+                if (viewModel.isMoviesSelected.value) {
+                    itemsIndexed(viewModel.watchedMovies.value) { index, item ->
+                        LibraryTextCard(title = item.title.orEmpty(), rating = item.myRating) {
+                            viewModel.isWatched.value = true
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
+                    }
+                } else if (viewModel.isShowsSelected.value) {
+                    itemsIndexed(viewModel.watchedShows.value) { index, item ->
+                        LibraryTextCard(title = item.name.orEmpty(), rating = item.myRating) {
+                            viewModel.isWatched.value = true
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
                     }
                 }
             }
@@ -186,28 +213,51 @@ fun PlanningTab(
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Column(Modifier.fillMaxSize()) {
         if (viewModel.plannedMovies.value.isEmpty() && viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         if (viewModel.plannedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(4),
-            contentPadding = PaddingValues(Padding.Medium),
-        ) {
-            if (viewModel.isMoviesSelected.value) {
-                itemsIndexed(viewModel.plannedMovies.value) { index, item ->
-                    LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
-                        viewModel.isWatched.value = false
-                        viewModel.mediaId.value = item.id ?: 0
-                        scope.launch { sheetState.show() }
+        if (context.isInternetAvailable()) {
+            LazyVerticalGrid(
+                cells = GridCells.Fixed(4),
+                contentPadding = PaddingValues(Padding.Medium),
+            ) {
+                if (viewModel.isMoviesSelected.value) {
+                    itemsIndexed(viewModel.plannedMovies.value) { index, item ->
+                        LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
+                            viewModel.isWatched.value = false
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
+                    }
+                } else if (viewModel.isShowsSelected.value) {
+                    itemsIndexed(viewModel.plannedShows.value) { index, item ->
+                        LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
+                            viewModel.isWatched.value = false
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
                     }
                 }
-            } else if (viewModel.isShowsSelected.value) {
-                itemsIndexed(viewModel.plannedShows.value) { index, item ->
-                    LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
-                        viewModel.isWatched.value = false
-                        viewModel.mediaId.value = item.id ?: 0
-                        scope.launch { sheetState.show() }
+            }
+        } else {
+            LazyColumn(contentPadding = PaddingValues(Padding.Medium)) {
+                if (viewModel.isMoviesSelected.value) {
+                    itemsIndexed(viewModel.plannedMovies.value) { index, item ->
+                        LibraryTextCard(title = item.title.orEmpty()) {
+                            viewModel.isWatched.value = false
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
+                    }
+                } else if (viewModel.isShowsSelected.value) {
+                    itemsIndexed(viewModel.plannedShows.value) { index, item ->
+                        LibraryTextCard(title = item.name.orEmpty()) {
+                            viewModel.isWatched.value = false
+                            viewModel.mediaId.value = item.id ?: 0
+                            scope.launch { sheetState.show() }
+                        }
                     }
                 }
             }

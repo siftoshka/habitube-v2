@@ -196,18 +196,21 @@ fun InfoBoard(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(Padding.Default)
+            .padding(horizontal = Padding.Default).padding(bottom = Padding.Default)
     ) {
         if (viewModel.isWatched.value) {
-            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
-                    ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
-                    viewModel.rating.value = it
-                    viewModel.addWatched(it)
+            DetailsCard {
+                Column(Modifier.fillMaxWidth().padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally) {
+                    RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
+                        ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
+                        viewModel.rating.value = it
+                        viewModel.addWatched(it)
+                    }
                 }
             }
         }
         if (videosState.videos.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(Padding.Medium))
             DetailTitle(text = R.string.text_videos)
             DetailsCard {
                 LazyRow(

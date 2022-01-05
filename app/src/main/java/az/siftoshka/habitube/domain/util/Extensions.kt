@@ -82,9 +82,6 @@ fun Context.clearCache() {
     this.cacheDir.deleteRecursively()
 }
 
-fun Context.firstSetupV2() {
-
-}
 
 fun Context.isPlayServicesAvailable(): Boolean {
     val gApi = GoogleApiAvailability.getInstance()
