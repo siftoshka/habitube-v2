@@ -34,6 +34,6 @@ fun DetailTitle(
         style = MaterialTheme.typography.h2,
         color = MaterialTheme.colors.onBackground,
         textAlign = TextAlign.Start,
-        modifier = Modifier.padding(horizontal = Padding.ExtraSmall, vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
     )
 }

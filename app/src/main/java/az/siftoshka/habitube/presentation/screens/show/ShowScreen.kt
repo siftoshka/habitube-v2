@@ -65,8 +65,10 @@ fun ShowScreen(
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 if (showState.isLoading) LoadingScreen()
-                MainBoard(scrollState, navController)
-                InfoBoard(scrollState, navController)
+                else {
+                    MainBoard(scrollState, navController)
+                    InfoBoard(scrollState, navController)
+                }
             }
         }
     }

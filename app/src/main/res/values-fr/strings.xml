@@ -15,6 +15,7 @@
 
     <!-- Movie/TV Show Screens -->
     <string name="text_rating">Rating</string>
+    <string name="text_director">Director</string>
     <string name="text_runtime">Runtime</string>
     <string name="text_episodes">Episodes</string>
     <string name="text_minutes">minutes</string>

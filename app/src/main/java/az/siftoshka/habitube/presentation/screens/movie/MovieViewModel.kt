@@ -8,10 +8,7 @@ import androidx.lifecycle.viewModelScope
 import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.usecases.local.PlannedMoviesUseCase
 import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
-import az.siftoshka.habitube.domain.usecases.remote.GetCreditsUseCase
-import az.siftoshka.habitube.domain.usecases.remote.GetMovieUseCase
-import az.siftoshka.habitube.domain.usecases.remote.GetSimilarUseCase
-import az.siftoshka.habitube.domain.usecases.remote.GetVideosUseCase
+import az.siftoshka.habitube.domain.usecases.remote.*
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.MediaType
 import az.siftoshka.habitube.domain.util.Resource
@@ -31,6 +28,7 @@ class MovieViewModel @Inject constructor(
     private val getVideosUseCase: GetVideosUseCase,
     private val getCreditsUseCase: GetCreditsUseCase,
     private val getSimilarUseCase: GetSimilarUseCase,
+    private val getMovieRatingsUseCase: GetOmdbDataUseCase,
     private val plannedMoviesUseCase: PlannedMoviesUseCase,
     private val watchedMoviesUseCase: WatchedMoviesUseCase,
     savedStateHandle: SavedStateHandle
@@ -41,6 +39,9 @@ class MovieViewModel @Inject constructor(
 
     private val _videosState = mutableStateOf(MovieVideosState())
     val videosState: State<MovieVideosState> = _videosState
+
+    private val _omdbState = mutableStateOf(OmdbDataState())
+    val omdbState: State<OmdbDataState> = _omdbState
 
     private val _creditsState = mutableStateOf(MovieCreditsState())
     val creditsState: State<MovieCreditsState> = _creditsState
@@ -76,6 +77,7 @@ class MovieViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     _movieState.value = MovieState(movie = result.data)
+                    getOmdbData(result.data?.imdbId ?: "")
                     movie = result.data
                 }
                 is Resource.Error -> {
@@ -134,6 +136,22 @@ class MovieViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _videosState.value = MovieVideosState(error = result.message ?: "Error")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getOmdbData(imdbId: String) {
+        getMovieRatingsUseCase(imdbId).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _omdbState.value = OmdbDataState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _omdbState.value = OmdbDataState(data = result.data)
+                }
+                is Resource.Error -> {
+                    _omdbState.value = OmdbDataState(error = result.message ?: "Error")
                 }
             }
         }.launchIn(viewModelScope)

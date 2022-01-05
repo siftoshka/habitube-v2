@@ -16,8 +16,8 @@ android {
         applicationId "az.siftoshka.habitube"
         minSdk 24
         targetSdk 31
-        versionCode 34
-        versionName "2.0 - Beta 2"
+        versionCode 35
+        versionName "2.0 - Beta 3"
 
         testInstrumentationRunner "az.siftoshka.habitube.HiltTestRunner"
         vectorDrawables {
@@ -25,6 +25,7 @@ android {
         }
 
         buildConfigField("String", "THEMOVIEDB_API_KEY", THEMOVIEDB_API_KEY)
+        buildConfigField("String", "OMDB_API_KEY", OMDB_API_KEY)
     }
     applicationVariants.all { variant ->
         variant.resValue "string", "version_name", variant.versionName + " (" + variant.versionCode + ")"

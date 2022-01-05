@@ -22,6 +22,7 @@ object Constants {
 
     // API
     const val API_URL = "https://api.themoviedb.org/3/"
+    const val OMDB_API_URL = "http://www.omdbapi.com/"
     const val IMAGE_URL_ORIGINAL = "https://image.tmdb.org/t/p/original"
     const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     const val YOUTUBE_URL = "https://www.youtube.com/watch?v="

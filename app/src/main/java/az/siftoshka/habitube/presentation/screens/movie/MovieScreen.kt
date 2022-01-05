@@ -36,6 +36,7 @@ import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailText
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
+import az.siftoshka.habitube.presentation.screens.movie.components.RatingsBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
@@ -57,14 +58,16 @@ fun MovieScreen(
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
 
-    val movieState = viewModel.movieState.value
+    val omdbState = viewModel.omdbState.value
 
     HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (movieState.isLoading) LoadingScreen()
-                MainBoard(scrollState, navController)
-                InfoBoard(scrollState, navController)
+                if (omdbState.isLoading) LoadingScreen()
+                else {
+                    MainBoard(scrollState, navController)
+                    InfoBoard(scrollState, navController)
+                }
             }
         }
     }
@@ -77,6 +80,7 @@ fun MainBoard(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val movie = viewModel.movieState.value.movie
+    val director = viewModel.omdbState.value.data?.director
 
     Column {
         BackgroundImage(
@@ -123,20 +127,6 @@ fun MainBoard(
                 Spacer(modifier = Modifier.height(Padding.ExtraSmall))
                 Text(
                     text = buildAnnotatedString {
-                        append(stringResource(id = R.string.text_rating))
-                        append(
-                            AnnotatedString(
-                                ": ${movie?.voteAverage} (${movie?.voteCount})",
-                                spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
-                            )
-                        )
-                    },
-                    style = MaterialTheme.typography.h5,
-                    color = MaterialTheme.colors.onBackground,
-                    textAlign = TextAlign.Start,
-                )
-                Text(
-                    text = buildAnnotatedString {
                         append(stringResource(id = R.string.text_runtime))
                         append(
                             AnnotatedString(
@@ -147,7 +137,22 @@ fun MainBoard(
                     },
                     style = MaterialTheme.typography.h5,
                     color = MaterialTheme.colors.onBackground,
+                    textAlign = TextAlign.Start
+                )
+                Text(
+                    text = buildAnnotatedString {
+                        append(stringResource(id = R.string.text_director))
+                        append(
+                            AnnotatedString(
+                                ": ${director ?: "-"}",
+                                spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
+                            )
+                        )
+                    },
+                    style = MaterialTheme.typography.h5,
+                    color = MaterialTheme.colors.onBackground,
                     textAlign = TextAlign.Start,
+                    maxLines = 1,
                     modifier = Modifier.weight(1f)
                 )
                 Row {
@@ -196,11 +201,15 @@ fun InfoBoard(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(horizontal = Padding.Default).padding(bottom = Padding.Default)
+            .padding(horizontal = Padding.Default)
+            .padding(bottom = Padding.Default)
     ) {
         if (viewModel.isWatched.value) {
             DetailsCard {
-                Column(Modifier.fillMaxWidth().padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally) {
                     RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
                         ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
                         viewModel.rating.value = it
@@ -209,6 +218,8 @@ fun InfoBoard(
                 }
             }
         }
+        Spacer(modifier = Modifier.height(Padding.Medium))
+        RatingsBoard()
         if (videosState.videos.isNotEmpty()) {
             Spacer(modifier = Modifier.height(Padding.Medium))
             DetailTitle(text = R.string.text_videos)

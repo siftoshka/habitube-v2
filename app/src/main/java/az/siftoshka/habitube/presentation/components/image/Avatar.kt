@@ -60,7 +60,8 @@ fun Avatar(
             color = MaterialTheme.colors.onSurface,
             textAlign = TextAlign.Center,
             maxLines = 1,
-            overflow = TextOverflow.Clip
+            overflow = TextOverflow.Clip,
+            modifier = Modifier.padding(top = 2.dp)
         )
         Text(
             text = secondary.orEmpty(),

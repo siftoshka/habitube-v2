@@ -10,6 +10,7 @@ import az.siftoshka.habitube.data.model.WATCHED_MIGRATION_1_2
 import az.siftoshka.habitube.data.model.WatchedDatabase
 import az.siftoshka.habitube.data.remote.HttpInterceptor
 import az.siftoshka.habitube.data.remote.MovieApiService
+import az.siftoshka.habitube.data.remote.OmdbApiService
 import az.siftoshka.habitube.data.repository.*
 import az.siftoshka.habitube.domain.repository.*
 import az.siftoshka.habitube.domain.util.Constants
@@ -21,6 +22,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -36,6 +38,7 @@ object AppModule {
 
     @Singleton
     @Provides
+    @Named("MovieDb")
     fun provideOkHttpClient(): OkHttpClient {
         val interceptor = HttpInterceptor()
         val httpInterceptor = HttpLoggingInterceptor()
@@ -48,26 +51,62 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideBaseUrl(): String {
-        return Constants.API_URL
+    @Named("OMDb")
+    fun provideOmdbOkHttpClient(): OkHttpClient {
+        return OkHttpClient
+            .Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+            .build()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit = Retrofit.Builder()
+    @Named("MovieDb")
+    fun provideBaseUrl(): String = Constants.API_URL
+
+    @Singleton
+    @Provides
+    @Named("OMDb")
+    fun provideOmdbUrl(): String = Constants.OMDB_API_URL
+
+    @Singleton
+    @Provides
+    @Named("MovieDb")
+    fun provideRetrofit(@Named("MovieDb") okHttpClient: OkHttpClient, @Named("MovieDb") url: String): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(baseUrl)
+        .baseUrl(url)
         .client(okHttpClient)
         .build()
 
     @Singleton
     @Provides
-    fun provideMovieApiService(retrofit: Retrofit): MovieApiService = retrofit.create(MovieApiService::class.java)
+    @Named("OMDb")
+    fun provideOmdbRetrofit(@Named("OMDb") okHttpClient: OkHttpClient, @Named("OMDb") url: String): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(url)
+        .client(okHttpClient)
+        .build()
 
-    @Provides
     @Singleton
-    fun provideMovieDBApiRepository(service: MovieApiService, localRepository: LocalRepository): MovieDBApiRepository {
+    @Provides
+    @Named("MovieDb")
+    fun provideMovieApiService(@Named("MovieDb") retrofit: Retrofit): MovieApiService = retrofit.create(MovieApiService::class.java)
+
+    @Singleton
+    @Provides
+    @Named("OMDb")
+    fun provideOmdbApiService(@Named("OMDb") retrofit: Retrofit): OmdbApiService = retrofit.create(OmdbApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMovieDBApiRepository(@Named("MovieDb") service: MovieApiService, localRepository: LocalRepository): MovieDBApiRepository {
         return MovieDBApiRepositoryImpl(service, localRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideOmdbApiRepository(@Named("OMDb") service: OmdbApiService): OmdbApiRepository {
+        return OmdbApiRepositoryImpl(service)
     }
 
     @Provides

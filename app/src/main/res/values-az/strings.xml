@@ -15,6 +15,7 @@
 
     <!-- Movie/TV Show Screens -->
     <string name="text_rating">Reytinq</string>
+    <string name="text_director">Rejissor</string>
     <string name="text_runtime">Surəklilik</string>
     <string name="text_episodes">Epizodlar</string>
     <string name="text_minutes">dəqiqə</string>

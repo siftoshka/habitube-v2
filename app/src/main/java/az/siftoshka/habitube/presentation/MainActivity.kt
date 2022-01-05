@@ -115,7 +115,7 @@ fun RowScope.AddItem(
             Icon(
                 painter = painterResource(id = screen.icon),
                 contentDescription = stringResource(id = screen.title),
-                modifier = Modifier.size(28.dp).fillMaxSize()
+                modifier = Modifier.size(26.dp).fillMaxSize()
             )
         },
         selected = currentDestination?.hierarchy?.any {

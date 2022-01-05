@@ -15,6 +15,7 @@
 
     <!-- Movie/TV Show Screens -->
     <string name="text_rating">Оценка</string>
+    <string name="text_director">Режиссер</string>
     <string name="text_runtime">Время</string>
     <string name="text_episodes">Эпизоды</string>
     <string name="text_minutes">минут</string>
