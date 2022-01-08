@@ -21,6 +21,7 @@ class GetTvShowUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             val movie = repository.getTvShow(showId).toTvShow()
+            delay(250L)
             emit(Resource.Success(movie))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))

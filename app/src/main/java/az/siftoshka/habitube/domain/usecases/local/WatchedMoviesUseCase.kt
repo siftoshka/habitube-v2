@@ -48,6 +48,10 @@ class WatchedMoviesUseCase @Inject constructor(
         return repository.getMovie(movieId) ?: Movie()
     }
 
+    suspend fun getMovieRating(movieId: Int): Float {
+        return repository.getMovieRating(movieId) ?: 0f
+    }
+
     suspend fun isMovieExist(movieId: Int): Boolean {
         return repository.isMovieExist(movieId)
     }

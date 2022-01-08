@@ -205,7 +205,10 @@ fun InfoBoard(
         if (viewModel.isWatched.value) {
             Column(Modifier.padding(horizontal = Padding.Default)) {
                 DetailsCard {
-                    Column(Modifier.fillMaxWidth().padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally) {
                         RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
                             ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
                             viewModel.rating.value = it
@@ -307,7 +310,7 @@ fun Cast(
         DetailTitle(text = R.string.text_cast)
         DetailsCard {
             LazyRow(Modifier.padding(Padding.Medium)) {
-                creditState.credits.cast.let { cast ->
+                creditState.credits.cast.sortedByDescending { it.popularity }.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
                         Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.character) {
@@ -331,7 +334,7 @@ fun Crew(
         DetailTitle(text = R.string.text_crew)
         DetailsCard {
             LazyRow(Modifier.padding(Padding.Medium)) {
-                creditState.credits.crew.let { crew ->
+                creditState.credits.crew.sortedByDescending { it.popularity }.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
                         Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.knownForDepartment) {
@@ -364,7 +367,7 @@ fun SimilarMovies(
                     if ((index + 1) >= (page * Constants.PAGE_SIZE)) {
                         viewModel.getMoreSimilarShows()
                     }
-                    ImageCard(imageUrl = show.posterPath, title = show.title) {
+                    ImageCard(imageUrl = show.posterPath, title = show.title, rating = show.voteAverage) {
                         navController.navigate(Screen.TvShowScreen.route + "/${show.id}")
                     }
                 }

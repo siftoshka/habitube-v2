@@ -3,9 +3,7 @@ package az.siftoshka.habitube.presentation
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -38,6 +36,7 @@ import az.siftoshka.habitube.presentation.screens.show.ShowScreen
 import az.siftoshka.habitube.presentation.screens.web.WebScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.fontFamily
+import az.siftoshka.habitube.presentation.util.Animation
 import az.siftoshka.habitube.presentation.util.BottomBarScreen
 import az.siftoshka.habitube.presentation.util.NavigationConstants
 import az.siftoshka.habitube.presentation.util.Screen
@@ -115,7 +114,9 @@ fun RowScope.AddItem(
             Icon(
                 painter = painterResource(id = screen.icon),
                 contentDescription = stringResource(id = screen.title),
-                modifier = Modifier.size(26.dp).fillMaxSize()
+                modifier = Modifier
+                    .size(26.dp)
+                    .fillMaxSize()
             )
         },
         selected = currentDestination?.hierarchy?.any {
@@ -144,18 +145,8 @@ fun NavGraph(navController: NavHostController) {
     ) {
         composable(
             route = BottomBarScreen.Home.route,
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            }
+            exitTransition = { Animation.slideOutHorizontally(-300) },
+            popEnterTransition = { Animation.slideInHorizontally(-300) }
         ) {
             HomeScreen(navController)
         }
@@ -175,190 +166,70 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(
             route = BottomBarScreen.Settings.route,
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            }
+            exitTransition = { Animation.slideOutHorizontally(-300) },
+            popEnterTransition = { Animation.slideInHorizontally(-300) }
         ) {
             SettingsScreen(navController)
         }
         composable(
             route = Screen.MovieScreen.route + "/{movieId}",
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) },
+            exitTransition = { Animation.slideOutHorizontally(-300) },
+            popEnterTransition = { Animation.slideInHorizontally(-300) }
         ) {
             MovieScreen(navController)
         }
         composable(
             route = Screen.TvShowScreen.route + "/{showId}",
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) },
+            exitTransition = { Animation.slideOutHorizontally(-300) },
+            popEnterTransition = { Animation.slideInHorizontally(-300) }
         ) {
             ShowScreen(navController)
         }
         composable(
             route = Screen.PersonScreen.route + "/{personId}",
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            exitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            },
-            popEnterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { -300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) },
+            exitTransition = { Animation.slideOutHorizontally(-300) },
+            popEnterTransition = { Animation.slideInHorizontally(-300) }
         ) {
             PersonScreen(navController)
         }
         composable(
             route = Screen.LanguageScreen.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
         ) {
             LanguageScreen(navController)
         }
         composable(
             route = Screen.ContentLanguageScreen.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
         ) {
             ContentLanguageScreen(navController)
         }
         composable(
             route = Screen.StorageScreen.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
         ) {
             StorageScreen(navController)
         }
         composable(
             route = Screen.SortScreen.route,
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
         ) {
             SortScreen(navController)
         }
         composable(
             route = Screen.WebScreen.route + "/{url}",
-            enterTransition = {
-                slideInHorizontally(
-                    initialOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(400))
-            },
-            popExitTransition = {
-                slideOutHorizontally(
-                    targetOffsetX = { 300 },
-                    animationSpec = tween(400, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(400))
-            }
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
         ) { navBackStackEntry ->
             navBackStackEntry.arguments?.getString("url")?.let {
                 WebScreen(value = it, navController = navController)

@@ -62,5 +62,4 @@ class SettingsViewModel @Inject constructor(
     fun isAdultVisible() = localRepository.isAdultVisible()
 
     fun changeAdultVisibility() = localRepository.setAdultVisibility(!isAdultVisible())
-
 }

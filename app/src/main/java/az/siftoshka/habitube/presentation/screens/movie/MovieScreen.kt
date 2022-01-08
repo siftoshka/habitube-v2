@@ -58,12 +58,12 @@ fun MovieScreen(
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
 
-    val omdbState = viewModel.omdbState.value
+    val movieState = viewModel.movieState.value
 
     HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (omdbState.isLoading) LoadingScreen()
+                if (movieState.isLoading) LoadingScreen()
                 else {
                     MainBoard(scrollState, navController)
                     InfoBoard(scrollState, navController)
@@ -209,7 +209,8 @@ fun InfoBoard(
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally) {
+                        .padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
                         ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
                         viewModel.rating.value = it
@@ -281,7 +282,7 @@ fun Cast(
         DetailTitle(text = R.string.text_cast)
         DetailsCard {
             LazyRow(Modifier.padding(Padding.Medium)) {
-                creditState.credits.cast.let { cast ->
+                creditState.credits.cast.sortedByDescending { it.popularity }.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
                         Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.character) {
@@ -305,7 +306,7 @@ fun Crew(
         DetailTitle(text = R.string.text_crew)
         DetailsCard {
             LazyRow(Modifier.padding(Padding.Medium)) {
-                creditState.credits.crew.let { crew ->
+                creditState.credits.crew.sortedByDescending { it.popularity }.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
                         Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.knownForDepartment) {
@@ -338,7 +339,7 @@ fun SimilarMovies(
                     if ((index + 1) >= (page * Constants.PAGE_SIZE)) {
                         viewModel.getMoreSimilarMovies()
                     }
-                    ImageCard(imageUrl = movie.posterPath, title = movie.title) {
+                    ImageCard(imageUrl = movie.posterPath, title = movie.title, rating = movie.voteAverage) {
                         navController.navigate(Screen.MovieScreen.route + "/${movie.id}")
                     }
                 }

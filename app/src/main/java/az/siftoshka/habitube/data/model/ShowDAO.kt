@@ -19,6 +19,9 @@ interface ShowDAO {
     @Transaction @Query("SELECT * FROM shows WHERE id = :showId")
     suspend fun getShow(showId: Int) : TvShow?
 
+    @Transaction @Query("SELECT my_rating FROM shows WHERE id = :showId")
+    suspend fun getShowRating(showId: Int): Float?
+
     @Transaction @Query("SELECT count(*) FROM shows WHERE id = :showId")
     suspend fun getShowCount(showId: Int): Int
 

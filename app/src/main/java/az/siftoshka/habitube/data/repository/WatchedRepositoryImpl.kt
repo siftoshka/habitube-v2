@@ -29,6 +29,10 @@ class WatchedRepositoryImpl(
         return movieDAO.getMovie(movieId)
     }
 
+    override suspend fun getMovieRating(movieId: Int): Float? {
+        return movieDAO.getMovieRating(movieId)
+    }
+
     override suspend fun isMovieExist(movieId: Int): Boolean {
         return movieDAO.getMovieCount(movieId) > 0
     }
@@ -47,6 +51,10 @@ class WatchedRepositoryImpl(
 
     override fun getShows(): Flow<List<TvShow>> {
         return showDAO.getShows()
+    }
+
+    override suspend fun getShowRating(showId: Int): Float? {
+        return showDAO.getShowRating(showId)
     }
 
     override suspend fun isShowExist(showId: Int): Boolean {

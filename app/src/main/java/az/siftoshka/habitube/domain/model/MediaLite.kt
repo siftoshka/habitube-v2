@@ -16,6 +16,6 @@ data class MediaLite(
     val name: String? = null,
     val video: Boolean? = false,
     val mediaType: String? = null,
-    val voteAverage: Double? = 0.0,
+    var voteAverage: Double? = 0.0,
     val voteCount: Int? = 0
 )

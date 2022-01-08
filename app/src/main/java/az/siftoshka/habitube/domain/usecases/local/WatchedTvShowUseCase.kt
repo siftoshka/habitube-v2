@@ -48,6 +48,10 @@ class WatchedTvShowUseCase @Inject constructor(
         return repository.getShow(showId) ?: TvShow()
     }
 
+    suspend fun getShowRating(showId: Int): Float {
+        return repository.getShowRating(showId) ?: 0f
+    }
+
     suspend fun isShowExist(showId: Int): Boolean {
         return repository.isShowExist(showId)
     }

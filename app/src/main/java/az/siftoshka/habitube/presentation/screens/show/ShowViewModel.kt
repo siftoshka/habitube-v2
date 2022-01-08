@@ -60,11 +60,11 @@ class ShowViewModel @Inject constructor(
     init {
         savedStateHandle.get<String>(PARAM_TV_SHOW_ID)?.let {
             showId = it.toInt()
-            getShow(it.toInt())
-            getVideos(it.toInt())
-            getCredits(it.toInt())
-            getSimilarShows(it.toInt())
-            isLocalExists(it.toInt())
+            getShow(showId)
+            getVideos(showId)
+            getCredits(showId)
+            getSimilarShows(showId)
+            isLocalExists(showId)
         }
     }
 
@@ -162,6 +162,7 @@ class ShowViewModel @Inject constructor(
                     _similarState.value = SimilarShowsState(isLoading = true)
                 }
                 is Resource.Success -> {
+                    result.data?.forEach { it.voteAverage = watchedTvShowUseCase.getShowRating(it.id ?: 0).toDouble() }
                     _similarState.value = SimilarShowsState(shows = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
@@ -178,6 +179,7 @@ class ShowViewModel @Inject constructor(
                 getSimilarUseCase(showId, similarShowsPage.value, MediaType.TvShow).onEach { result ->
                     when (result) {
                         is Resource.Success -> {
+                            result.data?.forEach { it.voteAverage = watchedTvShowUseCase.getShowRating(it.id ?: 0).toDouble() }
                             _similarState.value = SimilarShowsState(
                                 shows = _similarState.value.shows.plus(result.data.orEmpty())
                             )

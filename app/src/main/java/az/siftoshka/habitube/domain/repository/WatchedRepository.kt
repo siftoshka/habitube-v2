@@ -15,6 +15,8 @@ interface WatchedRepository {
 
     suspend fun getMovie(movieId: Int) : Movie?
 
+    suspend fun getMovieRating(movieId: Int) : Float?
+
     suspend fun isMovieExist(movieId: Int) : Boolean
 
     suspend fun deleteMovie(movie: Movie)
@@ -26,6 +28,8 @@ interface WatchedRepository {
     fun getShows() : Flow<List<TvShow>>
 
     suspend fun getShow(showId: Int) : TvShow?
+
+    suspend fun getShowRating(showId: Int) : Float?
 
     suspend fun isShowExist(showId: Int) : Boolean
 

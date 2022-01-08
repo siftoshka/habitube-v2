@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.usecases.local.PlannedMoviesUseCase
 import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
@@ -61,11 +62,11 @@ class MovieViewModel @Inject constructor(
     init {
         savedStateHandle.get<String>(PARAM_MOVIE_ID)?.let {
             movieId = it.toInt()
-            getMovie(it.toInt())
-            getVideos(it.toInt())
-            getCredits(it.toInt())
-            getSimilarMovies(it.toInt())
-            isLocalExists(it.toInt())
+            getMovie(movieId)
+            getVideos(movieId)
+            getCredits(movieId)
+            getSimilarMovies(movieId)
+            isLocalExists(movieId)
         }
     }
 
@@ -180,6 +181,7 @@ class MovieViewModel @Inject constructor(
                     _similarState.value = SimilarMoviesState(isLoading = true)
                 }
                 is Resource.Success -> {
+                    result.data?.forEach { it.voteAverage = watchedMoviesUseCase.getMovieRating(it.id ?: 0).toDouble() }
                     _similarState.value = SimilarMoviesState(movies = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
@@ -196,6 +198,7 @@ class MovieViewModel @Inject constructor(
                 getSimilarUseCase(movieId, similarMoviesPage.value, MediaType.Movie).onEach { result ->
                     when (result) {
                         is Resource.Success -> {
+                            result.data?.forEach { it.voteAverage = watchedMoviesUseCase.getMovieRating(it.id ?: 0).toDouble() }
                             _similarState.value = SimilarMoviesState(
                                 movies = _similarState.value.movies.plus(result.data.orEmpty())
                             )
