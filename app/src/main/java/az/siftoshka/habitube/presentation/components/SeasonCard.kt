@@ -20,7 +20,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.model.Season
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.onlyYear
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
@@ -31,9 +31,9 @@ fun SeasonCard(season: Season?) {
         shape = MaterialTheme.shapes.large,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Column(modifier = Modifier.padding(Padding.Small)) {
+        Column(modifier = Modifier.padding(MaterialTheme.spacing.small)) {
             ImageCard(season)
-            Spacer(modifier = Modifier.height(Padding.Small))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
             Text(
                 text = buildAnnotatedString {
                     append("${season?.name}")
@@ -50,7 +50,7 @@ fun SeasonCard(season: Season?) {
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(Padding.ExtraSmall))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
             Text(
                 text = buildAnnotatedString {
                     append(stringResource(id = R.string.text_episodes))

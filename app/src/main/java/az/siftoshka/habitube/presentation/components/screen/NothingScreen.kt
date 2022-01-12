@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import com.airbnb.lottie.compose.*
 
 @Composable
@@ -37,7 +37,7 @@ fun NothingScreen() {
             style = MaterialTheme.typography.h1,
             color = MaterialTheme.colors.onBackground,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(vertical = Padding.Default)
+            modifier = Modifier.padding(vertical = MaterialTheme.spacing.default)
         )
     }
 }

@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @ExperimentalMaterialApi
 @Composable
@@ -50,7 +50,7 @@ fun StorageDialog(
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = Padding.Default)
+                        .padding(bottom = MaterialTheme.spacing.default)
                 ) {
                     Card(
                         shape = MaterialTheme.shapes.large,
@@ -62,12 +62,12 @@ fun StorageDialog(
                             text = stringResource(id = R.string.text_cancel),
                             style = MaterialTheme.typography.body1,
                             color = MaterialTheme.colors.onSurface,
-                            modifier = Modifier.padding(Padding.Default)
+                            modifier = Modifier.padding(MaterialTheme.spacing.default)
                         )
                     }
                     Card(
                         shape = MaterialTheme.shapes.large,
-                        modifier = Modifier.padding(horizontal = Padding.Default),
+                        modifier = Modifier.padding(horizontal = MaterialTheme.spacing.default),
                         backgroundColor = MaterialTheme.colors.surface,
                         elevation = 0.dp,
                         onClick = onPerformClick
@@ -76,7 +76,7 @@ fun StorageDialog(
                             text = stringResource(id = positiveButton),
                             style = MaterialTheme.typography.body1,
                             color = MaterialTheme.colors.error,
-                            modifier = Modifier.padding(Padding.Default)
+                            modifier = Modifier.padding(MaterialTheme.spacing.default)
                         )
                     }
                 }

@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
  * Composable function of Sort Screen.
@@ -37,7 +37,7 @@ fun SortScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 LazyColumn(
                     modifier = Modifier
-                        .padding(horizontal = Padding.Default)
+                        .padding(horizontal = MaterialTheme.spacing.default)
                         .fillMaxWidth()
                 ) {
                     items(list.size) {
@@ -65,7 +65,7 @@ fun SortRowItem(
         backgroundColor = MaterialTheme.colors.surface,
         onClick = { onPerformClick(item.type) },
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         ListItem(
             text = {

@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
@@ -65,7 +65,7 @@ fun ImageCard(
                     Row(
                         horizontalArrangement = Arrangement.End, modifier = Modifier
                             .fillMaxWidth()
-                            .padding(Padding.ExtraSmall)
+                            .padding(MaterialTheme.spacing.extraSmall)
                     ) {
                         Text(
                             text = " $rating ",
@@ -81,7 +81,7 @@ fun ImageCard(
                         horizontalArrangement = Arrangement.Center,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(Padding.ExtraSmall)
+                            .padding(MaterialTheme.spacing.extraSmall)
                     ) {
                         Text(
                             text = stringResource(id = R.string.text_watched),

@@ -18,7 +18,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.screens.settings.fields.*
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 
 /**
@@ -41,7 +41,7 @@ fun SettingsScreen(
                     .fillMaxSize()
                     .verticalScroll(scrollState)
             ) {
-                Column(Modifier.padding(horizontal = Padding.Default)) {
+                Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
                     if (context.isPlayServicesAvailable()) {
                         SettingsTitleText(text = R.string.text_account)
                         GoogleSignInButton()

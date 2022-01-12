@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 import coil.size.Precision
@@ -34,7 +34,7 @@ fun LibraryCard(
         modifier = Modifier
             .width(90.dp)
             .height(135.dp)
-            .padding(Padding.ExtraSmall),
+            .padding(MaterialTheme.spacing.extraSmall),
         shape = MaterialTheme.shapes.large,
         elevation = 4.dp,
         onClick = onItemClick

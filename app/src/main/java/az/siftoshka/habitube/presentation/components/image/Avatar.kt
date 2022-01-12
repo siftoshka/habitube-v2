@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
+import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
@@ -61,7 +62,7 @@ fun Avatar(
             textAlign = TextAlign.Center,
             maxLines = 1,
             overflow = TextOverflow.Clip,
-            modifier = Modifier.padding(top = 2.dp)
+            modifier = Modifier.padding(top = MaterialTheme.spacing.ultraSmall)
         )
         Text(
             text = secondary.orEmpty(),

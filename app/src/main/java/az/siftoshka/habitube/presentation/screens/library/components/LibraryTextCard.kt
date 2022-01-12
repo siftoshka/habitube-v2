@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -36,7 +36,7 @@ fun LibraryTextCard(
                 style = MaterialTheme.typography.h5,
                 color = MaterialTheme.colors.onSurface,
                 textAlign = TextAlign.Start,
-                modifier = Modifier.padding(Padding.Medium).weight(0.8f),
+                modifier = Modifier.padding(MaterialTheme.spacing.medium).weight(0.8f),
                 maxLines = 1
             )
             Text(
@@ -44,7 +44,7 @@ fun LibraryTextCard(
                 style = MaterialTheme.typography.h5,
                 color = MaterialTheme.colors.onSurface,
                 textAlign = TextAlign.End,
-                modifier = Modifier.padding(Padding.Medium).weight(0.2f)
+                modifier = Modifier.padding(MaterialTheme.spacing.medium).weight(0.2f)
             )
         }
     }

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun OptionTitle(
@@ -20,14 +20,14 @@ fun OptionTitle(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = Padding.Small),
+            .padding(vertical = MaterialTheme.spacing.small),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Divider(
             modifier = Modifier
                 .width(40.dp)
-                .padding(horizontal = Padding.Medium), color = MaterialTheme.colors.onSurface
+                .padding(horizontal = MaterialTheme.spacing.medium), color = MaterialTheme.colors.onSurface
         )
         Text(
             text = stringResource(id = title),
@@ -38,7 +38,7 @@ fun OptionTitle(
         Divider(
             modifier = Modifier
                 .width(40.dp)
-                .padding(horizontal = Padding.Medium), color = MaterialTheme.colors.onSurface
+                .padding(horizontal = MaterialTheme.spacing.medium), color = MaterialTheme.colors.onSurface
         )
     }
 }

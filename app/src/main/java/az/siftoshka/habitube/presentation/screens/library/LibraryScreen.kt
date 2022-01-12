@@ -24,14 +24,14 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.RealtimeViewModel
-import az.siftoshka.habitube.presentation.screens.library.components.LibraryCard
-import az.siftoshka.habitube.presentation.screens.library.components.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
-import az.siftoshka.habitube.presentation.screens.library.components.LibraryTextCard
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
 import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryCard
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryEmptyScreen
+import az.siftoshka.habitube.presentation.screens.library.components.LibraryTextCard
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import com.google.accompanist.pager.*
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.Dispatchers
@@ -83,8 +83,8 @@ fun LibraryScreen(
                     Row(
                         horizontalArrangement = Arrangement.Start,
                         modifier = Modifier
-                            .padding(horizontal = Padding.Default)
-                            .padding(top = Padding.Default)
+                            .padding(horizontal = MaterialTheme.spacing.default)
+                            .padding(top = MaterialTheme.spacing.default)
                     ) {
                         LibraryTitle(title = stringResource(id = R.string.text_movies), isSelected = viewModel.isMoviesSelected.value) { isSelected ->
                             viewModel.isMoviesSelected.value = isSelected
@@ -162,7 +162,7 @@ fun WatchedTab(
         if (context.isInternetAvailable()) {
             LazyVerticalGrid(
                 cells = GridCells.Fixed(4),
-                contentPadding = PaddingValues(Padding.Medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
             ) {
                 if (viewModel.isMoviesSelected.value) {
                     itemsIndexed(viewModel.watchedMovies.value) { index, item ->
@@ -183,7 +183,7 @@ fun WatchedTab(
                 }
             }
         } else {
-            LazyColumn(contentPadding = PaddingValues(Padding.Medium)) {
+            LazyColumn(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 if (viewModel.isMoviesSelected.value) {
                     itemsIndexed(viewModel.watchedMovies.value) { index, item ->
                         LibraryTextCard(title = item.title.orEmpty(), rating = item.myRating) {
@@ -221,7 +221,7 @@ fun PlanningTab(
         if (context.isInternetAvailable()) {
             LazyVerticalGrid(
                 cells = GridCells.Fixed(4),
-                contentPadding = PaddingValues(Padding.Medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
             ) {
                 if (viewModel.isMoviesSelected.value) {
                     itemsIndexed(viewModel.plannedMovies.value) { index, item ->
@@ -242,7 +242,7 @@ fun PlanningTab(
                 }
             }
         } else {
-            LazyColumn(contentPadding = PaddingValues(Padding.Medium)) {
+            LazyColumn(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 if (viewModel.isMoviesSelected.value) {
                     itemsIndexed(viewModel.plannedMovies.value) { index, item ->
                         LibraryTextCard(title = item.title.orEmpty()) {
@@ -279,7 +279,7 @@ fun LibraryTitle(
         color = backgroundColor,
         textAlign = TextAlign.Start,
         modifier = Modifier
-            .padding(end = Padding.Small)
+            .padding(end = MaterialTheme.spacing.small)
             .indication(indication = null, interactionSource = MutableInteractionSource())
             .clickable { onPerformClick(!isSelected) }
     )

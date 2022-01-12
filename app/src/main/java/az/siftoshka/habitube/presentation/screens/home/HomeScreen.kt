@@ -30,7 +30,7 @@ import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.components.text.TitleText
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import az.siftoshka.habitube.presentation.util.SpecialColors
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -90,13 +90,13 @@ fun HomeScreen(
                             viewModel.setUpdateShown()
                         }
                         UpcomingMovies(navController)
-                        Spacer(modifier = Modifier.height(Padding.Large))
+                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.large))
                         TrendingMovies(navController)
-                        Spacer(modifier = Modifier.height(Padding.Regular))
+                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
                         TrendingTvShows(navController)
-                        Spacer(modifier = Modifier.height(Padding.Regular))
+                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
                         AirTodayTvShows(navController)
-                        Spacer(modifier = Modifier.height(Padding.Regular))
+                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
                     }
                 }
             }
@@ -118,8 +118,8 @@ fun UpcomingMovies(
             context = { lazyListState ->
                 LazyRow(
                     state = lazyListState,
-                    contentPadding = PaddingValues(horizontal = Padding.Default),
-                    horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                    contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.default),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
                 ) {
                     itemsIndexed(upcomingMoviesState.media) { index, movie ->
                         LongImageCard(imageUrl = movie.backdropPath, title = movie.title) {
@@ -144,8 +144,8 @@ fun TrendingMovies(
         TitleText(text = R.string.text_trending, secondary = R.string.text_movies)
         LazyRow(
             modifier = Modifier.height(150.dp),
-            contentPadding = PaddingValues(horizontal = Padding.Default),
-            horizontalArrangement = Arrangement.spacedBy(Padding.Small),
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.default),
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
         ) {
             itemsIndexed(items = trendingMoviesState.media) { index, movie ->
                 viewModel.onChangeTrendingMoviesPosition(index)
@@ -172,8 +172,8 @@ fun TrendingTvShows(
         TitleText(text = R.string.text_trending, secondary = R.string.text_shows)
         LazyRow(
             modifier = Modifier.height(150.dp),
-            contentPadding = PaddingValues(horizontal = Padding.Default),
-            horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.default),
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
         ) {
             itemsIndexed(items = trendingTvShowsState.media) { index, show ->
                 viewModel.onChangeTrendingTvShowsPosition(index)
@@ -200,8 +200,8 @@ fun AirTodayTvShows(
         TitleText(text = R.string.text_air_today, secondary = R.string.text_shows)
         LazyRow(
             modifier = Modifier.height(150.dp),
-            contentPadding = PaddingValues(horizontal = Padding.Default),
-            horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.default),
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
         ) {
             itemsIndexed(items = exploreAirTodayState.media) { index, show ->
                 viewModel.onChangeAirTodayTvShowsPosition(index)

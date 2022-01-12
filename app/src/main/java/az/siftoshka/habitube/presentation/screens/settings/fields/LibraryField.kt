@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -21,12 +21,12 @@ fun LibraryField(
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(
                 modifier = Modifier
-                    .padding(Padding.Default)
+                    .padding(MaterialTheme.spacing.default)
                     .weight(1f), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -34,7 +34,7 @@ fun LibraryField(
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(bottom = Padding.Small)
+                    modifier = Modifier.padding(bottom = MaterialTheme.spacing.small)
                 )
                 Text(
                     text = moviesCount.toString(),
@@ -49,7 +49,7 @@ fun LibraryField(
             )
             Column(
                 modifier = Modifier
-                    .padding(Padding.Default)
+                    .padding(MaterialTheme.spacing.default)
                     .weight(1f), horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -57,7 +57,7 @@ fun LibraryField(
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(bottom = Padding.Small)
+                    modifier = Modifier.padding(bottom = MaterialTheme.spacing.small)
                 )
                 Text(
                     text = showsCount.toString(),

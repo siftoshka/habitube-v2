@@ -19,7 +19,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.screens.library.LibraryViewModel
 import az.siftoshka.habitube.presentation.screens.library.sections.InfoMovieSection
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import kotlinx.coroutines.launch
 
@@ -40,8 +40,8 @@ fun MovieBoard(
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(horizontal = Padding.Default)
-                .padding(bottom = Padding.ExtraLarge)
+                .padding(horizontal = MaterialTheme.spacing.default)
+                .padding(bottom = MaterialTheme.spacing.extraLarge)
         ) {
             if (context.isInternetAvailable()) {
                 Card(
@@ -63,14 +63,14 @@ fun MovieBoard(
                         color = MaterialTheme.colors.onSurface,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h4,
-                        modifier = Modifier.padding(Padding.Medium)
+                        modifier = Modifier.padding(MaterialTheme.spacing.medium)
                     )
                 }
             }
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = Padding.Medium)
+                    .padding(top = MaterialTheme.spacing.medium)
                     .border(width = 1.dp, color = MaterialTheme.colors.error, shape = MaterialTheme.shapes.large),
                 shape = MaterialTheme.shapes.large,
                 backgroundColor = MaterialTheme.colors.surface,
@@ -85,7 +85,7 @@ fun MovieBoard(
                     color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(Padding.Medium)
+                    modifier = Modifier.padding(MaterialTheme.spacing.medium)
                 )
             }
         }
@@ -95,8 +95,8 @@ fun MovieBoard(
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(horizontal = Padding.Default)
-                .padding(bottom = Padding.ExtraLarge)
+                .padding(horizontal = MaterialTheme.spacing.default)
+                .padding(bottom = MaterialTheme.spacing.extraLarge)
         ) {
             if (context.isInternetAvailable()) {
                 Card(
@@ -118,14 +118,14 @@ fun MovieBoard(
                         color = MaterialTheme.colors.onSurface,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h4,
-                        modifier = Modifier.padding(Padding.Medium)
+                        modifier = Modifier.padding(MaterialTheme.spacing.medium)
                     )
                 }
             }
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = Padding.Medium)
+                    .padding(top = MaterialTheme.spacing.medium)
                     .border(width = 1.dp, color = MaterialTheme.colors.secondaryVariant, shape = MaterialTheme.shapes.large),
                 shape = MaterialTheme.shapes.large,
                 backgroundColor = MaterialTheme.colors.surface,
@@ -140,13 +140,13 @@ fun MovieBoard(
                     color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(Padding.Medium)
+                    modifier = Modifier.padding(MaterialTheme.spacing.medium)
                 )
             }
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = Padding.Medium)
+                    .padding(top = MaterialTheme.spacing.medium)
                     .border(width = 1.dp, color = MaterialTheme.colors.error, shape = MaterialTheme.shapes.large),
                 shape = MaterialTheme.shapes.large,
                 backgroundColor = MaterialTheme.colors.surface,
@@ -161,7 +161,7 @@ fun MovieBoard(
                     color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(Padding.Medium)
+                    modifier = Modifier.padding(MaterialTheme.spacing.medium)
                 )
             }
         }

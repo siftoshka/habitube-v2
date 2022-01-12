@@ -32,7 +32,7 @@ import az.siftoshka.habitube.presentation.components.image.SearchCard
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -63,7 +63,7 @@ fun SearchScreen(
                     }
                     LazyVerticalGrid(
                         cells = GridCells.Fixed(4),
-                        contentPadding = PaddingValues(Padding.Medium),
+                        contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                     ) {
                         itemsIndexed(searchState.media) { index, item ->
                             viewModel.onChangeSearchPosition(index)
@@ -98,7 +98,7 @@ fun SearchView(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
-            .padding(Padding.Default),
+            .padding(MaterialTheme.spacing.default),
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp
@@ -110,7 +110,7 @@ fun SearchView(
                 placeholder = { Text(text = stringResource(id = R.string.text_search), style = MaterialTheme.typography.body1) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(Padding.Small)
+                    .padding(MaterialTheme.spacing.small)
                     .focusRequester(focusRequester),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
                 keyboardActions = KeyboardActions(onSearch = { keyboardController?.hide() }),
@@ -121,7 +121,7 @@ fun SearchView(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = Padding.Default),
+                    .padding(horizontal = MaterialTheme.spacing.default),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 SearchTab(SearchType.Multi) { viewModel.changeSearchType(SearchType.Multi) }
@@ -165,7 +165,7 @@ fun SearchTab(
             color = textColor,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(horizontal = Padding.Medium, vertical = Padding.Small)
+            modifier = Modifier.padding(horizontal = MaterialTheme.spacing.medium, vertical = MaterialTheme.spacing.small)
         )
     }
 }

@@ -13,18 +13,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun StoreButton(
     inActiveText: String,
-    activeText: String,
-    @DrawableRes icon: Int,
+    activeText: String? = null,
+    @DrawableRes inActiveIcon: Int,
+    @DrawableRes activeIcon: Int? = null,
     isMediaExist: MutableState<Boolean>,
     onPerformClick: (value: Boolean) -> Unit
 ) {
     val backgroundColor = if (isMediaExist.value) MaterialTheme.colors.primary else MaterialTheme.colors.surface
     val text = if (isMediaExist.value) activeText else inActiveText
+    val icon = if (isMediaExist.value && activeIcon != null) activeIcon else inActiveIcon
 
     Button(
         onClick = {
@@ -33,22 +35,24 @@ fun StoreButton(
         },
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(backgroundColor = backgroundColor),
-        modifier = Modifier.padding(Padding.ExtraSmall)
+        modifier = Modifier.padding(MaterialTheme.spacing.extraSmall)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 painter = painterResource(id = icon),
                 contentDescription = stringResource(id = R.string.text_planning_watch),
-                modifier = Modifier
-                    .padding(end = Padding.ExtraSmall)
-                    .size(20.dp)
+                modifier = Modifier.size(20.dp)
             )
-            Text(
-                text = text,
-                style = MaterialTheme.typography.h6,
-                color = MaterialTheme.colors.onBackground,
-                modifier = Modifier.padding(vertical = Padding.Small)
-            )
+            if (text != null) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.onBackground,
+                    modifier = Modifier
+                        .padding(vertical = MaterialTheme.spacing.extraSmall)
+                        .padding(start = MaterialTheme.spacing.extraSmall)
+                )
+            }
         }
     }
 }

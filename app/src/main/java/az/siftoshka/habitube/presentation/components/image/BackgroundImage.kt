@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -18,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL_ORIGINAL
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
@@ -61,7 +62,7 @@ fun BackgroundImage(
             )
             Box(modifier = Modifier
                 .fillMaxSize()
-                .padding(Padding.Default)) {
+                .padding(MaterialTheme.spacing.default)) {
                 IconButton(
                     onClick = { onItemClick() },
                     modifier = Modifier.size(30.dp)

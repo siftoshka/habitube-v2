@@ -12,7 +12,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun DetailTitle(
@@ -34,6 +34,6 @@ fun DetailTitle(
         style = MaterialTheme.typography.h2,
         color = MaterialTheme.colors.onBackground,
         textAlign = TextAlign.Start,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     )
 }

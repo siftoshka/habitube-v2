@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverViewModel
 import az.siftoshka.habitube.presentation.screens.discover.items.DiscoverSortItem
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -41,7 +41,7 @@ fun SortTag(
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body2,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(Padding.Small)
+            modifier = Modifier.padding(MaterialTheme.spacing.small)
         )
     }
 }

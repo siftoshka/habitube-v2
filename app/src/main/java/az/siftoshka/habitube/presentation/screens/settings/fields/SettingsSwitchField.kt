@@ -8,7 +8,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -23,7 +23,7 @@ fun SettingsSwitchField(
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp,
         onClick = { onPerformClick(!isChecked.value) },
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         ListItem(
             text = {
@@ -38,7 +38,7 @@ fun SettingsSwitchField(
                     text = stringResource(id = description),
                     style = MaterialTheme.typography.body2,
                     color = MaterialTheme.colors.secondaryVariant,
-                    modifier = Modifier.padding(vertical = Padding.Small)
+                    modifier = Modifier.padding(vertical = MaterialTheme.spacing.small)
                 )
             },
             trailing = {

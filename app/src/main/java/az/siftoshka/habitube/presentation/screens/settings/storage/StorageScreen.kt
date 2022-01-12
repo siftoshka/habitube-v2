@@ -15,7 +15,7 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
  * Composable function of Storage Screen.
@@ -37,7 +37,7 @@ fun StorageScreen(
                     icon = R.drawable.ic_back,
                 ) { navController.popBackStack() }
                 Spacer(modifier = Modifier.height(16.dp))
-                Column(Modifier.padding(horizontal = Padding.Default)) {
+                Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
                     LazyColumn(modifier = Modifier.fillMaxWidth()) {
                         items(list.size) {
                             val item = list[it]
@@ -84,7 +84,7 @@ fun StorageRowItem(
         backgroundColor = MaterialTheme.colors.surface,
         onClick = { onPerformClick(item.type) },
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         ListItem(
             text = {

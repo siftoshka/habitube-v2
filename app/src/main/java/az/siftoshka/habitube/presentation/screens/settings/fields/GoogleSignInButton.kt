@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.image.FirebaseAvatar
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -58,7 +58,7 @@ fun GoogleSignInButton() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = Padding.ExtraSmall)
+            .padding(vertical = MaterialTheme.spacing.extraSmall)
             .border(width = 1.dp, color = borderColor, shape = MaterialTheme.shapes.large),
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
@@ -84,7 +84,7 @@ fun GoogleSignInButton() {
                     color = MaterialTheme.colors.onSurface,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(Padding.Medium)
+                    modifier = Modifier.padding(MaterialTheme.spacing.medium)
                 )
             }
         } else if (!isNotLogIn.value) {
@@ -103,11 +103,11 @@ fun AccountView(
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Padding.Default, vertical = Padding.Small)
+            .padding(horizontal = MaterialTheme.spacing.default, vertical = MaterialTheme.spacing.small)
     ) {
         FirebaseAvatar(imageUrl = user?.photoUrl.toString(), title = user?.displayName)
         Column(
-            modifier = Modifier.padding(horizontal = Padding.Small)
+            modifier = Modifier.padding(horizontal = MaterialTheme.spacing.small)
         ) {
             Text(
                 text = user?.displayName.orEmpty(),

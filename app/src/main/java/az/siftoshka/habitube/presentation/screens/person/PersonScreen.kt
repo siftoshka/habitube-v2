@@ -31,7 +31,7 @@ import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import java.lang.Float.min
@@ -81,7 +81,7 @@ fun MainBoard(
             imageUrl = person?.profilePath
         ) { navController.popBackStack() }
 
-        Column(modifier = Modifier.padding(horizontal = Padding.Default, vertical = Padding.Small)) {
+        Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.default, vertical = MaterialTheme.spacing.small)) {
             Text(
                 text = person?.name.orEmpty(),
                 style = MaterialTheme.typography.h1,
@@ -99,7 +99,7 @@ fun MainBoard(
                 color = MaterialTheme.colors.onBackground,
                 textAlign = TextAlign.Start,
             )
-            Spacer(modifier = Modifier.height(Padding.ExtraSmall))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
             Text(
                 text = buildAnnotatedString {
                     append(stringResource(id = R.string.text_known_for))
@@ -130,19 +130,19 @@ fun MainBoard(
             )
             person?.let { person ->
                 if (!person.biography.isNullOrEmpty()) {
-                    Spacer(modifier = Modifier.height(Padding.Medium))
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                     DetailTitle(text = R.string.text_biography)
                     DetailsCard { ExpandableText(text = person.biography.orEmpty()) }
                 }
-                Spacer(modifier = Modifier.height(Padding.Medium))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 MovieCast(navController)
-                Spacer(modifier = Modifier.height(Padding.Medium))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 MovieCrew(navController)
-                Spacer(modifier = Modifier.height(Padding.Medium))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 ShowCast(navController)
-                Spacer(modifier = Modifier.height(Padding.Medium))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 ShowCrew(navController)
-                Spacer(modifier = Modifier.height(Padding.Medium))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             }
         }
     }
@@ -159,10 +159,10 @@ fun MovieCast(
         DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_movies)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(Padding.Medium),
-                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
-                creditState.credits.cast.let { movies ->
+                creditState.credits.cast.sortedByDescending { it.popularity }.let { movies ->
                     items(movies.size) {
                         val movie = movies[it]
                         ImageCard(imageUrl = movie.posterPath, title = movie.name) {
@@ -186,10 +186,10 @@ fun MovieCrew(
         DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_movies)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(Padding.Medium),
-                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
-                creditState.credits.crew.let { movies ->
+                creditState.credits.crew.sortedByDescending { it.popularity }.let { movies ->
                     items(movies.size) {
                         val movie = movies[it]
                         ImageCard(imageUrl = movie.posterPath, title = movie.name) {
@@ -213,10 +213,10 @@ fun ShowCast(
         DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_shows)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(Padding.Medium),
-                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
-                creditState.credits.cast.let { shows ->
+                creditState.credits.cast.sortedByDescending { it.popularity }.let { shows ->
                     items(shows.size) {
                         val show = shows[it]
                         ImageCard(imageUrl = show.posterPath, title = show.name) {
@@ -240,10 +240,10 @@ fun ShowCrew(
         DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_shows)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(Padding.Medium),
-                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
-                creditState.credits.crew.let { shows ->
+                creditState.credits.crew.sortedByDescending { it.popularity }.let { shows ->
                     items(shows.size) {
                         val show = shows[it]
                         ImageCard(imageUrl = show.posterPath, title = show.name) {

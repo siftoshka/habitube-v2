@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverViewModel
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -26,7 +26,7 @@ fun MediaOptions(viewModel: DiscoverViewModel = hiltViewModel()) {
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(

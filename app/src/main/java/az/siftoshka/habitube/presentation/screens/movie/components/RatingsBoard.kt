@@ -10,13 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.screens.movie.MovieViewModel
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun RatingsBoard(viewModel: MovieViewModel = hiltViewModel()) {
@@ -24,8 +23,8 @@ fun RatingsBoard(viewModel: MovieViewModel = hiltViewModel()) {
     val movie = viewModel.movieState.value.movie
     val omdbData = viewModel.omdbState.value.data
 
-    val movieDbRating = "${movie?.voteAverage ?: 0} (${movie?.voteCount ?: 0})"
-    val imdbRating = "${omdbData?.imdbRating ?: 0} (${omdbData?.imdbVotes ?: 0})"
+    val movieDbRating = "${movie?.voteAverage} (${movie?.voteCount})"
+    val imdbRating = "${omdbData?.imdbRating} (${omdbData?.imdbVotes})"
     val ratings = omdbData?.ratings ?: emptyList()
 
     var tomatoValue: String? = null
@@ -42,12 +41,12 @@ fun RatingsBoard(viewModel: MovieViewModel = hiltViewModel()) {
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(Padding.Medium)
+                .padding(MaterialTheme.spacing.medium)
         ) {
-            RatingCard(value = imdbRating, icon = R.drawable.ic_imdb_logo)
-            RatingCard(value = metacriticValue, icon = R.drawable.ic_metacritic_logo)
+            omdbData?.imdbRating?.let { RatingCard(value = imdbRating, icon = R.drawable.ic_imdb_logo) }
+            RatingCard(value = metacriticValue, icon = R.drawable.ic_metascore_logo)
             RatingCard(value = tomatoValue, icon = R.drawable.ic_rotten_tomatoes_logo)
-            RatingCard(value = movieDbRating, icon = R.drawable.ic_moviedb_logo)
+            movie?.voteAverage?.let { RatingCard(value = movieDbRating, icon = R.drawable.ic_moviedb_logo) }
         }
     }
 }
@@ -67,7 +66,7 @@ fun RatingCard(value: String?, @DrawableRes icon: Int) {
                 color = MaterialTheme.colors.onSurface,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
-                modifier = Modifier.padding(top = Padding.ExtraSmall)
+                modifier = Modifier.padding(top = MaterialTheme.spacing.extraSmall)
             )
         }
     }

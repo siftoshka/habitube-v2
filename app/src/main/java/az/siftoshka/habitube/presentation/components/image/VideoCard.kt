@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
@@ -62,7 +62,7 @@ fun VideoCard(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(Padding.Medium),
+                    .padding(MaterialTheme.spacing.medium),
                 contentAlignment = Alignment.BottomStart
             ) {
                 Text(

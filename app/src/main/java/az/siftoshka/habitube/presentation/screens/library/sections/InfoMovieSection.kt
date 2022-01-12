@@ -18,7 +18,7 @@ import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.domain.util.onlyYear
 import az.siftoshka.habitube.presentation.screens.library.components.LibraryMinimalCard
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun InfoMovieSection(movie: Movie?, isWatched: Boolean) {
@@ -28,10 +28,10 @@ fun InfoMovieSection(movie: Movie?, isWatched: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Padding.Default, vertical = Padding.Small)
+            .padding(horizontal = MaterialTheme.spacing.default, vertical = MaterialTheme.spacing.small)
     ) {
         if (context.isInternetAvailable()) LibraryMinimalCard(imageUrl = movie?.posterPath.orEmpty())
-        Column(modifier = Modifier.padding(horizontal = Padding.Small)) {
+        Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.small)) {
             Text(
                 text = buildAnnotatedString {
                     append("${movie?.title}")
@@ -48,7 +48,7 @@ fun InfoMovieSection(movie: Movie?, isWatched: Boolean) {
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-            Spacer(modifier = Modifier.height(Padding.ExtraSmall))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
             if (isWatched) {
                 Text(
                     text = buildAnnotatedString {

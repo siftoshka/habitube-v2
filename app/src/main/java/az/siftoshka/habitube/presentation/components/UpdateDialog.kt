@@ -14,7 +14,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.SpecialColors
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -53,11 +53,11 @@ fun UpdateDialog(
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = Padding.Default)
+                        .padding(bottom = MaterialTheme.spacing.default)
                 ) {
                     Card(
                         shape = MaterialTheme.shapes.large,
-                        modifier = Modifier.padding(horizontal = Padding.Default),
+                        modifier = Modifier.padding(horizontal = MaterialTheme.spacing.default),
                         backgroundColor = SpecialColors.Update,
                         elevation = 0.dp,
                         onClick = onPerformClick
@@ -67,7 +67,7 @@ fun UpdateDialog(
                             text = stringResource(id = textButton),
                             style = MaterialTheme.typography.body1,
                             color = MaterialTheme.colors.primary,
-                            modifier = Modifier.padding(Padding.Default)
+                            modifier = Modifier.padding(MaterialTheme.spacing.default)
                         )
                     }
                 }

@@ -14,8 +14,8 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.presentation.screens.discover.components.*
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.NavigationConstants
-import az.siftoshka.habitube.presentation.util.Padding
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -36,7 +36,7 @@ fun DiscoverScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = Padding.Default)
+                    .padding(horizontal = MaterialTheme.spacing.default)
                     .verticalScroll(rememberScrollState())
             ) {
                 DiscoverConfigurations()
@@ -44,12 +44,12 @@ fun DiscoverScreen(
             Column(
                 verticalArrangement = Arrangement.Bottom, modifier = Modifier
                     .fillMaxWidth()
-                    .padding(Padding.Default)
+                    .padding(MaterialTheme.spacing.default)
             ) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = Padding.ExtraSmall),
+                        .padding(vertical = MaterialTheme.spacing.extraSmall),
                     shape = MaterialTheme.shapes.large,
                     backgroundColor = MaterialTheme.colors.primary,
                     onClick = {
@@ -64,7 +64,7 @@ fun DiscoverScreen(
                         color = MaterialTheme.colors.onPrimary,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h3,
-                        modifier = Modifier.padding(Padding.Medium)
+                        modifier = Modifier.padding(MaterialTheme.spacing.medium)
                     )
                 }
             }
@@ -75,7 +75,7 @@ fun DiscoverScreen(
 @Composable
 fun DiscoverConfigurations(viewModel: DiscoverViewModel = hiltViewModel()) {
     MediaOptions()
-    Spacer(modifier = Modifier.height(Padding.Small))
+    Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
     OptionTitle(title = R.string.text_sort)
     SortOptions()
     OptionTitle(title = R.string.text_years_range)

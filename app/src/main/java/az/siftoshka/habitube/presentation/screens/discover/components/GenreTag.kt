@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverViewModel
 import az.siftoshka.habitube.presentation.screens.discover.items.DiscoverGenresItem
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -28,7 +28,8 @@ fun GenreTag(
     val isExist = viewModel.genres.value.contains(item.category)
 
     val backgroundColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.background
-    val strokeColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.secondaryVariant.copy(alpha = 0.2f)
+    val strokeColor =
+        if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.primary else MaterialTheme.colors.secondaryVariant.copy(alpha = 0.2f)
     val textColor = if (viewModel.genres.value.contains(item.category)) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onBackground
 
     Card(
@@ -46,7 +47,7 @@ fun GenreTag(
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body2,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(Padding.Small)
+            modifier = Modifier.padding(MaterialTheme.spacing.small)
         )
     }
 }

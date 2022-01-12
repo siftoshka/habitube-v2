@@ -38,7 +38,7 @@ import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
 import az.siftoshka.habitube.presentation.screens.movie.components.RatingsBoard
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.gowtham.ratingbar.RatingBar
@@ -96,7 +96,7 @@ fun MainBoard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = Padding.Default, vertical = Padding.Small)
+                .padding(horizontal = MaterialTheme.spacing.default, vertical = MaterialTheme.spacing.small)
         ) {
             ImageCard(
                 imageUrl = movie?.posterPath,
@@ -105,7 +105,7 @@ fun MainBoard(
             ) {}
             Column(
                 modifier = Modifier
-                    .padding(horizontal = Padding.Small)
+                    .padding(horizontal = MaterialTheme.spacing.small)
                     .height(150.dp)
             ) {
                 Text(
@@ -124,7 +124,7 @@ fun MainBoard(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.height(Padding.ExtraSmall))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
                 Text(
                     text = buildAnnotatedString {
                         append(stringResource(id = R.string.text_runtime))
@@ -159,7 +159,7 @@ fun MainBoard(
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_add_rating),
                         activeText = stringResource(id = R.string.text_rated, viewModel.rating.value),
-                        icon = R.drawable.ic_star,
+                        inActiveIcon = R.drawable.ic_star,
                         isMediaExist = viewModel.isWatched
                     ) { isNotWatched ->
                         if (isNotWatched) {
@@ -170,8 +170,8 @@ fun MainBoard(
                     }
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_planning_watch),
-                        activeText = stringResource(id = R.string.text_planning_watch),
-                        icon = R.drawable.ic_planning,
+                        inActiveIcon = R.drawable.ic_planning,
+                        activeIcon = R.drawable.ic_planning_active,
                         isMediaExist = viewModel.isPlanned
                     ) { isNotPlanned ->
                         if (isNotPlanned) {
@@ -201,15 +201,15 @@ fun InfoBoard(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .padding(horizontal = Padding.Default)
-            .padding(bottom = Padding.Default)
+            .padding(horizontal = MaterialTheme.spacing.default)
+            .padding(bottom = MaterialTheme.spacing.default)
     ) {
         if (viewModel.isWatched.value) {
             DetailsCard {
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .padding(Padding.Medium), horizontalAlignment = Alignment.CenterHorizontally
+                        .padding(MaterialTheme.spacing.medium), horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
                         ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
@@ -219,15 +219,15 @@ fun InfoBoard(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(Padding.Medium))
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
         RatingsBoard()
         if (videosState.videos.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(Padding.Medium))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             DetailTitle(text = R.string.text_videos)
             DetailsCard {
                 LazyRow(
-                    modifier = Modifier.padding(Padding.Medium),
-                    horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                    modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
                 ) {
                     videosState.videos.let { videos ->
                         items(videos.size) {
@@ -243,14 +243,14 @@ fun InfoBoard(
         }
         movieState.movie?.let { movie ->
             if (!movie.overview.isNullOrEmpty()) {
-                Spacer(modifier = Modifier.height(Padding.Medium))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 DetailTitle(text = R.string.text_description)
                 DetailsCard { ExpandableText(text = movie.overview.orEmpty()) }
             }
-            Spacer(modifier = Modifier.height(Padding.Medium))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             DetailTitle(text = R.string.text_details)
             DetailsCard {
-                Column(modifier = Modifier.padding(Padding.Medium)) {
+                Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                     DetailText(name = R.string.text_original_title, detail = ": ${movie.originalTitle}")
                     DetailText(name = R.string.text_budget, detail = ": ${movie.budget.toString().moneyFormat()}")
                     DetailText(name = R.string.text_revenue, detail = ": ${movie.revenue.toString().moneyFormat()}")
@@ -260,13 +260,13 @@ fun InfoBoard(
                     DetailText(name = R.string.text_genres, detail = ": $genres")
                 }
             }
-            Spacer(modifier = Modifier.height(Padding.Medium))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             Cast(navController)
-            Spacer(modifier = Modifier.height(Padding.Medium))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             Crew(navController)
-            Spacer(modifier = Modifier.height(Padding.Medium))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             SimilarMovies(navController)
-            Spacer(modifier = Modifier.height(Padding.Medium))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
         }
     }
 }
@@ -281,7 +281,7 @@ fun Cast(
     if (creditState.credits?.cast?.isNotEmpty() == true) {
         DetailTitle(text = R.string.text_cast)
         DetailsCard {
-            LazyRow(Modifier.padding(Padding.Medium)) {
+            LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
                 creditState.credits.cast.sortedByDescending { it.popularity }.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
@@ -305,7 +305,7 @@ fun Crew(
     if (creditState.credits?.crew?.isNotEmpty() == true) {
         DetailTitle(text = R.string.text_crew)
         DetailsCard {
-            LazyRow(Modifier.padding(Padding.Medium)) {
+            LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
                 creditState.credits.crew.sortedByDescending { it.popularity }.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
@@ -331,8 +331,8 @@ fun SimilarMovies(
         DetailTitle(text = R.string.text_similar)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(Padding.Medium),
-                horizontalArrangement = Arrangement.spacedBy(Padding.Small)
+                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 itemsIndexed(items = similarState.movies) { index, movie ->
                     viewModel.onChangePosition(index)

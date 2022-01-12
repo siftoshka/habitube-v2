@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -31,7 +31,7 @@ fun FoldableTextField(
         onClick = { short = !short },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = Padding.ExtraSmall)
+            .padding(vertical = MaterialTheme.spacing.extraSmall)
             .animateContentSize(tween(400))
     ) {
         Text(
@@ -39,7 +39,7 @@ fun FoldableTextField(
             style = MaterialTheme.typography.h4,
             color = MaterialTheme.colors.onSurface,
             textAlign = TextAlign.Start,
-            modifier = Modifier.padding(Padding.Default)
+            modifier = Modifier.padding(MaterialTheme.spacing.default)
         )
         if (!short) {
             Text(
@@ -47,7 +47,7 @@ fun FoldableTextField(
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.secondaryVariant,
                 textAlign = TextAlign.Start,
-                modifier = Modifier.padding(Padding.Default)
+                modifier = Modifier.padding(MaterialTheme.spacing.default)
             )
         }
     }

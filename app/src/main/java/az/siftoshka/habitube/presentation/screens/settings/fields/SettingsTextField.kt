@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -19,7 +19,7 @@ fun SettingsTextField(
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         ListItem(
             text = {
@@ -34,7 +34,7 @@ fun SettingsTextField(
                     text = stringResource(id = secondaryText),
                     style = MaterialTheme.typography.body2,
                     color = MaterialTheme.colors.secondaryVariant,
-                    modifier = Modifier.padding(vertical = Padding.Small)
+                    modifier = Modifier.padding(vertical = MaterialTheme.spacing.small)
                 )
             }
         )

@@ -12,8 +12,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
-import com.airbnb.lottie.compose.*
+import az.siftoshka.habitube.presentation.theme.spacing
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
 fun NoConnectionScreen() {
@@ -35,14 +38,14 @@ fun NoConnectionScreen() {
             style = MaterialTheme.typography.h1,
             color = MaterialTheme.colors.onBackground,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = Padding.Default, bottom = Padding.Small)
+            modifier = Modifier.padding(top = MaterialTheme.spacing.default, bottom = MaterialTheme.spacing.small)
         )
         Text(
             text = stringResource(id = R.string.text_offline_description),
             style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onBackground,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(vertical = Padding.Default)
+            modifier = Modifier.padding(vertical = MaterialTheme.spacing.default)
         )
     }
 }

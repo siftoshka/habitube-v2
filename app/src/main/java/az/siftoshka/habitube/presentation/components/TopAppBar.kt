@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun TopAppBar(
@@ -26,7 +26,7 @@ fun TopAppBar(
                 text = stringResource(id = title),
                 style = MaterialTheme.typography.h3,
                 color = MaterialTheme.colors.onBackground,
-                modifier = Modifier.padding(vertical = Padding.Default)
+                modifier = Modifier.padding(vertical = MaterialTheme.spacing.default)
             )
         },
         navigationIcon = {

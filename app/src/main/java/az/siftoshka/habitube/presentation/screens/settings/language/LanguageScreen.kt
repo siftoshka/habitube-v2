@@ -17,7 +17,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
  * Composable function of Language Screen.
@@ -39,7 +39,7 @@ fun LanguageScreen(
                 Spacer(modifier = Modifier.height(16.dp))
                 LazyColumn(
                     modifier = Modifier
-                        .padding(horizontal = Padding.Default)
+                        .padding(horizontal = MaterialTheme.spacing.default)
                         .fillMaxWidth()
                 ) {
                     items(languages.size) {
@@ -85,7 +85,7 @@ fun LanguageRowItem(
         backgroundColor = MaterialTheme.colors.surface,
         onClick = { onPerformClick(language.category) },
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
         ListItem(
             text = {

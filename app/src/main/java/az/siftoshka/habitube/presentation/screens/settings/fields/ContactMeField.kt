@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.SocialNetworks
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.SpecialColors
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -23,14 +23,14 @@ fun ContactMeField(
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp,
-        modifier = Modifier.padding(vertical = Padding.ExtraSmall)
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
-        Column(modifier = Modifier.padding(Padding.Default)) {
+        Column(modifier = Modifier.padding(MaterialTheme.spacing.default)) {
             Text(
                 text = stringResource(id = text),
                 style = MaterialTheme.typography.h4,
                 color = MaterialTheme.colors.onSurface,
-                modifier = Modifier.padding(bottom = Padding.Small)
+                modifier = Modifier.padding(bottom = MaterialTheme.spacing.small)
             )
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Card(
@@ -44,7 +44,7 @@ fun ContactMeField(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_telegram),
                         contentDescription = SocialNetworks.TELEGRAM.name,
-                        modifier = Modifier.padding(Padding.Small)
+                        modifier = Modifier.padding(MaterialTheme.spacing.small)
                     )
                 }
                 Card(
@@ -58,7 +58,7 @@ fun ContactMeField(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_github),
                         contentDescription = SocialNetworks.GITHUB.name,
-                        modifier = Modifier.padding(Padding.Small)
+                        modifier = Modifier.padding(MaterialTheme.spacing.small)
                     )
                 }
                 Card(
@@ -72,7 +72,7 @@ fun ContactMeField(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_instagram),
                         contentDescription = SocialNetworks.INSTAGRAM.name,
-                        modifier = Modifier.padding(Padding.Small)
+                        modifier = Modifier.padding(MaterialTheme.spacing.small)
                     )
                 }
             }

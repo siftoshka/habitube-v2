@@ -8,12 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextAlign
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.util.Padding
+import az.siftoshka.habitube.presentation.theme.spacing
 
 @Composable
 fun ExpandableText(modifier: Modifier = Modifier, text: String) {
@@ -53,7 +51,7 @@ fun ExpandableText(modifier: Modifier = Modifier, text: String) {
         maxLines = if (isExpanded) Int.MAX_VALUE else 3,
         onTextLayout = { textLayoutResultState.value = it },
         modifier = modifier
-            .padding(Padding.Medium)
+            .padding(MaterialTheme.spacing.medium)
             .clickable(enabled = isClickable) { isExpanded = !isExpanded }
             .animateContentSize()
     )
