@@ -167,6 +167,7 @@ interface MovieApiService {
     suspend fun getDiscoverTvShows(
         @Query("sort_by") sort: String,
         @Query("with_genres") genres: String,
+        @Query("with_networks") networks: String,
         @Query("first_air_date.gte") yearGte: String,
         @Query("first_air_date.lte") yearLte: String,
         @Query("vote_average.gte") ratingGte: String,

@@ -23,12 +23,12 @@ import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.components.Pager
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.components.UpdateDialog
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.components.text.TitleText
+import az.siftoshka.habitube.presentation.screens.home.dialog.UpdateDialog
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen

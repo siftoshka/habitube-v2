@@ -11,5 +11,6 @@ data class DiscoverConfiguration(
     var yearEnd: String? = null,
     var ratingStart: String? = null,
     var ratingEnd: String? = null,
-    var genres: String? = null
+    var genres: String? = null,
+    var networks: String? = null
 ) : Parcelable

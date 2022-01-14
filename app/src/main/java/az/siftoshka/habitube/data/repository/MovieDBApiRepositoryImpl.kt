@@ -115,6 +115,7 @@ class MovieDBApiRepositoryImpl @Inject constructor(
     override suspend fun getDiscoverTvShows(
         sort: String,
         genres: String,
+        networks: String,
         yearGte: String,
         yearLte: String,
         ratingGte: String,
@@ -124,6 +125,7 @@ class MovieDBApiRepositoryImpl @Inject constructor(
         return service.getDiscoverTvShows(
             sort = sort,
             genres = genres,
+            networks = networks,
             yearGte = yearGte,
             yearLte = yearLte,
             ratingGte = ratingGte,

@@ -16,6 +16,7 @@ fun SortOptions(
 ) {
     FlowRow(
         mainAxisSpacing = 8.dp,
+        crossAxisSpacing = (-8).dp,
         modifier = Modifier.fillMaxWidth()
     ) {
         if (viewModel.isMovieSelected.value) {

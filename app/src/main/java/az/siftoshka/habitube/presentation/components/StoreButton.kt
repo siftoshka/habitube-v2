@@ -25,6 +25,7 @@ fun StoreButton(
     onPerformClick: (value: Boolean) -> Unit
 ) {
     val backgroundColor = if (isMediaExist.value) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+    val textColor = if (isMediaExist.value) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSurface
     val text = if (isMediaExist.value) activeText else inActiveText
     val icon = if (isMediaExist.value && activeIcon != null) activeIcon else inActiveIcon
 
@@ -47,7 +48,7 @@ fun StoreButton(
                 Text(
                     text = text,
                     style = MaterialTheme.typography.h6,
-                    color = MaterialTheme.colors.onBackground,
+                    color = textColor,
                     modifier = Modifier
                         .padding(vertical = MaterialTheme.spacing.extraSmall)
                         .padding(start = MaterialTheme.spacing.extraSmall)

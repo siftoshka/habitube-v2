@@ -926,6 +926,16 @@
   license: The Apache Software License, Version 2.0
   licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
   url: http://code.google.com/p/atinject/
+- artifact: nl.dionsegijn:konfetti-compose:+
+  name: konfetti-compose
+  copyrightHolder: Konfetti License
+  license: ISC License
+  url: https://github.com/DanielMartinus/Konfetti
+- artifact: nl.dionsegijn:konfetti-core:+
+  name: konfetti-core
+  copyrightHolder: Konfetti License
+  license: ISC License
+  url: https://github.com/DanielMartinus/Konfetti
 - artifact: org.jetbrains.kotlin:kotlin-android-extensions-runtime:+
   name: kotlin-android-extensions-runtime
   copyrightHolder: JetBrains s.r.o.

@@ -170,8 +170,8 @@ fun MainBoard(
                     }
                     StoreButton(
                         inActiveText = stringResource(id = R.string.text_planning_watch),
-                        activeText = stringResource(id = R.string.text_planning_watch),
                         inActiveIcon = R.drawable.ic_planning,
+                        activeIcon = R.drawable.ic_planning_active,
                         isMediaExist = viewModel.isPlanned
                     ) { isNotPlanned ->
                         if (isNotPlanned) {

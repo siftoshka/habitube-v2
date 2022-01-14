@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextAlign
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun OptionSlider(
+    default: ClosedFloatingPointRange<Float>,
     value: ClosedFloatingPointRange<Float>, steps: Int,
     onPerformClick: (value: ClosedFloatingPointRange<Float>) -> Unit,
 ) {
@@ -19,7 +20,7 @@ fun OptionSlider(
         steps = steps,
         values = sliderPosition,
         onValueChange = { sliderPosition = it },
-        valueRange = value,
+        valueRange = default,
         onValueChangeFinished = { onPerformClick(sliderPosition) },
         colors = SliderDefaults.colors(
             thumbColor = MaterialTheme.colors.primary,

@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
 
     fun isUpdateShown() {
         viewModelScope.launch {
-            delay(2000L)
+            delay(1000L)
             _updateState.value = !localRepository.isUpdateShown()
         }
     }

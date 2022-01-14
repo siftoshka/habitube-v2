@@ -79,10 +79,14 @@ fun DiscoverConfigurations(viewModel: DiscoverViewModel = hiltViewModel()) {
     OptionTitle(title = R.string.text_sort)
     SortOptions()
     OptionTitle(title = R.string.text_years_range)
-    OptionSlider(value = 1900f..2022f, 0) { viewModel.yearRange.value = it }
+    OptionSlider(default = 1900f..2022f, value = viewModel.yearRange.value, 0) { viewModel.yearRange.value = it }
     OptionTitle(title = R.string.text_rating_range)
-    OptionSlider(value = 4f..10f, 6) { viewModel.ratingRange.value = it }
+    OptionSlider(default = 4f..10f, value = viewModel.ratingRange.value, 6) { viewModel.ratingRange.value = it }
     OptionTitle(title = R.string.text_genres)
     GenreOptions()
+    if (!viewModel.isMovieSelected.value) {
+        OptionTitle(title = R.string.text_networks)
+        NetworkOptions()
+    }
     Spacer(modifier = Modifier.height(128.dp))
 }

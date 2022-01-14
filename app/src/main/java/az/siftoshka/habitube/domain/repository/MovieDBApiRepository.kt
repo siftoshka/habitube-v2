@@ -58,6 +58,7 @@ interface MovieDBApiRepository {
     suspend fun getDiscoverTvShows(
         sort: String,
         genres: String,
+        networks: String,
         yearGte: String,
         yearLte: String,
         ratingGte: String,

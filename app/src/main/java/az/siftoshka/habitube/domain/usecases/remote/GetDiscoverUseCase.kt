@@ -19,6 +19,7 @@ class GetDiscoverUseCase @Inject constructor(
     operator fun invoke(
         sort: String,
         genres: String,
+        networks: String,
         yearGte: String,
         yearLte: String,
         ratingGte: String,
@@ -31,7 +32,7 @@ class GetDiscoverUseCase @Inject constructor(
             var resources = if (isMovieSelected) {
                 repository.getDiscoverMovies(sort, genres, yearGte, yearLte, ratingGte, ratingLte, page).map { it.toMediaLite() }
             } else {
-                repository.getDiscoverTvShows(sort, genres, yearGte, yearLte, ratingGte, ratingLte, page).map { it.toMediaLite() }
+                repository.getDiscoverTvShows(sort, genres, networks, yearGte, yearLte, ratingGte, ratingLte, page).map { it.toMediaLite() }
             }
             resources = resources.filterNot { it.posterPath.isNullOrBlank() }
             emit(Resource.Success(resources))
