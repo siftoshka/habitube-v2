@@ -33,14 +33,14 @@ class UpdateDialogViewModel @Inject constructor() : ViewModel() {
             spread = Spread.WIDE,
             colors = colors,
             emitter = Emitter(duration = 2, TimeUnit.SECONDS).perSecond(50),
-            position = Position.Relative(0.0, 0.3)
+            position = Position.Relative(0.0, 0.2)
         )
 
         return listOf(
             party,
             party.copy(
                 angle = party.angle - 90,
-                position = Position.Relative(1.0, 0.3)
+                position = Position.Relative(1.0, 0.2)
             ),
         )
     }
