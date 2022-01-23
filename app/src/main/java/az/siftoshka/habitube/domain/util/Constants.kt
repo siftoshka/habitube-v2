@@ -29,6 +29,11 @@ object Constants {
     const val VIMEO_URL = "https://vimeo.com/"
     const val PAGE_SIZE = 20
 
+    // The Movie Database
+    const val MOVIE_THEMOVIEDB = "https://www.themoviedb.org/movie/"
+    const val TV_THEMOVIEDB = "https://www.themoviedb.org/tv/"
+    const val PERSON_THEMOVIEDB = "https://www.themoviedb.org/person/"
+
     // About me
     const val DEV_TELEGRAM = "https://t.me/siftoshka"
     const val DEV_GITHUB = "https://github.com/siftoshka"

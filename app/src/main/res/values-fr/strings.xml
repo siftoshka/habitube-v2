@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Habitube</string>
+    <string name="app_share">Sent via Habitube App\n</string>
 
     <!-- Navigation -->
     <string name="nav_home">Accueil</string>
@@ -42,7 +43,7 @@
 
 
     <!-- Search Screen -->
-    <string name="text_tab_multi">Multi</string>
+    <string name="text_tab_multi">All</string>
     <string name="text_tab_movie">Movies</string>
     <string name="text_tab_show">TV Shows</string>
     <string name="text_tab_person">Persons</string>

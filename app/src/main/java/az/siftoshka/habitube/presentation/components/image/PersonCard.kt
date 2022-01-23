@@ -25,7 +25,8 @@ import coil.request.CachePolicy
 fun PersonCard(
     modifier: Modifier,
     imageUrl: String?,
-    onItemClick: () -> Unit
+    onBack: () -> Unit,
+    onShare: () -> Unit
 ) {
     Card(
         modifier = modifier,
@@ -59,15 +60,32 @@ fun PersonCard(
                         )
                     )
             )
-            Box(modifier = Modifier.fillMaxSize().padding(MaterialTheme.spacing.default)) {
-                IconButton(
-                    onClick = { onItemClick() },
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = imageUrl,
-                    )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(MaterialTheme.spacing.default)
+            ) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    IconButton(
+                        onClick = { onBack() },
+                        modifier = Modifier.size(30.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            tint = Color.White,
+                            contentDescription = imageUrl,
+                        )
+                    }
+                    IconButton(
+                        onClick = { onShare() },
+                        modifier = Modifier.size(30.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_share),
+                            tint = Color.White,
+                            contentDescription = imageUrl,
+                        )
+                    }
                 }
             }
         }

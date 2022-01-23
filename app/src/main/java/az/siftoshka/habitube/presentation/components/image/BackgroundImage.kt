@@ -2,10 +2,7 @@ package az.siftoshka.habitube.presentation.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -27,7 +24,8 @@ import coil.request.CachePolicy
 fun BackgroundImage(
     modifier: Modifier,
     imageUrl: String?,
-    onItemClick: () -> Unit
+    onBack: () -> Unit,
+    onShare: () -> Unit,
 ) {
     Card(
         modifier = modifier,
@@ -60,18 +58,32 @@ fun BackgroundImage(
                         )
                     )
             )
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .padding(MaterialTheme.spacing.default)) {
-                IconButton(
-                    onClick = { onItemClick() },
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        tint = Color.White,
-                        contentDescription = imageUrl,
-                    )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(MaterialTheme.spacing.default)
+            ) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    IconButton(
+                        onClick = { onBack() },
+                        modifier = Modifier.size(30.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_back),
+                            tint = Color.White,
+                            contentDescription = imageUrl,
+                        )
+                    }
+                    IconButton(
+                        onClick = { onShare() },
+                        modifier = Modifier.size(30.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_share),
+                            tint = Color.White,
+                            contentDescription = imageUrl,
+                        )
+                    }
                 }
             }
         }

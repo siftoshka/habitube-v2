@@ -143,17 +143,17 @@ fun NavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = BottomBarScreen.Home.route
     ) {
-        composable(
-            route = BottomBarScreen.Home.route,
-            exitTransition = { Animation.slideOutHorizontally(-300) },
-            popEnterTransition = { Animation.slideInHorizontally(-300) }
-        ) {
+        composable(route = BottomBarScreen.Home.route) {
             HomeScreen(navController)
         }
         composable(route = BottomBarScreen.Discover.route) {
             DiscoverScreen(navController)
         }
-        composable(route = Screen.DiscoverListScreen.route) {
+        composable(
+            route = Screen.DiscoverListScreen.route,
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
+        ) {
             val discoverConfiguration =
                 navController.previousBackStackEntry?.arguments?.getParcelable<DiscoverConfiguration>(NavigationConstants.PARAM_DISCOVER)
             DiscoverListScreen(navController, discoverConfiguration)
@@ -164,11 +164,7 @@ fun NavGraph(navController: NavHostController) {
         composable(route = BottomBarScreen.Library.route) {
             LibraryScreen(navController)
         }
-        composable(
-            route = BottomBarScreen.Settings.route,
-            exitTransition = { Animation.slideOutHorizontally(-300) },
-            popEnterTransition = { Animation.slideInHorizontally(-300) }
-        ) {
+        composable(route = BottomBarScreen.Settings.route) {
             SettingsScreen(navController)
         }
         composable(

@@ -80,6 +80,7 @@ fun MainBoard(
     navController: NavController,
     viewModel: ShowViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val show = viewModel.showState.value.show
 
     Column {
@@ -91,8 +92,10 @@ fun MainBoard(
                     alpha = min(1f, 1 - (scrollState.value / 600f))
                     translationY = -scrollState.value * 0.1f
                 },
-            imageUrl = show?.backdropPath
-        ) { navController.popBackStack() }
+            imageUrl = show?.backdropPath,
+            onBack = { navController.popBackStack() },
+            onShare = { context.shareLink(show?.homepage ?: Constants.TV_THEMOVIEDB + show?.id) }
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -208,7 +211,8 @@ fun InfoBoard(
                     Column(
                         Modifier
                             .fillMaxWidth()
-                            .padding(MaterialTheme.spacing.medium), horizontalAlignment = Alignment.CenterHorizontally) {
+                            .padding(MaterialTheme.spacing.medium), horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         RatingBar(value = ratingState.value, numStars = 10, stepSize = StepSize.HALF,
                             ratingBarStyle = RatingBarStyle.HighLighted, onValueChange = { ratingState.value = it }) {
                             viewModel.rating.value = it

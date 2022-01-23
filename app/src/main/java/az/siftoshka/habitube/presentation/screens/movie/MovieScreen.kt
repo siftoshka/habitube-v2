@@ -79,6 +79,7 @@ fun MainBoard(
     navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val movie = viewModel.movieState.value.movie
     val director = viewModel.omdbState.value.data?.director
 
@@ -91,8 +92,10 @@ fun MainBoard(
                     alpha = min(1f, 1 - (scrollState.value / 600f))
                     translationY = -scrollState.value * 0.1f
                 },
-            imageUrl = movie?.backdropPath
-        ) { navController.popBackStack() }
+            imageUrl = movie?.backdropPath,
+            onBack = { navController.popBackStack() },
+            onShare = { context.shareLink(movie?.homepage ?: Constants.MOVIE_THEMOVIEDB + movie?.id) }
+        )
         Row(
             modifier = Modifier
                 .fillMaxWidth()

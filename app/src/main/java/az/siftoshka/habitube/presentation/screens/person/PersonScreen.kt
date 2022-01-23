@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.normalDate
+import az.siftoshka.habitube.domain.util.shareLink
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.PersonCard
@@ -53,7 +55,7 @@ fun PersonScreen(
     HabitubeTheme {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
-                if (personState.isLoading) { LoadingScreen() }
+                if (personState.isLoading) LoadingScreen()
                 MainBoard(scrollState, navController)
             }
         }
@@ -78,8 +80,10 @@ fun MainBoard(
                     alpha = min(1f, 1 - (scrollState.value / 600f))
                     translationY = -scrollState.value * 0.1f
                 },
-            imageUrl = person?.profilePath
-        ) { navController.popBackStack() }
+            imageUrl = person?.profilePath,
+            onBack = { navController.popBackStack() },
+            onShare = { context.shareLink(person?.homepage ?: Constants.PERSON_THEMOVIEDB + person?.id) }
+        )
 
         Column(modifier = Modifier.padding(horizontal = MaterialTheme.spacing.default, vertical = MaterialTheme.spacing.small)) {
             Text(

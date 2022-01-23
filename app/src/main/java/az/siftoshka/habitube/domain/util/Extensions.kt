@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
-import androidx.core.content.ContentProviderCompat
 import az.siftoshka.habitube.R
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -87,6 +86,18 @@ fun Context.isPlayServicesAvailable(): Boolean {
     val gApi = GoogleApiAvailability.getInstance()
     val resultCode = gApi.isGooglePlayServicesAvailable(this)
     return resultCode == ConnectionResult.SUCCESS
+}
+
+fun Context.shareLink(value: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_share))
+        putExtra(Intent.EXTRA_TEXT, value)
+        type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
 }
 
 fun Context.isInternetAvailable(): Boolean {

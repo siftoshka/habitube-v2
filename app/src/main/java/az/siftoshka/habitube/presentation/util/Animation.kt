@@ -5,7 +5,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 
 /**
- * Animated Navigations.
+ * Animated Navigation.
  */
 object Animation {
     fun slideInHorizontally(value: Int): EnterTransition {
