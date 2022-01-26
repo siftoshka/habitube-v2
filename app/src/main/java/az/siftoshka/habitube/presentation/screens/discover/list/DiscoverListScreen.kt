@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.model.DiscoverConfiguration
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.presentation.components.TopAppBar
@@ -35,7 +36,8 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 fun DiscoverListScreen(
     navController: NavController,
     discoverConfiguration: DiscoverConfiguration?,
-    viewModel: DiscoverListViewModel = hiltViewModel()
+    viewModel: DiscoverListViewModel = hiltViewModel(),
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
@@ -48,7 +50,7 @@ fun DiscoverListScreen(
     val page = viewModel.discoverListPage.value
     val isLoading = viewModel.discoverState.value.isLoading
 
-    HabitubeTheme {
+    HabitubeTheme(sharedViewModel) {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 TopAppBar(

@@ -1,8 +1,6 @@
-package az.siftoshka.habitube.presentation.screens.settings.fields
+package az.siftoshka.habitube.presentation.screens.settings.components
 
 import androidx.annotation.StringRes
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
@@ -32,7 +30,6 @@ fun FoldableTextField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = MaterialTheme.spacing.extraSmall)
-            .animateContentSize(tween(400))
     ) {
         Text(
             text = stringResource(id = shortText),

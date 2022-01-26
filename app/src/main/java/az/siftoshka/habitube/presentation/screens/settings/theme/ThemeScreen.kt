@@ -1,5 +1,6 @@
-package az.siftoshka.habitube.presentation.screens.settings.language
+package az.siftoshka.habitube.presentation.screens.settings.theme
 
+import android.app.Activity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,17 +17,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.SharedViewModel
-import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
- * Composable function of Language Screen.
+ * Composable function of Theme Screen.
  */
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
-fun LanguageScreen(
+fun ThemeScreen(
     navController: NavController,
     sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
@@ -45,30 +45,12 @@ fun LanguageScreen(
                         .padding(horizontal = MaterialTheme.spacing.default)
                         .fillMaxWidth()
                 ) {
-                    items(languages.size) {
-                        val language = languages[it]
-                        LanguageRowItem(language) { category ->
-                            when (category) {
-                                LanguageCategory.AUTO -> {
-                                    context.updateLanguage(getDeviceLanguage(), getDeviceCountry())
-                                }
-                                LanguageCategory.ENGLISH -> {
-                                    context.updateLanguage(Language.ENGLISH.language, Language.ENGLISH.country)
-                                }
-                                LanguageCategory.AZERBAIJANI -> {
-                                    context.updateLanguage(Language.AZERBAIJANI.language, Language.AZERBAIJANI.country)
-                                }
-                                LanguageCategory.FRENCH -> {
-                                    context.updateLanguage(Language.FRENCH.language, Language.FRENCH.country)
-                                }
-                                LanguageCategory.SPANISH -> {
-                                    context.updateLanguage(Language.SPANISH.language, Language.SPANISH.country)
-                                }
-                                LanguageCategory.RUSSIAN -> {
-                                    context.updateLanguage(Language.RUSSIAN.language, Language.RUSSIAN.country)
-                                }
-                            }
+                    items(themes.size) {
+                        val theme = themes[it]
+                        ThemeRowItem(theme, sharedViewModel) { category ->
+                            sharedViewModel.updateTheme(category.name)
                             navController.popBackStack()
+                            (context as Activity).recreate()
                         }
                     }
                 }
@@ -79,9 +61,10 @@ fun LanguageScreen(
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
-fun LanguageRowItem(
-    language: LanguageItem,
-    onPerformClick: (LanguageCategory) -> Unit
+fun ThemeRowItem(
+    language: ThemeItem,
+    sharedViewModel: SharedViewModel,
+    onPerformClick: (ThemeType) -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.large,
@@ -99,7 +82,7 @@ fun LanguageRowItem(
                 )
             },
             trailing = {
-                if (getCurrentLanguageCode() == language.code) {
+                if (sharedViewModel.getAppTheme() == language.category) {
                     OutlinedButton(
                         onClick = { onPerformClick(language.category) },
                         shape = RoundedCornerShape(20.dp),

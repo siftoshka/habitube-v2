@@ -15,8 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.*
-import az.siftoshka.habitube.presentation.screens.settings.fields.*
+import az.siftoshka.habitube.presentation.screens.settings.components.*
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
@@ -27,14 +28,15 @@ import az.siftoshka.habitube.presentation.util.Screen
 @Composable
 fun SettingsScreen(
     navController: NavController,
-    viewModel: SettingsViewModel = hiltViewModel()
+    viewModel: SettingsViewModel = hiltViewModel(),
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
     val adultState = remember { mutableStateOf(viewModel.isAdultVisible()) }
 
-    HabitubeTheme {
+    HabitubeTheme(sharedViewModel) {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
@@ -48,6 +50,10 @@ fun SettingsScreen(
                         Spacer(modifier = Modifier.height(24.dp))
                     }
                     SettingsTitleText(text = R.string.text_general)
+                    SettingsButtonField(
+                        text = R.string.text_theme,
+                        secondary = stringResource(id = viewModel.getThemeType())
+                    ) { navController.navigate(Screen.ThemeScreen.route) }
                     SettingsButtonField(
                         text = R.string.text_content_language,
                         secondary = stringResource(id = viewModel.getContentLanguage())

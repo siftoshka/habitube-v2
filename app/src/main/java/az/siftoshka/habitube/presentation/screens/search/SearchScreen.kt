@@ -25,10 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.SearchType
-import az.siftoshka.habitube.presentation.components.image.SearchCard
+import az.siftoshka.habitube.presentation.screens.search.components.SearchCard
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
@@ -43,14 +44,13 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun SearchScreen(
     navController: NavController,
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel(),
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
     val searchState = viewModel.searchState.value
     val page = viewModel.searchPage.value
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
 
-    HabitubeTheme {
+    HabitubeTheme(sharedViewModel) {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 SearchView()
@@ -98,7 +98,8 @@ fun SearchView(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
-            .padding(MaterialTheme.spacing.default),
+            .padding(horizontal = MaterialTheme.spacing.default)
+            .padding(top = MaterialTheme.spacing.default),
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
         elevation = 4.dp

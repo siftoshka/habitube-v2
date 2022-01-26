@@ -6,6 +6,7 @@ import androidx.core.content.edit
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.repository.LocalRepository
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
+import az.siftoshka.habitube.presentation.screens.settings.theme.ThemeType
 import javax.inject.Inject
 
 /**
@@ -21,6 +22,7 @@ class LocalRepositoryImpl @Inject constructor(
         const val KEY_SETTINGS_SORT = "key_settings_sort"
         const val KEY_SETTINGS_ADULT = "key_settings_adult"
         const val KEY_VERSION_NAME = "key_version_name"
+        const val KEY_APP_THEME = "key_app_theme"
     }
 
     override fun setContentLanguage(value: String) {
@@ -65,5 +67,20 @@ class LocalRepositoryImpl @Inject constructor(
 
     override fun isUpdateShown(): Boolean {
         return app.getString(R.string.version_name) == preferences.getString(KEY_VERSION_NAME, "")
+    }
+
+    override fun setAppTheme(value: String) {
+        preferences.edit(commit = true) {
+            putString(KEY_APP_THEME, value)
+        }
+    }
+
+    override fun getAppTheme(): ThemeType {
+        return when (preferences.getString(KEY_APP_THEME, "CLASSIC")) {
+            "CLASSIC" -> ThemeType.CLASSIC
+            "AMOLED" -> ThemeType.AMOLED
+            "CYBERPUNK" -> ThemeType.CYBERPUNK
+            else -> ThemeType.CLASSIC
+        }
     }
 }

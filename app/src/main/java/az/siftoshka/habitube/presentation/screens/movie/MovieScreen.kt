@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.StoreButton
@@ -52,15 +53,13 @@ import java.lang.Float.min
 @Composable
 fun MovieScreen(
     navController: NavController,
-    viewModel: MovieViewModel = hiltViewModel()
+    viewModel: MovieViewModel = hiltViewModel(),
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
-
     val movieState = viewModel.movieState.value
 
-    HabitubeTheme {
+    HabitubeTheme(sharedViewModel) {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 if (movieState.isLoading) LoadingScreen()
@@ -255,12 +254,12 @@ fun InfoBoard(
             DetailsCard {
                 Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                     DetailText(name = R.string.text_original_title, detail = ": ${movie.originalTitle}")
-                    DetailText(name = R.string.text_budget, detail = ": ${movie.budget.toString().moneyFormat()}")
-                    DetailText(name = R.string.text_revenue, detail = ": ${movie.revenue.toString().moneyFormat()}")
+                    if (movie.budget != 0L) DetailText(name = R.string.text_budget, detail = ": ${movie.budget.toString().moneyFormat()}")
+                    if (movie.revenue != 0L) DetailText(name = R.string.text_revenue, detail = ": ${movie.revenue.toString().moneyFormat()}")
                     val languages = movie.spokenLanguages?.map { it.englishName }?.toFormattedString()
-                    DetailText(name = R.string.text_spoken_languages, detail = ": $languages")
+                    if (!languages.isNullOrBlank()) DetailText(name = R.string.text_spoken_languages, detail = ": $languages")
                     val genres = movie.genres?.map { it.name }?.toFormattedString()
-                    DetailText(name = R.string.text_genres, detail = ": $genres")
+                    if (!genres.isNullOrBlank()) DetailText(name = R.string.text_genres, detail = ": $genres")
                 }
             }
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))

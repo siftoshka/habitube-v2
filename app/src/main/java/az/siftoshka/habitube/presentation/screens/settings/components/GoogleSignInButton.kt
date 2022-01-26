@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.settings.fields
+package az.siftoshka.habitube.presentation.screens.settings.components
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.presentation.components.image.FirebaseAvatar
 import az.siftoshka.habitube.presentation.theme.spacing
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

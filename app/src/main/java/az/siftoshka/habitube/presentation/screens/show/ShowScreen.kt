@@ -26,9 +26,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.DetailsCard
-import az.siftoshka.habitube.presentation.components.SeasonCard
+import az.siftoshka.habitube.presentation.screens.show.components.SeasonCard
 import az.siftoshka.habitube.presentation.components.StoreButton
 import az.siftoshka.habitube.presentation.components.image.Avatar
 import az.siftoshka.habitube.presentation.components.image.BackgroundImage
@@ -53,15 +54,13 @@ import java.lang.Float.min
 @Composable
 fun ShowScreen(
     navController: NavController,
-    viewModel: ShowViewModel = hiltViewModel()
+    viewModel: ShowViewModel = hiltViewModel(),
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
-
     val showState = viewModel.showState.value
 
-    HabitubeTheme {
+    HabitubeTheme(sharedViewModel) {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 if (showState.isLoading) LoadingScreen()
@@ -258,7 +257,7 @@ fun InfoBoard(
                         DetailText(name = R.string.text_original_title, detail = ": ${show.originalName}")
                         DetailText(name = R.string.text_status, detail = ": ${show.status}")
                         val genres = show.genres?.map { it.name }?.toFormattedString()
-                        DetailText(name = R.string.text_genres, detail = ": $genres")
+                        if (!genres.isNullOrBlank()) DetailText(name = R.string.text_genres, detail = ": $genres")
                     }
                 }
             }

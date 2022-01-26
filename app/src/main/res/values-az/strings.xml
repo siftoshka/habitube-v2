@@ -173,6 +173,14 @@
     <string name="text_genres_soap">Sabun opera</string>
     <string name="text_genres_talk">Danışıq</string>
 
+    <!-- Themes -->
+    <string name="text_theme">Görünüş</string>
+    <string name="theme_classic">Klassik</string>
+    <string name="theme_classic_full">Klassik (Gündüz/Gecə)</string>
+    <string name="theme_amoled">Amoled</string>
+    <string name="theme_cyberpunk">Kiberpank</string>
+    <string name="theme_cyberpunk_full">Kiberpank (Gündüz/Gecə)</string>
+
     <!-- Months -->
     <string name="month_1">Yan</string>
     <string name="month_2">Fev</string>

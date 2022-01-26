@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.components.Pager
@@ -27,7 +28,7 @@ import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
-import az.siftoshka.habitube.presentation.components.text.TitleText
+import az.siftoshka.habitube.presentation.screens.home.components.TitleText
 import az.siftoshka.habitube.presentation.screens.home.dialog.UpdateDialog
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
@@ -41,10 +42,9 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
     val scrollState = rememberScrollState()
     val context = LocalContext.current
 
@@ -55,7 +55,7 @@ fun HomeScreen(
             viewModel.exploreTrendingTvShowsState.value.isLoading &&
             viewModel.exploreAirTodayTvShowsState.value.isLoading
 
-    HabitubeTheme {
+    HabitubeTheme(sharedViewModel) {
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Scaffold(
                 floatingActionButton = { FloatingSearchButton(navController) },
@@ -221,7 +221,7 @@ fun FloatingSearchButton(navController: NavController) {
     FloatingActionButton(
         onClick = { navController.navigate(Screen.SearchScreen.route) },
         shape = MaterialTheme.shapes.large,
-        backgroundColor = SpecialColors.Search,
+        backgroundColor = MaterialTheme.colors.primary.copy(blue = 0.5f),
         modifier = Modifier.size(width = 100.dp, height = 50.dp)
     ) {
         Icon(

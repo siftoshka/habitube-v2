@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.screens.settings.fields
+package az.siftoshka.habitube.presentation.screens.settings.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
@@ -11,13 +11,14 @@ import az.siftoshka.habitube.presentation.theme.spacing
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SettingsTextField(
+fun SettingsSimpleButtonField(
     @StringRes text: Int,
-    @StringRes secondaryText: Int
+    onPerformClick: () -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.large,
         backgroundColor = MaterialTheme.colors.surface,
+        onClick = { onPerformClick() },
         elevation = 4.dp,
         modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
     ) {
@@ -27,14 +28,6 @@ fun SettingsTextField(
                     text = stringResource(id = text),
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onSurface,
-                )
-            },
-            trailing = {
-                Text(
-                    text = stringResource(id = secondaryText),
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.secondaryVariant,
-                    modifier = Modifier.padding(vertical = MaterialTheme.spacing.small)
                 )
             }
         )

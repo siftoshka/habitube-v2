@@ -2,6 +2,7 @@ package az.siftoshka.habitube.presentation
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
@@ -19,6 +20,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.model.DiscoverConfiguration
 import az.siftoshka.habitube.presentation.screens.discover.DiscoverScreen
 import az.siftoshka.habitube.presentation.screens.discover.list.DiscoverListScreen
@@ -32,6 +34,7 @@ import az.siftoshka.habitube.presentation.screens.settings.content.ContentLangua
 import az.siftoshka.habitube.presentation.screens.settings.language.LanguageScreen
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortScreen
 import az.siftoshka.habitube.presentation.screens.settings.storage.StorageScreen
+import az.siftoshka.habitube.presentation.screens.settings.theme.ThemeScreen
 import az.siftoshka.habitube.presentation.screens.show.ShowScreen
 import az.siftoshka.habitube.presentation.screens.web.WebScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
@@ -43,6 +46,7 @@ import az.siftoshka.habitube.presentation.util.Screen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -51,12 +55,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val sharedViewModel: SharedViewModel by viewModels()
+
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            HabitubeTheme {
+            HabitubeTheme(sharedViewModel) {
+                val systemUiController = rememberSystemUiController()
+                systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
                 val navController = rememberAnimatedNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route?.substringBeforeLast("/")
@@ -193,6 +201,13 @@ fun NavGraph(navController: NavHostController) {
             popEnterTransition = { Animation.slideInHorizontally(-300) }
         ) {
             PersonScreen(navController)
+        }
+        composable(
+            route = Screen.ThemeScreen.route,
+            enterTransition = { Animation.slideInHorizontally(300) },
+            popExitTransition = { Animation.slideOutHorizontally(300) }
+        ) {
+            ThemeScreen(navController)
         }
         composable(
             route = Screen.LanguageScreen.route,

@@ -107,7 +107,7 @@
     <string name="text_planning_watch">На потом</string>
     <string name="text_movies">Фильмы</string>
     <string name="text_shows">Сериалы</string>
-    <string name="text_selected">Выбран</string>
+    <string name="text_selected">Выбрано</string>
     <string name="text_cancel">Отмена</string>
     <string name="text_delete">Удалить</string>
     <string name="text_offline">Вы вне сети</string>
@@ -172,6 +172,14 @@
     <string name="text_genres_reality">Реалити Шоу</string>
     <string name="text_genres_soap">Мыльное</string>
     <string name="text_genres_talk">Разговорное</string>
+
+    <!-- Themes -->
+    <string name="text_theme">Тема</string>
+    <string name="theme_classic">Классика</string>
+    <string name="theme_classic_full">Классика (День/Ночь)</string>
+    <string name="theme_amoled">Амолед</string>
+    <string name="theme_cyberpunk">Киберпанк</string>
+    <string name="theme_cyberpunk_full">Киберпанк (День/Ночь)</string>
 
     <!-- Months -->
     <string name="month_1">Янв</string>

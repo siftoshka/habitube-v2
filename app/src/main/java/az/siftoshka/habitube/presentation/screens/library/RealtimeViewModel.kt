@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation
+package az.siftoshka.habitube.presentation.screens.library
 
 import androidx.lifecycle.ViewModel
 import az.siftoshka.habitube.domain.model.FirebaseMedia
@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 /**
- * Shared [ViewModel] for Firebase Realtime Database.
+ * [ViewModel] for Firebase Realtime Database.
  */
 @HiltViewModel
 class RealtimeViewModel @Inject constructor(

@@ -8,6 +8,7 @@ import az.siftoshka.habitube.domain.repository.LocalRepository
 import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
 import az.siftoshka.habitube.domain.usecases.local.WatchedTvShowUseCase
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
+import az.siftoshka.habitube.presentation.screens.settings.theme.ThemeType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -56,6 +57,14 @@ class SettingsViewModel @Inject constructor(
             SortType.RATING -> R.string.text_sort_rating
             SortType.RELEASE_DESC -> R.string.text_release_desc
             SortType.RELEASE_ASC -> R.string.text_release_asc
+        }
+    }
+
+    fun getThemeType(): Int {
+        return when(localRepository.getAppTheme()) {
+            ThemeType.CLASSIC -> R.string.theme_classic
+            ThemeType.AMOLED -> R.string.theme_amoled
+            ThemeType.CYBERPUNK -> R.string.theme_cyberpunk
         }
     }
 

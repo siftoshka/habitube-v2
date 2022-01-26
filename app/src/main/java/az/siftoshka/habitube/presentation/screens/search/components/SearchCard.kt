@@ -1,4 +1,4 @@
-package az.siftoshka.habitube.presentation.components.image
+package az.siftoshka.habitube.presentation.screens.search.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height

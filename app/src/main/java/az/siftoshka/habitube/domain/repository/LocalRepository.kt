@@ -2,6 +2,7 @@ package az.siftoshka.habitube.domain.repository
 
 import android.content.SharedPreferences
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
+import az.siftoshka.habitube.presentation.screens.settings.theme.ThemeType
 
 /**
  * The repository interface for [SharedPreferences].
@@ -23,4 +24,8 @@ interface LocalRepository {
     fun setVersionName()
 
     fun isUpdateShown(): Boolean
+
+    fun setAppTheme(value: String)
+
+    fun getAppTheme() : ThemeType
 }
