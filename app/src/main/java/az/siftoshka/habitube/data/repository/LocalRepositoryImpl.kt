@@ -1,10 +1,9 @@
 package az.siftoshka.habitube.data.repository
 
-import android.app.Application
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.repository.LocalRepository
+import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.presentation.screens.settings.sort.SortType
 import az.siftoshka.habitube.presentation.screens.settings.theme.ThemeType
 import javax.inject.Inject
@@ -13,7 +12,6 @@ import javax.inject.Inject
  * The implementation of repository class for [SharedPreferences].
  */
 class LocalRepositoryImpl @Inject constructor(
-    private val app: Application,
     private val preferences: SharedPreferences
 ) : LocalRepository {
 
@@ -61,12 +59,12 @@ class LocalRepositoryImpl @Inject constructor(
 
     override fun setVersionName() {
         preferences.edit(commit = true) {
-            putString(KEY_VERSION_NAME, app.getString(R.string.version_name))
+            putString(KEY_VERSION_NAME, Constants.APP_VERSION)
         }
     }
 
     override fun isUpdateShown(): Boolean {
-        return app.getString(R.string.version_name) == preferences.getString(KEY_VERSION_NAME, "")
+        return Constants.APP_VERSION == preferences.getString(KEY_VERSION_NAME, "")
     }
 
     override fun setAppTheme(value: String) {

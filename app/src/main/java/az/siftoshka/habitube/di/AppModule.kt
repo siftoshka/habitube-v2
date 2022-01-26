@@ -144,8 +144,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalRepository(app: Application, preferences: SharedPreferences): LocalRepository {
-        return LocalRepositoryImpl(app, preferences)
+    fun provideLocalRepository(preferences: SharedPreferences): LocalRepository {
+        return LocalRepositoryImpl(preferences)
     }
 
     @Provides
