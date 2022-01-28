@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,8 +34,6 @@ import az.siftoshka.habitube.presentation.screens.home.dialog.UpdateDialog
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
-import az.siftoshka.habitube.presentation.util.SpecialColors
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
  * Composable function of the Home Screen.
@@ -221,8 +220,8 @@ fun FloatingSearchButton(navController: NavController) {
     FloatingActionButton(
         onClick = { navController.navigate(Screen.SearchScreen.route) },
         shape = MaterialTheme.shapes.large,
-        backgroundColor = MaterialTheme.colors.primary.copy(blue = 0.5f),
-        modifier = Modifier.size(width = 100.dp, height = 50.dp)
+        backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.4f, blue = 0.1f).compositeOver(MaterialTheme.colors.primary),
+        modifier = Modifier.size(width = 90.dp, height = 50.dp)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_search),

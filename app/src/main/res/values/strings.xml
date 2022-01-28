@@ -178,6 +178,7 @@
     <string name="theme_classic">Classic</string>
     <string name="theme_classic_full">Classic (Light/Dark)</string>
     <string name="theme_amoled">Amoled</string>
+    <string name="theme_netflix">Netflix</string>
     <string name="theme_cyberpunk">Cyberpunk</string>
     <string name="theme_cyberpunk_full">Cyberpunk (Light/Dark)</string>
 

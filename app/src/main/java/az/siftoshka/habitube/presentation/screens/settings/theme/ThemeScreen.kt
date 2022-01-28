@@ -36,7 +36,7 @@ fun ThemeScreen(
         Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize()) {
                 TopAppBar(
-                    title = R.string.text_language,
+                    title = R.string.text_theme,
                     icon = R.drawable.ic_back,
                 ) { navController.popBackStack() }
                 Spacer(modifier = Modifier.height(16.dp))

@@ -47,7 +47,7 @@ fun ShowBoard(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
                     shape = MaterialTheme.shapes.large,
                     backgroundColor = MaterialTheme.colors.surface,
                     indication = rememberRipple(color = MaterialTheme.colors.primary),
@@ -102,7 +102,7 @@ fun ShowBoard(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(width = 1.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
                     shape = MaterialTheme.shapes.large,
                     backgroundColor = MaterialTheme.colors.surface,
                     indication = rememberRipple(color = MaterialTheme.colors.primary),

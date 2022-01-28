@@ -77,6 +77,7 @@ class LocalRepositoryImpl @Inject constructor(
         return when (preferences.getString(KEY_APP_THEME, "CLASSIC")) {
             "CLASSIC" -> ThemeType.CLASSIC
             "AMOLED" -> ThemeType.AMOLED
+            "NETFLIX" -> ThemeType.NETFLIX
             "CYBERPUNK" -> ThemeType.CYBERPUNK
             else -> ThemeType.CLASSIC
         }

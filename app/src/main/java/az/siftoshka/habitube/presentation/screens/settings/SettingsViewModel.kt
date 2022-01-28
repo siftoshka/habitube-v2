@@ -64,6 +64,7 @@ class SettingsViewModel @Inject constructor(
         return when(localRepository.getAppTheme()) {
             ThemeType.CLASSIC -> R.string.theme_classic
             ThemeType.AMOLED -> R.string.theme_amoled
+            ThemeType.NETFLIX -> R.string.theme_netflix
             ThemeType.CYBERPUNK -> R.string.theme_cyberpunk
         }
     }

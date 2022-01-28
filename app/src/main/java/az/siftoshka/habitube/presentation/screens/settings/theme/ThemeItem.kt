@@ -14,6 +14,7 @@ class ThemeItem(
 enum class ThemeType {
     CLASSIC,
     AMOLED,
+    NETFLIX,
     CYBERPUNK
 }
 
@@ -27,7 +28,11 @@ val themes = mutableListOf(
         R.string.theme_amoled
     ),
     ThemeItem(
+       ThemeType.NETFLIX,
+       R.string.theme_netflix
+    ),
+    ThemeItem(
         ThemeType.CYBERPUNK,
-        R.string.theme_cyberpunk
+        R.string.theme_cyberpunk_full
     )
 )

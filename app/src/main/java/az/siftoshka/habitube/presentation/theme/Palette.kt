@@ -21,9 +21,9 @@ val ClassicLightPalette = lightColors(
     primary = Color(0xFF1DB98D),
     onPrimary = Color(0xFFEEEEEE),
     background = Color(0xFFEFEBE9),
-    onBackground = Color(0xFF262626),
+    onBackground = Color(0xFF323232),
     surface = Color(0xFFE4DEDA),
-    onSurface = Color(0xFF303030),
+    onSurface = Color(0xFF363636),
     secondaryVariant = Color(0xFF606060)
 )
 
@@ -38,6 +38,19 @@ val AmoledPalette = darkColors(
     surface = Color(0xFF010101),
     onSurface = Color(0xFFEEEEEE),
     secondaryVariant = Color(0xFF898989)
+)
+
+/**
+ * Netflix theme
+ */
+val NetflixPalette = darkColors(
+    primary = Color(0xFFE50914),
+    onPrimary = Color(0xFFF5F5F1),
+    background = Color(0xFF221f1f),
+    onBackground = Color(0xFFF5F5F1),
+    surface = Color(0xFF121212),
+    onSurface = Color(0xFFF5F5F1),
+    secondaryVariant = Color(0xFF909090)
 )
 
 /**
@@ -57,8 +70,8 @@ val CyberpunkLightPalette = lightColors(
     primary = Color(0xFFFF2A6D),
     onPrimary = Color(0xFFEEEEEE),
     background = Color(0xFFD1F7FF),
-    onBackground = Color(0xFF262626),
-    surface = Color(0xFFadfaff),
-    onSurface = Color(0xFF303030),
+    onBackground = Color(0xFF404040),
+    surface = Color(0xFFd1fcff),
+    onSurface = Color(0xFF454545),
     secondaryVariant = Color(0xFF606060)
 )
