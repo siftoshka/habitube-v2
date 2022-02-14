@@ -142,4 +142,3 @@ fabric.properties
 keystore.properties
 app/google-services.json
 app/src/main/assets/
-app/src/main/java/az/siftoshka/habitube/domain/util/Censorship.kt
