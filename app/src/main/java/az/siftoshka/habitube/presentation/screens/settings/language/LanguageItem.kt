@@ -37,16 +37,19 @@ val languages = mutableListOf(
         R.string.text_lang_azerbaijani,
         Language.AZERBAIJANI.language
     ),
-    LanguageItem(
-        LanguageCategory.SPANISH,
-        R.string.text_lang_spanish,
-        Language.SPANISH.language
-    ),
-    LanguageItem(
-        LanguageCategory.FRENCH,
-        R.string.text_lang_french,
-        Language.FRENCH.language
-    ),
+    /**
+     * TODO: Add these languages once the translations will be ready.
+     */
+//    LanguageItem(
+//        LanguageCategory.SPANISH,
+//        R.string.text_lang_spanish,
+//        Language.SPANISH.language
+//    ),
+//    LanguageItem(
+//        LanguageCategory.FRENCH,
+//        R.string.text_lang_french,
+//        Language.FRENCH.language
+//    ),
     LanguageItem(
         LanguageCategory.RUSSIAN,
         R.string.text_lang_russian,

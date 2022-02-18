@@ -203,6 +203,11 @@ class MovieViewModel @Inject constructor(
                                 movies = _similarState.value.movies.plus(result.data.orEmpty())
                             )
                         }
+                        else -> {
+                            _similarState.value = SimilarMoviesState(
+                                movies = _similarState.value.movies.plus(emptyList())
+                            )
+                        }
                     }
                 }.launchIn(viewModelScope)
             }

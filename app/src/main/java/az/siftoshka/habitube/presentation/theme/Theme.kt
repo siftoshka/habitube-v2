@@ -31,7 +31,7 @@ fun HabitubeTheme(viewModel: SharedViewModel, content: @Composable () -> Unit) {
 
     CompositionLocalProvider(LocalSpacing provides Spacing()) {
         val systemUiController = rememberSystemUiController()
-        systemUiController.setSystemBarsColor(color = colors.background)
+        systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background, darkIcons = viewModel.isDarkIconTheme())
 
         MaterialTheme(
             colors = colors,

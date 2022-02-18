@@ -63,7 +63,7 @@ val CyberpunkDarkPalette = darkColors(
     onBackground = Color(0xFFEEEEEE),
     surface = Color(0xFF133E7C),
     onSurface = Color(0xFFEEEEEE),
-    secondaryVariant = Color(0xFFACACAC)
+    secondaryVariant = Color(0xFFAAAAAA)
 )
 
 val CyberpunkLightPalette = lightColors(

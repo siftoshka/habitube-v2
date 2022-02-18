@@ -184,6 +184,11 @@ class ShowViewModel @Inject constructor(
                                 shows = _similarState.value.shows.plus(result.data.orEmpty())
                             )
                         }
+                        else -> {
+                            _similarState.value = SimilarShowsState(
+                                shows = _similarState.value.shows.plus(emptyList())
+                            )
+                        }
                     }
                 }.launchIn(viewModelScope)
             }

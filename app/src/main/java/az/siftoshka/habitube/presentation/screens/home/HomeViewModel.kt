@@ -110,6 +110,11 @@ class HomeViewModel @Inject constructor(
                                 media = _exploreTrendingMoviesState.value.media.plus(result.data.orEmpty())
                             )
                         }
+                        else -> {
+                            _exploreTrendingMoviesState.value = ExploreState(
+                                media = _exploreTrendingMoviesState.value.media.plus(emptyList())
+                            )
+                        }
                     }
                 }.launchIn(viewModelScope)
             }
@@ -147,6 +152,11 @@ class HomeViewModel @Inject constructor(
                                 media = _exploreTrendingTvShowsState.value.media.plus(result.data.orEmpty())
                             )
                         }
+                        else -> {
+                            _exploreTrendingTvShowsState.value = ExploreState(
+                                media = _exploreTrendingTvShowsState.value.media.plus(emptyList())
+                            )
+                        }
                     }
                 }.launchIn(viewModelScope)
             }
@@ -182,6 +192,11 @@ class HomeViewModel @Inject constructor(
                         is Resource.Success -> {
                             _exploreAirTodayTvShowsState.value = ExploreState(
                                 media = _exploreAirTodayTvShowsState.value.media.plus(result.data.orEmpty())
+                            )
+                        }
+                        else -> {
+                            _exploreAirTodayTvShowsState.value = ExploreState(
+                                media = _exploreAirTodayTvShowsState.value.media.plus(emptyList())
                             )
                         }
                     }

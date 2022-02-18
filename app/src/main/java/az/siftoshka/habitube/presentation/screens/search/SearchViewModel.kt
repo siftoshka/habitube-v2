@@ -68,6 +68,11 @@ class SearchViewModel @Inject constructor(
                                 media = _searchState.value.media.plus(result.data.orEmpty())
                             )
                         }
+                        else -> {
+                            _searchState.value = SearchState(
+                                media = _searchState.value.media.plus(emptyList())
+                            )
+                        }
                     }
                 }.launchIn(viewModelScope)
             }

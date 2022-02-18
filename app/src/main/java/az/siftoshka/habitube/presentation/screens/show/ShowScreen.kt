@@ -42,7 +42,6 @@ import az.siftoshka.habitube.presentation.components.text.ExpandableText
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarStyle
 import com.gowtham.ratingbar.StepSize

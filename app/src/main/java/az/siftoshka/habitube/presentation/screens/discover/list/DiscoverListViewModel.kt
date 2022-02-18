@@ -71,6 +71,9 @@ class DiscoverListViewModel @Inject constructor(
                         is Resource.Success -> {
                             _discoverState.value = DiscoverState(media = _discoverState.value.media.plus(result.data.orEmpty()))
                         }
+                        else -> {
+                            _discoverState.value = DiscoverState(media = _discoverState.value.media.plus(emptyList()))
+                        }
                     }
                 }.launchIn(viewModelScope)
             }

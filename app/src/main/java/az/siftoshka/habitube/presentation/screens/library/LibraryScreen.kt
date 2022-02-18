@@ -3,7 +3,6 @@ package az.siftoshka.habitube.presentation.screens.library
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -33,7 +32,6 @@ import az.siftoshka.habitube.presentation.screens.library.components.LibraryText
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import com.google.accompanist.pager.*
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -86,14 +84,18 @@ fun LibraryScreen(
                             .padding(top = MaterialTheme.spacing.default)
                     ) {
                         LibraryTitle(title = stringResource(id = R.string.text_movies), isSelected = viewModel.isMoviesSelected.value) { isSelected ->
-                            viewModel.isMoviesSelected.value = isSelected
-                            viewModel.isShowsSelected.value = !isSelected
-                            viewModel.updateConfiguration()
+                            if (!viewModel.isMoviesSelected.value) {
+                                viewModel.isMoviesSelected.value = isSelected
+                                viewModel.isShowsSelected.value = !isSelected
+                                viewModel.updateConfiguration()
+                            }
                         }
                         LibraryTitle(title = stringResource(id = R.string.text_shows), isSelected = viewModel.isShowsSelected.value) { isSelected ->
-                            viewModel.isShowsSelected.value = isSelected
-                            viewModel.isMoviesSelected.value = !isSelected
-                            viewModel.updateConfiguration()
+                            if (!viewModel.isShowsSelected.value) {
+                                viewModel.isShowsSelected.value = isSelected
+                                viewModel.isMoviesSelected.value = !isSelected
+                                viewModel.updateConfiguration()
+                            }
                         }
                     }
                     TabView(pagerState, sheetState) {
@@ -279,7 +281,6 @@ fun LibraryTitle(
         textAlign = TextAlign.Start,
         modifier = Modifier
             .padding(end = MaterialTheme.spacing.small)
-            .indication(indication = null, interactionSource = MutableInteractionSource())
-            .clickable { onPerformClick(!isSelected) }
+            .clickable(interactionSource = MutableInteractionSource(), indication = null) { onPerformClick(!isSelected) }
     )
 }

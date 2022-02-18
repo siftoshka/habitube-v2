@@ -26,7 +26,6 @@ import az.siftoshka.habitube.presentation.components.screen.NothingScreen
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
  * Composable function of the Discover List Screen.
@@ -39,8 +38,6 @@ fun DiscoverListScreen(
     viewModel: DiscoverListViewModel = hiltViewModel(),
     sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
 
     LaunchedEffect(Unit) {
         viewModel.getDiscoverList(discoverConfiguration)

@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             HabitubeTheme(sharedViewModel) {
                 val systemUiController = rememberSystemUiController()
-                systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background)
+                systemUiController.setSystemBarsColor(color = MaterialTheme.colors.background, darkIcons = sharedViewModel.isDarkIconTheme())
                 val navController = rememberAnimatedNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route?.substringBeforeLast("/")
