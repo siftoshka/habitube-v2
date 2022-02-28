@@ -220,7 +220,7 @@ fun FloatingSearchButton(navController: NavController) {
     FloatingActionButton(
         onClick = { navController.navigate(Screen.SearchScreen.route) },
         shape = MaterialTheme.shapes.large,
-        backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.4f, blue = 0.1f).compositeOver(MaterialTheme.colors.primary),
+        backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier.size(width = 90.dp, height = 50.dp)
     ) {
         Icon(

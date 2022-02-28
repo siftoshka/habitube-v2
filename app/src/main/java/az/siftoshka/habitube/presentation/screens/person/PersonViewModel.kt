@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
+import az.siftoshka.habitube.domain.usecases.local.WatchedTvShowUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetPersonCreditsUseCase
 import az.siftoshka.habitube.domain.usecases.remote.GetPersonUseCase
 import az.siftoshka.habitube.domain.util.MediaType
@@ -22,6 +24,8 @@ import javax.inject.Inject
 class PersonViewModel @Inject constructor(
     private val getPersonUseCase: GetPersonUseCase,
     private val getPersonCreditsUseCase: GetPersonCreditsUseCase,
+    private val watchedMoviesUseCase: WatchedMoviesUseCase,
+    private val watchedTvShowUseCase: WatchedTvShowUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -65,6 +69,8 @@ class PersonViewModel @Inject constructor(
                     _personMoviesState.value = PersonCreditsState(isLoading = true)
                 }
                 is Resource.Success -> {
+                    result.data?.cast?.forEach { it.voteAverage = watchedMoviesUseCase.getMovieRating(it.id ?: 0).toDouble() }
+                    result.data?.crew?.forEach { it.voteAverage = watchedMoviesUseCase.getMovieRating(it.id ?: 0).toDouble() }
                     _personMoviesState.value = PersonCreditsState(credits = result.data)
                 }
                 is Resource.Error -> {
@@ -81,6 +87,8 @@ class PersonViewModel @Inject constructor(
                     _personShowsState.value = PersonCreditsState(isLoading = true)
                 }
                 is Resource.Success -> {
+                    result.data?.cast?.forEach { it.voteAverage = watchedTvShowUseCase.getShowRating(it.id ?: 0).toDouble() }
+                    result.data?.crew?.forEach { it.voteAverage = watchedTvShowUseCase.getShowRating(it.id ?: 0).toDouble() }
                     _personShowsState.value = PersonCreditsState(credits = result.data)
                 }
                 is Resource.Error -> {

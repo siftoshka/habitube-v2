@@ -27,6 +27,7 @@ class SharedViewModel @Inject constructor(
         return when (getAppTheme()) {
             ThemeType.CLASSIC -> !isSystemInDarkTheme()
             ThemeType.CYBERPUNK -> !isSystemInDarkTheme()
+            ThemeType.ARCTIC -> true
             ThemeType.AMOLED -> false
             ThemeType.NETFLIX -> false
         }

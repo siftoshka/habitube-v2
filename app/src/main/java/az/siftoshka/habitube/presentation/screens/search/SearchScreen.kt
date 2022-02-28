@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -29,13 +30,12 @@ import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.SearchType
-import az.siftoshka.habitube.presentation.screens.search.components.SearchCard
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
+import az.siftoshka.habitube.presentation.screens.search.components.SearchCard
 import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
  * Composable function of the Search Screen.
@@ -117,7 +117,23 @@ fun SearchView(
                 keyboardActions = KeyboardActions(onSearch = { keyboardController?.hide() }),
                 shape = MaterialTheme.shapes.large,
                 colors = TextFieldDefaults.outlinedTextFieldColors(unfocusedBorderColor = MaterialTheme.colors.primary),
-                onValueChange = { viewModel.onQueryChanged(it) }
+                onValueChange = { viewModel.onQueryChanged(it) },
+                trailingIcon = {
+                    if (query.isNotBlank()) {
+                        IconButton(
+                            onClick = {
+                                viewModel.onQueryChanged("")
+                                keyboardController?.hide()
+                            },
+                            modifier = Modifier.size(20.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_close),
+                                contentDescription = stringResource(id = R.string.text_cancel),
+                            )
+                        }
+                    }
+                }
             )
             Row(
                 modifier = Modifier

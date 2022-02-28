@@ -26,6 +26,7 @@
     <string name="text_seasons">Sezonlar</string>
     <string name="text_details">Təfərrüatlar</string>
     <string name="text_budget">Büdcə</string>
+    <string name="text_release_date">Buraxılış günü</string>
     <string name="text_status">Status</string>
     <string name="text_revenue">Gəlir</string>
     <string name="text_spoken_languages">Dillər</string>
@@ -178,6 +179,7 @@
     <string name="theme_classic">Klassik</string>
     <string name="theme_classic_full">Klassik (Gündüz/Gecə)</string>
     <string name="theme_amoled">Amoled</string>
+    <string name="theme_arctic">Arktik Mavi</string>
     <string name="theme_netflix">Netfliks</string>
     <string name="theme_cyberpunk">Kiberpank</string>
     <string name="theme_cyberpunk_full">Kiberpank (Gündüz/Gecə)</string>

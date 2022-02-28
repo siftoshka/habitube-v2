@@ -21,7 +21,7 @@ data class PersonCast(
     val overview: String? = null,
     val popularity: Double? = 0.0,
     val posterPath: String? = null,
-    val voteAverage: Double? = 0.0,
+    var voteAverage: Double? = 0.0,
     val voteCount: Int? = 0
 )
 
@@ -41,6 +41,6 @@ data class PersonCrew(
     val overview: String? = null,
     val popularity: Double? = 0.0,
     val posterPath: String? = null,
-    val voteAverage: Double? = 0.0,
+    var voteAverage: Double? = 0.0,
     val voteCount: Int? = 0
 )

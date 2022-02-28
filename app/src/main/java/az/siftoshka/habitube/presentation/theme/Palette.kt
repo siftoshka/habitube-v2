@@ -22,7 +22,7 @@ val ClassicLightPalette = lightColors(
     onPrimary = Color(0xFFEEEEEE),
     background = Color(0xFFEFEBE9),
     onBackground = Color(0xFF323232),
-    surface = Color(0xFFE4DEDA),
+    surface = Color(0xFFECE8E5),
     onSurface = Color(0xFF363636),
     secondaryVariant = Color(0xFF606060)
 )
@@ -38,6 +38,19 @@ val AmoledPalette = darkColors(
     surface = Color(0xFF010101),
     onSurface = Color(0xFFEEEEEE),
     secondaryVariant = Color(0xFF898989)
+)
+
+/**
+ * Arctic Blue
+ */
+val ArcticBluePalette = lightColors(
+    primary = Color(0xFF229ED9),
+    onPrimary = Color(0xFFEEEEEE),
+    background = Color(0xFFEFEBE9),
+    onBackground = Color(0xFF323232),
+    surface = Color(0xFFECE8E5),
+    onSurface = Color(0xFF363636),
+    secondaryVariant = Color(0xFF606060)
 )
 
 /**
@@ -61,9 +74,9 @@ val CyberpunkDarkPalette = darkColors(
     onPrimary = Color(0xFFEEEEEE),
     background = Color(0xFF091833),
     onBackground = Color(0xFFEEEEEE),
-    surface = Color(0xFF133E7C),
+    surface = Color(0xFF13357C),
     onSurface = Color(0xFFEEEEEE),
-    secondaryVariant = Color(0xFFAAAAAA)
+    secondaryVariant = Color(0xFFC7C7C7)
 )
 
 val CyberpunkLightPalette = lightColors(

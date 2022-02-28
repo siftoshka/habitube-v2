@@ -254,6 +254,7 @@ fun InfoBoard(
                 DetailsCard {
                     Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                         DetailText(name = R.string.text_original_title, detail = ": ${show.originalName}")
+                        if (!show.firstAirDate.isNullOrBlank())  DetailText(name = R.string.text_release_date, detail = ": ${show.firstAirDate.normalDate(context)}")
                         DetailText(name = R.string.text_status, detail = ": ${show.status}")
                         val genres = show.genres?.map { it.name }?.toFormattedString()
                         if (!genres.isNullOrBlank()) DetailText(name = R.string.text_genres, detail = ": $genres")

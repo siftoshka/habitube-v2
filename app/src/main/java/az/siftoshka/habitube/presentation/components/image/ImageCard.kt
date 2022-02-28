@@ -79,9 +79,7 @@ fun ImageCard(
                     Row(
                         verticalAlignment = Alignment.Bottom,
                         horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(MaterialTheme.spacing.extraSmall)
+                        modifier = Modifier.fillMaxSize()
                     ) {
                         Text(
                             text = stringResource(id = R.string.text_watched),
@@ -89,8 +87,8 @@ fun ImageCard(
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .background(Color.Black.copy(alpha = 0.5f), MaterialTheme.shapes.large)
-                                .padding(horizontal = 4.dp)
+                                .background(MaterialTheme.colors.primary.copy(alpha = 0.6f), MaterialTheme.shapes.small)
+                                .fillMaxWidth()
                         )
                     }
                 }

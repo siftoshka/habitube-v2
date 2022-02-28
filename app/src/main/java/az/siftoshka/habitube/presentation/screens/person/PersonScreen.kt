@@ -168,7 +168,7 @@ fun MovieCast(
                 creditState.credits.cast.sortedByDescending { it.popularity }.let { movies ->
                     items(movies.size) {
                         val movie = movies[it]
-                        ImageCard(imageUrl = movie.posterPath, title = movie.name) {
+                        ImageCard(imageUrl = movie.posterPath, title = movie.name, rating = movie.voteAverage) {
                             navController.navigate(Screen.MovieScreen.route + "/${movie.id}")
                         }
                     }
@@ -195,7 +195,7 @@ fun MovieCrew(
                 creditState.credits.crew.sortedByDescending { it.popularity }.let { movies ->
                     items(movies.size) {
                         val movie = movies[it]
-                        ImageCard(imageUrl = movie.posterPath, title = movie.name) {
+                        ImageCard(imageUrl = movie.posterPath, title = movie.name, rating = movie.voteAverage) {
                             navController.navigate(Screen.MovieScreen.route + "/${movie.id}")
                         }
                     }
@@ -222,7 +222,7 @@ fun ShowCast(
                 creditState.credits.cast.sortedByDescending { it.popularity }.let { shows ->
                     items(shows.size) {
                         val show = shows[it]
-                        ImageCard(imageUrl = show.posterPath, title = show.name) {
+                        ImageCard(imageUrl = show.posterPath, title = show.name, rating = show.voteAverage) {
                             navController.navigate(Screen.TvShowScreen.route + "/${show.id}")
                         }
                     }
@@ -249,7 +249,7 @@ fun ShowCrew(
                 creditState.credits.crew.sortedByDescending { it.popularity }.let { shows ->
                     items(shows.size) {
                         val show = shows[it]
-                        ImageCard(imageUrl = show.posterPath, title = show.name) {
+                        ImageCard(imageUrl = show.posterPath, title = show.name, rating = show.voteAverage) {
                             navController.navigate(Screen.TvShowScreen.route + "/${show.id}")
                         }
                     }

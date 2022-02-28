@@ -58,7 +58,7 @@ fun ContentLanguageScreen(
                             style = MaterialTheme.typography.h5,
                             color = MaterialTheme.colors.secondaryVariant,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(vertical = MaterialTheme.spacing.default)
+                            modifier = Modifier.padding(MaterialTheme.spacing.default)
                         )
                     }
                 }

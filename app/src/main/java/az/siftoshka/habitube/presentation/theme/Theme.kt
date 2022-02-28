@@ -17,6 +17,7 @@ fun HabitubeTheme(viewModel: SharedViewModel, content: @Composable () -> Unit) {
         when (viewModel.getAppTheme()) {
             ThemeType.CLASSIC -> ClassicDarkPalette
             ThemeType.AMOLED -> AmoledPalette
+            ThemeType.ARCTIC -> ArcticBluePalette
             ThemeType.NETFLIX -> NetflixPalette
             ThemeType.CYBERPUNK -> CyberpunkDarkPalette
         }
@@ -24,6 +25,7 @@ fun HabitubeTheme(viewModel: SharedViewModel, content: @Composable () -> Unit) {
         when (viewModel.getAppTheme()) {
             ThemeType.CLASSIC -> ClassicLightPalette
             ThemeType.AMOLED -> AmoledPalette
+            ThemeType.ARCTIC -> ArcticBluePalette
             ThemeType.NETFLIX -> NetflixPalette
             ThemeType.CYBERPUNK -> CyberpunkLightPalette
         }

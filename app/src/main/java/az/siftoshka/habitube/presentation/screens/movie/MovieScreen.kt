@@ -253,6 +253,7 @@ fun InfoBoard(
             DetailsCard {
                 Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                     DetailText(name = R.string.text_original_title, detail = ": ${movie.originalTitle}")
+                    if (!movie.releaseDate.isNullOrBlank())  DetailText(name = R.string.text_release_date, detail = ": ${movie.releaseDate.normalDate(context)}")
                     if (movie.budget != 0L) DetailText(name = R.string.text_budget, detail = ": ${movie.budget.toString().moneyFormat()}")
                     if (movie.revenue != 0L) DetailText(name = R.string.text_revenue, detail = ": ${movie.revenue.toString().moneyFormat()}")
                     val languages = movie.spokenLanguages?.map { it.englishName }?.toFormattedString()

@@ -26,6 +26,7 @@
     <string name="text_seasons">Сезоны</string>
     <string name="text_details">Детали</string>
     <string name="text_budget">Бюджет</string>
+    <string name="text_release_date">Дата выхода</string>
     <string name="text_status">Статус</string>
     <string name="text_revenue">Сборы</string>
     <string name="text_spoken_languages">Языки</string>
@@ -178,6 +179,7 @@
     <string name="theme_classic">Классика</string>
     <string name="theme_classic_full">Классика (День/Ночь)</string>
     <string name="theme_amoled">Амолед</string>
+    <string name="theme_arctic">Арктика</string>
     <string name="theme_netflix">Нетфликс</string>
     <string name="theme_cyberpunk">Киберпанк</string>
     <string name="theme_cyberpunk_full">Киберпанк (День/Ночь)</string>

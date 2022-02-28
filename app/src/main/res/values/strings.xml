@@ -26,6 +26,7 @@
     <string name="text_seasons">Seasons</string>
     <string name="text_details">Details</string>
     <string name="text_budget">Budget</string>
+    <string name="text_release_date">Release date</string>
     <string name="text_status">Status</string>
     <string name="text_revenue">Revenue</string>
     <string name="text_spoken_languages">Spoken languages</string>
@@ -178,6 +179,7 @@
     <string name="theme_classic">Classic</string>
     <string name="theme_classic_full">Classic (Light/Dark)</string>
     <string name="theme_amoled">Amoled</string>
+    <string name="theme_arctic">Arctic Blue</string>
     <string name="theme_netflix">Netflix</string>
     <string name="theme_cyberpunk">Cyberpunk</string>
     <string name="theme_cyberpunk_full">Cyberpunk (Light/Dark)</string>
