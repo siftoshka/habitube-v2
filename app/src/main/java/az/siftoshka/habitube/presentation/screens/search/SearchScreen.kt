@@ -201,6 +201,5 @@ fun navigation(
         SearchType.Movie -> navController.navigate(Screen.MovieScreen.route + "/${item.id}")
         SearchType.TvShow -> navController.navigate(Screen.TvShowScreen.route + "/${item.id}")
         SearchType.Person -> navController.navigate(Screen.PersonScreen.route + "/${item.id}")
-        else -> navController.navigate(Screen.MovieScreen.route + "/${item.id}")
     }
 }

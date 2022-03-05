@@ -6,7 +6,7 @@ package az.siftoshka.habitube.domain.util
 object Constants {
 
     // Info
-    const val APP_VERSION = "2.0 Beta"
+    const val APP_VERSION = "2.0"
 
     // Database
     const val WATCHED = "watched"

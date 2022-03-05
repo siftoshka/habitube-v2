@@ -16,8 +16,8 @@ android {
         applicationId "az.siftoshka.habitube"
         minSdk 24
         targetSdk 31
-        versionCode 44
-        versionName "2.0 - Beta 9"
+        versionCode 46
+        versionName "2.0"
 
         testInstrumentationRunner "az.siftoshka.habitube.HiltTestRunner"
         vectorDrawables {
