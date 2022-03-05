@@ -1,6 +1,18 @@
-# Habitube V2
+# Habitube 2.0
+<img width="600" src="https://user-images.githubusercontent.com/22058062/156888833-13b866b8-20a6-45bb-ae77-0cc49ba2489e.png">
+
 ### The 2nd iteration of the Habitube
-#### New stack of technologies with Kotlin and Jetpack Compose. Still Ad-Free :)
+#### New stack of technologies with Kotlin and Jetpack Compose.
+```
+Habitube - is an open-source project. Absolutely Ad-Free. 
+The main point of Habitube is to save your watched Movies & TV Shows.
+```
+#
+### How to compile?
+
+- Use your own api key from https://www.themoviedb.org/. It is absolutely free.
+- Use your own api key from http://www.omdbapi.com/.
+- Use your own google-services.json file
 #
 ### License
 ```
