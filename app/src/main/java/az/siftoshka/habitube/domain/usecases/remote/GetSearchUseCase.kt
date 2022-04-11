@@ -28,7 +28,7 @@ class GetSearchUseCase @Inject constructor(
                 SearchType.TvShow -> repository.getTvShowSearchResults(searchQuery, page).map { it.toMediaLite() }
                 SearchType.Person -> repository.getPersonSearchResults(searchQuery, page).map { it.toMediaLite() }
             }
-            emit(Resource.Success(resources))
+            emit(Resource.Success(resources.sortedByDescending { it.popularity }))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))
         } catch (e: IOException) {

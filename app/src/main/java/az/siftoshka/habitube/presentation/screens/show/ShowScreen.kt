@@ -308,7 +308,7 @@ fun Cast(
         DetailTitle(text = R.string.text_cast)
         DetailsCard {
             LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
-                creditState.credits.cast.sortedByDescending { it.popularity }.let { cast ->
+                creditState.credits.cast.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
                         Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.character) {
@@ -332,7 +332,7 @@ fun Crew(
         DetailTitle(text = R.string.text_crew)
         DetailsCard {
             LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
-                creditState.credits.crew.sortedByDescending { it.popularity }.let { crew ->
+                creditState.credits.crew.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
                         Avatar(imageUrl = actor.profilePath, title = actor.name, secondary = actor.knownForDepartment) {

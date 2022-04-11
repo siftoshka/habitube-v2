@@ -24,8 +24,12 @@ class GetCreditsUseCase @Inject constructor(
                 MediaType.Movie -> repository.getMovieCredits(mediaId).toCredits()
                 MediaType.TvShow -> repository.getTvShowCredits(mediaId).toCredits()
             }
-            val cast = credits.cast?.distinctBy { it.name }
-            val crew = credits.crew?.distinctBy { it.name }
+            val cast = credits.cast
+                ?.distinctBy { it.name }
+                ?.sortedByDescending { it.popularity }
+            val crew = credits.crew
+                ?.distinctBy { it.name }
+                ?.sortedByDescending { it.popularity }
 
             credits = credits.copy(cast = cast, crew = crew)
             emit(Resource.Success(credits))
