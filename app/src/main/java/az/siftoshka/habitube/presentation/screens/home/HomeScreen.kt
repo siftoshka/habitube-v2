@@ -25,6 +25,7 @@ import az.siftoshka.habitube.presentation.components.Pager
 import az.siftoshka.habitube.presentation.components.TopAppBar
 import az.siftoshka.habitube.presentation.components.image.ImageCard
 import az.siftoshka.habitube.presentation.components.image.LongImageCard
+import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.screens.home.components.TitleText
@@ -49,6 +50,10 @@ fun HomeScreen(
             viewModel.exploreTrendingMoviesState.value.isLoading &&
             viewModel.exploreTrendingTvShowsState.value.isLoading &&
             viewModel.exploreAirTodayTvShowsState.value.isLoading
+    val isEmpty = viewModel.exploreUpcomingMoviesState.value.media.isEmpty() &&
+            viewModel.exploreTrendingMoviesState.value.media.isEmpty() &&
+            viewModel.exploreTrendingTvShowsState.value.media.isEmpty() &&
+            viewModel.exploreAirTodayTvShowsState.value.media.isEmpty()
 
     Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -56,14 +61,10 @@ fun HomeScreen(
             floatingActionButtonPosition = FabPosition.End
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.app_name,
-                    icon = R.drawable.ic_launch_icon
-                ) {
-                    dialogState.value = true
-                }
+                TopAppBar(title = R.string.app_name, icon = R.drawable.ic_launch_icon) { dialogState.value = true }
                 if (isLoading) LoadingScreen()
                 if (!context.isInternetAvailable()) NoConnectionScreen { viewModel.updateScreen() }
+                if (isEmpty) EmptyScreen()
                 Column(
                     horizontalAlignment = Alignment.Start,
                     modifier = Modifier
