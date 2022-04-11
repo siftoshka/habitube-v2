@@ -113,6 +113,7 @@
     <string name="text_delete">Delete</string>
     <string name="text_offline">You are offline</string>
     <string name="text_offline_description">Check the network access\nReconnect to Wi-Fi</string>
+    <string name="text_refresh_button">Refresh</string>
 
     <!-- Storage -->
     <string name="text_delete_watched_movies">Delete Watched Movies</string>

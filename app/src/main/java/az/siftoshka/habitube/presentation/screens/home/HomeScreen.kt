@@ -63,7 +63,7 @@ fun HomeScreen(
                     dialogState.value = true
                 }
                 if (isLoading) LoadingScreen()
-                if (!context.isInternetAvailable()) NoConnectionScreen()
+                if (!context.isInternetAvailable()) NoConnectionScreen { viewModel.updateScreen() }
                 Column(
                     horizontalAlignment = Alignment.Start,
                     modifier = Modifier

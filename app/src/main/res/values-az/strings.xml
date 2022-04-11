@@ -113,6 +113,7 @@
     <string name="text_delete">Sil</string>
     <string name="text_offline">Siz oflaynız</string>
     <string name="text_offline_description">Şəbəkəyə girişi yoxlayın\nWi-Fi-a yenidən qoşulun</string>
+    <string name="text_refresh_button">Təzələ</string>
 
     <!-- Storage -->
     <string name="text_delete_watched_movies">Baxılan Filmləri silmək</string>

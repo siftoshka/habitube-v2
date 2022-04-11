@@ -48,6 +48,10 @@ class HomeViewModel @Inject constructor(
     private var airTodayTvShowsPosition = 0
 
     init {
+        updateScreen()
+    }
+
+    fun updateScreen() {
         getUpcomingMovies()
         getTrendingMovies()
         getTrendingTvShows()

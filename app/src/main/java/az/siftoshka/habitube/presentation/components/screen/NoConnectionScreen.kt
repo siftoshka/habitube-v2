@@ -1,12 +1,13 @@
 package az.siftoshka.habitube.presentation.components.screen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -19,7 +20,9 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 
 @Composable
-fun NoConnectionScreen() {
+fun NoConnectionScreen(
+    onPerformClick: () -> Unit
+) {
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.no_connection))
 
     Column(
@@ -45,7 +48,20 @@ fun NoConnectionScreen() {
             style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onBackground,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(vertical = MaterialTheme.spacing.default)
+            modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
         )
+        OutlinedButton(
+            onClick = { onPerformClick() },
+            shape = MaterialTheme.shapes.large,
+            border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
+            modifier = Modifier.padding(MaterialTheme.spacing.medium)
+        ) {
+            Text(
+                text = stringResource(id = R.string.text_refresh_button),
+                style = MaterialTheme.typography.h4,
+                color = MaterialTheme.colors.onSurface
+            )
+        }
     }
 }

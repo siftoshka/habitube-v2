@@ -113,6 +113,7 @@
     <string name="text_delete">Удалить</string>
     <string name="text_offline">Вы вне сети</string>
     <string name="text_offline_description">Проверьте интернет соединение\nПереподключитесь к Wi-Fi</string>
+    <string name="text_refresh_button">Обновить</string>
 
     <!-- Storage -->
     <string name="text_delete_watched_movies">Удалить просмотренные фильмы</string>
