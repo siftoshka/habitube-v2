@@ -24,8 +24,14 @@ class GetPersonCreditsUseCase @Inject constructor(
                 MediaType.Movie -> repository.getPersonMovieCredits(mediaId).toCredit()
                 MediaType.TvShow -> repository.getPersonTvShowCredits(mediaId).toCredit()
             }
-            credits = credits.copy(cast = credits.cast?.filterNot { it.posterPath.isNullOrBlank() })
-            credits = credits.copy(crew = credits.crew?.filterNot { it.posterPath.isNullOrBlank() })
+            val cast = credits.cast
+                ?.filterNot { it.posterPath.isNullOrBlank() }
+                ?.distinctBy { it.posterPath }
+            val crew = credits.crew
+                ?.filterNot { it.posterPath.isNullOrBlank() }
+                ?.distinctBy { it.posterPath }
+
+            credits = credits.copy(cast = cast, crew = crew)
             emit(Resource.Success(credits))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))

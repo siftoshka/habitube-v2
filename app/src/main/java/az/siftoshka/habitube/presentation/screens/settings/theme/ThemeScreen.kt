@@ -18,7 +18,6 @@ import androidx.navigation.NavController
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
@@ -32,26 +31,24 @@ fun ThemeScreen(
 ) {
     val context = LocalContext.current
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.text_theme,
-                    icon = R.drawable.ic_back,
-                ) { navController.popBackStack() }
-                Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(horizontal = MaterialTheme.spacing.default)
-                        .fillMaxWidth()
-                ) {
-                    items(themes.size) {
-                        val theme = themes[it]
-                        ThemeRowItem(theme, sharedViewModel) { category ->
-                            sharedViewModel.updateTheme(category.name)
-                            navController.popBackStack()
-                            (context as Activity).recreate()
-                        }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = R.string.text_theme,
+                icon = R.drawable.ic_back,
+            ) { navController.popBackStack() }
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = MaterialTheme.spacing.default)
+                    .fillMaxWidth()
+            ) {
+                items(themes.size) {
+                    val theme = themes[it]
+                    ThemeRowItem(theme, sharedViewModel) { category ->
+                        sharedViewModel.updateTheme(category.name)
+                        navController.popBackStack()
+                        (context as Activity).recreate()
                     }
                 }
             }

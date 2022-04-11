@@ -26,10 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.DetailsCard
-import az.siftoshka.habitube.presentation.screens.show.components.SeasonCard
 import az.siftoshka.habitube.presentation.components.StoreButton
 import az.siftoshka.habitube.presentation.components.image.Avatar
 import az.siftoshka.habitube.presentation.components.image.BackgroundImage
@@ -39,7 +37,7 @@ import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailText
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
+import az.siftoshka.habitube.presentation.screens.show.components.SeasonCard
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import com.gowtham.ratingbar.RatingBar
@@ -53,20 +51,17 @@ import java.lang.Float.min
 @Composable
 fun ShowScreen(
     navController: NavController,
-    viewModel: ShowViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: ShowViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
     val showState = viewModel.showState.value
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                if (showState.isLoading) LoadingScreen()
-                else {
-                    MainBoard(scrollState, navController)
-                    InfoBoard(scrollState, navController)
-                }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            if (showState.isLoading) LoadingScreen()
+            else {
+                MainBoard(scrollState, navController)
+                InfoBoard(scrollState, navController)
             }
         }
     }

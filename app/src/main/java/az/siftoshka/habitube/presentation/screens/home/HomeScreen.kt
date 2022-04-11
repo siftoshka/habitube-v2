@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.components.Pager
@@ -31,7 +29,6 @@ import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.screen.NoConnectionScreen
 import az.siftoshka.habitube.presentation.screens.home.components.TitleText
 import az.siftoshka.habitube.presentation.screens.home.dialog.UpdateDialog
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 
@@ -41,8 +38,7 @@ import az.siftoshka.habitube.presentation.util.Screen
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
     val context = LocalContext.current
@@ -54,49 +50,47 @@ fun HomeScreen(
             viewModel.exploreTrendingTvShowsState.value.isLoading &&
             viewModel.exploreAirTodayTvShowsState.value.isLoading
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Scaffold(
-                floatingActionButton = { FloatingSearchButton(navController) },
-                floatingActionButtonPosition = FabPosition.End
-            ) {
-                Column(modifier = Modifier.fillMaxSize()) {
-                    TopAppBar(
-                        title = R.string.app_name,
-                        icon = R.drawable.ic_launch_icon
-                    ) {
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Scaffold(
+            floatingActionButton = { FloatingSearchButton(navController) },
+            floatingActionButtonPosition = FabPosition.End
+        ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                TopAppBar(
+                    title = R.string.app_name,
+                    icon = R.drawable.ic_launch_icon
+                ) {
+                    dialogState.value = true
+                }
+                if (isLoading) LoadingScreen()
+                if (!context.isInternetAvailable()) NoConnectionScreen()
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(scrollState)
+                ) {
+                    viewModel.isUpdateShown()
+                    if (updateState.value) {
                         dialogState.value = true
                     }
-                    if (isLoading) LoadingScreen()
-                    if (!context.isInternetAvailable()) NoConnectionScreen()
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(scrollState)
+                    UpdateDialog(
+                        title = R.string.text_update_title,
+                        text = R.string.text_update_description,
+                        textButton = R.string.text_update_button,
+                        state = dialogState
                     ) {
-                        viewModel.isUpdateShown()
-                        if (updateState.value) {
-                            dialogState.value = true
-                        }
-                        UpdateDialog(
-                            title = R.string.text_update_title,
-                            text = R.string.text_update_description,
-                            textButton = R.string.text_update_button,
-                            state = dialogState
-                        ) {
-                            dialogState.value = false
-                            viewModel.setUpdateShown()
-                        }
-                        UpcomingMovies(navController)
-                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.large))
-                        TrendingMovies(navController)
-                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
-                        TrendingTvShows(navController)
-                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
-                        AirTodayTvShows(navController)
-                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
+                        dialogState.value = false
+                        viewModel.setUpdateShown()
                     }
+                    UpcomingMovies(navController)
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.large))
+                    TrendingMovies(navController)
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
+                    TrendingTvShows(navController)
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
+                    AirTodayTvShows(navController)
+                    Spacer(modifier = Modifier.height(MaterialTheme.spacing.regular))
                 }
             }
         }

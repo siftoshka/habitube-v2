@@ -16,9 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
@@ -28,39 +26,36 @@ import az.siftoshka.habitube.presentation.theme.spacing
 @Composable
 fun ContentLanguageScreen(
     navController: NavController,
-    viewModel: ContentLanguageViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: ContentLanguageViewModel = hiltViewModel()
 ) {
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.text_content_language,
-                    icon = R.drawable.ic_back,
-                ) { navController.popBackStack() }
-                Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(horizontal = MaterialTheme.spacing.default)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    items(languages.size) {
-                        val language = languages[it]
-                        ContentLanguageRowItem(language) { code ->
-                            viewModel.setContentLanguage(code)
-                            navController.popBackStack()
-                        }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = R.string.text_content_language,
+                icon = R.drawable.ic_back,
+            ) { navController.popBackStack() }
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = MaterialTheme.spacing.default)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(languages.size) {
+                    val language = languages[it]
+                    ContentLanguageRowItem(language) { code ->
+                        viewModel.setContentLanguage(code)
+                        navController.popBackStack()
                     }
-                    item {
-                        Text(
-                            text = stringResource(id = R.string.text_content_warning),
-                            style = MaterialTheme.typography.h5,
-                            color = MaterialTheme.colors.secondaryVariant,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(MaterialTheme.spacing.default)
-                        )
-                    }
+                }
+                item {
+                    Text(
+                        text = stringResource(id = R.string.text_content_warning),
+                        style = MaterialTheme.typography.h5,
+                        color = MaterialTheme.colors.secondaryVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(MaterialTheme.spacing.default)
+                    )
                 }
             }
         }

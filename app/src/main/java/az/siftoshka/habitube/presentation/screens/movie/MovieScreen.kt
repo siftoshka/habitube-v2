@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.StoreButton
@@ -38,7 +37,6 @@ import az.siftoshka.habitube.presentation.components.text.DetailText
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
 import az.siftoshka.habitube.presentation.screens.movie.components.RatingsBoard
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 import com.gowtham.ratingbar.RatingBar
@@ -52,20 +50,17 @@ import java.lang.Float.min
 @Composable
 fun MovieScreen(
     navController: NavController,
-    viewModel: MovieViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: MovieViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
     val movieState = viewModel.movieState.value
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                if (movieState.isLoading) LoadingScreen()
-                else {
-                    MainBoard(scrollState, navController)
-                    InfoBoard(scrollState, navController)
-                }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            if (movieState.isLoading) LoadingScreen()
+            else {
+                MainBoard(scrollState, navController)
+                InfoBoard(scrollState, navController)
             }
         }
     }

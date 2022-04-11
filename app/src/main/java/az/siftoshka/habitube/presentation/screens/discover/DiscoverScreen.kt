@@ -12,13 +12,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.presentation.screens.discover.components.*
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.NavigationConstants
 import az.siftoshka.habitube.presentation.util.Screen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
  * Composable function of the Discover Screen.
@@ -27,46 +24,43 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun DiscoverScreen(
     navController: NavController,
-    viewModel: DiscoverViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: DiscoverViewModel = hiltViewModel()
 ) {
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = MaterialTheme.spacing.default)
+                .verticalScroll(rememberScrollState())
+        ) {
+            DiscoverConfigurations()
+        }
+        Column(
+            verticalArrangement = Arrangement.Bottom, modifier = Modifier
+                .fillMaxWidth()
+                .padding(MaterialTheme.spacing.default)
+        ) {
+            Card(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = MaterialTheme.spacing.default)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                DiscoverConfigurations()
-            }
-            Column(
-                verticalArrangement = Arrangement.Bottom, modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MaterialTheme.spacing.default)
+                    .padding(vertical = MaterialTheme.spacing.extraSmall),
+                shape = MaterialTheme.shapes.large,
+                backgroundColor = MaterialTheme.colors.primary,
+                onClick = {
+                    viewModel.updateData().also {
+                        navController.currentBackStackEntry?.arguments?.putParcelable(NavigationConstants.PARAM_DISCOVER, it)
+                        navController.navigate(Screen.DiscoverListScreen.route)
+                    }
+                },
             ) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = MaterialTheme.spacing.extraSmall),
-                    shape = MaterialTheme.shapes.large,
-                    backgroundColor = MaterialTheme.colors.primary,
-                    onClick = {
-                        viewModel.updateData().also {
-                            navController.currentBackStackEntry?.arguments?.putParcelable(NavigationConstants.PARAM_DISCOVER, it)
-                            navController.navigate(Screen.DiscoverListScreen.route)
-                        }
-                    },
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.text_discover),
-                        color = MaterialTheme.colors.onPrimary,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h3,
-                        modifier = Modifier.padding(MaterialTheme.spacing.medium)
-                    )
-                }
+                Text(
+                    text = stringResource(id = R.string.text_discover),
+                    color = MaterialTheme.colors.onPrimary,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.h3,
+                    modifier = Modifier.padding(MaterialTheme.spacing.medium)
+                )
             }
         }
     }

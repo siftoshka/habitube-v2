@@ -20,10 +20,14 @@ class GetCreditsUseCase @Inject constructor(
     operator fun invoke(mediaId: Int, mediaType: MediaType): Flow<Resource<Credit>> = flow {
         try {
             emit(Resource.Loading())
-            val credits = when (mediaType) {
+            var credits = when (mediaType) {
                 MediaType.Movie -> repository.getMovieCredits(mediaId).toCredits()
                 MediaType.TvShow -> repository.getTvShowCredits(mediaId).toCredits()
             }
+            val cast = credits.cast?.distinctBy { it.name }
+            val crew = credits.crew?.distinctBy { it.name }
+
+            credits = credits.copy(cast = cast, crew = crew)
             emit(Resource.Success(credits))
         } catch (e: HttpException) {
             emit(Resource.Error(e.localizedMessage ?: "HTTP Error"))

@@ -26,14 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.SearchType
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.screens.search.components.SearchCard
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
 
@@ -44,35 +42,32 @@ import az.siftoshka.habitube.presentation.util.Screen
 @Composable
 fun SearchScreen(
     navController: NavController,
-    viewModel: SearchViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: SearchViewModel = hiltViewModel()
 ) {
     val searchState = viewModel.searchState.value
     val page = viewModel.searchPage.value
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            SearchView()
             Column(modifier = Modifier.fillMaxSize()) {
-                SearchView()
-                Column(modifier = Modifier.fillMaxSize()) {
-                    if (searchState.isLoading) {
-                        LoadingScreen()
-                    }
-                    if (searchState.media.isEmpty()) {
-                        EmptyScreen()
-                    }
-                    LazyVerticalGrid(
-                        cells = GridCells.Fixed(4),
-                        contentPadding = PaddingValues(MaterialTheme.spacing.medium),
-                    ) {
-                        itemsIndexed(searchState.media) { index, item ->
-                            viewModel.onChangeSearchPosition(index)
-                            if ((index + 1) >= (page * PAGE_SIZE)) {
-                                viewModel.getMoreSearchResults()
-                            }
-                            SearchCard(item) {
-                                navigation(item, navController, viewModel.mediaType.value)
-                            }
+                if (searchState.isLoading) {
+                    LoadingScreen()
+                }
+                if (searchState.media.isEmpty()) {
+                    EmptyScreen()
+                }
+                LazyVerticalGrid(
+                    cells = GridCells.Fixed(4),
+                    contentPadding = PaddingValues(MaterialTheme.spacing.medium),
+                ) {
+                    itemsIndexed(searchState.media) { index, item ->
+                        viewModel.onChangeSearchPosition(index)
+                        if ((index + 1) >= (page * PAGE_SIZE)) {
+                            viewModel.getMoreSearchResults()
+                        }
+                        SearchCard(item) {
+                            navigation(item, navController, viewModel.mediaType.value)
                         }
                     }
                 }

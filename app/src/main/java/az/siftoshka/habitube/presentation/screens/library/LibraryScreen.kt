@@ -21,7 +21,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.isInternetAvailable
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.screens.library.boards.MovieBoard
@@ -29,7 +28,6 @@ import az.siftoshka.habitube.presentation.screens.library.boards.ShowBoard
 import az.siftoshka.habitube.presentation.screens.library.components.LibraryCard
 import az.siftoshka.habitube.presentation.screens.library.components.LibraryEmptyScreen
 import az.siftoshka.habitube.presentation.screens.library.components.LibraryTextCard
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.Dispatchers
@@ -43,8 +41,7 @@ import kotlinx.coroutines.launch
 fun LibraryScreen(
     navController: NavController,
     viewModel: LibraryViewModel = hiltViewModel(),
-    realtimeViewModel: RealtimeViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    realtimeViewModel: RealtimeViewModel = hiltViewModel()
 ) {
     val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val pagerState = rememberPagerState()
@@ -57,50 +54,48 @@ fun LibraryScreen(
         }
     }
 
-    HabitubeTheme(sharedViewModel) {
-        ModalBottomSheetLayout(
-            sheetState = sheetState,
-            sheetBackgroundColor = MaterialTheme.colors.surface,
-            sheetShape = MaterialTheme.shapes.large,
-            scrimColor = Color.Transparent,
-            sheetContent = {
-                if (viewModel.isMoviesSelected.value) {
-                    MovieBoard(isWatched = viewModel.isWatched.value, navController, sheetState)
-                } else {
-                    ShowBoard(isWatched = viewModel.isWatched.value, navController, sheetState)
-                }
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetBackgroundColor = MaterialTheme.colors.surface,
+        sheetShape = MaterialTheme.shapes.large,
+        scrimColor = Color.Transparent,
+        sheetContent = {
+            if (viewModel.isMoviesSelected.value) {
+                MovieBoard(isWatched = viewModel.isWatched.value, navController, sheetState)
+            } else {
+                ShowBoard(isWatched = viewModel.isWatched.value, navController, sheetState)
             }
-        ) {
-            BackHandler(
-                enabled = (sheetState.currentValue == ModalBottomSheetValue.Expanded),
-                onBack = { scope.launch { sheetState.hide() } }
-            )
-            Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-                Column(modifier = Modifier.fillMaxSize()) {
-                    Row(
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier
-                            .padding(horizontal = MaterialTheme.spacing.default)
-                            .padding(top = MaterialTheme.spacing.default)
-                    ) {
-                        LibraryTitle(title = stringResource(id = R.string.text_movies), isSelected = viewModel.isMoviesSelected.value) { isSelected ->
-                            if (!viewModel.isMoviesSelected.value) {
-                                viewModel.isMoviesSelected.value = isSelected
-                                viewModel.isShowsSelected.value = !isSelected
-                                viewModel.updateConfiguration()
-                            }
-                        }
-                        LibraryTitle(title = stringResource(id = R.string.text_shows), isSelected = viewModel.isShowsSelected.value) { isSelected ->
-                            if (!viewModel.isShowsSelected.value) {
-                                viewModel.isShowsSelected.value = isSelected
-                                viewModel.isMoviesSelected.value = !isSelected
-                                viewModel.updateConfiguration()
-                            }
+        }
+    ) {
+        BackHandler(
+            enabled = (sheetState.currentValue == ModalBottomSheetValue.Expanded),
+            onBack = { scope.launch { sheetState.hide() } }
+        )
+        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Row(
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .padding(horizontal = MaterialTheme.spacing.default)
+                        .padding(top = MaterialTheme.spacing.default)
+                ) {
+                    LibraryTitle(title = stringResource(id = R.string.text_movies), isSelected = viewModel.isMoviesSelected.value) { isSelected ->
+                        if (!viewModel.isMoviesSelected.value) {
+                            viewModel.isMoviesSelected.value = isSelected
+                            viewModel.isShowsSelected.value = !isSelected
+                            viewModel.updateConfiguration()
                         }
                     }
-                    TabView(pagerState, sheetState) {
-                        scope.launch { pagerState.animateScrollToPage(it) }
+                    LibraryTitle(title = stringResource(id = R.string.text_shows), isSelected = viewModel.isShowsSelected.value) { isSelected ->
+                        if (!viewModel.isShowsSelected.value) {
+                            viewModel.isShowsSelected.value = isSelected
+                            viewModel.isMoviesSelected.value = !isSelected
+                            viewModel.updateConfiguration()
+                        }
                     }
+                }
+                TabView(pagerState, sheetState) {
+                    scope.launch { pagerState.animateScrollToPage(it) }
                 }
             }
         }

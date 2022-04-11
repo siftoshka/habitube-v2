@@ -23,20 +23,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.normalDate
 import az.siftoshka.habitube.domain.util.shareLink
 import az.siftoshka.habitube.presentation.components.DetailsCard
 import az.siftoshka.habitube.presentation.components.image.ImageCard
-import az.siftoshka.habitube.presentation.screens.person.components.PersonCard
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.DetailTitle
 import az.siftoshka.habitube.presentation.components.text.ExpandableText
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
+import az.siftoshka.habitube.presentation.screens.person.components.PersonCard
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import java.lang.Float.min
 
 /**
@@ -45,18 +42,15 @@ import java.lang.Float.min
 @Composable
 fun PersonScreen(
     navController: NavController,
-    viewModel: PersonViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: PersonViewModel = hiltViewModel()
 ) {
     val scrollState = rememberScrollState()
     val personState = viewModel.personState.value
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                if (personState.isLoading) LoadingScreen()
-                MainBoard(scrollState, navController)
-            }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            if (personState.isLoading) LoadingScreen()
+            MainBoard(scrollState, navController)
         }
     }
 }

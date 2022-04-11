@@ -12,12 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 
 /**
  * Composable function of Web Screen.
@@ -26,8 +23,7 @@ import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 @Composable
 fun WebScreen(
     value: String,
-    navController: NavController,
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    navController: NavController
 ) {
 
     val title = when (value) {
@@ -44,28 +40,26 @@ fun WebScreen(
         else -> "file:///android_asset/privacy_policy.html"
     }
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = title,
-                    icon = R.drawable.ic_back,
-                ) { navController.popBackStack() }
-                AndroidView(
-                    factory = {
-                        WebView(it).apply {
-                            webViewClient = object : WebViewClient() {
-                                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                                    return false
-                                }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = title,
+                icon = R.drawable.ic_back,
+            ) { navController.popBackStack() }
+            AndroidView(
+                factory = {
+                    WebView(it).apply {
+                        webViewClient = object : WebViewClient() {
+                            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                                return false
                             }
                         }
-                    },
-                    update = {
-                        it.loadUrl(url)
                     }
-                )
-            }
+                },
+                update = {
+                    it.loadUrl(url)
+                }
+            )
         }
     }
 }

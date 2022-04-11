@@ -14,9 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
@@ -26,28 +24,25 @@ import az.siftoshka.habitube.presentation.theme.spacing
 @Composable
 fun SortScreen(
     navController: NavController,
-    viewModel: SortViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: SortViewModel = hiltViewModel()
 ) {
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.text_sort,
-                    icon = R.drawable.ic_back,
-                ) { navController.popBackStack() }
-                Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(horizontal = MaterialTheme.spacing.default)
-                        .fillMaxWidth()
-                ) {
-                    items(list.size) {
-                        val item = list[it]
-                        SortRowItem(item) { type ->
-                            viewModel.setSortType(type.name)
-                            navController.popBackStack()
-                        }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = R.string.text_sort,
+                icon = R.drawable.ic_back,
+            ) { navController.popBackStack() }
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = MaterialTheme.spacing.default)
+                    .fillMaxWidth()
+            ) {
+                items(list.size) {
+                    val item = list[it]
+                    SortRowItem(item) { type ->
+                        viewModel.setSortType(type.name)
+                        navController.popBackStack()
                     }
                 }
             }

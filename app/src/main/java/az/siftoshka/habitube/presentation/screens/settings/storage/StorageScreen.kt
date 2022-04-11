@@ -13,9 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
@@ -25,48 +23,45 @@ import az.siftoshka.habitube.presentation.theme.spacing
 @Composable
 fun StorageScreen(
     navController: NavController,
-    viewModel: StorageViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: StorageViewModel = hiltViewModel()
 ) {
     val dialogState = remember { mutableStateOf(false) }
     val storageType = remember { mutableStateOf(StorageType.WATCHED_MOVIES) }
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.text_storage,
-                    icon = R.drawable.ic_back,
-                ) { navController.popBackStack() }
-                Spacer(modifier = Modifier.height(16.dp))
-                Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
-                    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-                        items(list.size) {
-                            val item = list[it]
-                            StorageRowItem(item) { type ->
-                                storageType.value = type
-                                dialogState.value = true
-                            }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = R.string.text_storage,
+                icon = R.drawable.ic_back,
+            ) { navController.popBackStack() }
+            Spacer(modifier = Modifier.height(16.dp))
+            Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
+                LazyColumn(modifier = Modifier.fillMaxWidth()) {
+                    items(list.size) {
+                        val item = list[it]
+                        StorageRowItem(item) { type ->
+                            storageType.value = type
+                            dialogState.value = true
                         }
                     }
-                    StorageDialog(
-                        title = R.string.text_storage_dialog_title,
-                        text = R.string.text_storage_dialog_description,
-                        positiveButton = R.string.text_delete,
-                        state = dialogState,
-                        onPerformClick = {
-                            when (storageType.value) {
-                                StorageType.WATCHED_MOVIES -> viewModel.deleteWatchedMovies()
-                                StorageType.WATCHED_SHOWS -> viewModel.deleteWatchedTvShows()
-                                StorageType.PLANNED_MOVIES -> viewModel.deletePlannedMovies()
-                                StorageType.PLANNED_SHOWS -> viewModel.deletePlannedTvShows()
-                                StorageType.ALL -> viewModel.deleteAll()
-                            }
-                            dialogState.value = false
-                        },
-                        onCancel = { dialogState.value = false }
-                    )
                 }
+                StorageDialog(
+                    title = R.string.text_storage_dialog_title,
+                    text = R.string.text_storage_dialog_description,
+                    positiveButton = R.string.text_delete,
+                    state = dialogState,
+                    onPerformClick = {
+                        when (storageType.value) {
+                            StorageType.WATCHED_MOVIES -> viewModel.deleteWatchedMovies()
+                            StorageType.WATCHED_SHOWS -> viewModel.deleteWatchedTvShows()
+                            StorageType.PLANNED_MOVIES -> viewModel.deletePlannedMovies()
+                            StorageType.PLANNED_SHOWS -> viewModel.deletePlannedTvShows()
+                            StorageType.ALL -> viewModel.deleteAll()
+                        }
+                        dialogState.value = false
+                    },
+                    onCancel = { dialogState.value = false }
+                )
             }
         }
     }

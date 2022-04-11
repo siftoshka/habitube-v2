@@ -12,13 +12,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import az.siftoshka.habitube.R
-import az.siftoshka.habitube.SharedViewModel
 import az.siftoshka.habitube.domain.util.*
 import az.siftoshka.habitube.presentation.components.TopAppBar
-import az.siftoshka.habitube.presentation.theme.HabitubeTheme
 import az.siftoshka.habitube.presentation.theme.spacing
 
 /**
@@ -27,49 +24,46 @@ import az.siftoshka.habitube.presentation.theme.spacing
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun LanguageScreen(
-    navController: NavController,
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    navController: NavController
 ) {
     val context = LocalContext.current
 
-    HabitubeTheme(sharedViewModel) {
-        Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = R.string.text_language,
-                    icon = R.drawable.ic_back,
-                ) { navController.popBackStack() }
-                Spacer(modifier = Modifier.height(16.dp))
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(horizontal = MaterialTheme.spacing.default)
-                        .fillMaxWidth()
-                ) {
-                    items(languages.size) {
-                        val language = languages[it]
-                        LanguageRowItem(language) { category ->
-                            when (category) {
-                                LanguageCategory.AUTO -> {
-                                    context.updateLanguage(getDeviceLanguage(), getDeviceCountry())
-                                }
-                                LanguageCategory.ENGLISH -> {
-                                    context.updateLanguage(Language.ENGLISH.language, Language.ENGLISH.country)
-                                }
-                                LanguageCategory.AZERBAIJANI -> {
-                                    context.updateLanguage(Language.AZERBAIJANI.language, Language.AZERBAIJANI.country)
-                                }
-                                LanguageCategory.FRENCH -> {
-                                    context.updateLanguage(Language.FRENCH.language, Language.FRENCH.country)
-                                }
-                                LanguageCategory.SPANISH -> {
-                                    context.updateLanguage(Language.SPANISH.language, Language.SPANISH.country)
-                                }
-                                LanguageCategory.RUSSIAN -> {
-                                    context.updateLanguage(Language.RUSSIAN.language, Language.RUSSIAN.country)
-                                }
+    Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            TopAppBar(
+                title = R.string.text_language,
+                icon = R.drawable.ic_back,
+            ) { navController.popBackStack() }
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(
+                modifier = Modifier
+                    .padding(horizontal = MaterialTheme.spacing.default)
+                    .fillMaxWidth()
+            ) {
+                items(languages.size) {
+                    val language = languages[it]
+                    LanguageRowItem(language) { category ->
+                        when (category) {
+                            LanguageCategory.AUTO -> {
+                                context.updateLanguage(getDeviceLanguage(), getDeviceCountry())
                             }
-                            navController.popBackStack()
+                            LanguageCategory.ENGLISH -> {
+                                context.updateLanguage(Language.ENGLISH.language, Language.ENGLISH.country)
+                            }
+                            LanguageCategory.AZERBAIJANI -> {
+                                context.updateLanguage(Language.AZERBAIJANI.language, Language.AZERBAIJANI.country)
+                            }
+                            LanguageCategory.FRENCH -> {
+                                context.updateLanguage(Language.FRENCH.language, Language.FRENCH.country)
+                            }
+                            LanguageCategory.SPANISH -> {
+                                context.updateLanguage(Language.SPANISH.language, Language.SPANISH.country)
+                            }
+                            LanguageCategory.RUSSIAN -> {
+                                context.updateLanguage(Language.RUSSIAN.language, Language.RUSSIAN.country)
+                            }
                         }
+                        navController.popBackStack()
                     }
                 }
             }
