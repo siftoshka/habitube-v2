@@ -20,7 +20,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
-import az.siftoshka.habitube.presentation.theme.spacing
 import coil.compose.rememberImagePainter
 import coil.request.CachePolicy
 
@@ -62,18 +61,16 @@ fun ImageCard(
             )
             if (rating?.let { it.compareTo(0f) > 0 } == true) {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    Row(
-                        horizontalArrangement = Arrangement.End, modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(MaterialTheme.spacing.extraSmall)
-                    ) {
+                    Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = " $rating ",
+                            text = "$rating",
                             style = MaterialTheme.typography.h6,
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(100.dp))
+                                .background(Color.Black.copy(alpha = 0.7f), RoundedCornerShape(bottomStart = 12.dp))
+                                .padding(start = 4.dp, end = 2.dp)
+                                .padding(vertical = 2.dp)
                         )
                     }
                     Row(
@@ -84,7 +81,7 @@ fun ImageCard(
                         Text(
                             text = stringResource(id = R.string.text_watched),
                             style = MaterialTheme.typography.h6,
-                            color = Color.White,
+                            color = MaterialTheme.colors.onPrimary,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .background(MaterialTheme.colors.primary.copy(alpha = 0.6f), MaterialTheme.shapes.small)

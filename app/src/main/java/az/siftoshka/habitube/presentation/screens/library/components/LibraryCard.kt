@@ -61,18 +61,16 @@ fun LibraryCard(
             )
             if (rating?.let { it.compareTo(0f) > 0 } == true) {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    Row(
-                        horizontalArrangement = Arrangement.End, modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(4.dp)
-                    ) {
+                    Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = " $rating ",
+                            text = "$rating",
                             style = MaterialTheme.typography.h6,
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(100.dp))
+                                .background(Color.Black.copy(alpha = 0.7f), RoundedCornerShape(bottomStart = 12.dp))
+                                .padding(start = 4.dp, end = 2.dp)
+                                .padding(vertical = 2.dp)
                         )
                     }
                 }
