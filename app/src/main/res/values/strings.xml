@@ -47,6 +47,11 @@
     <string name="text_tab_movie">Movies</string>
     <string name="text_tab_show">TV Shows</string>
     <string name="text_tab_person">Persons</string>
+    <string-array name="text_search_hints">
+        <item>Search your favourite movie</item>
+        <item>Maybe something from Marvel?</item>
+        <item>Let\'s find Will Smith here :)</item>
+    </string-array>
 
     <!-- Library Screen -->
     <string name="text_watched">Watched</string>

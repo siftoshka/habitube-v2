@@ -47,6 +47,11 @@
     <string name="text_tab_movie">Фильмы</string>
     <string name="text_tab_show">Сериалы</string>
     <string name="text_tab_person">Люди</string>
+    <string-array name="text_search_hints">
+        <item>Фильмы, сериалы, персоны</item>
+        <item>Что-нибудь из Марвел?</item>
+        <item>Давай найдем популярных актёров</item>
+    </string-array>
 
     <!-- Library Screen -->
     <string name="text_watched">Просмотрено</string>

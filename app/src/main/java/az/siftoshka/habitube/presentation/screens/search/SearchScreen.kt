@@ -18,6 +18,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,6 +32,7 @@ import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.SearchType
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
+import az.siftoshka.habitube.presentation.components.text.AnimatedPlaceholder
 import az.siftoshka.habitube.presentation.screens.search.components.SearchCard
 import az.siftoshka.habitube.presentation.theme.spacing
 import az.siftoshka.habitube.presentation.util.Screen
@@ -103,7 +105,7 @@ fun SearchView(
             OutlinedTextField(
                 value = query,
                 singleLine = true,
-                placeholder = { Text(text = stringResource(id = R.string.text_search), style = MaterialTheme.typography.body1) },
+                placeholder = { AnimatedPlaceholder(stringArrayResource(id = R.array.text_search_hints)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.small)

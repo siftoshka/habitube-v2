@@ -8,6 +8,7 @@ import android.net.Uri
 import az.siftoshka.habitube.R
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import kotlinx.coroutines.delay
 import java.text.DecimalFormat
 
 /**
@@ -118,3 +119,19 @@ fun Context.getGithubIntent() = startActivity(Intent(Intent.ACTION_VIEW, Uri.par
 fun Context.getTelegramIntent() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DEV_TELEGRAM)))
 
 fun Context.getInstagramIntent() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DEV_INSTAGRAM)))
+
+suspend fun <T> ListIterator<T>.doWhenHasNextOrPrevious(
+    delayMills: Long = 2000,
+    doWork: suspend (T) -> Unit
+) {
+    while (hasNext() || hasPrevious()) {
+        while (hasNext()) {
+            delay(delayMills)
+            doWork(next())
+        }
+        while (hasPrevious()) {
+            delay(delayMills)
+            doWork(previous())
+        }
+    }
+}

@@ -47,6 +47,11 @@
     <string name="text_tab_movie">Filmlər</string>
     <string name="text_tab_show">Şoular</string>
     <string name="text_tab_person">Şəxslər</string>
+    <string-array name="text_search_hints">
+        <item>Sevimli filmini axtar</item>
+        <item>Bəlkə Marveldən bir şey?</item>
+        <item>Gəl Taleh Yüzbəyovu tapaq :)</item>
+    </string-array>
 
     <!-- Library Screen -->
     <string name="text_watched">Baxılıb</string>
