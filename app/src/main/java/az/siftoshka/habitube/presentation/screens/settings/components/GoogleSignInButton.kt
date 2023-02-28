@@ -4,8 +4,10 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -54,23 +56,21 @@ fun GoogleSignInButton() {
         }
     }
 
-    Card(
-        modifier = Modifier
+    Card({
+        if (isNotLogIn.value) {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(token).requestEmail().build()
+            val googleSignInClient = GoogleSignIn.getClient(context, gso)
+            launcher.launch(googleSignInClient.signInIntent)
+        }
+    },
+        Modifier
             .fillMaxWidth()
             .padding(vertical = MaterialTheme.spacing.extraSmall)
             .border(width = 1.dp, color = borderColor, shape = MaterialTheme.shapes.large),
-        shape = MaterialTheme.shapes.large,
-        backgroundColor = MaterialTheme.colors.surface,
-        indication = indicator,
-        onClick = {
-            if (isNotLogIn.value) {
-                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(token).requestEmail().build()
-                val googleSignInClient = GoogleSignIn.getClient(context, gso)
-                launcher.launch(googleSignInClient.signInIntent)
-            }
-        }
-    ) {
+        true, MaterialTheme.shapes.large,
+        MaterialTheme.colors.surface,
+        contentColorFor(backgroundColor), null, 1.dp, remember { MutableInteractionSource() }) {
         if (isNotLogIn.value) {
             Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
                 Image(

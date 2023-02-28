@@ -18,7 +18,7 @@ fun OptionSlider(
     var sliderPosition by remember { mutableStateOf(value) }
     RangeSlider(
         steps = steps,
-        values = sliderPosition,
+        value = sliderPosition,
         onValueChange = { sliderPosition = it },
         valueRange = default,
         onValueChangeFinished = { onPerformClick(sliderPosition) },

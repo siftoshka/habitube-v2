@@ -1,11 +1,10 @@
 package az.siftoshka.habitube.presentation.screens.search
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -30,6 +29,7 @@ import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.util.Constants.PAGE_SIZE
 import az.siftoshka.habitube.domain.util.SearchType
+import az.siftoshka.habitube.domain.util.SearchType.*
 import az.siftoshka.habitube.presentation.components.screen.EmptyScreen
 import az.siftoshka.habitube.presentation.components.screen.LoadingScreen
 import az.siftoshka.habitube.presentation.components.text.AnimatedPlaceholder
@@ -40,7 +40,6 @@ import az.siftoshka.habitube.presentation.util.Screen
 /**
  * Composable function of the Search Screen.
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchScreen(
     navController: NavController,
@@ -60,7 +59,7 @@ fun SearchScreen(
                     EmptyScreen()
                 }
                 LazyVerticalGrid(
-                    cells = GridCells.Fixed(4),
+                    columns = GridCells.Fixed(4),
                     contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 ) {
                     itemsIndexed(searchState.media) { index, item ->
@@ -138,10 +137,10 @@ fun SearchView(
                     .padding(horizontal = MaterialTheme.spacing.default),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                SearchTab(SearchType.Multi) { viewModel.changeSearchType(SearchType.Multi) }
-                SearchTab(SearchType.Movie) { viewModel.changeSearchType(SearchType.Movie) }
-                SearchTab(SearchType.TvShow) { viewModel.changeSearchType(SearchType.TvShow) }
-                SearchTab(SearchType.Person) { viewModel.changeSearchType(SearchType.Person) }
+                SearchTab(Multi) { viewModel.changeSearchType(Multi) }
+                SearchTab(Movie) { viewModel.changeSearchType(Movie) }
+                SearchTab(TvShow) { viewModel.changeSearchType(TvShow) }
+                SearchTab(Person) { viewModel.changeSearchType(Person) }
             }
         }
     }
@@ -160,10 +159,10 @@ fun SearchTab(
     val strokeColor = if (mediaType == searchType) MaterialTheme.colors.primary else MaterialTheme.colors.secondaryVariant
     val textColor = if (mediaType == searchType) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSurface
     val title = when (searchType) {
-        SearchType.Multi -> stringResource(id = R.string.text_tab_multi)
-        SearchType.Movie -> stringResource(id = R.string.text_tab_movie)
-        SearchType.TvShow -> stringResource(id = R.string.text_tab_show)
-        SearchType.Person -> stringResource(id = R.string.text_tab_person)
+        Multi -> stringResource(id = R.string.text_tab_multi)
+        Movie -> stringResource(id = R.string.text_tab_movie)
+        TvShow -> stringResource(id = R.string.text_tab_show)
+        Person -> stringResource(id = R.string.text_tab_person)
     }
     Card(
         border = BorderStroke(1.dp, strokeColor),
@@ -194,9 +193,13 @@ fun navigation(
         "tv" -> navController.navigate(Screen.TvShowScreen.route + "/${item.id}")
         "person" -> navController.navigate(Screen.PersonScreen.route + "/${item.id}")
     }
-    when (searchType) {
-        SearchType.Movie -> navController.navigate(Screen.MovieScreen.route + "/${item.id}")
-        SearchType.TvShow -> navController.navigate(Screen.TvShowScreen.route + "/${item.id}")
-        SearchType.Person -> navController.navigate(Screen.PersonScreen.route + "/${item.id}")
+    if (searchType == Movie) {
+        navController.navigate(Screen.MovieScreen.route + "/${item.id}")
+    }
+    if (searchType == TvShow) {
+        navController.navigate(Screen.TvShowScreen.route + "/${item.id}")
+    }
+    if (searchType == Person) {
+        navController.navigate(Screen.PersonScreen.route + "/${item.id}")
     }
 }

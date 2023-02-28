@@ -1,13 +1,12 @@
 package az.siftoshka.habitube.presentation.screens.discover.list
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -28,7 +27,6 @@ import az.siftoshka.habitube.presentation.util.Screen
 /**
  * Composable function of the Discover List Screen.
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DiscoverListScreen(
     navController: NavController,
@@ -53,7 +51,7 @@ fun DiscoverListScreen(
             if (isLoading) LoadingScreen()
             if (discoverState.media.isEmpty()) NothingScreen()
             LazyVerticalGrid(
-                cells = GridCells.Fixed(2),
+                columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.default, vertical = MaterialTheme.spacing.small),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)

@@ -44,19 +44,19 @@ fun ShowBoard(
                 .padding(bottom = MaterialTheme.spacing.extraLarge)
         ) {
             if (context.isInternetAvailable()) {
+                rememberRipple(color = MaterialTheme.colors.primary)
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
-                    shape = MaterialTheme.shapes.large,
-                    backgroundColor = MaterialTheme.colors.surface,
-                    indication = rememberRipple(color = MaterialTheme.colors.primary),
                     onClick = {
                         scope.launch {
                             sheetState.hide()
                             navController.navigate(Screen.TvShowScreen.route + "/${viewModel.showState.value.id}")
                         }
-                    }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                    shape = MaterialTheme.shapes.large,
+                    backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Text(
                         text = stringResource(id = R.string.text_full_info),
@@ -67,18 +67,18 @@ fun ShowBoard(
                     )
                 }
             }
+            rememberRipple(color = MaterialTheme.colors.error)
             Card(
+                onClick = {
+                    scope.launch { sheetState.hide() }
+                    viewModel.deleteShow(viewModel.showState.value, isWatched)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.spacing.medium)
                     .border(width = 1.dp, color = MaterialTheme.colors.error, shape = MaterialTheme.shapes.large),
                 shape = MaterialTheme.shapes.large,
-                backgroundColor = MaterialTheme.colors.surface,
-                indication = rememberRipple(color = MaterialTheme.colors.error),
-                onClick = {
-                    scope.launch { sheetState.hide() }
-                    viewModel.deleteShow(viewModel.showState.value, isWatched)
-                }
+                backgroundColor = MaterialTheme.colors.surface
             ) {
                 Text(
                     text = stringResource(id = R.string.text_remove_watched),
@@ -99,19 +99,19 @@ fun ShowBoard(
                 .padding(bottom = MaterialTheme.spacing.extraLarge)
         ) {
             if (context.isInternetAvailable()) {
+                rememberRipple(color = MaterialTheme.colors.primary)
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
-                    shape = MaterialTheme.shapes.large,
-                    backgroundColor = MaterialTheme.colors.surface,
-                    indication = rememberRipple(color = MaterialTheme.colors.primary),
                     onClick = {
                         scope.launch {
                             sheetState.hide()
                             navController.navigate(Screen.TvShowScreen.route + "/${viewModel.showState.value.id}")
                         }
-                    }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                    shape = MaterialTheme.shapes.large,
+                    backgroundColor = MaterialTheme.colors.surface
                 ) {
                     Text(
                         text = stringResource(id = R.string.text_full_info),
@@ -122,18 +122,18 @@ fun ShowBoard(
                     )
                 }
             }
+            rememberRipple(color = MaterialTheme.colors.secondaryVariant)
             Card(
+                onClick = {
+                    scope.launch { sheetState.hide() }
+                    viewModel.switchToWatchedShow(viewModel.showState.value)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.spacing.medium)
                     .border(width = 1.dp, color = MaterialTheme.colors.secondaryVariant, shape = MaterialTheme.shapes.large),
                 shape = MaterialTheme.shapes.large,
-                backgroundColor = MaterialTheme.colors.surface,
-                indication = rememberRipple(color = MaterialTheme.colors.secondaryVariant),
-                onClick = {
-                    scope.launch { sheetState.hide() }
-                    viewModel.switchToWatchedShow(viewModel.showState.value)
-                }
+                backgroundColor = MaterialTheme.colors.surface
             ) {
                 Text(
                     text = stringResource(id = R.string.text_already_watched),
@@ -143,18 +143,18 @@ fun ShowBoard(
                     modifier = Modifier.padding(MaterialTheme.spacing.medium)
                 )
             }
+            rememberRipple(color = MaterialTheme.colors.error)
             Card(
+                onClick = {
+                    scope.launch { sheetState.hide() }
+                    viewModel.deleteShow(viewModel.showState.value, isWatched)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.spacing.medium)
                     .border(width = 1.dp, color = MaterialTheme.colors.error, shape = MaterialTheme.shapes.large),
                 shape = MaterialTheme.shapes.large,
-                backgroundColor = MaterialTheme.colors.surface,
-                indication = rememberRipple(color = MaterialTheme.colors.error),
-                onClick = {
-                    scope.launch { sheetState.hide() }
-                    viewModel.deleteShow(viewModel.showState.value, isWatched)
-                }
+                backgroundColor = MaterialTheme.colors.surface
             ) {
                 Text(
                     text = stringResource(id = R.string.text_remove_planning),

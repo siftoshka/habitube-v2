@@ -1,7 +1,6 @@
 package az.siftoshka.habitube.presentation.components.image
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Indication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,7 +8,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,17 +27,15 @@ fun ImageCard(
     imageUrl: String?,
     title: String?,
     rating: Double? = 0.0,
-    indication: Indication? = rememberRipple(),
     onItemClick: () -> Unit
 ) {
     Card(
+        onClick = onItemClick,
         modifier = Modifier
             .width(100.dp)
             .height(150.dp),
         shape = MaterialTheme.shapes.large,
-        elevation = 4.dp,
-        indication = indication,
-        onClick = onItemClick
+        elevation = 4.dp
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Image(

@@ -5,9 +5,10 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -157,7 +158,7 @@ fun WatchedTab(
         if (viewModel.watchedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         if (context.isInternetAvailable()) {
             LazyVerticalGrid(
-                cells = GridCells.Fixed(4),
+                columns = GridCells.Fixed(4),
                 contentPadding = PaddingValues(MaterialTheme.spacing.medium),
             ) {
                 if (viewModel.isMoviesSelected.value) {
@@ -216,7 +217,7 @@ fun PlanningTab(
         if (viewModel.plannedShows.value.isEmpty() && !viewModel.isMoviesSelected.value) LibraryEmptyScreen()
         if (context.isInternetAvailable()) {
             LazyVerticalGrid(
-                cells = GridCells.Fixed(4),
+                columns = GridCells.Fixed(4),
                 contentPadding = PaddingValues(MaterialTheme.spacing.medium),
             ) {
                 if (viewModel.isMoviesSelected.value) {
