@@ -26,14 +26,16 @@ fun DetailTitle(
                 append(
                     AnnotatedString(
                         " ${stringResource(id = secondary)}",
-                        spanStyle = SpanStyle(fontSize = 18.sp, color = MaterialTheme.colors.secondaryVariant)
+                        spanStyle = SpanStyle(fontSize = 16.sp, color = MaterialTheme.colors.secondaryVariant)
                     )
                 )
             }
         },
-        style = MaterialTheme.typography.h2,
+        style = MaterialTheme.typography.h3,
         color = MaterialTheme.colors.onBackground,
         textAlign = TextAlign.Start,
-        modifier = Modifier.padding(vertical = MaterialTheme.spacing.extraSmall)
+        modifier = Modifier
+            .padding(horizontal = MaterialTheme.spacing.medium)
+            .padding(top = MaterialTheme.spacing.medium)
     )
 }

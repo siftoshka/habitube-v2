@@ -37,7 +37,7 @@ fun InfoMovieSection(movie: Movie?, isWatched: Boolean) {
                     append("${movie?.title}")
                     append(
                         AnnotatedString(
-                            " (${movie?.releaseDate?.onlyYear()})",
+                            movie?.releaseDate.onlyYear(),
                             spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
                         )
                     )

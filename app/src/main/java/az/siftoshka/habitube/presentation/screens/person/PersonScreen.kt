@@ -128,8 +128,10 @@ fun MainBoard(
             person?.let { person ->
                 if (!person.biography.isNullOrEmpty()) {
                     Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-                    DetailTitle(text = R.string.text_biography)
-                    DetailsCard { ExpandableText(text = person.biography.orEmpty()) }
+                    DetailsCard {
+                        DetailTitle(text = R.string.text_biography)
+                        ExpandableText(text = person.biography)
+                    }
                 }
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 MovieCast(navController)
@@ -153,10 +155,10 @@ fun MovieCast(
     val creditState = viewModel.personMoviesState.value
 
     if (creditState.credits?.cast?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_movies)
         DetailsCard {
+            DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_movies)
             LazyRow(
-                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 creditState.credits.cast.sortedByDescending { it.popularity }.let { movies ->
@@ -180,10 +182,10 @@ fun MovieCrew(
     val creditState = viewModel.personMoviesState.value
 
     if (creditState.credits?.crew?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_movies)
         DetailsCard {
+            DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_movies)
             LazyRow(
-                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 creditState.credits.crew.sortedByDescending { it.popularity }.let { movies ->
@@ -207,10 +209,10 @@ fun ShowCast(
     val creditState = viewModel.personShowsState.value
 
     if (creditState.credits?.cast?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_shows)
         DetailsCard {
+            DetailTitle(text = R.string.text_person_acting, secondary = R.string.text_shows)
             LazyRow(
-                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 creditState.credits.cast.sortedByDescending { it.popularity }.let { shows ->
@@ -234,10 +236,10 @@ fun ShowCrew(
     val creditState = viewModel.personShowsState.value
 
     if (creditState.credits?.crew?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_shows)
         DetailsCard {
+            DetailTitle(text = R.string.text_person_crew, secondary = R.string.text_shows)
             LazyRow(
-                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 creditState.credits.crew.sortedByDescending { it.popularity }.let { shows ->

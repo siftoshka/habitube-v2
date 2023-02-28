@@ -28,53 +28,48 @@ import coil.request.ImageRequest
 
 @Composable
 fun SeasonCard(season: Season?) {
-    Card(
-        elevation = 4.dp,
-        shape = MaterialTheme.shapes.large,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(modifier = Modifier.padding(MaterialTheme.spacing.small)) {
-            ImageCard(season)
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
-            Text(
-                text = buildAnnotatedString {
-                    append("${season?.name}")
-                    append(
-                        AnnotatedString(
-                            " (${season?.airDate?.onlyYear()})",
-                            spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
-                        )
+    Column {
+        ImageCard(season)
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
+        Text(
+            modifier = Modifier.width(160.dp),
+            text = buildAnnotatedString {
+                append("${season?.name}")
+                append(
+                    AnnotatedString(
+                        season?.airDate.onlyYear(),
+                        spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
                     )
-                },
-                style = MaterialTheme.typography.h4,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Start,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
-            Text(
-                text = buildAnnotatedString {
-                    append(stringResource(id = R.string.text_episodes))
-                    append(
-                        AnnotatedString(
-                            ": ${season?.episodeCount}",
-                            spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
-                        )
+                )
+            },
+            style = MaterialTheme.typography.h4,
+            color = MaterialTheme.colors.onBackground,
+            textAlign = TextAlign.Start,
+            maxLines =1,
+            overflow = TextOverflow.Ellipsis
+        )
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.extraSmall))
+        Text(
+            text = buildAnnotatedString {
+                append(stringResource(id = R.string.text_episodes))
+                append(
+                    AnnotatedString(
+                        ": ${season?.episodeCount}",
+                        spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Normal)
                     )
-                },
-                style = MaterialTheme.typography.h5,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Start,
-            )
-        }
+                )
+            },
+            style = MaterialTheme.typography.h5,
+            color = MaterialTheme.colors.onBackground,
+            textAlign = TextAlign.Start,
+        )
     }
 }
 
 @Composable
-fun ImageCard(season: Season?) {
+private fun ImageCard(season: Season?) {
     Card(
-        modifier = Modifier.size(160.dp),
+        modifier = Modifier.size(width = 160.dp, height = 240.dp),
         shape = MaterialTheme.shapes.large,
         elevation = 4.dp,
     ) {

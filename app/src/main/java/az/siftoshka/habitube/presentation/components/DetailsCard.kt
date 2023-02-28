@@ -1,5 +1,6 @@
 package az.siftoshka.habitube.presentation.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -17,6 +18,8 @@ fun DetailsCard(
         shape = MaterialTheme.shapes.large,
         elevation = 4.dp
     ) {
-        content()
+        Column {
+            content()
+        }
     }
 }

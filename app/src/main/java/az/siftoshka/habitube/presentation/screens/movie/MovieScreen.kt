@@ -108,7 +108,7 @@ fun MainBoard(
                         append("${movie?.title}")
                         append(
                             AnnotatedString(
-                                " (${movie?.releaseDate?.onlyYear()})",
+                                movie?.releaseDate.onlyYear(),
                                 spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
                             )
                         )
@@ -218,8 +218,8 @@ fun InfoBoard(
         RatingsBoard()
         if (videosState.videos.isNotEmpty()) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-            DetailTitle(text = R.string.text_videos)
             DetailsCard {
+                DetailTitle(text = R.string.text_videos)
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
                     contentPadding = PaddingValues(MaterialTheme.spacing.medium)
@@ -239,15 +239,20 @@ fun InfoBoard(
         movieState.movie?.let { movie ->
             if (!movie.overview.isNullOrEmpty()) {
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-                DetailTitle(text = R.string.text_description)
-                DetailsCard { ExpandableText(text = movie.overview.orEmpty()) }
+                DetailsCard {
+                    DetailTitle(text = R.string.text_description)
+                    ExpandableText(text = movie.overview.orEmpty())
+                }
             }
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-            DetailTitle(text = R.string.text_details)
             DetailsCard {
+                DetailTitle(text = R.string.text_details)
                 Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                     DetailText(name = R.string.text_original_title, detail = ": ${movie.originalTitle}")
-                    if (!movie.releaseDate.isNullOrBlank())  DetailText(name = R.string.text_release_date, detail = ": ${movie.releaseDate.normalDate(context)}")
+                    if (!movie.releaseDate.isNullOrBlank()) DetailText(
+                        name = R.string.text_release_date,
+                        detail = ": ${movie.releaseDate.normalDate(context)}"
+                    )
                     if (movie.budget != 0L) DetailText(name = R.string.text_budget, detail = ": ${movie.budget.toString().moneyFormat()}")
                     if (movie.revenue != 0L) DetailText(name = R.string.text_revenue, detail = ": ${movie.revenue.toString().moneyFormat()}")
                     val languages = movie.spokenLanguages?.map { it.englishName }?.toFormattedString()
@@ -275,8 +280,8 @@ fun Cast(
     val creditState = viewModel.creditsState.value
 
     if (creditState.credits?.cast?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_cast)
         DetailsCard {
+            DetailTitle(text = R.string.text_cast)
             LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.cast.let { cast ->
                     items(cast.size) {
@@ -299,8 +304,8 @@ fun Crew(
     val creditState = viewModel.creditsState.value
 
     if (creditState.credits?.crew?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_crew)
         DetailsCard {
+            DetailTitle(text = R.string.text_crew)
             LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.crew.let { crew ->
                     items(crew.size) {
@@ -324,8 +329,8 @@ fun SimilarMovies(
     val page = viewModel.similarMoviesPage.value
 
     if (similarState.movies.isNotEmpty()) {
-        DetailTitle(text = R.string.text_similar)
         DetailsCard {
+            DetailTitle(text = R.string.text_similar)
             LazyRow(
                 contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)

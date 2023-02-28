@@ -37,7 +37,7 @@ fun InfoShowSection(show: TvShow?, isWatched: Boolean) {
                     append("${show?.name}")
                     append(
                         AnnotatedString(
-                            " (${show?.firstAirDate?.onlyYear()})",
+                            show?.firstAirDate.onlyYear(),
                             spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
                         )
                     )

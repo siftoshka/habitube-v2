@@ -108,7 +108,7 @@ fun MainBoard(
                         append("${show?.name}")
                         append(
                             AnnotatedString(
-                                " (${show?.firstAirDate?.onlyYear()})",
+                                show?.firstAirDate.onlyYear(),
                                 spanStyle = SpanStyle(color = MaterialTheme.colors.secondaryVariant, fontWeight = FontWeight.Light)
                             )
                         )
@@ -216,8 +216,8 @@ fun InfoBoard(
         if (videosState.videos.isNotEmpty()) {
             Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-                DetailTitle(text = R.string.text_videos)
                 DetailsCard {
+                    DetailTitle(text = R.string.text_videos)
                     LazyRow(
                         contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
@@ -239,12 +239,14 @@ fun InfoBoard(
             Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
                 if (!show.overview.isNullOrEmpty()) {
                     Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-                    DetailTitle(text = R.string.text_description)
-                    DetailsCard { ExpandableText(text = show.overview.orEmpty()) }
+                    DetailsCard {
+                        DetailTitle(text = R.string.text_description)
+                        ExpandableText(text = show.overview.orEmpty())
+                    }
                 }
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-                DetailTitle(text = R.string.text_details)
                 DetailsCard {
+                    DetailTitle(text = R.string.text_details)
                     Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                         DetailText(name = R.string.text_original_title, detail = ": ${show.originalName}")
                         if (!show.firstAirDate.isNullOrBlank()) DetailText(
@@ -257,9 +259,9 @@ fun InfoBoard(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
-            Seasons()
             Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
+                Seasons()
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 Cast(navController)
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
@@ -279,21 +281,20 @@ fun Seasons(
     val show = viewModel.showState.value.show
 
     if (show?.seasons?.isNotEmpty() == true) {
-        Column(Modifier.padding(horizontal = MaterialTheme.spacing.default)) {
+        DetailsCard {
             DetailTitle(text = R.string.text_seasons)
-        }
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.default),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
-        ) {
-            show.seasons?.let { seasons ->
-                items(seasons.size) {
-                    val season = seasons[it]
-                    SeasonCard(season)
+            LazyRow(
+                contentPadding = PaddingValues(MaterialTheme.spacing.default),
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
+            ) {
+                show.seasons?.let { seasons ->
+                    items(seasons.size) {
+                        val season = seasons[it]
+                        SeasonCard(season)
+                    }
                 }
             }
         }
-
     }
 }
 
@@ -305,8 +306,8 @@ fun Cast(
     val creditState = viewModel.creditsState.value
 
     if (creditState.credits?.cast?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_cast)
         DetailsCard {
+            DetailTitle(text = R.string.text_cast)
             LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.cast.let { cast ->
                     items(cast.size) {
@@ -329,8 +330,8 @@ fun Crew(
     val creditState = viewModel.creditsState.value
 
     if (creditState.credits?.crew?.isNotEmpty() == true) {
-        DetailTitle(text = R.string.text_crew)
         DetailsCard {
+            DetailTitle(text = R.string.text_crew)
             LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.crew.let { crew ->
                     items(crew.size) {
@@ -354,8 +355,8 @@ fun SimilarMovies(
     val page = viewModel.similarShowsPage.value
 
     if (similarState.shows.isNotEmpty()) {
-        DetailTitle(text = R.string.text_similar)
         DetailsCard {
+            DetailTitle(text = R.string.text_similar)
             LazyRow(
                 contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)

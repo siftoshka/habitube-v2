@@ -43,8 +43,10 @@ fun String?.normalDate(context: Context): String {
     return "$day $month $year"
 }
 
-fun String.onlyYear(): String {
-    return this.take(4)
+fun String?.onlyYear(): String {
+    if (this == null) return ""
+    if (this == "null") return ""
+    return " (${this.take(4)})"
 }
 
 fun List<Any?>.toFormattedString(): String {

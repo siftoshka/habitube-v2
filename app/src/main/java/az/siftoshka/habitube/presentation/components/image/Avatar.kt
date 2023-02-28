@@ -39,13 +39,14 @@ fun Avatar(
         ) {
             Image(
                 painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(LocalContext.current).data(data = IMAGE_URL + imageUrl).apply(block = fun ImageRequest.Builder.() {
-                        crossfade(true)
-                        error(R.drawable.ic_placeholder)
-                        memoryCachePolicy(CachePolicy.ENABLED)
-                        diskCachePolicy(CachePolicy.DISABLED)
-                        networkCachePolicy(CachePolicy.ENABLED)
-                    }).build()
+                    ImageRequest.Builder(LocalContext.current).data(data = IMAGE_URL + imageUrl)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                            error(R.drawable.ic_placeholder)
+                            memoryCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.DISABLED)
+                            networkCachePolicy(CachePolicy.ENABLED)
+                        }).build()
                 ),
                 contentDescription = title,
                 contentScale = ContentScale.Crop,

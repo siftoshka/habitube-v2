@@ -13,13 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL_ORIGINAL
 import az.siftoshka.habitube.presentation.theme.spacing
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
+import coil.request.ImageRequest
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -36,18 +38,19 @@ fun LongImageCard(
     ) {
         Box(modifier = Modifier.height(180.dp)) {
             Image(
-                painter = rememberImagePainter(
-                    data = IMAGE_URL_ORIGINAL + imageUrl,
-                    builder = {
-                        crossfade(true)
-                        error(R.drawable.ic_placeholder)
-                        memoryCachePolicy(CachePolicy.ENABLED)
-                        diskCachePolicy(CachePolicy.DISABLED)
-                        networkCachePolicy(CachePolicy.ENABLED)
-                    }
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = IMAGE_URL_ORIGINAL + imageUrl)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                            error(R.drawable.ic_placeholder)
+                            memoryCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.DISABLED)
+                            networkCachePolicy(CachePolicy.ENABLED)
+                        }).build()
                 ),
                 contentDescription = title,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth()
             )
             Box(
                 modifier = Modifier

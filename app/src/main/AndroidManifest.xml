@@ -29,7 +29,6 @@
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/LaunchTheme"
             tools:ignore="LockedOrientationActivity">
