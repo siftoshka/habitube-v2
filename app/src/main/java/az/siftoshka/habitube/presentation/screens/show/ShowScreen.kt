@@ -1,6 +1,5 @@
 package az.siftoshka.habitube.presentation.screens.show
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -87,7 +86,7 @@ fun MainBoard(
                 },
             imageUrl = show?.backdropPath,
             onBack = { navController.popBackStack() },
-            onShare = { context.shareLink(show?.homepage ?: Constants.TV_THEMOVIEDB + show?.id) }
+            onShare = { context.shareLink(show?.homepage ?: (Constants.TV_THEMOVIEDB + show?.id)) }
         )
         Row(
             modifier = Modifier
@@ -97,7 +96,6 @@ fun MainBoard(
             ImageCard(
                 imageUrl = show?.posterPath,
                 title = show?.name,
-                indication = null
             ) {}
             Column(
                 modifier = Modifier
@@ -221,7 +219,7 @@ fun InfoBoard(
                 DetailTitle(text = R.string.text_videos)
                 DetailsCard {
                     LazyRow(
-                        modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                        contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
                     ) {
                         videosState.videos.let { videos ->
@@ -249,7 +247,10 @@ fun InfoBoard(
                 DetailsCard {
                     Column(modifier = Modifier.padding(MaterialTheme.spacing.medium)) {
                         DetailText(name = R.string.text_original_title, detail = ": ${show.originalName}")
-                        if (!show.firstAirDate.isNullOrBlank())  DetailText(name = R.string.text_release_date, detail = ": ${show.firstAirDate.normalDate(context)}")
+                        if (!show.firstAirDate.isNullOrBlank()) DetailText(
+                            name = R.string.text_release_date,
+                            detail = ": ${show.firstAirDate.normalDate(context)}"
+                        )
                         DetailText(name = R.string.text_status, detail = ": ${show.status}")
                         val genres = show.genres?.map { it.name }?.toFormattedString()
                         if (!genres.isNullOrBlank()) DetailText(name = R.string.text_genres, detail = ": $genres")
@@ -271,7 +272,6 @@ fun InfoBoard(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Seasons(
     viewModel: ShowViewModel = hiltViewModel()
@@ -307,7 +307,7 @@ fun Cast(
     if (creditState.credits?.cast?.isNotEmpty() == true) {
         DetailTitle(text = R.string.text_cast)
         DetailsCard {
-            LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
+            LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.cast.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
@@ -331,7 +331,7 @@ fun Crew(
     if (creditState.credits?.crew?.isNotEmpty() == true) {
         DetailTitle(text = R.string.text_crew)
         DetailsCard {
-            LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
+            LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.crew.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
@@ -357,7 +357,7 @@ fun SimilarMovies(
         DetailTitle(text = R.string.text_similar)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 itemsIndexed(items = similarState.shows) { index, show ->

@@ -9,12 +9,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.presentation.theme.spacing
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
+import coil.request.ImageRequest
 import coil.size.Precision
 
 @Composable
@@ -28,16 +30,16 @@ fun LibraryMinimalCard(imageUrl: String) {
         elevation = 4.dp,
     ) {
         Image(
-            painter = rememberImagePainter(
-                data = Constants.IMAGE_URL + imageUrl,
-                builder = {
-                    crossfade(true)
-                    precision(Precision.INEXACT)
-                    error(R.drawable.ic_placeholder)
-                    memoryCacheKey(Constants.IMAGE_URL + imageUrl)
-                    memoryCachePolicy(CachePolicy.READ_ONLY)
-                    networkCachePolicy(CachePolicy.ENABLED)
-                }
+            painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current).data(data = Constants.IMAGE_URL + imageUrl)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        crossfade(true)
+                        precision(Precision.INEXACT)
+                        error(R.drawable.ic_placeholder)
+                        memoryCacheKey(Constants.IMAGE_URL + imageUrl)
+                        memoryCachePolicy(CachePolicy.READ_ONLY)
+                        networkCachePolicy(CachePolicy.ENABLED)
+                    }).build()
             ),
             contentDescription = imageUrl,
             contentScale = ContentScale.Crop,

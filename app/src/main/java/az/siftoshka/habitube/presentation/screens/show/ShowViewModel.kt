@@ -163,7 +163,7 @@ class ShowViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     result.data?.forEach { it.voteAverage = watchedTvShowUseCase.getShowRating(it.id ?: 0).toDouble() }
-                    _similarState.value = SimilarShowsState(shows = result.data ?: emptyList())
+                    _similarState.value = SimilarShowsState(shows = result.data?.filter { it.posterPath != null } ?: emptyList())
                 }
                 is Resource.Error -> {
                     _similarState.value = SimilarShowsState(error = result.message ?: "Error")
@@ -181,7 +181,7 @@ class ShowViewModel @Inject constructor(
                         is Resource.Success -> {
                             result.data?.forEach { it.voteAverage = watchedTvShowUseCase.getShowRating(it.id ?: 0).toDouble() }
                             _similarState.value = SimilarShowsState(
-                                shows = _similarState.value.shows.plus(result.data.orEmpty())
+                                shows = _similarState.value.shows.plus(result.data?.filter { it.posterPath != null }.orEmpty())
                             )
                         }
                         else -> {

@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import az.siftoshka.habitube.domain.model.MediaLite
 import az.siftoshka.habitube.domain.model.Movie
 import az.siftoshka.habitube.domain.usecases.local.PlannedMoviesUseCase
 import az.siftoshka.habitube.domain.usecases.local.WatchedMoviesUseCase
@@ -182,7 +181,7 @@ class MovieViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     result.data?.forEach { it.voteAverage = watchedMoviesUseCase.getMovieRating(it.id ?: 0).toDouble() }
-                    _similarState.value = SimilarMoviesState(movies = result.data ?: emptyList())
+                    _similarState.value = SimilarMoviesState(movies = result.data?.filter { it.posterPath != null } ?: emptyList())
                 }
                 is Resource.Error -> {
                     _similarState.value = SimilarMoviesState(error = result.message ?: "Error")
@@ -200,7 +199,7 @@ class MovieViewModel @Inject constructor(
                         is Resource.Success -> {
                             result.data?.forEach { it.voteAverage = watchedMoviesUseCase.getMovieRating(it.id ?: 0).toDouble() }
                             _similarState.value = SimilarMoviesState(
-                                movies = _similarState.value.movies.plus(result.data.orEmpty())
+                                movies = _similarState.value.movies.plus(result.data?.filter { it.posterPath != null }.orEmpty())
                             )
                         }
                         else -> {

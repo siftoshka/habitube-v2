@@ -162,7 +162,7 @@ fun WatchedTab(
                 contentPadding = PaddingValues(MaterialTheme.spacing.medium),
             ) {
                 if (viewModel.isMoviesSelected.value) {
-                    itemsIndexed(viewModel.watchedMovies.value) { index, item ->
+                    itemsIndexed(viewModel.watchedMovies.value) { _, item ->
                         LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
                             viewModel.isWatched.value = true
                             viewModel.mediaId.value = item.id ?: 0
@@ -170,7 +170,7 @@ fun WatchedTab(
                         }
                     }
                 } else if (viewModel.isShowsSelected.value) {
-                    itemsIndexed(viewModel.watchedShows.value) { index, item ->
+                    itemsIndexed(viewModel.watchedShows.value) { _, item ->
                         LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty(), rating = item.myRating) {
                             viewModel.isWatched.value = true
                             viewModel.mediaId.value = item.id ?: 0
@@ -182,7 +182,7 @@ fun WatchedTab(
         } else {
             LazyColumn(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 if (viewModel.isMoviesSelected.value) {
-                    itemsIndexed(viewModel.watchedMovies.value) { index, item ->
+                    itemsIndexed(viewModel.watchedMovies.value) { _, item ->
                         LibraryTextCard(title = item.title.orEmpty(), rating = item.myRating) {
                             viewModel.isWatched.value = true
                             viewModel.mediaId.value = item.id ?: 0
@@ -190,7 +190,7 @@ fun WatchedTab(
                         }
                     }
                 } else if (viewModel.isShowsSelected.value) {
-                    itemsIndexed(viewModel.watchedShows.value) { index, item ->
+                    itemsIndexed(viewModel.watchedShows.value) { _, item ->
                         LibraryTextCard(title = item.name.orEmpty(), rating = item.myRating) {
                             viewModel.isWatched.value = true
                             viewModel.mediaId.value = item.id ?: 0
@@ -221,7 +221,7 @@ fun PlanningTab(
                 contentPadding = PaddingValues(MaterialTheme.spacing.medium),
             ) {
                 if (viewModel.isMoviesSelected.value) {
-                    itemsIndexed(viewModel.plannedMovies.value) { index, item ->
+                    itemsIndexed(viewModel.plannedMovies.value) { _, item ->
                         LibraryCard(title = item.title.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
                             viewModel.isWatched.value = false
                             viewModel.mediaId.value = item.id ?: 0
@@ -229,7 +229,7 @@ fun PlanningTab(
                         }
                     }
                 } else if (viewModel.isShowsSelected.value) {
-                    itemsIndexed(viewModel.plannedShows.value) { index, item ->
+                    itemsIndexed(viewModel.plannedShows.value) { _, item ->
                         LibraryCard(title = item.name.orEmpty(), imageUrl = item.posterPath.orEmpty()) {
                             viewModel.isWatched.value = false
                             viewModel.mediaId.value = item.id ?: 0
@@ -241,7 +241,7 @@ fun PlanningTab(
         } else {
             LazyColumn(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 if (viewModel.isMoviesSelected.value) {
-                    itemsIndexed(viewModel.plannedMovies.value) { index, item ->
+                    itemsIndexed(viewModel.plannedMovies.value) { _, item ->
                         LibraryTextCard(title = item.title.orEmpty()) {
                             viewModel.isWatched.value = false
                             viewModel.mediaId.value = item.id ?: 0
@@ -249,7 +249,7 @@ fun PlanningTab(
                         }
                     }
                 } else if (viewModel.isShowsSelected.value) {
-                    itemsIndexed(viewModel.plannedShows.value) { index, item ->
+                    itemsIndexed(viewModel.plannedShows.value) { _, item ->
                         LibraryTextCard(title = item.name.orEmpty()) {
                             viewModel.isWatched.value = false
                             viewModel.mediaId.value = item.id ?: 0

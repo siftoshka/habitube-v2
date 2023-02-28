@@ -97,7 +97,6 @@ fun MainBoard(
             ImageCard(
                 imageUrl = movie?.posterPath,
                 title = movie?.title,
-                indication = null
             ) {}
             Column(
                 modifier = Modifier
@@ -222,8 +221,8 @@ fun InfoBoard(
             DetailTitle(text = R.string.text_videos)
             DetailsCard {
                 LazyRow(
-                    modifier = Modifier.padding(MaterialTheme.spacing.medium),
-                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
+                    horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small),
+                    contentPadding = PaddingValues(MaterialTheme.spacing.medium)
                 ) {
                     videosState.videos.let { videos ->
                         items(videos.size) {
@@ -278,7 +277,7 @@ fun Cast(
     if (creditState.credits?.cast?.isNotEmpty() == true) {
         DetailTitle(text = R.string.text_cast)
         DetailsCard {
-            LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
+            LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.cast.let { cast ->
                     items(cast.size) {
                         val actor = cast[it]
@@ -302,7 +301,7 @@ fun Crew(
     if (creditState.credits?.crew?.isNotEmpty() == true) {
         DetailTitle(text = R.string.text_crew)
         DetailsCard {
-            LazyRow(Modifier.padding(MaterialTheme.spacing.medium)) {
+            LazyRow(contentPadding = PaddingValues(MaterialTheme.spacing.medium)) {
                 creditState.credits.crew.let { crew ->
                     items(crew.size) {
                         val actor = crew[it]
@@ -328,7 +327,7 @@ fun SimilarMovies(
         DetailTitle(text = R.string.text_similar)
         DetailsCard {
             LazyRow(
-                modifier = Modifier.padding(MaterialTheme.spacing.medium),
+                contentPadding = PaddingValues(MaterialTheme.spacing.medium),
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
             ) {
                 itemsIndexed(items = similarState.movies) { index, movie ->

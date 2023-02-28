@@ -7,17 +7,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
+import coil.request.ImageRequest
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FirebaseAvatar(
     imageUrl: String?,
@@ -30,15 +30,15 @@ fun FirebaseAvatar(
             elevation = 4.dp
         ) {
             Image(
-                painter = rememberImagePainter(
-                    data = imageUrl,
-                    builder = {
-                        crossfade(true)
-                        error(R.drawable.ic_placeholder)
-                        memoryCachePolicy(CachePolicy.ENABLED)
-                        diskCachePolicy(CachePolicy.ENABLED)
-                        networkCachePolicy(CachePolicy.ENABLED)
-                    }
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = imageUrl)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                            error(R.drawable.ic_placeholder)
+                            memoryCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.ENABLED)
+                            networkCachePolicy(CachePolicy.ENABLED)
+                        }).build()
                 ),
                 contentDescription = title,
                 contentScale = ContentScale.Crop,

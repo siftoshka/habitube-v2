@@ -52,11 +52,9 @@ fun MovieBoard(
                             navController.navigate(Screen.MovieScreen.route + "/${viewModel.movieState.value.id}")
                         }
                     },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                    modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.large,
-                    backgroundColor = MaterialTheme.colors.surface
+                    backgroundColor = MaterialTheme.colors.primary
                 ) {
                     Text(
                         text = stringResource(id = R.string.text_full_info),
@@ -107,11 +105,9 @@ fun MovieBoard(
                             navController.navigate(Screen.MovieScreen.route + "/${viewModel.movieState.value.id}")
                         }
                     },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(width = 4.dp, color = MaterialTheme.colors.primary, shape = MaterialTheme.shapes.large),
+                    modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.large,
-                    backgroundColor = MaterialTheme.colors.surface
+                    backgroundColor = MaterialTheme.colors.primary
                 ) {
                     Text(
                         text = stringResource(id = R.string.text_full_info),

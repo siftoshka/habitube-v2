@@ -13,13 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import az.siftoshka.habitube.R
 import az.siftoshka.habitube.domain.util.Constants.IMAGE_URL
 import az.siftoshka.habitube.presentation.theme.spacing
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
+import coil.request.ImageRequest
 
 @Composable
 fun PersonCard(
@@ -35,15 +37,15 @@ fun PersonCard(
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
-                painter = rememberImagePainter(
-                    data = IMAGE_URL + imageUrl,
-                    builder = {
-                        crossfade(true)
-                        error(R.drawable.ic_placeholder)
-                        memoryCachePolicy(CachePolicy.ENABLED)
-                        diskCachePolicy(CachePolicy.DISABLED)
-                        networkCachePolicy(CachePolicy.ENABLED)
-                    }
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(LocalContext.current).data(data = IMAGE_URL + imageUrl)
+                        .apply(block = fun ImageRequest.Builder.() {
+                            crossfade(true)
+                            error(R.drawable.ic_placeholder)
+                            memoryCachePolicy(CachePolicy.ENABLED)
+                            diskCachePolicy(CachePolicy.DISABLED)
+                            networkCachePolicy(CachePolicy.ENABLED)
+                        }).build()
                 ),
                 contentDescription = imageUrl,
                 contentScale = ContentScale.FillWidth,

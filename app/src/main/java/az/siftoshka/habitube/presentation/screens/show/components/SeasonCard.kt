@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -21,8 +22,9 @@ import az.siftoshka.habitube.domain.model.Season
 import az.siftoshka.habitube.domain.util.Constants
 import az.siftoshka.habitube.domain.util.onlyYear
 import az.siftoshka.habitube.presentation.theme.spacing
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
+import coil.request.ImageRequest
 
 @Composable
 fun SeasonCard(season: Season?) {
@@ -77,15 +79,15 @@ fun ImageCard(season: Season?) {
         elevation = 4.dp,
     ) {
         Image(
-            painter = rememberImagePainter(
-                data = Constants.IMAGE_URL + season?.posterPath,
-                builder = {
-                    crossfade(true)
-                    error(R.drawable.ic_placeholder)
-                    memoryCachePolicy(CachePolicy.ENABLED)
-                    diskCachePolicy(CachePolicy.DISABLED)
-                    networkCachePolicy(CachePolicy.ENABLED)
-                }
+            painter = rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current).data(data = Constants.IMAGE_URL + season?.posterPath)
+                    .apply(block = fun ImageRequest.Builder.() {
+                        crossfade(true)
+                        error(R.drawable.ic_placeholder)
+                        memoryCachePolicy(CachePolicy.ENABLED)
+                        diskCachePolicy(CachePolicy.DISABLED)
+                        networkCachePolicy(CachePolicy.ENABLED)
+                    }).build()
             ),
             contentDescription = season?.name,
             contentScale = ContentScale.Crop,

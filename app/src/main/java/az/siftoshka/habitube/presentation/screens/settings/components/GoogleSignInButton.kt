@@ -37,7 +37,6 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun GoogleSignInButton() {
     val isNotLogIn = remember { mutableStateOf(FirebaseAuth.getInstance().currentUser == null) }
-    val indicator = if (isNotLogIn.value) rememberRipple(color = MaterialTheme.colors.secondaryVariant) else null
     val borderColor = if (isNotLogIn.value) MaterialTheme.colors.secondaryVariant else MaterialTheme.colors.primary
     val context = LocalContext.current
     val token = stringResource(R.string.default_web_client_id)
@@ -52,7 +51,7 @@ fun GoogleSignInButton() {
                     isNotLogIn.value = false
                 }
             }
-        } catch (e: ApiException) {
+        } catch (_: ApiException) {
         }
     }
 
